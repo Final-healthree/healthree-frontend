@@ -1,70 +1,77 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 0. Git 전략 규칙
 
-## Available Scripts
+### 기본은 Git Flow 전략을 따라간다.
 
-In the project directory, you can run:
+**main **: 기준이 되는 브랜치로 배포하는 브랜치. (master->main)
+**dev **: 이 브랜치를 기준으로 각자 작업한 기능들을 Merge한다.  (develop->dev)
+**view**: 각 page를 그리는 브랜치로 view 작업이 완료되면 dev 브랜치로 merge 한다.
+**feature** : 각 Page를 개발하는 브랜치로 기능 개발이 완료되면 dev 브랜치로 Merge 한다.
 
-### `yarn start`
+- 각 브랜치로 push를 하기전에 error유무 확인 후 push한다.
+- dev 브랜치에 merge 한후엔 브랜치를 삭제한다.
+- dev 브랜치에 merge 한후에 conflict 가 일어난 경우엔 문제 해결시까지 push 나 pull 금지
+- 최종 배포시엔 dev를 main으로 merge하여 배포한다.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# 1. 프로젝트 개요
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `yarn test`
+### 주제 :의지박약인 사람들에게 동기를 생기게 해주는 자기관리 어플
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+작업기간
+2022년 8월 26일~
 
-### `yarn build`
+팀원
+Front-end 최락현, 조영은, 유지완
+Back-end 이상현, 최유영
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. **로그인 페이지**
+    - 소셜로그인 (카카오) ⇒ 카카오 프로필 가져오기
+   
+   
+    +추가기능
+    - 일반 로그인 기능
+    - 닉네임 중복체크 기능
+    - 카카오 프로필, 기본 프로필 선택가능
+2. **메인 페이지**
+    - 캘린더 구현 및  날짜 받아오기,
+    - 동영상 파일 업로드 및 미리보기
+    - 모달창 구현
+    - 카드 세션 슬라이드 (3일 카드 )
+    - 성공 실패 구분하는 화면 구현
+    - 미션 종료시 메인 화면 이동
+3. **마이 페이지**
+    - 마이페이지 캘린더 구현 및 날짜 받아오기
+    - 캘린더 내의 도전 결과 내역 불러오기(박스, 도장)
+    - 성공한 내역 클릭시 영상 재생
+    - 드랍다운 (마이영상 불러오기)
+    - 마이영상 무한스크롤
+    - 영상 클릭시 모달창 영상 재생
+    
 
-### `yarn eject`
++추가기능
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- 공유하기 버튼 ( 커뮤니티페이지에 영상 공유)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+ 4.**커뮤니티 페이지**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- 공유된 영상 모아오기 (영상 + 날짜 )
+- 커뮤니티 페이지 무한스크롤
+- 게시판 RD , 댓글 CRUD
+- 좋아요 구현
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+# 2.화면 구성/레이아웃
 
-## Learn More
+### **1. 모바일 웹 레이아웃 구성**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- 모바일 클라이언트 환경에 적합한 모바일 웹 페이지 레이아웃 구성하기
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<aside>
+👉🏻 반응형 앱기준 
+max-width: 640px
+ min-width: 360px
 
-### Code Splitting
+</aside>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
