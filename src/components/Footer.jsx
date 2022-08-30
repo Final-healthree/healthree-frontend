@@ -1,11 +1,16 @@
 import React from "react";
+import styled from "styled-components";
 
 const Footer = () => {
   return (
-    <div>
+    <StFooterLayout>
       Footer
-    </div>
+    </StFooterLayout>
   )
 }
+
+const StFooterLayout = styled.div`
+
+`;
 
 export default Footer;

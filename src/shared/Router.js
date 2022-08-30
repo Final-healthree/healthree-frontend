@@ -8,10 +8,12 @@ import Register from "../pages/Register";
 import Mypage from "../pages/MyPage";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import Layout from "../components/Layout";
 
 const Router = () => {
   return (
     <BrowserRouter>
+    <Layout>
       <Header />
         <Routes>
           <Route path="/" element={<Main />} />
@@ -22,6 +24,7 @@ const Router = () => {
           <Route path="/mypage" element={<Mypage />} />
         </Routes>
       <Footer />
+    </Layout>
     </BrowserRouter>
   );
 };
