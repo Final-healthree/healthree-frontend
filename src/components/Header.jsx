@@ -1,11 +1,16 @@
 import React from "react";
+import styled from "styled-components";
 
 const Header = () => {
   return (
-    <div>
+    <StHeaderLayout>
       Header
-    </div>
+    </StHeaderLayout>
   )
 }
+
+const StHeaderLayout = styled.div`
+`;
+
 
 export default Header;
