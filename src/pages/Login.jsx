@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-
+import LoginForm from "../components/login/LoginForm";
 
 const Login = () => {
   return (
