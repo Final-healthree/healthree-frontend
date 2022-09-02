@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import MainGoal from "../components/main/MainGoal";
+
 
 const Main = () => {
   return (
     <StMainContainer>
-      Main
+      <MainGoal />
     </StMainContainer>
   )
 }     
@@ -12,7 +14,7 @@ const Main = () => {
 const StMainContainer = styled.div`
   width: 100%;
   height: 500px;
-  background-color: red;
+  /* background-color: red; */
 `;
 
 export default Main;
