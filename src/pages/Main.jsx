@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import RegCalendar from "../components/register/Calendar";
-import MainGoal from "../components/main/MainGoal";
+import MainGoal from "../components/main/MainGoal";
 
 const Main = () => {
   return (
     <StMainContainer>
       <MainGoal />
-      //<RegCalendar />
+      {/* <RegCalendar /> */}
     </StMainContainer>
   );
 };
