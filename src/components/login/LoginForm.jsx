@@ -13,7 +13,6 @@ function LoginForm() {
                         <span>카카오로 시작하기</span>
                 </Button>
             </LoginArea>
-            {/* <img src="https://www.shopintake.com/static/intake/img/sub/kakao_login.jpg" /> */}
         </div>
     );
 }
