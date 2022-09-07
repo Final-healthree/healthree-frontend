@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import RegCalendar from "../components/register/Calendar";
+// import RegCalendar from "../components/register/Calendar";
 import MainGoal from "../components/main/MainGoal";
 
 const Main = () => {

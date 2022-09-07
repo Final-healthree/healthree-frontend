@@ -5,18 +5,11 @@ import "react-calendar/dist/Calendar.css";
 const RegCalendar = () => {
   const [last, setLast] = useState(new Date());
   const lastday = new Date(last.setDate(last.getDate() + 2));
-  // setLast(lastday);
   const [day, setday] = useState([new Date(), new Date(lastday)]);
   console.log(day);
   const onChange = (value) => {
     setday([new Date(value), new Date(value.setDate(value.getDate() + 2))]);
   };
-
-  // console.log(day[0]);
-  // // console.log(day);
-  // console.log(day[0].getDate());
-  // const newday = day[1].setDate(day[0].getDate() + 2);
-  // console.log(new Date(newday));
 
   return (
     <div>
