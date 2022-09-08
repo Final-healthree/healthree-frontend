@@ -1,45 +1,54 @@
-import Nav from 'react-bootstrap/Nav';
-import styled from 'styled-components';
-
+import React, { useState } from "react";
+import styled from "styled-components";
 
 function Tab() {
+  const [currentTab, setCurrentTab] = useState(0);
+
+  const menuArr = [
+    { name: 'MyCalendar', content: " Tab menu One" },
+    { name: 'MyVideo', content: " Tab menu Two" },
+  ];
+
+  const selectMenuHandler = (index) => {
+    setCurrentTab(index);
+  };
   return (
-    <Nav
-      activeKey="/home"
-      onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
-    >
-      <Nav.Item>
-        <Nav.Link href="/home">Active</Nav.Link>
-      </Nav.Item>
-      <Nav.Item>
-        <Nav.Link eventKey="link-1">Link</Nav.Link>
-      </Nav.Item>
-      <Nav.Item>
-        <Nav.Link eventKey="link-2">Link</Nav.Link>
-      </Nav.Item>
-      <Nav.Item>
-        <Nav.Link eventKey="disabled" disabled>
-          Disabled
-        </Nav.Link>
-      </Nav.Item>
-    </Nav>
+    <>
+      <div>
+        <TabMenu>
+          {menuArr.map((ele, index) => {
+            console.log(index)
+            return (
+              <li
+                key={index}
+                className={currentTab === index ? "submenu focused" : "submenu"}
+                onClick={() => selectMenuHandler(index)}
+              >
+                {ele.name}
+              </li>
+            )
+          })}
+        </TabMenu>
+      </div>
+    </>
   );
-}
+};
 
-export default Tab;
+export default Tab
 
-const StTab = styled.div`
-.Nav{ 
-    position: absolute;
-    width: 102px;
-    height: 34px;
-    left: 24px;
-    top: 109px;
-    display: flex;
-    text-align: center;
-    
+const TabMenu = styled.ul`
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  justify-items: center;
+  align-items: center;
+  list-style: none;
+
+  .submenu {
+    width:100% auto;
+    padding: 15px 10px;
+    cursor: pointer;
     &:hover, &.active {
-        color: #70CCA6
+      color: #2C8D65;
     }
-}
-`
+`;

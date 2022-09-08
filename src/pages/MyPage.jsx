@@ -1,10 +1,10 @@
 import React from "react";
 import MyPageCalendar from "../components/mypage/MyPageCalendar";
-// import Tab from "../components/mypage/Tab";
+import Tab from "../components/mypage/Tab";
 const Mypage = () => {
   return (
     <div>
-      {/* <Tab/> */}
+      <Tab/>
       <MyPageCalendar/>
     </div>
   )
