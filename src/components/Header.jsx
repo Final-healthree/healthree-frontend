@@ -2,28 +2,24 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 //svg 이미지
-import headerLogo from '../assets/images/headerLogo.svg'
-
+import headerLogo from "../assets/images/headerLogo.svg";
 
 const Header = () => {
   const navigate = useNavigate();
 
   return (
     <StHeader>
-      <img src = {headerLogo} onClick={() => navigate("/")}/>
+      <img src={headerLogo} onClick={() => navigate("/")} />
     </StHeader>
-    
   );
-}
-
+};
 
 export default Header;
 
 const StHeader = styled.div`
   /* max-width: 375px;
   height: 70px; */
-
+  position: sticky;
   display: flex;
   /* justify-content: flex-start; */
-  `
- 
+`;
