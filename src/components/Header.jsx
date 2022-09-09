@@ -17,9 +17,13 @@ const Header = () => {
 export default Header;
 
 const StHeader = styled.div`
-  /* max-width: 375px;
-  height: 70px; */
-  position: sticky;
+  min-width: 360px;
+  max-width: 375px;
+  height: 70px;
   display: flex;
+  position: sticky;
+  top: 0;
   /* justify-content: flex-start; */
+  left: 50%;
+  transform: translateX(-50%);
 `;
