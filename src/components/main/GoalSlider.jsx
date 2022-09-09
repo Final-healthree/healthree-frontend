@@ -28,7 +28,6 @@ const GoalSlider = () => {
 
   return (
       <div>
-        <h2>인생은 회전목마</h2>
         <Slider {...settings}>
           <div>
             <MainGoalFirst />
