@@ -55,7 +55,7 @@ const StFooterMain = styled.ul`
   list-style: none;
   flex: 0 0 auto;
   padding: 6px 1em 0;
-  justify-content: space-between;
+  justify-content: space-around;
   background-color: #fff;
 
   position: sticky;
