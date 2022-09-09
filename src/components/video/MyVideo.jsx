@@ -2,44 +2,84 @@ import React, { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import axios from "axios";
 import styled from "styled-components";
-import ReactLoading from "react-loading";
+// import ReactLoading from "react-loading";
+import VideoModal from "./VideoModal";
 
 const MyVideo = () => {
-  const [items, setItems] = useState([]);
-  const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(false);
+  // const [items, setItems] = useState([]);
+  // const [page, setPage] = useState(1);
+  // const [loading, setLoading] = useState(false);
 
-  const [ref, inView] = useInView();
+  // const [ref, inView] = useInView();
 
-  // 서버에서 아이템을 가지고 오는 함수
-  const getItems = async () => {
-    setLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    await axios
-      .get(`https://picsum.photos/v2/list?page=${page}&limit=5`)
-      .then((res) => {
-        setItems((items) => items.concat(res.data));
-      });
-    setLoading(false);
-  };
+  // // 서버에서 아이템을 가지고 오는 함수
+  // const getItems = async () => {
+  //   setLoading(true);
+  //   await new Promise((resolve) => setTimeout(resolve, 2000));
+  //   await axios
+  //     .get(`https://picsum.photos/v2/list?page=${page}&limit=5`)
+  //     .then((res) => {
+  //       setItems((items) => items.concat(res.data));
+  //     });
+  //   setLoading(false);
+  // };
 
-  // `getItems` 가 바뀔 때 마다 함수 실행
-  useEffect(() => {
-    getItems();
-  }, [page]);
+  // // `getItems` 가 바뀔 때 마다 함수 실행
+  // useEffect(() => {
+  //   getItems();
+  // }, [page]);
 
-  useEffect(() => {
-    if (!loading && inView) {
-      setPage(page + 1);
-    }
-  }, [inView, loading]);
+  // useEffect(() => {
+  //   if (!loading && inView) {
+  //     setPage(page + 1);
+  //   }
+  // }, [inView, loading]);
 
-  console.log(items);
-  console.log("inView", inView);
-  console.log("loading", loading);
+  // console.log(items);
+  // console.log("inView", inView);
+  // console.log("loading", loading);
+  const [modal, setModal] = useState(false);
+  console.log(modal);
   return (
     <div>
-      {items.map((item, idx) => (
+      {modal === true ? <VideoModal modal={modal} /> : null}
+      <VideoBox
+        onClick={() => {
+          setModal(true);
+        }}
+      >
+        <source
+          src="https://healthree.s3.ap-northeast-2.amazonaws.com/videos/1662714433501.6726"
+          type="video/mp4"
+        />
+      </VideoBox>
+      <span>08.07 - 08.10</span>
+
+      <VideoBox
+        onClick={() => {
+          setModal(true);
+        }}
+      >
+        <source
+          src="https://healthree.s3.ap-northeast-2.amazonaws.com/videos/1662714433501.6726"
+          type="video/mp4"
+        />
+      </VideoBox>
+      <span>08.07 - 08.10</span>
+
+      <VideoBox
+        onClick={() => {
+          setModal(true);
+        }}
+      >
+        <source
+          src="https://healthree.s3.ap-northeast-2.amazonaws.com/videos/1662714433501.6726"
+          type="video/mp4"
+        />
+      </VideoBox>
+      <span>08.07 - 08.10</span>
+
+      {/* {items.map((item, idx) => (
         <div key={idx}>
           {items.length - 1 === idx ? (
             <Box ref={ref}>{item.author}</Box>
@@ -54,7 +94,7 @@ const MyVideo = () => {
         </LoaderWrap>
       ) : (
         ""
-      )}
+      )} */}
     </div>
   );
 };
@@ -75,4 +115,10 @@ const LoaderWrap = styled.div`
   justify-content: center;
   text-align: center;
   align-items: center;
+`;
+
+const VideoBox = styled.video`
+  height: 160px;
+  width: 320px;
+  border: 1px solid black;
 `;

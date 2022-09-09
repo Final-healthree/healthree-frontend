@@ -1,7 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 const GoalReg = () => {
+  const regDay = useSelector((state) => state.registerday);
+  console.log(regDay);
   return (
     <Container>
       <Box>
@@ -9,8 +12,10 @@ const GoalReg = () => {
         <GoalInput placeholder="목표를 입력해주세요"></GoalInput>
       </Box>
       <Box>
-        <Label>목표 기간</Label>
-        <Period>2022.08.31 - 2022.09.02</Period>
+        <Label></Label>
+        <Period>
+          {regDay.start.toDateString()} - {regDay.last.toDateString()}
+        </Period>
       </Box>
 
       <RegBtn>목표 등록하기</RegBtn>
@@ -31,12 +36,21 @@ const Label = styled.div`
 `;
 
 const GoalInput = styled.input`
-  width: 90%;
+  width: 340px;
+  height: 52px;
+  border: 1px solid #70cca6;
 `;
 
-const Period = styled.div``;
+const Period = styled.div`
+  width: 340px;
+  height: 52px;
+  background: #70cca6;
+`;
 
 const RegBtn = styled.button`
-  width: 90%;
-  height: 20px;
+  width: 340px;
+  height: 52px;
+  background: #70cca6;
+  border-radius: 2px;
+  border: none;
 `;
