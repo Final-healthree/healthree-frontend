@@ -1,26 +1,23 @@
 import React from "react";
 import styled from "styled-components";
 import RegCalendar from "../components/register/Calendar";
-import MainGoal from "../components/main/MainGoal";
+import GoalSlider from "../components/main/GoalSlider";
 
 const Main = () => {
   return (
     <StMainContainer>
-      <div>
-        Main
-        </div>
-
+      <GoalSlider />
+      {/* <RegCalendar /> */}
     </StMainContainer>
   );
 };
 
 const StMainContainer = styled.div`
   width: 100%;
-  height: calc(100vh - 70px - 80px );
+  /* height: calc(100vh-54px-70px); */
+  /* height: 100vh; */
   overflow-y: scroll;
-  /* background-color: red; */
   
-
 `;
 
 export default Main;
