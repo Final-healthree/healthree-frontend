@@ -52,9 +52,19 @@ const Footer = () => {
 
 const StFooterLayout = styled.div`
 
+div {
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  }
 `;
 
-export default Footer;
+const StLine = styled.hr`
+  border: 1px solid black;
+`;
+
+
 
 
 const StFooterMain = styled.ul`
@@ -64,3 +74,10 @@ const StFooterMain = styled.ul`
   padding: 6px 1em 0;
   justify-content:space-between;
 `
+
+  }
+  `
+
+
+export default Footer;
+

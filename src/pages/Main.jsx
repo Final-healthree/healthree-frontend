@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import RegCalendar from "../components/register/Calendar";
+import MainGoal from "../components/main/MainGoal";
 
 const Main = () => {
   return (
@@ -7,9 +9,10 @@ const Main = () => {
       <div>
         Main
         </div>
+
     </StMainContainer>
-  )
-}     
+  );
+};
 
 const StMainContainer = styled.div`
   width: 100%;
@@ -17,6 +20,7 @@ const StMainContainer = styled.div`
   overflow-y: scroll;
   background-color: red;
   
+
 `;
 
 export default Main;
