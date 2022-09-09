@@ -75,8 +75,6 @@ const StFooterMain = styled.ul`
   justify-content:space-between;
 `
 
-  }
-  `
 
 
 export default Footer;
