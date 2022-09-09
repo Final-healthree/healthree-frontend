@@ -1,16 +1,22 @@
 import React from "react";
 import styled from "styled-components";
 
-const UniversalButton = () => {
+const UniversalButton = (props) => {
   return (
     <div>
-      <StButton>버튼입니다.</StButton>
+      <StButton>{props.name}</StButton>
     </div>
   )
 }
 
 const StButton = styled.button`
-  color: red;
+    width: 95%;
+    height: 52px;
+    background: #70CCA6;  
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 2px;
 `;
 
 export default UniversalButton;
