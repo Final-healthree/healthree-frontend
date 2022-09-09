@@ -1,38 +1,52 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-//임시 아이콘
-import { ImHome2, ImUsers, ImUserCheck  } from "react-icons/im";
+
+import footerMain from '../assets/images/footerMain.svg'
+import footerMainC from '../assets/images/footerMainC.svg'
+import footerCommunity from '../assets/images/footerCommunity.svg'
+import footerCommunityC from '../assets/images/footerCommunityC.svg'
+import footerMypage from '../assets/images/footerMypage.svg'
+import footerMypageC from '../assets/images/footerMypageC.svg'
 
 const Footer = () => {
   const navigate = useNavigate();
-  
+  const [isListHoverMain, setIsListHoverMain] = useState(false);
+  const [isListHoverCommunity, setIsListHoverCommunity] = useState(false);
+  const [isListHoverMypage, setIsListHoverMypage] = useState(false);
+
+
+
+
   return (
-    <StFooter>
-      <ul className="footer_menu">
-        <li onClick={() => {
-          navigate('/main')
-        }}>
-          <div className="icon_box">
-            <ImHome2 />
-          </div>
+      <StFooterMain>
+        <li onMouseOver={() => setIsListHoverMain(true)}
+          onMouseOut={() => setIsListHoverMain(false)}
+          onClick={() => {
+            navigate('/')
+          }}>
+          <img src={isListHoverMain ? footerMainC : footerMain} />
         </li>
-        <li onClick={() => {
-          navigate('/community')
-        }}>
-           <div className="icon_box">
-            <ImUsers />
-          </div>
+
+        <li onMouseOver={() => setIsListHoverCommunity(true)}
+          onMouseOut={() => setIsListHoverCommunity(false)}
+          onClick={() => {
+            navigate('/community')
+          }}>
+          <img src={isListHoverCommunity ? footerCommunityC : footerCommunity} />
+
         </li>
-        <li onClick={() => {
-          navigate('/ImUser')
-        }}>
-          <div className="icon_box">
-            <ImUserCheck />
-          </div>
+
+        <li onMouseOver={() => setIsListHoverMypage(true)}
+          onMouseOut={() => setIsListHoverMypage(false)}
+          onClick={() => {
+            navigate('/ImUser')
+          }}>
+          <img src={isListHoverMypage ? footerMypageC : footerMypage} />
+
         </li>
-      </ul>
-    </StFooter>
+      </StFooterMain>
+
   )
 }
 
@@ -51,46 +65,19 @@ const StLine = styled.hr`
 `;
 
 
-const StFooter = styled.div`
-  height: 80px;
-  background-color: #fff;
 
 
-  .footer_menu {
-    display: flex;
-    justify-content: space-between;
-    text-align: center;
-    
-    li {
-      flex: 1 1 auto;
-      
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .icon_box {
-      width: 70%;
-      height: 75px;
+const StFooterMain = styled.ul`
+  display: flex;
+  list-style: none;
+  flex: 0 0 auto;
+  padding: 6px 1em 0;
+  justify-content:space-between;
+`
 
-      font-size: 2.3em;
-      
-      border-radius: 20px;
-      color: #888;
-
-      cursor: pointer;
-      transition: all 0.2s;
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      &:hover, &.active {
-        color: #533483
-      }
-    }
   }
   `
 
 
 export default Footer;
+
