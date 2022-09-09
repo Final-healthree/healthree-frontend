@@ -1,13 +1,20 @@
 import React from "react";
-import MyPageCalendar from "../components/mypage/MyPageCalendar";
-import Tab from "../components/mypage/Tab";
+
+import MyVideo from "../components/video/MyVideo";
+import styled from "styled-components";
+
 const Mypage = () => {
   return (
-    <div>
-      <Tab/>
-      <MyPageCalendar/>
-    </div>
-  )
-}
+    <StMainContainer>
+      Mypage
+      <MyVideo />
+    </StMainContainer>
+  );
+};
 
 export default Mypage;
+
+const StMainContainer = styled.div`
+  width: 100%;
+  height: 500px;
+`;
