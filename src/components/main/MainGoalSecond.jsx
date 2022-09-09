@@ -3,7 +3,7 @@ import styled from "styled-components";
 import RegisterModal from "./RegisterModal";
 import Modal from "./Modal";
 
-const MainGoal = (props) => {
+const MainGoalSecond = (props) => {
   const [modalopen, setModalOpen] = useState(false);
 
   return (
@@ -12,7 +12,7 @@ const MainGoal = (props) => {
         <span>오늘 운동을 아직 안했네여 인증해주세요</span>
       </StGuideTextContainer>
       <StMainGoalTextContainer>
-        <span>작심 1일</span>
+        <span>작심 2일</span>
       </StMainGoalTextContainer>
       <StTitleContainer>
         <p>팔굽혀펴기 10번</p>
@@ -30,7 +30,7 @@ const MainGoal = (props) => {
             </Modal>
           )}
         }}>동영상 등록하기</button> */}
-        { modalopen === true ? <RegisterModal /> : null }
+        {/* { modalopen === true ? <RegisterModal /> : null } */}
       </StButtonContainer>
     </StMainLayout>
   )
@@ -41,6 +41,7 @@ const StMainLayout = styled.div`
 `;
 
 const StGuideTextContainer = styled.div`
+  margin-top: 30px;
   text-align: center;
 `;
 
@@ -69,4 +70,4 @@ button {
   cursor: pointer;
 }
 `;
-export default MainGoal;
+export default MainGoalSecond;
