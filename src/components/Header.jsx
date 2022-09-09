@@ -20,10 +20,10 @@ const Header = () => {
 export default Header;
 
 const StHeader = styled.div`
-  width: 100%;
-  height: 70px;
+  /* max-width: 375px;
+  height: 70px; */
 
   display: flex;
-  justify-content: flex-start;
+  /* justify-content: flex-start; */
   `
  
