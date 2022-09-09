@@ -41,7 +41,7 @@ const Footer = () => {
         onMouseOver={() => setIsListHoverMypage(true)}
         onMouseOut={() => setIsListHoverMypage(false)}
         onClick={() => {
-          navigate("/ImUser");
+          navigate("/Mypage");
         }}
       >
         <img src={isListHoverMypage ? footerMypageC : footerMypage} />
@@ -51,6 +51,8 @@ const Footer = () => {
 };
 
 const StFooterMain = styled.ul`
+  min-width: 360px;
+  max-width: 375px;
   display: flex;
   list-style: none;
   flex: 0 0 auto;
@@ -58,7 +60,11 @@ const StFooterMain = styled.ul`
   justify-content: space-between;
   background-color: #fff;
 
-  position: sticky;
+  position: absolute;
+  bottom: 0;
+  //중앙 정렬
+  left: 50%;
+  transform: translateX(-50%);
 `;
 
 export default Footer;
