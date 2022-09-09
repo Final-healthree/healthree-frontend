@@ -14,8 +14,10 @@ const Main = () => {
 
 const StMainContainer = styled.div`
   width: 100%;
-  /* height: 500px; */
-  /* background-color: red; */
+  /* height: calc(100vh-54px-70px); */
+  /* height: 100vh; */
+  overflow-y: scroll;
+  
 `;
 
 export default Main;
