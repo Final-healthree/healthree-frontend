@@ -11,7 +11,7 @@ const Layout = (props) => {
 
 const StLayout = styled.div`
   min-width: 360px;
-  max-width: 640px;
+  max-width: 375px;
   height:100vh;
   margin: 0 auto;
   background-color: #99c9f2;
