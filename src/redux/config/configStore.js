@@ -7,10 +7,11 @@ const rootReducer = combineReducers({
   registerday,
 });
 
-const store = configureStore({
-  reducer: rootReducer,
 
-  middleware: [...middlewares],
-});
+// const store = configureStore({
+//   reducer: rootReducer,
 
-export default store;
+//   middleware: [...middlewares],
+// });
+
+// export default store;

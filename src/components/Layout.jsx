@@ -7,6 +7,7 @@ const Layout = (props) => {
 
 const StLayout = styled.div`
   min-width: 360px;
+
   max-width: 375px;
   height: 100vh;
   max-height: calc(100vh - 90px - 70px);
