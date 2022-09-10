@@ -10,13 +10,12 @@ const StLayout = styled.div`
 
   max-width: 375px;
   height: 100vh;
-  max-height: calc(100vh - 54px - 70px);
-  
-  overflow-y: scroll;  //스크롤 달아줌, 부모크기 고정      +)hidden 짤림
-  
+  max-height: calc(100vh - 90px - 70px);
+
+  overflow-y: scroll; //스크롤 달아줌, 부모크기 고정      +)hidden 짤림
 
   margin: 0 auto;
-  background-color: #99c9f2;
+  background-color: #fff;
   position: relative;
 `;
 
