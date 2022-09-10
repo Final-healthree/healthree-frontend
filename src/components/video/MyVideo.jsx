@@ -41,43 +41,50 @@ const MyVideo = () => {
   const [modal, setModal] = useState(false);
   console.log(modal);
   return (
-    <div>
-      {modal === true ? <VideoModal modal={modal} /> : null}
-      <VideoBox
-        onClick={() => {
-          setModal(true);
-        }}
-      >
-        <source
-          src="https://healthree.s3.ap-northeast-2.amazonaws.com/videos/1662714433501.6726"
-          type="video/mp4"
-        />
-      </VideoBox>
-      <span>08.07 - 08.10</span>
+    <Container>
+      <VideoArea>
+        {modal === true ? <VideoModal modal={modal} /> : null}
+        <VideoBox>
+          <VideoImg
+            onClick={() => {
+              setModal(true);
+            }}
+          >
+            <source
+              src="https://healthree.s3.ap-northeast-2.amazonaws.com/videos/1662714433501.6726"
+              type="video/mp4"
+            />
+          </VideoImg>
+          <VideoDate>08.07 - 08.10</VideoDate>
+        </VideoBox>
 
-      <VideoBox
-        onClick={() => {
-          setModal(true);
-        }}
-      >
-        <source
-          src="https://healthree.s3.ap-northeast-2.amazonaws.com/videos/1662714433501.6726"
-          type="video/mp4"
-        />
-      </VideoBox>
-      <span>08.07 - 08.10</span>
-
-      <VideoBox
-        onClick={() => {
-          setModal(true);
-        }}
-      >
-        <source
-          src="https://healthree.s3.ap-northeast-2.amazonaws.com/videos/1662714433501.6726"
-          type="video/mp4"
-        />
-      </VideoBox>
-      <span>08.07 - 08.10</span>
+        <VideoBox>
+          <VideoImg
+            onClick={() => {
+              setModal(true);
+            }}
+          >
+            <source
+              src="https://healthree.s3.ap-northeast-2.amazonaws.com/videos/1662714433501.6726"
+              type="video/mp4"
+            />
+          </VideoImg>
+          <VideoDate>08.07 - 08.10</VideoDate>
+        </VideoBox>
+        <VideoBox>
+          <VideoImg
+            onClick={() => {
+              setModal(true);
+            }}
+          >
+            <source
+              src="https://healthree.s3.ap-northeast-2.amazonaws.com/videos/1662714433501.6726"
+              type="video/mp4"
+            />
+          </VideoImg>
+          <VideoDate>08.07 - 08.10</VideoDate>
+        </VideoBox>
+      </VideoArea>
 
       {/* {items.map((item, idx) => (
         <div key={idx}>
@@ -95,11 +102,39 @@ const MyVideo = () => {
       ) : (
         ""
       )} */}
-    </div>
+    </Container>
   );
 };
 
 export default MyVideo;
+
+const Container = styled.div``;
+
+const VideoArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  padding: 20px 0;
+  box-sizing: border-box;
+`;
+
+const VideoBox = styled.div`
+  height: 170px;
+  width: 320px;
+`;
+
+const VideoImg = styled.video`
+  height: 150px;
+  width: 320px;
+  background-color: #dadada;
+
+  filter: drop-shadow(6px 6px 5px rgba(0, 0, 0, 0.12));
+  mix-blend-mode: multiply;
+  border-radius: 2px;
+`;
+
+const VideoDate = styled.span``;
 
 const Box = styled.div`
   margin: 10px auto;
@@ -115,10 +150,4 @@ const LoaderWrap = styled.div`
   justify-content: center;
   text-align: center;
   align-items: center;
-`;
-
-const VideoBox = styled.video`
-  height: 160px;
-  width: 320px;
-  border: 1px solid black;
 `;

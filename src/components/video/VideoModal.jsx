@@ -32,13 +32,11 @@ const ModalBody = styled.div`
 `;
 
 const ShowVideo = styled.video`
-  background-color: #fff;
-  border-radius: 10px;
-  border: solid 3px black;
-  padding: 15px;
+  background-color: #dadada;
+  border-radius: 2px;
   margin: auto;
-  width: 40%;
-  height: 70%;
+  width: 20%;
+  height: 50%;
   display: flex;
   flex-direction: column;
 `;
