@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 //svg 이미지
-import headerLogo from "../assets/images/headerLogo.svg";
+import headerLogo from "../assets/headerFooter/headerLogo.svg";
 
 const Header = () => {
   const navigate = useNavigate();

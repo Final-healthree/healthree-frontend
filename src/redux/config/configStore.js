@@ -1,12 +1,10 @@
-import {combineReducers, configureStore} from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
-
-
+import registerday from "../modules/regday";
 
 const middlewares = [thunk];
 const rootReducer = combineReducers({
-  
-  
+  registerday,
 });
 
 const store = configureStore({

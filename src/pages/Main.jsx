@@ -5,6 +5,7 @@ import GoalSlider from "../components/main/GoalSlider";
 
 const Main = () => {
   return (
+
     <StMainContainer>
       <GoalSlider />
       {/* <RegCalendar /> */}
@@ -13,10 +14,9 @@ const Main = () => {
 };
 
 const StMainContainer = styled.div`
-  width: 100%;
+  /* width: 100%; */
   /* height: calc(100vh-54px-70px); */
   /* height: 100vh; */
-  overflow-y: scroll;
 `;
 
 export default Main;

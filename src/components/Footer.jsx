@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-import footerMain from "../assets/images/footerMain.svg";
-import footerMainC from "../assets/images/footerMainC.svg";
-import footerCommunity from "../assets/images/footerCommunity.svg";
-import footerCommunityC from "../assets/images/footerCommunityC.svg";
-import footerMypage from "../assets/images/footerMypage.svg";
-import footerMypageC from "../assets/images/footerMypageC.svg";
+import footerMain from "../assets/headerFooter/footerMain.svg";
+import footerMainC from "../assets/headerFooter/footerMainC.svg";
+import footerCommunity from "../assets/headerFooter/footerCommunity.svg";
+import footerCommunityC from "../assets/headerFooter/footerCommunityC.svg";
+import footerMypage from "../assets/headerFooter/footerMypage.svg";
+import footerMypageC from "../assets/headerFooter/footerMypageC.svg";
 
 const Footer = () => {
   const navigate = useNavigate();
@@ -56,7 +56,7 @@ const StFooterMain = styled.ul`
   display: flex;
   list-style: none;
   flex: 0 0 auto;
-  padding: 6px 1em 0;
+  padding: 0px 1em 0;
   justify-content: space-around;
   background-color: #fff;
 
