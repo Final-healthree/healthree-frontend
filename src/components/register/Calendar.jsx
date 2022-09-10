@@ -11,6 +11,7 @@ const RegCalendar = () => {
   const regDay = useSelector((state) => state.registerday);
   const navigate = useNavigate();
   console.log(regDay);
+
   const [last, setLast] = useState(new Date());
   const lastday = new Date(last.setDate(last.getDate() + 2));
   const [day, setday] = useState([new Date(), new Date(lastday)]);
@@ -24,60 +25,82 @@ const RegCalendar = () => {
     navigate("/register");
   };
 
+  function leftPad(value) {
+    if (value >= 10) {
+      return value;
+    }
+
+    return `0${value}`;
+  }
+
+  function toStringByFormatting(source, delimiter = "-") {
+    const year = source.getFullYear();
+    const month = leftPad(source.getMonth() + 1);
+    const day = leftPad(source.getDate());
+
+    return [year, month, day].join(delimiter);
+  }
+
   return (
     <Container>
       <HeaderArea>
-        <Title>목표를 세워보세요.</Title>
-        <Today>{new Date().toDateString()}</Today>
+        <Title>목표를 세워보세요!</Title>
+        <Today>{toStringByFormatting(new Date(), ".")}</Today>
       </HeaderArea>
 
-      <div>
+      <CalendarArea>
         <Calendar onChange={onChange} value={day} />
-      </div>
-      <RegBtn onClick={sendDay}>날짜 등록하기</RegBtn>
+      </CalendarArea>
+
+      <BtnArea>
+        <RegBtn onClick={sendDay}>날짜 등록하기</RegBtn>
+      </BtnArea>
     </Container>
   );
 };
 
 export default RegCalendar;
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
+const Container = styled.div``;
 
 const HeaderArea = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 16px 8px;
 `;
-const Title = styled.div`
-  display: flex;
-  width: 340px;
-  height: 50px;
-  padding: 0;
+const Title = styled.h3`
   margin: 0;
-  box-sizing: content-box;
 `;
 
-const Today = styled.div`
-  display: flex;
-  width: 185px;
-  height: 18px;
+const Today = styled.span`
   color: #4b4b4b;
-  margin: 0;
-  box-sizing: content-box;
+`;
+
+const CalendarArea = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 300px;
+`;
+
+const BtnArea = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: center;
 `;
 
 const RegBtn = styled.button`
+  position: absolute;
+  top: 130px;
+
   width: 340px;
   height: 52px;
   background: #70cca6;
   border-radius: 2px;
   border: none;
-  bottom: 2px;
-  margin-top: 120px;
-
+  font-size: medium;
   font-weight: 700;
 `;
