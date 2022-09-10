@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+//svg 이미지
+// import tapMycalendarA from '../../assets/myCalendar/tabMycalendarA.svg'
+// import tapMycalendarB from '../../assets/myCalendar/tabMycalendarB.svg'
+
 
 function Tab() {
   const [currentTab, setCurrentTab] = useState(0);
