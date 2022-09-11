@@ -14,15 +14,14 @@ import stamp from "../../assets/myCalendar/stamp.svg";
 
 function MyPageCalendar() {
   const [value, onChange] = useState(new Date());
-  console.log(value);
 
   const date = [
     { day1: "2022. 9 .5." },
     { day1: "2022. 9 .10.", day2: "2022. 9 .11." },
   ];
-  // const test1 = ["2022. 9 .5."];
-  // const test2 = ["2022. 9 .6.", "2022-9-7."];
-  // const test3 = ["2022. 9 .8.", "2022-9-9.", "2022. 9 . 10."];
+  const test1 = ["2022. 9 .5."];
+  const test2 = ["2022. 9 .6.", "2022-9-7."];
+  const test3 = ["2022. 9 .8.", "2022-9-9.", "2022. 9 . 10."];
 
   date.map((item) => {
     if (item.length === 1) {
@@ -35,18 +34,31 @@ function MyPageCalendar() {
         onChange={onChange}
         value={value}
         tileContent={(e) => {
-          console.log(e);
-          // if (item.find((x) => new Date(x).getTime() === e.date.getTime())){
-          //   return <HilightB/>
-          // }
+          if (test1.find((x) => new Date(x).getTime() === e.date.getTime())) {
+            return (
+              <>
+                <HilightA />
+                <HilightB />
+              </>
+            );
+          }
+          if (test2.find((x) => new Date(x).getTime() === e.date.getTime())) {
+            return (
+              <>
+                <HilightA />
+                <HilightB />
+              </>
+            );
+          }
+          if (test3.find((x) => new Date(x).getTime() === e.date.getTime())) {
+            return (
+              <>
+                <HilightA />
+                <HilightB />
+              </>
+            );
+          }
         }}
-
-        // if (test2.find((x) => new Date(x).getTime() === e.date.getTime())){
-        //   return <HilightB/>
-        // }
-        // if (test3.find((x) => new Date(x).getTime() === e.date.getTime())){
-        //   return <HilightC/>
-        // }
       />
     </div>
   );
@@ -56,11 +68,8 @@ export default MyPageCalendar;
 const HilightA = styled.div`
   width: 25px;
   height: 25px;
-
   position: absolute;
-
   transform: translate(5px, -22px);
-
   background-image: url(${stamp});
   background-size: cover;
   background-position: center;
@@ -68,28 +77,21 @@ const HilightA = styled.div`
 `;
 
 const HilightB = styled.div`
-  width: 35px;
-  height: 35px;
-
+  width: 33px;
+  height: 33px;
   position: absolute;
-
-  transform: translate(1px, -27px);
-
+  transform: translate(1px, -25px);
   background-image: url(${OhilightOne});
   background-size: cover;
   background-position: center;
   z-index: -100;
 `;
 
-const HilightC = styled.div`
-  width: 35px;
-  height: 35px;
-
-  position: absolute;
-
-  transform: translate(1px, -27px);
-
-  background-image: url(${stamp});
-  background-size: cover;
-  background-position: center;
-`;
+// const HilightC = styled.div`
+// width: 35px;
+// height: 35px;
+// position: absolute;
+// transform: translate(1px, -27px);
+// background-image: url(${stamp});
+// background-size: cover;
+// background-position: center;
