@@ -1,94 +1,95 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import Calendar from 'react-calendar';
+import React, { useState } from "react";
+import styled from "styled-components";
+import Calendar from "react-calendar";
 // import 'react-calendar/dist/Calendar.css';
-import './Calendar.css'
+import "./Calendar.css";
 //svg 이미지
 // import GhilightA from '../../assets/myCalendar/GhilightA.svg'
-// import GhilightB from '../../assets/myCalendar/GhilightB.svg' 
-// import GhilightC from '../../assets/myCalendar/GhilightC.svg' 
-// import OhilightA from '../../assets/myCalendar/OhilightA.svg' 
+// import GhilightB from '../../assets/myCalendar/GhilightB.svg'
+// import GhilightC from '../../assets/myCalendar/GhilightC.svg'
+// import OhilightA from '../../assets/myCalendar/OhilightA.svg'
 // import OhilightB from '../../assets/myCalendar/OhilightB.svg'
-import OhilightOne from '../../assets/myCalendar/OhilightOne.svg'
-import stamp from '../../assets/myCalendar/stamp.svg'
-
-
-
-
-
-
+import OhilightOne from "../../assets/myCalendar/OhilightOne.svg";
+import stamp from "../../assets/myCalendar/stamp.svg";
 
 function MyPageCalendar() {
   const [value, onChange] = useState(new Date());
-  console.log(value)
+  console.log(value);
 
-  const test1 = ["2022. 9 .5."]
-  const test2 = ["2022. 9 .6.", "2022-9-7."]
-  const test3 = ["2022. 9 .8.", "2022-9-9.", "2022. 9 . 10."]
+  const date = [
+    { day1: "2022. 9 .5." },
+    { day1: "2022. 9 .10.", day2: "2022. 9 .11." },
+  ];
+  // const test1 = ["2022. 9 .5."];
+  // const test2 = ["2022. 9 .6.", "2022-9-7."];
+  // const test3 = ["2022. 9 .8.", "2022-9-9.", "2022. 9 . 10."];
 
+  date.map((item) => {
+    if (item.length === 1) {
+      return item;
+    }
+  });
   return (
     <div>
-      <Calendar onChange={onChange} value={value} 
-      tileContent={(e)=>{
-        console.log(e)
-      if (test1.find((x) => new Date(x).getTime() === e.date.getTime())){
-        return <>
-        <HilightA/>
-        <HilightB/>
-        </>
-      
-      }
-      // if (test2.find((x) => new Date(x).getTime() === e.date.getTime())){
-      //   return <HilightB/>
-      // }
-      // if (test3.find((x) => new Date(x).getTime() === e.date.getTime())){
-      //   return <HilightC/>
-      // }
-      }}
+      <Calendar
+        onChange={onChange}
+        value={value}
+        tileContent={(e) => {
+          console.log(e);
+          // if (item.find((x) => new Date(x).getTime() === e.date.getTime())){
+          //   return <HilightB/>
+          // }
+        }}
+
+        // if (test2.find((x) => new Date(x).getTime() === e.date.getTime())){
+        //   return <HilightB/>
+        // }
+        // if (test3.find((x) => new Date(x).getTime() === e.date.getTime())){
+        //   return <HilightC/>
+        // }
       />
     </div>
   );
 }
-export default MyPageCalendar
+export default MyPageCalendar;
 
 const HilightA = styled.div`
-width: 25px;
-height: 25px;
+  width: 25px;
+  height: 25px;
 
-position: absolute;
+  position: absolute;
 
-transform: translate(5px, -22px);
+  transform: translate(5px, -22px);
 
-background-image: url(${stamp});
-background-size: cover;
-background-position: center;
-z-index: 2;
-
-`
+  background-image: url(${stamp});
+  background-size: cover;
+  background-position: center;
+  z-index: 2;
+`;
 
 const HilightB = styled.div`
-width: 35px;
-height: 35px;
+  width: 35px;
+  height: 35px;
 
-position: absolute;
+  position: absolute;
 
-transform: translate(1px, -27px);
+  transform: translate(1px, -27px);
 
-background-image: url(${OhilightOne});
-background-size: cover;
-background-position: center;
-z-index: -100;
-`
+  background-image: url(${OhilightOne});
+  background-size: cover;
+  background-position: center;
+  z-index: -100;
+`;
 
 const HilightC = styled.div`
-width: 35px;
-height: 35px;
+  width: 35px;
+  height: 35px;
 
-position: absolute;
+  position: absolute;
 
-transform: translate(1px, -27px);
+  transform: translate(1px, -27px);
 
-background-image: url(${stamp});
-background-size: cover;
-background-position: center;
-`
+  background-image: url(${stamp});
+  background-size: cover;
+  background-position: center;
+`;

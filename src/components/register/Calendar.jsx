@@ -1,12 +1,18 @@
+import React from "react";
 import { useState } from "react";
-import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
+import styled from "styled-components";
+
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import { register } from "../../redux/modules/regday";
 
-const RegCalendar = () => {
+import { DayPicker } from "react-day-picker";
+import { format } from "date-fns";
+import ko from "date-fns/locale/ko";
+import "./day-picker.css";
+
+const RegCalendar = (props) => {
+  console.log(props);
   const dispatch = useDispatch();
   const regDay = useSelector((state) => state.registerday);
   const navigate = useNavigate();
@@ -40,6 +46,12 @@ const RegCalendar = () => {
 
     return [year, month, day].join(delimiter);
   }
+  const [selected, setSelected] = React.useState();
+  let footer = <p>Please pick a day.</p>;
+
+  if (selected) {
+    footer = <Test>You picked {format(selected, "PP")}.</Test>;
+  }
 
   return (
     <Container>
@@ -49,7 +61,14 @@ const RegCalendar = () => {
       </HeaderArea>
 
       <CalendarArea>
-        <Calendar onChange={onChange} value={day} />
+        <DayPicker
+          mode="single"
+          selected={selected}
+          onSelect={setSelected}
+          footer={footer}
+          locale={ko}
+          components={{}}
+        />
       </CalendarArea>
 
       <BtnArea>
@@ -82,8 +101,7 @@ const CalendarArea = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  height: 300px;
+  /* height: 300px; */
 `;
 
 const BtnArea = styled.div`
@@ -103,4 +121,8 @@ const RegBtn = styled.button`
   border: none;
   font-size: medium;
   font-weight: 700;
+`;
+
+const Test = styled.p`
+  border: 1px solid pink;
 `;

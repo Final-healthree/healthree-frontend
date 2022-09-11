@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import MyPageCalendar from "../components/mypage/MyPageCalendar";
-// import MyVideo from "../components/video/MyVideo";
+// import MyPageCalendar from "../components/mypage/MyPageCalendar";
+import MyVideo from "../components/video/MyVideo";
 
 const Mypage = () => {
   return (
     <StMainContainer>
-      <MyPageCalendar />
-      {/* <MyVideo /> */}
+      {/* <MyPageCalendar /> */}
+      <MyVideo />
     </StMainContainer>
   );
 };
