@@ -1,58 +1,52 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { Nav } from "react-bootstrap";
 //svg 이미지
-// import tapMycalendarA from '../../assets/myCalendar/tabMycalendarA.svg'
-// import tapMycalendarB from '../../assets/myCalendar/tabMycalendarB.svg'
+import tapMycalendarA from '../../assets/myCalendar/tabMycalendarA.svg'
+import tapMycalendarB from '../../assets/myCalendar/tabMycalendarB.svg'
+import tapMyVideoA from '../../assets/myCalendar/tabMyVideoA.svg'
+import tapMyVideoB from '../../assets/myCalendar/tabMyVideoB.svg'
+//컴퍼넌트
+import MyPageCalendar from "./MyPageCalendar";
+import MyVideo from "../video/MyVideo"
 
 
 function Tab() {
-  const [currentTab, setCurrentTab] = useState(0);
+  const [isListHoverMC, setIsListHoverMC] = useState(false);
+  const [isListHoverMV, setIsListHoverMV] = useState(false);
 
-  const menuArr = [
-    { name: 'MyCalendar', content: " Tab menu One" },
-    { name: 'MyVideo', content: " Tab menu Two" },
-  ];
+  const [Tb, setTb] = useState(0);
+  console.log(isListHoverMC)
 
-  const selectMenuHandler = (index) => {
-    setCurrentTab(index);
-  };
   return (
     <>
-      <div>
-        <TabMenu>
-          {menuArr.map((ele, index) => {
-            console.log(index)
-            return (
-              <li
-                key={index}
-                className={currentTab === index ? "submenu focused" : "submenu"}
-                onClick={() => selectMenuHandler(index)}
-              >
-                {ele.name}
-              </li>
-            )
-          })}
-        </TabMenu>
-      </div>
-    </>
+      <Nav variant="tabs" defaultActiveKey="link0" style = {{display: "flex", flexDirection:"row", gap: "20px" }}>
+        <Nav.Item>
+          <Nav.Link eventKey="link0" onClick={()=>{setTb(0)}}  onMouseOver={() => setIsListHoverMC(true)}
+            onMouseOut={() => setIsListHoverMC(false)}
+            >
+            <img src={isListHoverMC ? tapMycalendarB : tapMycalendarA} />
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link eventKey="link1" onClick={()=>{setTb(1)}} onMouseOver={() => setIsListHoverMV(true)}
+            onMouseOut={() => setIsListHoverMV(false)}
+            >
+            <img src={isListHoverMV ? tapMyVideoB : tapMyVideoA} />
+          </Nav.Link>
+        </Nav.Item>
+
+      </Nav>
+      {
+        Tb == 0 ? <MyPageCalendar/> : null
+      }
+        {
+          Tb == 1 ? <MyVideo/> : null
+        }
+        </>
   );
 };
 
 export default Tab
 
-const TabMenu = styled.ul`
-  font-weight: bold;
-  display: flex;
-  flex-direction: row;
-  justify-items: center;
-  align-items: center;
-  list-style: none;
 
-  .submenu {
-    width:100% auto;
-    padding: 15px 10px;
-    cursor: pointer;
-    &:hover, &.active {
-      color: #2C8D65;
-    }
-`;
