@@ -6,13 +6,12 @@ import styled from "styled-components";
 // import tapMyVideoA from '../../assets/myCalendar/tabMyVideoA.svg'
 // import tapMyVideoB from '../../assets/myCalendar/tabMyVideoB.svg'
 
-
 function Tab() {
   const [currentTab, setCurrentTab] = useState(0);
 
   const menuArr = [
-    { name: 'MyCalendar', content: " Tab menu One" },
-    { name: 'MyVideo', content: " Tab menu Two" },
+    { name: "MyCalendar", content: " Tab menu One" },
+    { name: "MyVideo", content: " Tab menu Two" },
   ];
 
   const selectMenuHandler = (index) => {
@@ -23,7 +22,7 @@ function Tab() {
       <div>
         <TabMenu>
           {menuArr.map((ele, index) => {
-            console.log(index)
+            console.log(index);
             return (
               <li
                 key={index}
@@ -32,15 +31,15 @@ function Tab() {
               >
                 {ele.name}
               </li>
-            )
+            );
           })}
         </TabMenu>
       </div>
     </>
   );
-};
+}
 
-export default Tab
+export default Tab;
 
 const TabMenu = styled.ul`
   font-weight: bold;
@@ -51,10 +50,12 @@ const TabMenu = styled.ul`
   list-style: none;
 
   .submenu {
-    width:100% auto;
+    width: 100% auto;
     padding: 15px 10px;
     cursor: pointer;
-    &:hover, &.active {
-      color: #2C8D65;
+    &:hover,
+    &.active {
+      color: #2c8d65;
     }
+  }
 `;

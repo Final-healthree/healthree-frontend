@@ -3717,6 +3717,11 @@ data-urls@^2.0.0:
     whatwg-mimetype "^2.3.0"
     whatwg-url "^8.0.0"
 
+date-fns@^2.29.2:
+  version "2.29.2"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.29.2.tgz#0d4b3d0f3dff0f920820a070920f0d9662c51931"
+  integrity sha512-0VNbwmWJDS/G3ySwFSJA3ayhbURMTJLtwM2DTxf9CWondCnh6DTNlO9JgRSq6ibf4eD0lfMJNBxUdEAHHix+bA==
+
 debug@*, debug@4, debug@^4.1.0, debug@^4.1.1, debug@^4.3.2, debug@^4.3.4:
   version "4.3.4"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.4.tgz#1319f6579357f2338d3337d2cdd4914bb5dcc865"
@@ -7959,6 +7964,11 @@ react-calendar@^3.7.0:
     get-user-locale "^1.2.0"
     merge-class-names "^1.1.1"
     prop-types "^15.6.0"
+
+react-day-picker@^8.2.1:
+  version "8.2.1"
+  resolved "https://registry.yarnpkg.com/react-day-picker/-/react-day-picker-8.2.1.tgz#43f57ebe65dd8a90ccbb9d192eee899d67f79087"
+  integrity sha512-zFCi2IP7UbwcOM26mqYVE1vcuVC2sw/WY+QfC0AKitwRLkxMjC/o/KSzl8ia0+N3XQb38aoNcXnuH7d17QOSOw==
 
 react-dev-utils@^12.0.1:
   version "12.0.1"
