@@ -7,12 +7,11 @@ import { useNavigate } from "react-router-dom";
 import { register } from "../../redux/modules/regday";
 
 import { DayPicker } from "react-day-picker";
-import { format } from "date-fns";
+import { addDays, format } from "date-fns";
 import ko from "date-fns/locale/ko";
 import "./day-picker.css";
 
-const RegCalendar = (props) => {
-  console.log(props);
+const RegCalendar = () => {
   const dispatch = useDispatch();
   const regDay = useSelector((state) => state.registerday);
   const navigate = useNavigate();
@@ -46,12 +45,19 @@ const RegCalendar = (props) => {
 
     return [year, month, day].join(delimiter);
   }
-  const [selected, setSelected] = React.useState();
-  let footer = <p>Please pick a day.</p>;
 
-  if (selected) {
-    footer = <Test>You picked {format(selected, "PP")}.</Test>;
-  }
+  const pastMonth = new Date(2020, 10, 15);
+
+  const defaultSelected = {
+    from: pastMonth,
+    to: addDays(pastMonth, 2),
+  };
+
+  const [range, setRange] = useState(defaultSelected);
+  const [selectedDay, setSelectedDay] = useState(new Date());
+  const handleDayClick = (day) => setSelectedDay(day);
+
+  console.log(selectedDay);
 
   return (
     <Container>
@@ -62,12 +68,11 @@ const RegCalendar = (props) => {
 
       <CalendarArea>
         <DayPicker
-          mode="single"
-          selected={selected}
-          onSelect={setSelected}
-          footer={footer}
+          mode="range"
+          defaultMonth={pastMonth}
+          selected={range}
+          onDayClick={handleDayClick}
           locale={ko}
-          components={{}}
         />
       </CalendarArea>
 
