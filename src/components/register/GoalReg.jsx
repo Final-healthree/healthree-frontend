@@ -1,10 +1,34 @@
 import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
+import { useState } from "react";
+
+import axios from "axios";
 
 const GoalReg = () => {
   const regDay = useSelector((state) => state.registerday);
   console.log(regDay);
+  const year = regDay.start.getFullYear();
+  const month = regDay.start.getMonth() + 1;
+  const Month = leftPad(month);
+  const Day = leftPad(regDay.start.getDate() + 1);
+
+  console.log(typeof month);
+
+  const [info, setInfo] = useState({
+    day1: toStringByFormatting(regDay.start),
+    day2: `${year}-${Month}-${Day}`,
+    day3: toStringByFormatting(regDay.last),
+    goal: "",
+  });
+
+  const onChange = (e) => {
+    const { value } = e.target;
+    setInfo({
+      ...info,
+      goal: value,
+    });
+  };
 
   function leftPad(value) {
     if (value >= 10) {
@@ -22,6 +46,16 @@ const GoalReg = () => {
     return [year, month, day].join(delimiter);
   }
 
+  const submit = async () => {
+    await axios
+      .post(process.env.REACT_APP_API_KEY + "main/register", info)
+      .then((res) => {
+        console.log(res);
+      });
+  };
+
+  console.log(info);
+
   return (
     <Container>
       <HeaderArea>
@@ -30,7 +64,13 @@ const GoalReg = () => {
 
       <GoalArea>
         <Label>나의 목표</Label>
-        <GoalInput placeholder="목표를 입력해주세요"></GoalInput>
+        <GoalInput
+          placeholder="목표를 입력해주세요"
+          onChange={onChange}
+          name="goal"
+          value={info.goal}
+          // borderColor={false}
+        ></GoalInput>
         {/* 입력에 따라 버튼이랑 테두리 유무 */}
 
         <Label>목표 기간</Label>
@@ -41,7 +81,7 @@ const GoalReg = () => {
       </GoalArea>
 
       <BtnArea>
-        <RegBtn>목표 등록하기</RegBtn>
+        <RegBtn onClick={submit}>목표 등록하기</RegBtn>
       </BtnArea>
     </Container>
   );
@@ -80,7 +120,7 @@ const GoalInput = styled.input`
   box-sizing: border-box;
   width: 340px;
   height: 52px;
-  border: 2px solid #70cca6;
+  /* border: 2px solid $((props) => props.borderColor ? ##70cca6: #4b4b4b); */
   margin-bottom: 20px;
 `;
 
@@ -113,4 +153,6 @@ const RegBtn = styled.button`
   border: none;
   font-size: medium;
   font-weight: 700;
+
+  cursor: pointer;
 `;

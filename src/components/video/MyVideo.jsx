@@ -65,7 +65,7 @@ const MyVideo = () => {
             }}
           >
             <source
-              src="https://healthree.s3.ap-northeast-2.amazonaws.com/videos/1662714433501.6726"
+              src="https://healthree.s3.ap-northeast-2.amazonaws.com/videos/1662949231502.5002"
               type="video/mp4"
             />
           </VideoImg>
@@ -127,7 +127,7 @@ const VideoBox = styled.div`
 const VideoImg = styled.video`
   height: 150px;
   width: 320px;
-  background-color: #dadada;
+  background-color: #4b4b4b;
 
   filter: drop-shadow(6px 6px 5px rgba(0, 0, 0, 0.12));
   mix-blend-mode: multiply;

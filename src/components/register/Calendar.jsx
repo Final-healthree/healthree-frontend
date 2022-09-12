@@ -6,10 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { register } from "../../redux/modules/regday";
 
-import { DayPicker } from "react-day-picker";
-import { addDays, format } from "date-fns";
-import ko from "date-fns/locale/ko";
-import "./day-picker.css";
+import Calendar from "react-calendar";
+// import "react-calendar/dist/Calendar.css";
+import "./RegCalendar.css";
 
 const RegCalendar = () => {
   const dispatch = useDispatch();
@@ -46,19 +45,6 @@ const RegCalendar = () => {
     return [year, month, day].join(delimiter);
   }
 
-  const pastMonth = new Date(2020, 10, 15);
-
-  const defaultSelected = {
-    from: pastMonth,
-    to: addDays(pastMonth, 2),
-  };
-
-  const [range, setRange] = useState(defaultSelected);
-  const [selectedDay, setSelectedDay] = useState(new Date());
-  const handleDayClick = (day) => setSelectedDay(day);
-
-  console.log(selectedDay);
-
   return (
     <Container>
       <HeaderArea>
@@ -67,13 +53,7 @@ const RegCalendar = () => {
       </HeaderArea>
 
       <CalendarArea>
-        <DayPicker
-          mode="range"
-          defaultMonth={pastMonth}
-          selected={range}
-          onDayClick={handleDayClick}
-          locale={ko}
-        />
+        <Calendar onChange={onChange} value={day} calendarType={"US"} />
       </CalendarArea>
 
       <BtnArea>
@@ -126,6 +106,10 @@ const RegBtn = styled.button`
   border: none;
   font-size: medium;
   font-weight: 700;
+  cursor: pointer;
+
+  &:hover {
+  }
 `;
 
 const Test = styled.p`
