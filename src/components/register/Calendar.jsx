@@ -15,12 +15,10 @@ const RegCalendar = () => {
   const dispatch = useDispatch();
   const regDay = useSelector((state) => state.registerday);
   const navigate = useNavigate();
-  console.log(regDay);
 
   const [last, setLast] = useState(new Date());
   const lastday = new Date(last.setDate(last.getDate() + 2));
   const [day, setday] = useState([new Date(), new Date(lastday)]);
-  console.log(day);
   const onChange = (value) => {
     setday([new Date(value), new Date(value.setDate(value.getDate() + 2))]);
   };
@@ -57,7 +55,6 @@ const RegCalendar = () => {
   const [selectedDay, setSelectedDay] = useState(new Date());
   const handleDayClick = (day) => setSelectedDay(day);
 
-  console.log(selectedDay);
 
   return (
     <Container>

@@ -39,7 +39,6 @@ const MyVideo = () => {
   // console.log("inView", inView);
   // console.log("loading", loading);
   const [modal, setModal] = useState(false);
-  console.log(modal);
   return (
     <Container>
       <VideoArea>
