@@ -19,14 +19,14 @@ const GoalReg = () => {
     day1: toStringByFormatting(regDay.start),
     day2: `${year}-${Month}-${Day}`,
     day3: toStringByFormatting(regDay.last),
-    goal: "",
+    goal_name: "",
   });
 
   const onChange = (e) => {
     const { value } = e.target;
     setInfo({
       ...info,
-      goal: value,
+      goal_name: value,
     });
   };
 
@@ -48,9 +48,23 @@ const GoalReg = () => {
 
   const submit = async () => {
     await axios
-      .post(process.env.REACT_APP_API_KEY + "main/register", info)
+      .post(process.env.REACT_APP_REST_API_KEY + "api/main/register", info, {
+        headers: {
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOjQsIm5pY2tuYW1lIjoi7Jyg7JiBIiwicHJvZmlsZV9pbWFnZSI6Imh0dHA6Ly9rLmtha2FvY2RuLm5ldC9kbi9ielNMRDgvYnRySTJjd3lZYmcvMDJvTkNvWVVlZXF4czdReVp3a2E2MC9pbWdfNjQweDY0MC5qcGcifSwiaWF0IjoxNjYyOTkxMDc0fQ.nYSDF0dT_f8EOdmXg-Nhz2lpW194lGsCjouQ1z3fkcc`,
+        },
+      })
       .then((res) => {
+        alert(res.data.messgae);
         console.log(res);
+      })
+      .catch((error) => {
+        const type = error.response.data.message;
+        switch (type) {
+          case "하루에 한번만 작심삼일을 등록할 수 있습니다.":
+            alert("하루에 한번만 작심삼일을 등록할 수 있습니다.");
+            break;
+          default:
+        }
       });
   };
 
@@ -67,8 +81,8 @@ const GoalReg = () => {
         <GoalInput
           placeholder="목표를 입력해주세요"
           onChange={onChange}
-          name="goal"
-          value={info.goal}
+          name="goal_name"
+          value={info.goal_name}
           // borderColor={false}
         ></GoalInput>
         {/* 입력에 따라 버튼이랑 테두리 유무 */}
