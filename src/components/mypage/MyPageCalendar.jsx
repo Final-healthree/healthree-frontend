@@ -4,60 +4,98 @@ import Calendar from "react-calendar";
 // import 'react-calendar/dist/Calendar.css';
 import "./Calendar.css";
 //svg 이미지
-// import GhilightA from '../../assets/myCalendar/GhilightA.svg'
-// import GhilightB from '../../assets/myCalendar/GhilightB.svg'
-// import GhilightC from '../../assets/myCalendar/GhilightC.svg'
-// import OhilightA from '../../assets/myCalendar/OhilightA.svg'
-// import OhilightB from '../../assets/myCalendar/OhilightB.svg'
-import OhilightOne from "../../assets/myCalendar/OhilightOne.svg";
 import stamp from "../../assets/myCalendar/stamp.svg";
 
 function MyPageCalendar() {
-  const [value, onChange] = useState(new Date());
+  //목 Data
+  const result = {
+    data: [
+      { goal_id: "goal-id2", date: ["2022.10.02.", "2022.10.03."] },
+      { goal_id: "goal-id2", date: ["2022.10.15.", "2022.10.16."] },
+      { goal_id: "goal-id4", date: ["2022.10.21.", "2022.10.22.", "2022.10.23."] },
+      { goal_id: "goal-id4", date: ["2022.10.08.", "2022.10.09.", "2022.10.10."] },
+      { goal_id: "goal-id5", date: ["2022.10.29."] },
+    ],
+  };
+  const test = result.data;
+  const test1 = [];
+  const test2 = [];
+  const test3 = [];
 
-  const date = [
-    { day1: "2022. 9 .5." },
-    { day1: "2022. 9 .10.", day2: "2022. 9 .11." },
-  ];
-  const test1 = ["2022. 9 .5."];
-  const test2 = ["2022. 9 .6.", "2022-9-7."];
-  const test3 = ["2022. 9 .8.", "2022-9-9.", "2022. 9 . 10."];
-
-  date.map((item) => {
-    if (item.length === 1) {
-      return item;
+  test.map((item) => {
+    if (item.date.length === 3) {
+      test3.push(...item.date);
+    } else if (item.date.length === 2) {
+      test2.push(...item.date);
+    } else {
+      test1.push(item.date);
     }
   });
+
+  const failA = test2.filter((item, inx) => inx % 2 == 0)
+  const failB = test2.filter((item, inx) => inx % 2 !== 0)
+  const completeA = test3.filter((item, inx) => inx % 3 == 0)
+  const completeB = test3.filter((item, inx) => inx % 3 == 1)
+  const completeC = test3.filter((item, inx) => inx % 3 == 2)
+
+
   return (
     <div>
       <Calendar
-        onChange={onChange}
-        value={value}
         tileContent={(e) => {
           if (test1.find((x) => new Date(x).getTime() === e.date.getTime())) {
             return (
               <>
-                <HilightA />
-                <HilightB />
+                <Stamp />
+                <HilightOne />
               </>
             );
           }
-          if (test2.find((x) => new Date(x).getTime() === e.date.getTime())) {
+
+          if (failA.find((x) => new Date(x).getTime() === e.date.getTime())) {
             return (
               <>
-                <HilightA />
-                <HilightB />
+                <Stamp />
+                <OhilightAA />
+
               </>
             );
-          }
-          if (test3.find((x) => new Date(x).getTime() === e.date.getTime())) {
+          };
+          if (failB.find((x) => new Date(x).getTime() === e.date.getTime())) {
             return (
               <>
-                <HilightA />
-                <HilightB />
+                <Stamp />
+                <OhilightBB />
               </>
             );
-          }
+          };
+
+          if (completeA.find((x) => new Date(x).getTime() === e.date.getTime())) {
+            return (
+              <>
+                <Stamp />
+                <GhilightAA />
+
+              </>
+            );
+          };
+          if (completeB.find((x) => new Date(x).getTime() === e.date.getTime())) {
+            return (
+              <>
+                <Stamp />
+                <GhilightBB />
+
+              </>
+            );
+          };
+          if (completeC.find((x) => new Date(x).getTime() === e.date.getTime())) {
+            return (
+              <>
+                <Stamp />
+                <GhilightCC />
+              </>
+            );
+          };
         }}
       />
     </div>
@@ -65,7 +103,7 @@ function MyPageCalendar() {
 }
 export default MyPageCalendar;
 
-const HilightA = styled.div`
+const Stamp = styled.div`
   width: 25px;
   height: 25px;
   position: absolute;
@@ -76,22 +114,74 @@ const HilightA = styled.div`
   z-index: 2;
 `;
 
-const HilightB = styled.div`
+const HilightOne = styled.div`
   width: 33px;
   height: 33px;
   position: absolute;
-  transform: translate(1px, -25px);
-  background-image: url(${OhilightOne});
+  transform: translate(2px, -26px);
+  border-radius: 100px 100px 100px 100px;
+  background-color: #EEAE67;
   background-size: cover;
   background-position: center;
   z-index: -100;
 `;
 
-// const HilightC = styled.div`
-// width: 35px;
-// height: 35px;
-// position: absolute;
-// transform: translate(1px, -27px);
-// background-image: url(${stamp});
-// background-size: cover;
-// background-position: center;
+const OhilightAA = styled.div`
+  width: 41px;
+  height: 33px;
+  position: absolute;
+  transform: translate(2px, -26px);
+  border-radius: 100px 0px 0px 100px;
+  background-color: #EEAE67;
+  background-size: cover;
+  background-position: center;
+  z-index: -100;
+`;
+
+const OhilightBB = styled.div`
+  width: 41px;
+  height: 33px;
+  position: absolute;
+  transform: translate(-7px, -26px);
+  border-radius: 0px 100px 100px 0px;
+  background-color: #EEAE67;
+  background-size: cover;
+  background-position: center;
+  z-index: -100;
+`;
+
+const GhilightAA = styled.div`
+   width: 41px;
+  height: 33px;
+  position: absolute;
+  transform: translate(3px, -26px);
+  border-radius: 100px 0px 0px 100px;
+  background-color: #70CCA6;
+  background-size: cover;
+  background-position: center;
+  z-index: -100;
+`;
+
+const GhilightBB = styled.div`
+width: 50px;
+  height: 33px;
+  position: absolute;
+  transform: translate(-7px, -26px);
+  border-radius: 0px 0px 0x 0px;
+  background-color: #70CCA6;
+  background-size: cover;
+  background-position: center;
+  z-index: -100;
+`;
+
+const GhilightCC = styled.div`
+ width: 42px;
+  height: 33px;
+  position: absolute;
+  transform: translate(-7px, -26px);
+  border-radius: 0px 100px 100px 0px;
+  background-color: #70CCA6;
+  background-size: cover;
+  background-position: center;
+  z-index: -100;
+`;

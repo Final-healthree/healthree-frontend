@@ -16,7 +16,6 @@ function Tab() {
   const [show, setShow] = useState(false);
 
   const [Tb, setTb] = useState(false);
-  console.log(isListHoverMC);
 
   const test = () => {
     setTb(true);
@@ -39,8 +38,8 @@ function Tab() {
           <Nav.Link
             eventKey="link0"
             onClick={test}
-            onMouseOver={() => setIsListHoverMC(true)}
-            onMouseOut={() => setIsListHoverMC(false)}
+            onMouseOver={() => setIsListHoverMC(false)}
+            onMouseOut={() => setIsListHoverMC(true)}
           >
             <img src={isListHoverMC ? tapMycalendarA : tapMycalendarB} />
           </Nav.Link>
@@ -49,8 +48,8 @@ function Tab() {
           <Nav.Link
             eventKey="link1"
             onClick={test2}
-            onMouseOver={() => setIsListHoverMV(true)}
-            onMouseOut={() => setIsListHoverMV(false)}
+            onMouseOver={() => setIsListHoverMV(false)}
+            onMouseOut={() => setIsListHoverMV(true)}
           >
             <img src={isListHoverMV ? tapMyVideoA : tapMyVideoB} />
           </Nav.Link>
