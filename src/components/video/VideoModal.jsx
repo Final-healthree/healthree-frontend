@@ -1,18 +1,22 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const VideoModal = (props) => {
-  const modal = props.modal;
-  console.log(modal);
+const VideoModal = ({ url, setModalOpen, goal_name }) => {
+  console.log(url);
+  const videoUrl = url;
+  const videoGoal = goal_name;
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
 
   return (
-    <ModalBody>
+    <ModalBody onClick={closeModal}>
       <ShowVideo controls="controls">
-        <source
-          src="https://healthree.s3.ap-northeast-2.amazonaws.com/videos/1662714433501.6726"
-          type="video/mp4"
-        />
+        <source src={videoUrl} type="video/mp4" />
       </ShowVideo>
+      <p style={{ color: "white" }}>{videoGoal}</p>
     </ModalBody>
   );
 };
@@ -29,14 +33,17 @@ const ModalBody = styled.div`
   background: rgba(0, 0, 0, 0.6);
   display: flex;
   margin: auto;
+
+  width: 360px;
+  height: 420px;
 `;
 
 const ShowVideo = styled.video`
   background-color: #dadada;
   border-radius: 2px;
   margin: auto;
-  width: 20%;
-  height: 50%;
+  width: 70%;
+  height: 70%;
   display: flex;
   flex-direction: column;
 `;
