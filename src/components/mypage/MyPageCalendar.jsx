@@ -41,7 +41,7 @@ function MyPageCalendar() {
 
 
   return (
-    <div>
+    <StCalendar>
       <Calendar
         tileContent={(e) => {
           if (test1.find((x) => new Date(x).getTime() === e.date.getTime())) {
@@ -103,10 +103,14 @@ function MyPageCalendar() {
           };
         }}
       />
-    </div>
+    </StCalendar>
   );
 }
 export default MyPageCalendar;
+
+const StCalendar = styled.div`
+padding-top: 20px;
+`
 
 const Stamp = styled.div`
   width: 25px;
