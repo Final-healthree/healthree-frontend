@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
-import MyVideo from "../components/video/MyVideo";
 import styled from "styled-components";
 import serverAxios from "../components/axios/server.axios";
+
+import Tab from "../components/mypage/Tab";
+import MyPageCalendar from "../components/mypage/MyPageCalendar";
+// import MyVideo from "../components/video/MyVideo";
 
 const Mypage = () => {
   const fetchTodos = async () => {
@@ -14,8 +17,9 @@ const Mypage = () => {
 
   return (
     <StMainContainer>
-      Mypage
-      <MyVideo />
+      <Tab />
+      {/* <MyPageCalendar /> */}
+      {/* <MyVideo /> */}
     </StMainContainer>
   );
 };
