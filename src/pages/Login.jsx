@@ -6,6 +6,7 @@ import LoginForm from "../components/login/LoginForm";
 import teamName from "../assets/kakaoLogin/teamName.svg";
 
 const Login = () => {
+
   return (
     <>
       <StLoginForm>
@@ -13,7 +14,7 @@ const Login = () => {
         <StLogo>
           <img src={mainLogo} />
         </StLogo>
-        
+
         <LoginForm />
 
         <StTeamName>

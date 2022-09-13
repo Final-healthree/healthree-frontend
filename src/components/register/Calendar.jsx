@@ -1,21 +1,23 @@
+import React from "react";
 import { useState } from "react";
-import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
+import styled from "styled-components";
+
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import { register } from "../../redux/modules/regday";
+
+import Calendar from "react-calendar";
+// import "react-calendar/dist/Calendar.css";
+import "./RegCalendar.css";
 
 const RegCalendar = () => {
   const dispatch = useDispatch();
   const regDay = useSelector((state) => state.registerday);
   const navigate = useNavigate();
-  console.log(regDay);
 
   const [last, setLast] = useState(new Date());
   const lastday = new Date(last.setDate(last.getDate() + 2));
   const [day, setday] = useState([new Date(), new Date(lastday)]);
-  console.log(day);
   const onChange = (value) => {
     setday([new Date(value), new Date(value.setDate(value.getDate() + 2))]);
   };
@@ -49,7 +51,7 @@ const RegCalendar = () => {
       </HeaderArea>
 
       <CalendarArea>
-        <Calendar onChange={onChange} value={day} />
+        <Calendar onChange={onChange} value={day} calendarType={"US"} />
       </CalendarArea>
 
       <BtnArea>
@@ -82,8 +84,7 @@ const CalendarArea = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  height: 300px;
+  /* height: 300px; */
 `;
 
 const BtnArea = styled.div`
@@ -103,4 +104,12 @@ const RegBtn = styled.button`
   border: none;
   font-size: medium;
   font-weight: 700;
+  cursor: pointer;
+
+  &:hover {
+  }
+`;
+
+const Test = styled.p`
+  border: 1px solid pink;
 `;
