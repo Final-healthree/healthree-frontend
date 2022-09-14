@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Calendar from "react-calendar";
-// import 'react-calendar/dist/Calendar.css';
 //svg 이미지
 import stamp from "../../assets/myCalendar/stamp.svg";
 
@@ -31,7 +30,6 @@ function MyPageCalendar() {
     }
   });
 
-
   const failA = test2.filter((item, inx) => inx % 2 == 0)
   const failB = test2.filter((item, inx) => inx % 2 !== 0)
   const completeA = test3.filter((item, inx) => inx % 3 == 0)
@@ -39,22 +37,18 @@ function MyPageCalendar() {
   const completeC = test3.filter((item, inx) => inx % 3 == 2)
 
 
-
   return (
-    <StCalendar>
+    <Stcalendar>
       <Calendar
         tileContent={(e) => {
           if (test1.find((x) => new Date(x).getTime() === e.date.getTime())) {
             return (
               <>
                 <Stamp />
-
                 <HilightOne />
-
               </>
             );
           }
-
 
           if (failA.find((x) => new Date(x).getTime() === e.date.getTime())) {
             return (
@@ -70,7 +64,6 @@ function MyPageCalendar() {
               <>
                 <Stamp />
                 <OhilightBB />
-
               </>
             );
           };
@@ -103,14 +96,14 @@ function MyPageCalendar() {
           };
         }}
       />
-    </StCalendar>
+    </Stcalendar>
+
   );
 }
 export default MyPageCalendar;
-
-const StCalendar = styled.div`
-padding-top: 20px;
-`
+const Stcalendar = styled.div`
+ padding-top:23px;
+`;
 
 const Stamp = styled.div`
   width: 25px;
@@ -124,7 +117,6 @@ const Stamp = styled.div`
 `;
 
 const HilightOne = styled.div`
-
   width: 33px;
   height: 33px;
   position: absolute;
@@ -135,7 +127,6 @@ const HilightOne = styled.div`
   background-position: center;
   z-index: -100;
 `;
-
 
 const OhilightAA = styled.div`
   width: 41px;
@@ -149,7 +140,6 @@ const OhilightAA = styled.div`
   z-index: -100;
 `;
 
-
 const OhilightBB = styled.div`
   width: 41px;
   height: 33px;
@@ -157,7 +147,6 @@ const OhilightBB = styled.div`
   transform: translate(-7px, -26px);
   border-radius: 0px 100px 100px 0px;
   background-color: #EEAE67;
-
   background-size: cover;
   background-position: center;
   z-index: -100;
