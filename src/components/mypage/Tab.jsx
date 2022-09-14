@@ -60,20 +60,15 @@ function Tab() {
 export default Tab;
 
 const StTap = styled.div`
-  font-size: 18px;
-  color: ${(props) => props.color};
-  display: inline-block;
-  padding: 20px 0px 5px 0px;
+font-size: 18px;
+color: ${(props) => props.color};
+display: inline-block;
+padding: 20px 0px 5px 0px;
 
-  border-bottom: solid 2px ${(props) => props.borderColor};
+border-bottom: solid 2px ${(props) => props.borderColor};
 
-  /* &:focus {
-    color: #70cca6;
-    border-bottom: solid 2px #70cca6;
-  } */
-
-  &:hover {
-    color: #70cca6;
-    border-bottom: solid 2px #70cca6;
-  }
+&:hover {
+color: #70cca6;
+border-bottom: solid 2px #70cca6;
+}
 `;

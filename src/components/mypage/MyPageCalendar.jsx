@@ -36,14 +36,15 @@ function MyPageCalendar() {
     }
   });
 
-  const failA = test2.filter((item, inx) => inx % 2 == 0);
-  const failB = test2.filter((item, inx) => inx % 2 !== 0);
-  const completeA = test3.filter((item, inx) => inx % 3 == 0);
-  const completeB = test3.filter((item, inx) => inx % 3 == 1);
-  const completeC = test3.filter((item, inx) => inx % 3 == 2);
+
+  const failA = test2.filter((item, inx) => inx % 2 == 0)
+  const failB = test2.filter((item, inx) => inx % 2 !== 0)
+  const completeA = test3.filter((item, inx) => inx % 3 == 0)
+  const completeB = test3.filter((item, inx) => inx % 3 == 1)
+  const completeC = test3.filter((item, inx) => inx % 3 == 2)
 
   return (
-    <div>
+    <Stcalendar>
       <Calendar
         tileContent={(e) => {
           if (test1.find((x) => new Date(x).getTime() === e.date.getTime())) {
@@ -104,10 +105,14 @@ function MyPageCalendar() {
           }
         }}
       />
-    </div>
+    </Stcalendar>
+
   );
 }
 export default MyPageCalendar;
+const Stcalendar = styled.div`
+ padding-top:23px;
+`;
 
 const Stamp = styled.div`
   width: 25px;
@@ -150,7 +155,8 @@ const OhilightBB = styled.div`
   position: absolute;
   transform: translate(-7px, -26px);
   border-radius: 0px 100px 100px 0px;
-  background-color: #eeae67;
+  background-color: #EEAE67;
+
   background-size: cover;
   background-position: center;
   z-index: -100;
