@@ -4,6 +4,7 @@ import axios from "axios";
 import styled from "styled-components";
 import ReactLoading from "react-loading";
 import VideoModal from "./VideoModal";
+import serverAxios from "../axios/server.axios";
 
 const MyVideo = () => {
   const [items, setItems] = useState([]);
@@ -11,20 +12,20 @@ const MyVideo = () => {
   const [loading, setLoading] = useState(false);
 
   const [ref, inView] = useInView();
-  const showVideo = useRef();
+
   // 서버에서 아이템을 가지고 오는 함수
   const getItems = async () => {
     setLoading(true);
     await new Promise((resolve) => setTimeout(resolve, 1500));
-    await axios
+    await serverAxios
       .get(
         process.env.REACT_APP_REST_API_KEY +
-          `api/users/my_video?pagecount=5&&page=${page}`,
-        {
-          headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOjQsIm5pY2tuYW1lIjoi7Jyg7JiBIiwicHJvZmlsZV9pbWFnZSI6Imh0dHA6Ly9rLmtha2FvY2RuLm5ldC9kbi9ielNMRDgvYnRySTJjd3lZYmcvMDJvTkNvWVVlZXF4czdReVp3a2E2MC9pbWdfNjQweDY0MC5qcGcifSwiaWF0IjoxNjYyOTkxMDc0fQ.nYSDF0dT_f8EOdmXg-Nhz2lpW194lGsCjouQ1z3fkcc`,
-          },
-        }
+          `api/users/my_video?pagecount=5&&page=${page}`
+        // {
+        //   headers: {
+        //     Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOjQsIm5pY2tuYW1lIjoi7Jyg7JiBIiwicHJvZmlsZV9pbWFnZSI6Imh0dHA6Ly9rLmtha2FvY2RuLm5ldC9kbi9ielNMRDgvYnRySTJjd3lZYmcvMDJvTkNvWVVlZXF4czdReVp3a2E2MC9pbWdfNjQweDY0MC5qcGcifSwiaWF0IjoxNjYyOTkxMDc0fQ.nYSDF0dT_f8EOdmXg-Nhz2lpW194lGsCjouQ1z3fkcc`,
+        //   },
+        // }
       )
       .then((res) => {
         console.log(res);
@@ -45,57 +46,44 @@ const MyVideo = () => {
   }, [inView, loading]);
 
   const [modalOpen, setModalOpen] = useState(false);
+  const [url, setUrl] = useState("");
 
-  const showModal = () => {
+  const showModal = (data) => {
     setModalOpen(true);
+    setUrl();
   };
 
   console.log("inView", inView);
   console.log("loading", loading);
 
-  console.log(showVideo);
-
-
-  // console.log(items);
-  // console.log("inView", inView);
-  // console.log("loading", loading);
-  const [modal, setModal] = useState(false);
-
   return (
     <Container>
       <VideoArea>
-        {items.map((item, idx) => (
-          <>
-            <div key={idx}>
-              {items.length - 1 === idx ? (
-                <VideoBox ref={ref}>
-                  <VideoImg onClick={showModal} ref={showVideo}>
-                    <source src={item.final_video} type="video/mp4" />
-                  </VideoImg>
-                  <VideoDate>
-                    {item.day1.slice(0, 10)} ~ {item.day3.slice(0, 10)}
-                  </VideoDate>
-                </VideoBox>
-              ) : (
-                <VideoBox>
-                  <VideoImg onClick={showModal}>
-                    <source src={item.final_video} type="video/mp4" />
-                  </VideoImg>
-                  <span>{item.goal_name}</span>
-                  <VideoDate>
-                    {item.day1.slice(0, 10)} ~ {item.day3.slice(0, 10)}
-                  </VideoDate>
-                </VideoBox>
-              )}
-              {modalOpen && (
-                <VideoModal
-                  url={showVideo.current.currentSrc}
-                  setModalOpen={setModalOpen}
-                />
-              )}
-            </div>
-          </>
+        {items.map((data, idx) => (
+          <div key={data.goal_id} onClick={() => setUrl(data.final_video)}>
+            {items.length - 1 === idx ? (
+              <VideoBox ref={ref}>
+                <VideoImg>
+                  <source src={data.final_video} type="video/mp4" />
+                </VideoImg>
+                <VideoDate>
+                  {data.day1.slice(0, 10)} ~ {data.day3.slice(0, 10)}
+                </VideoDate>
+              </VideoBox>
+            ) : (
+              <VideoBox>
+                <VideoImg key={data.goal_id} onClick={showModal}>
+                  <source src={data.final_video} type="video/mp4" />
+                </VideoImg>
+                <span>{data.goal_name}</span>
+                <VideoDate>
+                  {data.day1.slice(0, 10)} ~ {data.day3.slice(0, 10)}
+                </VideoDate>
+              </VideoBox>
+            )}
+          </div>
         ))}
+        {modalOpen && <VideoModal url={url} setModalOpen={setModalOpen} />}
 
         {inView ? (
           <LoaderWrap>

@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const VideoModal = ({ url, setModalOpen, goal_name }) => {
-  console.log(url);
-  const videoUrl = url;
-  const videoGoal = goal_name;
+const VideoModal = (props) => {
+  const url = props.url;
+
+  const setModalOpen = props.setModalOpen;
 
   const closeModal = () => {
     setModalOpen(false);
@@ -14,9 +14,8 @@ const VideoModal = ({ url, setModalOpen, goal_name }) => {
   return (
     <ModalBody onClick={closeModal}>
       <ShowVideo controls="controls">
-        <source src={videoUrl} type="video/mp4" />
+        <source src={url} type="video/mp4" />
       </ShowVideo>
-      <p style={{ color: "white" }}>{videoGoal}</p>
     </ModalBody>
   );
 };

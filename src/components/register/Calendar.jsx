@@ -12,7 +12,7 @@ import "./RegCalendar.css";
 
 const RegCalendar = () => {
   const dispatch = useDispatch();
-  const regDay = useSelector((state) => state.registerday);
+  // const regDay = useSelector((state) => state.registerday);
   const navigate = useNavigate();
 
   const [last, setLast] = useState(new Date());

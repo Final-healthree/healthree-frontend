@@ -1,6 +1,5 @@
 import axios from "axios";
-import * as reactJwt from "react-jwt";
-// import { useNavigate } from "react-router-dom";
+import { isExpired } from "react-jwt";
 
 const serverAxios = axios.create({
   baseURL: process.env.REACT_APP_REST_API_KEY,
@@ -10,16 +9,17 @@ const requestHandler = async (req) => {
   //   const accessToken = getToken().accessToken;
   //   request.headers.Authorization = `Bearer ${accessToken}`;
   const accessToken = localStorage.getItem("accessToken");
+  console.log(accessToken);
 
-  // const navigate = useNavigate();
-  const isExpiredTkn = reactJwt.isExpired(accessToken);
-  if (isExpiredTkn === true) {
+  const isMyTokenExpired = isExpired(accessToken);
+
+  if (isMyTokenExpired === true) {
     //True인 경우
     // 1. 토큰이 만료된 경우
     // 2. 토큰이 없거나 이상한것이 들어있을 경우
     try {
-      // navigate("/login");
-      return req;
+      // alert("로그인필요");
+      // return window.location.replace("/login");
     } catch (error) {
       // 에러가뜬경우 (status가 4xx, 5xx인 경우)
       // 1. 토큰이 아닌게 왔을 경우
@@ -30,6 +30,7 @@ const requestHandler = async (req) => {
       return req;
     }
   } else {
+    console.log("성공");
     req.headers.Authorization = `Bearer ${accessToken}`;
 
     return req;
