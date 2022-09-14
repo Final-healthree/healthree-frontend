@@ -18,8 +18,8 @@ const requestHandler = async (req) => {
     // 1. 토큰이 만료된 경우
     // 2. 토큰이 없거나 이상한것이 들어있을 경우
     try {
-      // alert("로그인필요");
-      // return window.location.replace("/login");
+      alert("로그인필요");
+      return window.location.replace("/login");
     } catch (error) {
       // 에러가뜬경우 (status가 4xx, 5xx인 경우)
       // 1. 토큰이 아닌게 왔을 경우
