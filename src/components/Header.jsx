@@ -2,17 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 //svg 이미지
-import headerLogo from "../assets/images/headerLogo.svg";
+import headerLogo from "../assets/headerFooter/headerLogo.svg";
 import back from "../assets/images/back.svg";
-
 
 const Header = () => {
   const navigate = useNavigate();
+    //로그인 페이지 헤더 숨기기
+    if (window.location.pathname === '/login') return null;
 
-  if (window.location.pathname === '/login') return null;
   return (
     <StHeader>
-      <img src={back} onclick={() => navigate(-1)} style = {{width:'30px'}}/>
+      <img src={back} onclick={() => navigate('/login')} style = {{width:'30px'}}/>
       <img src={headerLogo} />
     </StHeader>
   );

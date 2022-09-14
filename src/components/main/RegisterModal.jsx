@@ -1,5 +1,7 @@
 import { React, useState } from "react";
 import styled from "styled-components";
+import Thumnail from "../../assets/main/Thumnail.png"
+import upload from "../../assets/main/upload.png"
 
 const RegisterModal = () => {
   const [state, setState] = useState();
@@ -11,9 +13,11 @@ const RegisterModal = () => {
         <span>2022.08.xx</span>
       </StTitleContainer>
       <StVideoRegisterContainer>
-        <p>영상 자리</p>
-        <img src="https://www.figma.com/file/I9DmxmZM5auR7hcStYCnEs/220827_2%EC%A1%B0_%EC%9E%91%EC%8B%AC%EC%82%BC%EC%9D%BC?node-id=35%3A305" alt= "" />
-        <button>파일 업로드</button>
+        <img src={Thumnail} alt="" />
+        <button>
+          <img className="uploadImg" src={upload} alt="" />
+          &nbsp;업로드
+        </button>
       </StVideoRegisterContainer>
       <StButtonContainer>
         <button>확인</button>
@@ -35,22 +39,44 @@ const StRegisterModalContainer = styled.div`
   height: 400px;
   background-color: red;
   margin-top: 80px;
+  border-radius: 2px;
 `;
 
 const StTitleContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  padding: 20px;
 
 `;
 
 const StVideoRegisterContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  width: max-content;
+  margin: 0 auto;
+
   & > button {
     width: 72px;
     height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: flex-end;
+    position: relative;
+    right: 12px;
+  }
+  .uploadImg {
+    transform: translate(-1px, -1px);
   }
 `;
 
 const StButtonContainer = styled.div`
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export default RegisterModal;

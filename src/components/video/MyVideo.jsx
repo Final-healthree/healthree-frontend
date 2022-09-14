@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 import axios from "axios";
 import styled from "styled-components";
 import ReactLoading from "react-loading";
+import VideoModal from "./VideoModal";
+import serverAxios from "../axios/server.axios";
 
 const MyVideo = () => {
   const [items, setItems] = useState([]);
@@ -14,11 +16,20 @@ const MyVideo = () => {
   // 서버에서 아이템을 가지고 오는 함수
   const getItems = async () => {
     setLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    await axios
-      .get(`https://picsum.photos/v2/list?page=${page}&limit=5`)
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    await serverAxios
+      .get(
+        process.env.REACT_APP_REST_API_KEY +
+          `api/users/my_video?pagecount=5&&page=${page}`
+        // {
+        //   headers: {
+        //     Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOjQsIm5pY2tuYW1lIjoi7Jyg7JiBIiwicHJvZmlsZV9pbWFnZSI6Imh0dHA6Ly9rLmtha2FvY2RuLm5ldC9kbi9ielNMRDgvYnRySTJjd3lZYmcvMDJvTkNvWVVlZXF4czdReVp3a2E2MC9pbWdfNjQweDY0MC5qcGcifSwiaWF0IjoxNjYyOTkxMDc0fQ.nYSDF0dT_f8EOdmXg-Nhz2lpW194lGsCjouQ1z3fkcc`,
+        //   },
+        // }
+      )
       .then((res) => {
-        setItems((items) => items.concat(res.data));
+        console.log(res);
+        setItems([...items, ...res.data.result.video_list]);
       });
     setLoading(false);
   };
@@ -34,32 +45,89 @@ const MyVideo = () => {
     }
   }, [inView, loading]);
 
-  console.log(items);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [url, setUrl] = useState("");
+
+  const showModal = (data) => {
+    setModalOpen(true);
+    setUrl();
+  };
+
   console.log("inView", inView);
   console.log("loading", loading);
+
   return (
-    <div>
-      {items.map((item, idx) => (
-        <div key={idx}>
-          {items.length - 1 === idx ? (
-            <Box ref={ref}>{item.author}</Box>
-          ) : (
-            <Box>{item.author}</Box>
-          )}
-        </div>
-      ))}
-      {inView ? (
-        <LoaderWrap>
-          <ReactLoading type="spin" color="#A593E0" />
-        </LoaderWrap>
-      ) : (
-        ""
-      )}
-    </div>
+    <Container>
+      <VideoArea>
+        {items.map((data, idx) => (
+          <div key={data.goal_id} onClick={() => setUrl(data.final_video)}>
+            {items.length - 1 === idx ? (
+              <VideoBox ref={ref}>
+                <VideoImg>
+                  <source src={data.final_video} type="video/mp4" />
+                </VideoImg>
+                <VideoDate>
+                  {data.day1.slice(0, 10)} ~ {data.day3.slice(0, 10)}
+                </VideoDate>
+              </VideoBox>
+            ) : (
+              <VideoBox>
+                <VideoImg key={data.goal_id} onClick={showModal}>
+                  <source src={data.final_video} type="video/mp4" />
+                </VideoImg>
+                <span>{data.goal_name}</span>
+                <VideoDate>
+                  {data.day1.slice(0, 10)} ~ {data.day3.slice(0, 10)}
+                </VideoDate>
+              </VideoBox>
+            )}
+          </div>
+        ))}
+        {modalOpen && <VideoModal url={url} setModalOpen={setModalOpen} />}
+
+        {inView ? (
+          <LoaderWrap>
+            <ReactLoading type="spin" color="#A593E0" />
+          </LoaderWrap>
+        ) : (
+          ""
+        )}
+      </VideoArea>
+    </Container>
   );
 };
 
 export default MyVideo;
+
+const Container = styled.div``;
+
+const VideoArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  padding: 20px 0;
+  box-sizing: border-box;
+`;
+
+const VideoBox = styled.div`
+  height: 170px;
+  width: 320px;
+
+  cursor: pointer;
+`;
+
+const VideoImg = styled.video`
+  height: 150px;
+  width: 320px;
+  background-color: #4b4b4b;
+
+  filter: drop-shadow(6px 6px 5px rgba(0, 0, 0, 0.12));
+  mix-blend-mode: multiply;
+  border-radius: 2px;
+`;
+
+const VideoDate = styled.span``;
 
 const Box = styled.div`
   margin: 10px auto;
