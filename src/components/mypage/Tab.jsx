@@ -1,32 +1,23 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Nav } from "react-bootstrap";
-//svg 이미지
-import tapMycalendarA from "../../assets/myCalendar/tabMycalendarA.svg";
-import tapMycalendarB from "../../assets/myCalendar/tabMycalendarB.svg";
-import tapMyVideoA from "../../assets/myCalendar/tabMyVideoA.svg";
-import tapMyVideoB from "../../assets/myCalendar/tabMyVideoB.svg";
 //컴퍼넌트
 import MyPageCalendar from "./MyPageCalendar";
 import MyVideo from "../video/MyVideo";
 
 function Tab() {
-  const [isListHoverMC, setIsListHoverMC] = useState(false);
-  const [isListHoverMV, setIsListHoverMV] = useState(false);
-  const [show, setShow] = useState(false);
-
-  const [Tb, setTb] = useState(false);
+  const [Tb, setTb] = useState(true);
+  const [show, setShow] = useState(true);
 
   const test = () => {
     setTb(true);
-    setIsListHoverMC(!isListHoverMC);
+    setShow(true);
   };
 
   const test2 = () => {
     setTb(false);
     setShow(false);
   };
-
   return (
     <>
       <Nav
@@ -35,23 +26,29 @@ function Tab() {
         style={{ display: "flex", flexDirection: "row", gap: "20px" }}
       >
         <Nav.Item>
-          <Nav.Link
-            eventKey="link0"
-            onClick={test}
-            onMouseOver={() => setIsListHoverMC(false)}
-            onMouseOut={() => setIsListHoverMC(true)}
-          >
-            <img src={isListHoverMC ? tapMycalendarA : tapMycalendarB} />
+          <Nav.Link eventKey="link0" onClick={test}>
+            {show ? (
+              <StTap borderColor="#70cca6" color="#70cca6">
+                my calendar
+              </StTap>
+            ) : (
+              <StTap borderColor="white" color="black">
+                my calendar
+              </StTap>
+            )}
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link
-            eventKey="link1"
-            onClick={test2}
-            onMouseOver={() => setIsListHoverMV(false)}
-            onMouseOut={() => setIsListHoverMV(true)}
-          >
-            <img src={isListHoverMV ? tapMyVideoA : tapMyVideoB} />
+          <Nav.Link eventKey="link1" onClick={test2}>
+            {show ? (
+              <StTap borderColor="white" color="black">
+                my video
+              </StTap>
+            ) : (
+              <StTap borderColor="#70cca6" color="#70cca6">
+                my video
+              </StTap>
+            )}
           </Nav.Link>
         </Nav.Item>
       </Nav>
@@ -61,3 +58,22 @@ function Tab() {
 }
 
 export default Tab;
+
+const StTap = styled.div`
+  font-size: 18px;
+  color: ${(props) => props.color};
+  display: inline-block;
+  padding: 20px 0px 5px 0px;
+
+  border-bottom: solid 2px ${(props) => props.borderColor};
+
+  /* &:focus {
+    color: #70cca6;
+    border-bottom: solid 2px #70cca6;
+  } */
+
+  &:hover {
+    color: #70cca6;
+    border-bottom: solid 2px #70cca6;
+  }
+`;
