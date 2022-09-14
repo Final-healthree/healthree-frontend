@@ -5,6 +5,28 @@ import upload from "../../assets/main/upload.png"
 import { useDispatch } from "react-redux";
 import { __addCertification } from "../../redux/modules/certificationSlice";
 import { useNavigate } from "react-router-dom";
+import {RdxVideo, Overlay, Controls} from 'react-html5-video-editor'
+
+
+const option =  {
+  autoPlay: false,
+  loop: false,
+  controls: true,
+  volume:	1.0,
+  preload: "auto",
+  cropEnabled: true,
+}
+const VideoEditor = (props) => {
+  return (
+    <RdxVideo {...option} autoPlay loop muted poster="../../assets/main/ThumnailReady.png">
+      <Overlay />
+      <Controls />
+      <source src="../../assets/main/1sevideo.mp4" type="video/mp4" />
+    </RdxVideo>
+    // document.getElementById('root')
+  )
+}
+
 
 const RegisterModal = () => {
   const [state, setState] = useState();
@@ -44,7 +66,7 @@ const RegisterModal = () => {
         <input
           id="file-input"
           type="file"
-          // accept="img/*"
+          accept="video/*"
           name="video"
           ref={fileInput}
           onChange={selectVideo}
@@ -61,6 +83,7 @@ const RegisterModal = () => {
           </label>
         </button>
       </StVideoRegisterContainer>
+      <VideoEditor />
       <StButtonContainer>
         <button onClick={addVideo}>확인</button>
       </StButtonContainer>
@@ -113,8 +136,6 @@ const StVideoRegisterContainer = styled.div`
     object-fit: fill;
   }
   }
-
-
 
   button {
     width: 72px;
