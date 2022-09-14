@@ -12,7 +12,7 @@ const Header = () => {
 
   return (
     <StHeader>
-      <img src={back} onclick={() => navigate('/login')} style = {{width:'30px'}}/>
+      <img src={back} onClick={() => navigate('/')} style = {{width:'30px'}}/>
       <img src={headerLogo} />
     </StHeader>
   );
