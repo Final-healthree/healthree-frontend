@@ -14,6 +14,9 @@ const RegCalendar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  let token = new URL(window.location.href).searchParams.get("token");
+  localStorage.setItem("Token", token);
+
   let last = new Date();
   const lastday = new Date(last.setDate(last.getDate() + 2));
   const [day, setday] = useState([new Date(), new Date(lastday)]);
