@@ -15,6 +15,8 @@ const Footer = () => {
   const [isListHoverCommunity, setIsListHoverCommunity] = useState(false);
   const [isListHoverMypage, setIsListHoverMypage] = useState(false);
 
+  if (window.location.pathname === '/login') return null;
+
   return (
     <StFooterMain>
       <li
