@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
-import axios from "axios";
 import styled from "styled-components";
 import ReactLoading from "react-loading";
 import VideoModal from "./VideoModal";
@@ -128,13 +127,6 @@ const VideoImg = styled.video`
 `;
 
 const VideoDate = styled.span``;
-
-const Box = styled.div`
-  margin: 10px auto;
-  width: 100px;
-  height: 300px;
-  background-color: pink;
-`;
 
 const LoaderWrap = styled.div`
   width: 100%;
