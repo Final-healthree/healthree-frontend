@@ -8,15 +8,16 @@ import footerCommunity from "../assets/headerFooter/footerCommunity.svg";
 import footerCommunityC from "../assets/headerFooter/footerCommunityC.svg";
 import footerMypage from "../assets/headerFooter/footerMypage.svg";
 import footerMypageC from "../assets/headerFooter/footerMypageC.svg";
-
 const Footer = () => {
   const navigate = useNavigate();
   const [isListHoverMain, setIsListHoverMain] = useState(false);
   const [isListHoverCommunity, setIsListHoverCommunity] = useState(false);
   const [isListHoverMypage, setIsListHoverMypage] = useState(false);
-
+  //로그인 페이지 푸터 숨기기
+  if (window.location.pathname === '/login') return null;
   return (
     <StFooterMain>
+
       <li
         onMouseOver={() => setIsListHoverMain(true)}
         onMouseOut={() => setIsListHoverMain(false)}
@@ -50,6 +51,7 @@ const Footer = () => {
   );
 };
 
+
 const StFooterMain = styled.ul`
   min-width: 360px;
   max-width: 375px;
@@ -59,12 +61,13 @@ const StFooterMain = styled.ul`
   padding: 0px 1em 0;
   justify-content: space-around;
   background-color: #fff;
-
+  
   position: absolute;
   bottom: 0;
   //중앙 정렬
   left: 50%;
   transform: translateX(-50%);
-`;
+  `;
 
 export default Footer;
+

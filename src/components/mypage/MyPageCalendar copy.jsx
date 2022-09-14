@@ -6,6 +6,29 @@ import stamp from "../../assets/myCalendar/stamp.svg";
 import serverAxios from "../axios/server.axios";
 
 function MyPageCalendar() {
+  // // 목 Data
+  // const result = {
+  //   data: [
+  //     { goal_id: "goal-id2", date: ["2022010.02.", "2022.10.03."] },
+  //     { goal_id: "goal-id2", date: ["2022.10.15.", "2022.10.16."] },
+  //     {
+  //       goal_id: "goal-id4",
+  //       date: ["2022.10.21.", "2022.10.22.", "2022.10.23."],
+  //     },
+  //     {
+  //       goal_id: "goal-id4",
+  //       date: ["2022.10.08.", "2022.10.09.", "2022.10.10."],
+  //     },
+  //     { goal_id: "goal-id5", date: ["2022.10.29."] },
+  //   ],
+  // };
+  // const test = result.data;
+  // const test1 = [];
+  // const test2 = [];
+  // const test3 = [];
+
+
+
   const [dates, setDates] = useState([]);
   const date1 = [];
   const date2 = [];
@@ -13,42 +36,62 @@ function MyPageCalendar() {
 
   const getDates = async () => {
     await serverAxios
-      .get(process.env.REACT_APP_REST_API_KEY + `api/users/my_calendar`)
+      .get(
+        process.env.REACT_APP_REST_API_KEY +
+          `api/users/my_calendar`
+      )
       .then((data) => {
-        setDates([...dates, ...data.data.result.date]);
+        // console.log(data);
+        // console.log(data.data);
+        // console.log(data.data.result.date.date);
+        setDates([...dates, ...data.data.result.date])
       });
-  };
-
-  useEffect(() => {
-    getDates();
-  }, []);
-
-  dates.map((item) => {
-    if (item.date.length === 3) {
-      date3.push(...item.date);
-    } else if (item.date.length === 2) {
-      date2.push(...item.date);
-    } else {
-      date1.push(item.date);
     }
-  });
+    
+    useEffect(() => {
+      getDates();
+    }, []);
+    console.log(dates)
 
-  const failA = date2.filter((day, inx) => inx % 2 === 0);
-  const failB = date2.filter((day, inx) => inx % 2 !== 0);
-  const completeA = date3.filter((day, inx) => inx % 3 === 0);
-  const completeB = date3.filter((day, inx) => inx % 3 === 1);
-  const completeC = date3.filter((day, inx) => inx % 3 === 2);
+    dates.map((item) => {
+      if (item.date.length === 3) {
+        date3.push(...item.date);
+      } else if (item.date.length === 2) {
+        date2.push(...item.date);
+      } else {
+        date1.push(item.date);
+      }
+    });
 
+  // test.map((item) => {
+  //   if (item.date.length === 3) {
+  //     test3.push(...item.date);
+  //   } else if (item.date.length === 2) {
+  //     test2.push(...item.date);
+  //   } else {
+  //     test1.push(item.date);
+  //   }
+  // });
+
+  // const failA = test2.filter((day, inx) => inx % 2 === 0)
+  // const failB = test2.filter((day, inx) => inx % 2 !== 0)
+  // const completeA = test3.filter((day, inx) => inx % 3 === 0)
+  // const completeB = test3.filter((day, inx) => inx % 3 === 1)
+  // const completeC = test3.filter((day, inx) => inx % 3 === 2)
+
+
+  const failA = date2.filter((day, inx) => inx % 2 === 0)
+  const failB = date2.filter((day, inx) => inx % 2 !== 0)
+  const completeA = date3.filter((day, inx) => inx % 3 === 0)
+  const completeB = date3.filter((day, inx) => inx % 3 === 1)
+  const completeC = date3.filter((day, inx) => inx % 3 === 2)
+
+  // console.log(failA)
   return (
     <Stcalendar>
       <Calendar
         tileContent={(e) => {
-          if (
-            date1.find(
-              (x) =>
-                new Date(x).toLocaleDateString() === e.date.toLocaleDateString()
-            )
-          ) {
+          if (date1.find((x) => new Date(x).getTime() === e.date.getTime())) {
             return (
               <>
                 <Stamp />
@@ -56,12 +99,8 @@ function MyPageCalendar() {
               </>
             );
           }
-          if (
-            failA.find(
-              (x) =>
-                new Date(x).toLocaleDateString() === e.date.toLocaleDateString()
-            )
-          ) {
+
+          if (failA.find((x) => new Date(x).getTime() === e.date.getTime())) {
             return (
               <>
                 <Stamp />
@@ -69,12 +108,7 @@ function MyPageCalendar() {
               </>
             );
           }
-          if (
-            failB.find(
-              (x) =>
-                new Date(x).toLocaleDateString() === e.date.toLocaleDateString()
-            )
-          ) {
+          if (failB.find((x) => new Date(x).getTime() === e.date.getTime())) {
             return (
               <>
                 <Stamp />
@@ -84,10 +118,7 @@ function MyPageCalendar() {
           }
 
           if (
-            completeA.find(
-              (x) =>
-                new Date(x).toLocaleDateString() === e.date.toLocaleDateString()
-            )
+            completeA.find((x) => new Date(x).getTime() === e.date.getTime())
           ) {
             return (
               <>
@@ -97,10 +128,7 @@ function MyPageCalendar() {
             );
           }
           if (
-            completeB.find(
-              (x) =>
-                new Date(x).toLocaleDateString() === e.date.toLocaleDateString()
-            )
+            completeB.find((x) => new Date(x).getTime() === e.date.getTime())
           ) {
             return (
               <>
@@ -110,10 +138,7 @@ function MyPageCalendar() {
             );
           }
           if (
-            completeC.find(
-              (x) =>
-                new Date(x).toLocaleDateString() === e.date.toLocaleDateString()
-            )
+            completeC.find((x) => new Date(x).getTime() === e.date.getTime())
           ) {
             return (
               <>
@@ -125,11 +150,12 @@ function MyPageCalendar() {
         }}
       />
     </Stcalendar>
+
   );
 }
 export default MyPageCalendar;
 const Stcalendar = styled.div`
-  padding-top: 23px;
+ padding-top:23px;
 `;
 
 const Stamp = styled.div`
@@ -173,7 +199,7 @@ const OhilightBB = styled.div`
   position: absolute;
   transform: translate(-7px, -26px);
   border-radius: 0px 100px 100px 0px;
-  background-color: #eeae67;
+  background-color: #EEAE67;
 
   background-size: cover;
   background-position: center;
