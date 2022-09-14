@@ -2,8 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-
-import axios from "axios";
 import serverAxios from "../axios/server.axios";
 
 const GoalReg = () => {
@@ -23,12 +21,15 @@ const GoalReg = () => {
     goal_name: "",
   });
 
+  const [confirm, setConfirm] = useState(false);
+
   const onChange = (e) => {
     const { value } = e.target;
     setInfo({
       ...info,
       goal_name: value,
     });
+    value.length > 0 ? setConfirm(true) : setConfirm(false);
   };
 
   function leftPad(value) {
@@ -80,7 +81,7 @@ const GoalReg = () => {
           onChange={onChange}
           name="goal_name"
           value={info.goal_name}
-          // borderColor={false}
+          borderColor={confirm ? "#70cca6" : "black"}
         ></GoalInput>
         {/* 입력에 따라 버튼이랑 테두리 유무 */}
 
@@ -131,7 +132,7 @@ const GoalInput = styled.input`
   box-sizing: border-box;
   width: 340px;
   height: 52px;
-  /* border: 2px solid $((props) => props.borderColor ? ##70cca6: #4b4b4b); */
+  border: 2px solid ${(props) => props.borderColor};
   margin-bottom: 20px;
 `;
 
