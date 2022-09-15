@@ -6,8 +6,8 @@ import GoalSlider from "../components/main/GoalSlider";
 const Main = () => {
   return (
     <StMainContainer>
-      {/* <GoalSlider /> */}
-      <RegCalendar />
+      <GoalSlider />
+      {/* <RegCalendar /> */}
     </StMainContainer>
   );
 };

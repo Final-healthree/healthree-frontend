@@ -3,7 +3,7 @@ import styled from "styled-components";
 import RegisterModal from "./RegisterModal";
 import Modal from "./Modal";
 
-const MainGoalFirst = (props) => {
+const MainGoalThird = (props) => {
   const [modalopen, setModalOpen] = useState(false);
 
   return (
@@ -25,7 +25,7 @@ const MainGoalFirst = (props) => {
         <button onClick={() => {
           setModalOpen(!modalopen);
         }}>동영상 등록하기</button>
-        { modalopen === true ? <RegisterModal /> : null }
+        { modalopen === true ? <RegisterModal number={3} /> : null }
         {/* <button onClick={() => {
           {RegisterModal && (
             <Modal closeModal={() => setModalOpen(!modalopen)}>
@@ -95,4 +95,4 @@ const StButtonContainer = styled.div`
     border-radius: 2px;
   }
 `;
-export default MainGoalFirst;
+export default MainGoalThird;

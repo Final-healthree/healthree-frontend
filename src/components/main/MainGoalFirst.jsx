@@ -25,7 +25,7 @@ const MainGoalFirst = (props) => {
         <button onClick={() => {
           setModalOpen(!modalopen);
         }}>동영상 등록하기</button>
-        { modalopen === true ? <RegisterModal /> : null }
+        { modalopen === true ? <RegisterModal number={1}/> : null }
         {/* <button onClick={() => {
           {RegisterModal && (
             <Modal closeModal={() => setModalOpen(!modalopen)}>

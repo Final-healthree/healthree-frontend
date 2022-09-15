@@ -24,6 +24,7 @@ const StLayout = styled.div`
     height: 20%;
   }
 
+
   margin: 0 auto;
   background-color: #fff;
   position: relative;

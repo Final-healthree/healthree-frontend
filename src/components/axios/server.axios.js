@@ -30,11 +30,7 @@ const requestHandler = async (req) => {
   } else {
     console.log("성공");
     req.headers.Authorization = `Bearer ${Token}`;
-
-    return req;
   }
-};
-
+}
 serverAxios.interceptors.request.use((request) => requestHandler(request));
-
 export default serverAxios;
