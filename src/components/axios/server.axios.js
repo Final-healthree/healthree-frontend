@@ -8,10 +8,10 @@ const serverAxios = axios.create({
 const requestHandler = async (req) => {
   //   const accessToken = getToken().accessToken;
   //   request.headers.Authorization = `Bearer ${accessToken}`;
-  const accessToken = localStorage.getItem("accessToken");
-  console.log(accessToken);
+  const Token = localStorage.getItem("Token");
+  console.log(Token);
 
-  const isMyTokenExpired = isExpired(accessToken);
+  const isMyTokenExpired = isExpired(Token);
 
   if (isMyTokenExpired === true) {
     //True인 경우
@@ -31,7 +31,7 @@ const requestHandler = async (req) => {
     }
   } else {
     console.log("성공");
-    req.headers.Authorization = `Bearer ${accessToken}`;
+    req.headers.Authorization = `Bearer ${Token}`;
 
     return req;
   }
