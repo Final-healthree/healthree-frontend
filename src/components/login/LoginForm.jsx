@@ -5,14 +5,15 @@ const LoginForm = () => {
   return (
     <div>
       <StLoginArea>
-        <img src={kakaoLogin}></img>
         <a href="http://wetube-phenomenonlee.shop/api/users/auth/kakao">
+        <img src={kakaoLogin}></img>
         </a>
       </StLoginArea>
     </div>
   );
 };
 
+console.log()
 export default LoginForm;
 
 const StLoginArea = styled.div`
