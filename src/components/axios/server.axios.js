@@ -6,8 +6,6 @@ const serverAxios = axios.create({
 });
 /** @param { Request } req */
 const requestHandler = async (req) => {
-  //   const accessToken = getToken().accessToken;
-  //   request.headers.Authorization = `Bearer ${accessToken}`;
   const Token = localStorage.getItem("Token");
   console.log(Token);
 

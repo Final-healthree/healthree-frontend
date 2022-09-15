@@ -119,7 +119,7 @@ const GoalArea = styled.div`
   padding: 0 13px;
   /* margin: 30px 0; */
 
-  height: 300px;
+  height: 278px;
 `;
 
 const Label = styled.div`
