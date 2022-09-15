@@ -5,26 +5,27 @@ import ReactLoading from "react-loading";
 import VideoModal from "./VideoModal";
 import serverAxios from "../axios/server.axios";
 
+import emptyImg from "../../assets/images/emptyimg.svg";
+
 const MyVideo = () => {
   const [items, setItems] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [more, setMore] = useState(0);
 
   const [ref, inView] = useInView();
 
   // 서버에서 아이템을 가지고 오는 함수
   const getItems = async () => {
     setLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    if (page > 1) {
+      await new Promise((resolve) => setTimeout(resolve, 700));
+    }
+
     await serverAxios
       .get(
         process.env.REACT_APP_REST_API_KEY +
           `api/users/my_video?pagecount=5&&page=${page}`
-        // {
-        //   headers: {
-        //     Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOjQsIm5pY2tuYW1lIjoi7Jyg7JiBIiwicHJvZmlsZV9pbWFnZSI6Imh0dHA6Ly9rLmtha2FvY2RuLm5ldC9kbi9ielNMRDgvYnRySTJjd3lZYmcvMDJvTkNvWVVlZXF4czdReVp3a2E2MC9pbWdfNjQweDY0MC5qcGcifSwiaWF0IjoxNjYyOTkxMDc0fQ.nYSDF0dT_f8EOdmXg-Nhz2lpW194lGsCjouQ1z3fkcc`,
-        //   },
-        // }
       )
       .then((res) => {
         console.log(res);
@@ -36,11 +37,12 @@ const MyVideo = () => {
   // `getItems` 가 바뀔 때 마다 함수 실행
   useEffect(() => {
     getItems();
-  }, [page]);
+  }, [page]); //페이지가 바껴서 함수가 실행됐어
 
   useEffect(() => {
-    if (!loading && inView) {
+    if (inView && !loading && items.length >= more) {
       setPage(page + 1);
+      setMore(more + 5);
     }
   }, [inView, loading]);
 
@@ -52,46 +54,58 @@ const MyVideo = () => {
     setUrl();
   };
 
-  console.log("inView", inView);
-  console.log("loading", loading);
+  // console.log("inView", inView);
+  // console.log("more", more);
+  // console.log("item", items.length);
+  // console.log("loading", loading);
+  // console.log("page", page);
 
   return (
     <Container>
-      <VideoArea>
-        {items.map((data, idx) => (
-          <div key={data.goal_id} onClick={() => setUrl(data.final_video)}>
-            {items.length - 1 === idx ? (
-              <VideoBox ref={ref}>
-                <VideoImg>
-                  <source src={data.final_video} type="video/mp4" />
-                </VideoImg>
-                <VideoDate>
-                  {data.day1.slice(0, 10)} ~ {data.day3.slice(0, 10)}
-                </VideoDate>
-              </VideoBox>
-            ) : (
-              <VideoBox>
-                <VideoImg key={data.goal_id} onClick={showModal}>
-                  <source src={data.final_video} type="video/mp4" />
-                </VideoImg>
-                <span>{data.goal_name}</span>
-                <VideoDate>
-                  {data.day1.slice(0, 10)} ~ {data.day3.slice(0, 10)}
-                </VideoDate>
-              </VideoBox>
-            )}
-          </div>
-        ))}
-        {modalOpen && <VideoModal url={url} setModalOpen={setModalOpen} />}
+      {items.length === 0 ? (
+        <EmptyArea>
+          <EmptyImg />
+          <EmptyP>
+            영상이 비어있어요. <br /> 작심삼일을 성공해봐요!
+          </EmptyP>
+        </EmptyArea>
+      ) : (
+        <VideoArea>
+          {items.map((data, idx) => (
+            <div key={data.goal_id} onClick={() => setUrl(data.final_video)}>
+              {items.length - 1 === idx ? (
+                <VideoBox ref={ref}>
+                  <VideoImg>
+                    <source src={data.final_video} type="video/mp4" />
+                  </VideoImg>
+                  <VideoDate>
+                    {data.day1.slice(0, 10)} ~ {data.day3.slice(0, 10)}
+                  </VideoDate>
+                </VideoBox>
+              ) : (
+                <VideoBox>
+                  <VideoImg key={data.goal_id} onClick={showModal}>
+                    <source src={data.final_video} type="video/mp4" />
+                  </VideoImg>
+                  <span>{data.goal_name}</span>
+                  <VideoDate>
+                    {data.day1.slice(0, 10)} ~ {data.day3.slice(0, 10)}
+                  </VideoDate>
+                </VideoBox>
+              )}
+            </div>
+          ))}
+          {modalOpen && <VideoModal url={url} setModalOpen={setModalOpen} />}
 
-        {inView ? (
-          <LoaderWrap>
-            <ReactLoading type="spin" color="#A593E0" />
-          </LoaderWrap>
-        ) : (
-          ""
-        )}
-      </VideoArea>
+          {inView && items.length >= more ? (
+            <LoaderWrap>
+              <ReactLoading type="spin" color="#A593E0" />
+            </LoaderWrap>
+          ) : (
+            ""
+          )}
+        </VideoArea>
+      )}
     </Container>
   );
 };
@@ -99,6 +113,36 @@ const MyVideo = () => {
 export default MyVideo;
 
 const Container = styled.div``;
+
+const EmptyArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const EmptyImg = styled.div`
+  position: absolute;
+  width: 144.74px;
+  height: 154.36px;
+  top: 150px;
+  background-image: url(${emptyImg});
+  background-size: cover;
+  background-position: center;
+`;
+
+const EmptyP = styled.p`
+  position: absolute;
+  height: 36px;
+  /* top: calc(50% - 36px / 2 + 123px); */
+  top: 330px;
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: -0.01em;
+
+  color: #4b4b4b;
+`;
 
 const VideoArea = styled.div`
   display: flex;
