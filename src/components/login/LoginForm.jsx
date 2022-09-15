@@ -28,4 +28,5 @@ export default LoginForm;
 
 const StLoginArea = styled.div`
   display: flex;
+  cursor: pointer;
 `;
