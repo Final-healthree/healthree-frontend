@@ -5,7 +5,16 @@ export const __addCertification = createAsyncThunk(
   "post/CERTIFICATION",
   async (payload) => {
     console.log(payload)
-    const response = await api.post("/api/main/video/3", payload);
+    const response = await api.post(`/api/main/video/${payload.goalnumber}`, payload.formdata);
+    return response.data;
+  }
+);
+
+export const __getMainGoal = createAsyncThunk(
+  "user/MAINGOAL",
+  async (payload) => {
+    console.log(payload)
+    const response = await api.get("/api/main/Goal_day/1", payload);
     return response.data;
   }
 );

@@ -15,6 +15,7 @@ function MyPageCalendar() {
     await serverAxios
       .get(process.env.REACT_APP_REST_API_KEY + `api/users/my_calendar`)
       .then((data) => {
+        // console.log(data);
         setDates([...dates, ...data.data.result.date]);
       });
   };

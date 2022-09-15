@@ -1,4 +1,4 @@
-import { React, useState, useRef } from "react";
+import { React, useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import Thumnail from "../../assets/main/Thumnail.png"
 import upload from "../../assets/main/upload.png"
@@ -28,12 +28,19 @@ const VideoEditor = (props) => {
 }
 
 
-const RegisterModal = () => {
+const RegisterModal = (props) => {
   const [state, setState] = useState();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [attachment, setAttachment] = useState("");
   const fileInput = useRef(null);
+  const [goalnumber, setGoalNumber] = useState(); 
+  
+  useEffect(() => {
+    setGoalNumber(props.number);
+  }, []);
+  
+  console.log(goalnumber)
 
 
   const selectVideo = (e) => {
@@ -52,7 +59,10 @@ const RegisterModal = () => {
   const addVideo = () => {
     const formData = new FormData();
     formData.append("video", fileInput.current.files[0]);
-    dispatch(__addCertification(formData));
+    dispatch(__addCertification({
+      formData,
+      goalnumber
+    }));
     navigate("/", {replace: true});
   }
 
@@ -83,7 +93,7 @@ const RegisterModal = () => {
           </label>
         </button>
       </StVideoRegisterContainer>
-      <VideoEditor />
+      {/* <VideoEditor /> */}
       <StButtonContainer>
         <button onClick={addVideo}>확인</button>
       </StButtonContainer>

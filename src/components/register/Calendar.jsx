@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { register } from "../../redux/modules/regday";
 
@@ -12,10 +12,12 @@ import "./RegCalendar.css";
 
 const RegCalendar = () => {
   const dispatch = useDispatch();
-  const regDay = useSelector((state) => state.registerday);
   const navigate = useNavigate();
 
-  const [last, setLast] = useState(new Date());
+  let token = new URL(window.location.href).searchParams.get("token");
+  localStorage.setItem("Token", token);
+
+  let last = new Date();
   const lastday = new Date(last.setDate(last.getDate() + 2));
   const [day, setday] = useState([new Date(), new Date(lastday)]);
   const onChange = (value) => {
@@ -108,8 +110,4 @@ const RegBtn = styled.button`
 
   &:hover {
   }
-`;
-
-const Test = styled.p`
-  border: 1px solid pink;
 `;

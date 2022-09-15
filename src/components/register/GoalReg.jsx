@@ -2,8 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-
-import axios from "axios";
+import serverAxios from "../axios/server.axios";
 
 const GoalReg = () => {
   const regDay = useSelector((state) => state.registerday);
@@ -22,12 +21,15 @@ const GoalReg = () => {
     goal_name: "",
   });
 
+  const [confirm, setConfirm] = useState(false);
+
   const onChange = (e) => {
     const { value } = e.target;
     setInfo({
       ...info,
       goal_name: value,
     });
+    value.length > 0 ? setConfirm(true) : setConfirm(false);
   };
 
   function leftPad(value) {
@@ -47,12 +49,8 @@ const GoalReg = () => {
   }
 
   const submit = async () => {
-    await axios
-      .post(process.env.REACT_APP_REST_API_KEY + "api/main/register", info, {
-        headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOjQsIm5pY2tuYW1lIjoi7Jyg7JiBIiwicHJvZmlsZV9pbWFnZSI6Imh0dHA6Ly9rLmtha2FvY2RuLm5ldC9kbi9ielNMRDgvYnRySTJjd3lZYmcvMDJvTkNvWVVlZXF4czdReVp3a2E2MC9pbWdfNjQweDY0MC5qcGcifSwiaWF0IjoxNjYyOTkxMDc0fQ.nYSDF0dT_f8EOdmXg-Nhz2lpW194lGsCjouQ1z3fkcc`,
-        },
-      })
+    await serverAxios
+      .post(process.env.REACT_APP_REST_API_KEY + "api/main/register", info)
       .then((res) => {
         alert(res.data.messgae);
         console.log(res);
@@ -83,7 +81,7 @@ const GoalReg = () => {
           onChange={onChange}
           name="goal_name"
           value={info.goal_name}
-          // borderColor={false}
+          borderColor={confirm ? "#70cca6" : "black"}
         ></GoalInput>
         {/* 입력에 따라 버튼이랑 테두리 유무 */}
 
@@ -134,7 +132,7 @@ const GoalInput = styled.input`
   box-sizing: border-box;
   width: 340px;
   height: 52px;
-  /* border: 2px solid $((props) => props.borderColor ? ##70cca6: #4b4b4b); */
+  border: 2px solid ${(props) => props.borderColor};
   margin-bottom: 20px;
 `;
 
