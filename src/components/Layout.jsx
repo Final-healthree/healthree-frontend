@@ -14,12 +14,14 @@ const StLayout = styled.div`
 
   overflow-y: scroll; //스크롤 달아줌, 부모크기 고정      +)hidden 짤림
   &::-webkit-scrollbar {
-    width: 5px;
+    width: 10px;
   }
   &::-webkit-scrollbar-thumb {
     display: none;
-    /* border-radius: 2px;
-    background: #dad4d4e0; */
+
+    border-radius: 200px;
+    background: #dad4d4e0;
+    height: 20%;
   }
 
   margin: 0 auto;

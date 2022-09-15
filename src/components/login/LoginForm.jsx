@@ -7,6 +7,7 @@ const LoginForm = () => {
   return (
     <div>
       <StLoginArea>
+
         <img
           src={kakaoLogin}
           onClick={() => {
@@ -16,11 +17,13 @@ const LoginForm = () => {
         {/* <a href="http://wetube-phenomenonlee.shop/api/users/auth/kakao">
           로그인
         </a> */}
+
       </StLoginArea>
     </div>
   );
 };
 
+console.log()
 export default LoginForm;
 
 const StLoginArea = styled.div`
