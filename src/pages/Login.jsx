@@ -38,7 +38,7 @@ gap: 140px;
 
 `
 const StLogo = styled.div`
-  margin-top: 100px;
+  margin-top: 500px;
 `
 const StTeamName = styled.div`
 `
