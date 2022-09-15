@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 const Layout = (props) => {
-    
   return <StLayout>{props.children}</StLayout>;
 };
 
@@ -18,8 +17,9 @@ const StLayout = styled.div`
     width: 5px;
   }
   &::-webkit-scrollbar-thumb {
-    border-radius: 2px;
-    background: #dad4d4e0;
+    display: none;
+    /* border-radius: 2px;
+    background: #dad4d4e0; */
   }
 
   margin: 0 auto;
