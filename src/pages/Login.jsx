@@ -40,12 +40,5 @@ gap: 140px;
 const StLogo = styled.div`
   margin-top: 100px;
 `
-const Logo = styled.div`
-img{
-width: 300px;
-height:300px;
-}
-`
 const StTeamName = styled.div`
-  margin-bottom: 200px ;
 `
