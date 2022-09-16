@@ -30,8 +30,8 @@ const Main = () => {
 
   return (
     <StMainContainer>
-      <GoalSlider />
-      {/* <RegCalendar /> */}
+      {/* <GoalSlider /> */}
+      <RegCalendar />
     </StMainContainer>
   );
 };
