@@ -1,10 +1,26 @@
-import { React, useState } from "react";
+import { React, useState,useEffect } from "react";
 import styled from "styled-components";
 import RegisterModal from "./RegisterModal";
 import Modal from "./Modal";
+import { __loadMainGoal } from "../../redux/modules/goalSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const MainGoalFirst = (props) => {
   const [modalopen, setModalOpen] = useState(false);
+  const dispatch = useDispatch();
+  const [goalnumber, setGoalNumber] = useState(); 
+  const getMainGoal = useSelector((state) => state.goal.list.result)
+
+  // console.log(getMainGoal)
+  
+  // useEffect(() => {
+  //   setGoalNumber(props.number);
+  // }, []);
+  
+
+  useEffect(() => {
+    dispatch(__loadMainGoal());
+  }, [])
 
   return (
     <StMainLayout>
@@ -17,8 +33,8 @@ const MainGoalFirst = (props) => {
       <StMainGoalTextContainer>
         <h1>작심 1일</h1>
       <StTitleContainer>
-        <p>팔굽혀펴기 10번</p>
-        <p className="date">2022.08.xx</p>
+        <p>{getMainGoal?.goal}</p>
+        <p className="date">{getMainGoal?.day1.slice(0,10)}</p>
       </StTitleContainer>
       </StMainGoalTextContainer>
       <StButtonContainer>

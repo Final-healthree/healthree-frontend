@@ -1,32 +1,13 @@
 import { React, useState, useRef, useEffect } from "react";
 import styled from "styled-components";
-import Thumnail from "../../assets/main/Thumnail.png"
-import upload from "../../assets/main/upload.png"
-import { useDispatch } from "react-redux";
+import Thumnail from "../../assets/main/Thumnail.png";
+import upload from "../../assets/main/upload.png";
+import { useDispatch, useSelector } from "react-redux";
 import { __addCertification } from "../../redux/modules/certificationSlice";
 import { useNavigate } from "react-router-dom";
-import {RdxVideo, Overlay, Controls} from 'react-html5-video-editor'
-
-
-const option =  {
-  autoPlay: false,
-  loop: false,
-  controls: true,
-  volume:	1.0,
-  preload: "auto",
-  cropEnabled: true,
-}
-const VideoEditor = (props) => {
-  return (
-    <RdxVideo {...option} autoPlay loop muted poster="../../assets/main/ThumnailReady.png">
-      <Overlay />
-      <Controls />
-      <source src="../../assets/main/1sevideo.mp4" type="video/mp4" />
-    </RdxVideo>
-    // document.getElementById('root')
-  )
-}
-
+import { RdxVideo, Overlay, Controls } from 'react-html5-video-editor';
+import VideoPlayer from "./VideoPlayer";
+// import "node_modules/video-react/dist/video-react.css";
 
 const RegisterModal = (props) => {
   const [state, setState] = useState();
@@ -35,7 +16,32 @@ const RegisterModal = (props) => {
   const [attachment, setAttachment] = useState("");
   const fileInput = useRef(null);
   const [goalnumber, setGoalNumber] = useState(); 
+  const getMainGoal = useSelector((state) => state.goal.list.result);
+  const FirstDay = useSelector((state) => state.goal.list.result.day1);
+  const SecondDay = useSelector((state) => state.goal.list.result.day2);
+  const ThirdDay = useSelector((state) => state.goal.list.result.day3);
   
+  const option =  {
+    autoPlay: false,
+    loop: false,
+    controls: true,
+    volume:	1.0,
+    preload: "auto",
+    cropEnabled: true,
+  }
+  const VideoEditor = (props) => {
+    return (
+      <RdxVideo {...option} autoPlay loop muted poster="../../assets/main/ThumnailReady.png">
+        <Overlay />
+        <Controls />
+        <source src="../../assets/main/1sevideo.mp4" type="video/mp4" />
+      </RdxVideo>
+      // document.getElementById('root')
+    )
+  }
+
+
+
   useEffect(() => {
     setGoalNumber(props.number);
   }, []);
@@ -63,14 +69,31 @@ const RegisterModal = (props) => {
       formData,
       goalnumber
     }));
-    navigate("/", {replace: true});
+    // navigate("/", {replace: true});
+    navigate("/");
+  }
+
+  const getDay = (e) => {
+      if (e === 1){
+        return FirstDay.slice(0,10);
+      }
+      else if (e === 2){
+        return SecondDay.slice(0,10);
+      } 
+      else if (e === 3) {
+        return ThirdDay.slice(0,10);
+      }
+      
+    
   }
 
   return (
+    // <StRegisterModalLayout>
     <StRegisterModalContainer>
       <StTitleContainer>
-        <span>팔굽혀펴기 10번</span>
-        <span>2022.08.xx</span>
+        <span>{getMainGoal?.goal}</span>
+        {/* <span>{goalnumber === 1 ? FirstDay : SecondDay}</span> */}
+        <span>{getDay(goalnumber)}</span>
       </StTitleContainer>
       <StVideoRegisterContainer>
         <input
@@ -94,27 +117,37 @@ const RegisterModal = (props) => {
         </button>
       </StVideoRegisterContainer>
       {/* <VideoEditor /> */}
+      {/* <VideoPlayer/> */}
       <StButtonContainer>
         <button onClick={addVideo}>확인</button>
       </StButtonContainer>
     </StRegisterModalContainer>
+    // </StRegisterModalLayout>
   )
 }
 
 const StRegisterModalLayout = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    /* position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center; */
 `;
 
 const StRegisterModalContainer = styled.div`
   position: absolute;
   top: 0;
   width: 350px;
-  height: 430px;
+  height: 450px;
   background-color: red;
-  margin-top: 80px;
+  margin-top: 90px;
+  /* background-color: rgb(255, 255, 255); */
   border-radius: 2px;
+  box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
 `;
 
 const StTitleContainer = styled.div`
@@ -168,7 +201,7 @@ const StVideoRegisterContainer = styled.div`
 `;
 
 const StButtonContainer = styled.div`
-  margin-top: 15px;
+  margin-top: 55px;
   display: flex;
   justify-content: center;
   align-items: center;
