@@ -13,6 +13,10 @@ const Footer = () => {
   const [isListHoverMain, setIsListHoverMain] = useState(false);
   const [isListHoverCommunity, setIsListHoverCommunity] = useState(false);
   const [isListHoverMypage, setIsListHoverMypage] = useState(false);
+
+  const [show, setShow] = useState(true);
+
+
   //로그인 페이지 푸터 숨기기
   if (window.location.pathname === '/login') return null;
   return (
