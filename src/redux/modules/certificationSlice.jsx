@@ -4,24 +4,18 @@ import { api } from "../../shared/api";
 export const __addCertification = createAsyncThunk(
   "post/CERTIFICATION",
   async (payload) => {
-    console.log(payload)
-    const response = await api.post(`/api/main/video/${payload.goalnumber}`, payload.formdata);
+    const response = await api.post(`/api/main/video/${payload.goalnumber}`, payload);
+    console.log(response.data)
     return response.data;
   }
 );
 
-export const __getMainGoal = createAsyncThunk(
-  "user/MAINGOAL",
-  async (payload) => {
-    console.log(payload)
-    const response = await api.get("/api/main/Goal_day/1", payload);
-    return response.data;
-  }
-);
 
 const certificationSlice = createSlice({
   name: "certification",
-  initialState:{},
+  initialState:{
+    list: [],
+  },
   reducers: {
 
   },
