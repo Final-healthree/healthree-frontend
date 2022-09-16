@@ -1,9 +1,9 @@
 import React from "react";
-
+import MainModal from "../components/main/MainModal"
 const Community = () => {
   return (
     <div>
-      Community
+      <MainModal/>
     </div>
   )
 }
