@@ -1,11 +1,17 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { api } from "../../shared/api";
 
+// export const __addCertification = createAsyncThunk(
+//   "post/CERTIFICATION",
+//   async (payload) => {
+//     const response = await api.post(`/api/main/video/${payload.goalnumber}`, payload.formdata);
+//     return response.data;
+//   }
+// );
 export const __addCertification = createAsyncThunk(
   "post/CERTIFICATION",
   async (payload) => {
-    const response = await api.post(`/api/main/video/${payload.goalnumber}`, payload);
-    console.log(response.data)
+    const response = await api.post(`/api/main/video/1`, payload.formdata);
     return response.data;
   }
 );
