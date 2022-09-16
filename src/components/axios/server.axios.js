@@ -1,11 +1,12 @@
 import axios from "axios";
 import { isExpired } from "react-jwt";
-
 const serverAxios = axios.create({
   baseURL: process.env.REACT_APP_REST_API_KEY,
 });
 /** @param { Request } req */
 const requestHandler = async (req) => {
+  //   const accessToken = getToken().accessToken;
+  //   request.headers.Authorization = `Bearer ${accessToken}`;
   const Token = localStorage.getItem("Token");
   console.log(Token);
 
@@ -30,7 +31,9 @@ const requestHandler = async (req) => {
   } else {
     console.log("성공");
     req.headers.Authorization = `Bearer ${Token}`;
+
+    return req;
   }
-}
+};
 serverAxios.interceptors.request.use((request) => requestHandler(request));
 export default serverAxios;

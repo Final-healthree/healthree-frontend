@@ -23,7 +23,7 @@ const Router = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/mypage" element={<Mypage />} />
         </Routes>
-      </Layout >
+      </Layout>
       <Footer />
     </BrowserRouter>
   );
