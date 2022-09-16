@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { RdxVideo, Overlay, Controls } from 'react-html5-video-editor';
 import VideoPlayer from "./VideoPlayer";
 // import "node_modules/video-react/dist/video-react.css";
+import VideoInput from "./VideoInput";
 
 const RegisterModal = (props) => {
   const [state, setState] = useState();
@@ -21,24 +22,24 @@ const RegisterModal = (props) => {
   const SecondDay = useSelector((state) => state.goal.list.result.day2);
   const ThirdDay = useSelector((state) => state.goal.list.result.day3);
   
-  const option =  {
-    autoPlay: false,
-    loop: false,
-    controls: true,
-    volume:	1.0,
-    preload: "auto",
-    cropEnabled: true,
-  }
-  const VideoEditor = (props) => {
-    return (
-      <RdxVideo {...option} autoPlay loop muted poster="../../assets/main/ThumnailReady.png">
-        <Overlay />
-        <Controls />
-        <source src="../../assets/main/1sevideo.mp4" type="video/mp4" />
-      </RdxVideo>
-      // document.getElementById('root')
-    )
-  }
+  // const option =  {
+  //   autoPlay: false,
+  //   loop: false,
+  //   controls: true,
+  //   volume:	1.0,
+  //   preload: "auto",
+  //   cropEnabled: true,
+  // }
+  // const VideoEditor = (props) => {
+  //   return (
+  //     <RdxVideo {...option} autoPlay loop muted poster="../../assets/main/ThumnailReady.png">
+  //       <Overlay />
+  //       <Controls />
+  //       <source src="../../assets/main/1sevideo.mp4" type="video/mp4" />
+  //     </RdxVideo>
+  //     // document.getElementById('root')
+  //   )
+  // }
 
 
 
@@ -62,6 +63,16 @@ const RegisterModal = (props) => {
     };
   }
 
+  // const addVideo = () => {
+  //   const formData = new FormData();
+  //   formData.append("video", fileInput.current.files[0]);
+  //   dispatch(__addCertification({
+  //     formData,
+  //     goalnumber
+  //   }));
+  //   // navigate("/", {replace: true});
+  //   navigate("/");
+  // }
   const addVideo = () => {
     const formData = new FormData();
     formData.append("video", fileInput.current.files[0]);
@@ -96,7 +107,7 @@ const RegisterModal = (props) => {
         <span>{getDay(goalnumber)}</span>
       </StTitleContainer>
       <StVideoRegisterContainer>
-        <input
+        {/* <input
           id="file-input"
           type="file"
           accept="video/*"
@@ -114,7 +125,8 @@ const RegisterModal = (props) => {
             <img className="uploadImg" src={upload} alt="" />
             &nbsp;업로드
           </label>
-        </button>
+        </button> */}
+      <VideoInput width={400} height={300} />
       </StVideoRegisterContainer>
       {/* <VideoEditor /> */}
       {/* <VideoPlayer/> */}
@@ -201,7 +213,7 @@ const StVideoRegisterContainer = styled.div`
 `;
 
 const StButtonContainer = styled.div`
-  margin-top: 55px;
+  margin-top: 25px;
   display: flex;
   justify-content: center;
   align-items: center;
