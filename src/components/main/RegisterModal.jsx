@@ -102,9 +102,9 @@ const RegisterModal = (props) => {
     // <StRegisterModalLayout>
     <StRegisterModalContainer>
       <StTitleContainer>
-        <span>{getMainGoal?.goal}</span>
+        <span className="goalTitle">{getMainGoal?.goal}</span>
         {/* <span>{goalnumber === 1 ? FirstDay : SecondDay}</span> */}
-        <span>{getDay(goalnumber)}</span>
+        <span className="goalDate">{getDay(goalnumber)}</span>
       </StTitleContainer>
       <StVideoRegisterContainer>
         {/* <input
@@ -126,20 +126,20 @@ const RegisterModal = (props) => {
             &nbsp;업로드
           </label>
         </button> */}
-      <VideoInput width={400} height={300} />
       </StVideoRegisterContainer>
+      <VideoInput width={400} height={300} number={goalnumber}/>
       {/* <VideoEditor /> */}
       {/* <VideoPlayer/> */}
       <StButtonContainer>
-        <button onClick={addVideo}>확인</button>
+        {/* <button onClick={addVideo}>확인</button> */}
       </StButtonContainer>
     </StRegisterModalContainer>
-    // </StRegisterModalLayout>
+    // {/* </StRegisterModalLayout> */}
   )
 }
 
 const StRegisterModalLayout = styled.div`
-    /* position: fixed;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -147,25 +147,33 @@ const StRegisterModalLayout = styled.div`
     background-color: rgba(0, 0, 0, 0.4);
     display: flex;
     justify-content: center;
-    align-items: center; */
+    align-items: center;
 `;
 
 const StRegisterModalContainer = styled.div`
   position: absolute;
   top: 0;
   width: 350px;
-  height: 450px;
-  background-color: red;
-  margin-top: 90px;
-  /* background-color: rgb(255, 255, 255); */
+  height: 500px;
+  /* background-color: red; */
+  margin-top: 50px;
+  background-color: rgb(255, 255, 255);
   border-radius: 2px;
-  box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+  box-shadow: 2px 4px 6px 2px rgba(34, 36, 38, 0.15);
 `;
 
 const StTitleContainer = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 20px;
+
+  .goalTitle {
+    font-weight: 900;
+  }
+
+  .goalDate {
+    font-weight: 300;
+  }
 
 `;
 
