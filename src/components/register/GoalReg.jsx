@@ -6,13 +6,13 @@ import serverAxios from "../axios/server.axios";
 
 const GoalReg = () => {
   const regDay = useSelector((state) => state.registerday);
-  console.log(regDay);
+  // console.log(regDay);
   const year = regDay.start.getFullYear();
   const month = regDay.start.getMonth() + 1;
   const Month = leftPad(month);
   const Day = leftPad(regDay.start.getDate() + 1);
 
-  console.log(typeof month);
+  // console.log(typeof month);
 
   const [info, setInfo] = useState({
     day1: toStringByFormatting(regDay.start),
@@ -66,7 +66,7 @@ const GoalReg = () => {
       });
   };
 
-  console.log(info);
+  // console.log(info);
 
   return (
     <Container>

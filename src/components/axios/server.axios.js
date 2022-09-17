@@ -8,7 +8,7 @@ const requestHandler = async (req) => {
   //   const accessToken = getToken().accessToken;
   //   request.headers.Authorization = `Bearer ${accessToken}`;
   const Token = localStorage.getItem("Token");
-  console.log(Token);
+  // console.log(Token);
 
   const isMyTokenExpired = isExpired(Token);
 
@@ -18,7 +18,7 @@ const requestHandler = async (req) => {
     // 2. 토큰이 없거나 이상한것이 들어있을 경우
     try {
       alert("로그인필요");
-      return window.location.replace("/login");
+      return window.location.replace("/");
     } catch (error) {
       // 에러가뜬경우 (status가 4xx, 5xx인 경우)
       // 1. 토큰이 아닌게 왔을 경우
@@ -29,7 +29,7 @@ const requestHandler = async (req) => {
       return req;
     }
   } else {
-    console.log("성공");
+    // console.log("성공");
     req.headers.Authorization = `Bearer ${Token}`;
 
     return req;

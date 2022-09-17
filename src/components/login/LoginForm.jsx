@@ -5,8 +5,8 @@ const LoginForm = () => {
   return (
     <div>
       <StLoginArea>
-        <a href="http://wetube-phenomenonlee.shop/api/users/auth/kakao">
-          <img src={kakaoLogin}></img>
+        <a href="http://43.200.253.0/api/users/auth/kakao">
+          <img src={kakaoLogin} />
         </a>
       </StLoginArea>
     </div>

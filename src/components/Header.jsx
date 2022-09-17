@@ -7,12 +7,16 @@ import back from "../assets/images/back.svg";
 
 const Header = () => {
   const navigate = useNavigate();
-    //로그인 페이지 헤더 숨기기
-    if (window.location.pathname === '/login') return null;
+  //로그인 페이지 헤더 숨기기
+  if (window.location.pathname === "/") return null;
 
   return (
     <StHeader>
-      <img src={back} onClick={() => navigate('/')} style = {{width:'30px'}} />
+      <img
+        src={back}
+        onClick={() => navigate("/main")}
+        style={{ width: "30px" }}
+      />
       <img src={headerLogo} />
     </StHeader>
   );
@@ -31,5 +35,4 @@ const StHeader = styled.div`
   left: 50%;
   transform: translateX(-50%);
   cursor: pointer;
-
 `;
