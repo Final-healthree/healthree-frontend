@@ -75,7 +75,8 @@ const MyVideo = () => {
             <div key={data.goal_id} onClick={() => setUrl(data.final_video)}>
               {items.length - 1 === idx ? (
                 <VideoBox ref={ref}>
-                  <VideoImg>
+                  <VideoImg onClick={showModal}>
+                    <span>{data.goal_name}</span>
                     <source src={data.final_video} type="video/mp4" />
                   </VideoImg>
                   <VideoDate>
@@ -84,7 +85,7 @@ const MyVideo = () => {
                 </VideoBox>
               ) : (
                 <VideoBox>
-                  <VideoImg key={data.goal_id} onClick={showModal}>
+                  <VideoImg onClick={showModal}>
                     <source src={data.final_video} type="video/mp4" />
                   </VideoImg>
                   <span>{data.goal_name}</span>
