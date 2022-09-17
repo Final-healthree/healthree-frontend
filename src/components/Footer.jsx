@@ -14,6 +14,7 @@ const Footer = () => {
   const [isListHoverCommunity, setIsListHoverCommunity] = useState(false);
   const [isListHoverMypage, setIsListHoverMypage] = useState(false);
 
+  const [show, setShow] = useState(false);
   //로그인 페이지 푸터 숨기기
   if (window.location.pathname === "/") return null;
   return (
@@ -23,6 +24,7 @@ const Footer = () => {
         onMouseOut={() => setIsListHoverMain(false)}
         onClick={() => {
           navigate("/main");
+          setShow(true)
         }}
       >
         <img src={isListHoverMain ? footerMainC : footerMain} />
@@ -60,12 +62,13 @@ const StFooterMain = styled.ul`
   padding: 0px 1em 0;
   justify-content: space-around;
   background-color: #fff;
+  box-shadow: 0 -7px 5px -5px #9c939376;
 
   position: absolute;
   bottom: 0;
   //중앙 정렬
   left: 50%;
   transform: translateX(-50%);
-`;
+  cursor: pointer;
 
 export default Footer;
