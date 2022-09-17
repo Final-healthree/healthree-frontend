@@ -33,6 +33,7 @@
     "redux-thunk": "^2.4.1",
     "styled-components": "^5.3.5",
     "video-react": "^0.15.0",
+    "video.js": "^7.20.3",
     "web-vitals": "^2.1.0"
   },
   "scripts": {

@@ -3,6 +3,7 @@ import thunk from "redux-thunk";
 import registerday from "../modules/regday";
 import certificationReducer from "../modules/certificationSlice";
 import goalReducer from "../modules/goalSlice";
+// import getToken from "../modules/getToken";
 
 const middlewares = [thunk];
 const rootReducer = combineReducers({

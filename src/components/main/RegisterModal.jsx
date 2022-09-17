@@ -5,23 +5,26 @@ import upload from "../../assets/main/upload.png";
 import { useDispatch, useSelector } from "react-redux";
 import { __addCertification } from "../../redux/modules/certificationSlice";
 import { useNavigate } from "react-router-dom";
-import { RdxVideo, Overlay, Controls } from 'react-html5-video-editor';
+import { RdxVideo, Overlay, Controls } from "react-html5-video-editor";
 import VideoPlayer from "./VideoPlayer";
 // import "node_modules/video-react/dist/video-react.css";
 import VideoInput from "./VideoInput";
 
 const RegisterModal = (props) => {
+  console.log(props); // 값이 잘 들어오면 버튼이 줄어든다.
   const [state, setState] = useState();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [attachment, setAttachment] = useState("");
+  const [attachment, setAttachment] = useState(false);
+  const [newvideo, setNewVideo] = useState("");
   const fileInput = useRef(null);
-  const [goalnumber, setGoalNumber] = useState(); 
+  // const [goalnumber, setGoalNumber] = useState();
+  const [goalnumber, setGoalNumber] = useState(props.number);
   const getMainGoal = useSelector((state) => state.goal.list.result);
   const FirstDay = useSelector((state) => state.goal.list.result.day1);
   const SecondDay = useSelector((state) => state.goal.list.result.day2);
   const ThirdDay = useSelector((state) => state.goal.list.result.day3);
-  
+
   // const option =  {
   //   autoPlay: false,
   //   loop: false,
@@ -41,27 +44,29 @@ const RegisterModal = (props) => {
   //   )
   // }
 
+  // useEffect(() => {
+  //   setGoalNumber(props.number);
+  // }, []);
 
-
-  useEffect(() => {
-    setGoalNumber(props.number);
-  }, []);
-  
-  console.log(goalnumber)
-
-
-  const selectVideo = (e) => {
-    const reader = new FileReader();
-    const theFile = fileInput.current.files[0];
-    reader.readAsDataURL(theFile);
-    reader.onloadend = (finishiedEvent) => {
-      const {
-        currentTarget: { result },
-      } = finishiedEvent;
-      setAttachment(result);
-      console.log(theFile)
-    };
-  }
+  // const selectVideo = () => {
+  //   console.log("hi");
+  // const reader = new FileReader();
+  // const theFile = fileInput.current.files[0];
+  //   console.log(theFile);
+  //   if (theFile) {
+  //     reader.readAsDataURL(theFile);
+  //     setAttachment(true);
+  //     console.log(theFile);
+  //   }
+  //   // reader.readAsDataURL(theFile);
+  //   // reader.onloadend = (finishiedEvent) => {
+  //   //   const {
+  //   //     currentTarget: { result },
+  //   //   } = finishiedEvent;
+  //   //   setAttachment(result);
+  //   //   console.log(theFile);
+  //   // };
+  // };
 
   // const addVideo = () => {
   //   const formData = new FormData();
@@ -75,28 +80,26 @@ const RegisterModal = (props) => {
   // }
   const addVideo = () => {
     const formData = new FormData();
-    formData.append("video", fileInput.current.files[0]);
-    dispatch(__addCertification({
-      formData,
-      goalnumber
-    }));
+    formData.append("video", fileInput.current);
+    dispatch(
+      __addCertification({
+        formData,
+        goalnumber,
+      })
+    );
     // navigate("/", {replace: true});
     navigate("/");
-  }
+  };
 
   const getDay = (e) => {
-      if (e === 1){
-        return FirstDay.slice(0,10);
-      }
-      else if (e === 2){
-        return SecondDay.slice(0,10);
-      } 
-      else if (e === 3) {
-        return ThirdDay.slice(0,10);
-      }
-      
-    
-  }
+    if (e === 1) {
+      return FirstDay.slice(0, 10);
+    } else if (e === 2) {
+      return SecondDay.slice(0, 10);
+    } else if (e === 3) {
+      return ThirdDay.slice(0, 10);
+    }
+  };
 
   return (
     // <StRegisterModalLayout>
@@ -113,11 +116,18 @@ const RegisterModal = (props) => {
           accept="video/*"
           name="video"
           ref={fileInput}
-          onChange={selectVideo}
-          style={{ display: "none" }}
+          // onChange={onChange}
+          // style={{ display: "none" }}
         />
+
         <div className="imgDiv">
-          <img src={attachment ? attachment : Thumnail} alt=""/>
+          {attachment ? (
+            <div style={{ width: "50px", height: "50px" }}>
+              <source src="" type="video/mp4" alt="newvideo" />
+            </div>
+          ) : (
+            <img src={`${Thumnail}`} alt="" />
+          )}
         </div>
 
         <button>
@@ -126,7 +136,7 @@ const RegisterModal = (props) => {
             &nbsp;업로드
           </label>
         </button> */}
-      <VideoInput width={400} height={300} />
+        <VideoInput width={400} height={300} />
       </StVideoRegisterContainer>
       {/* <VideoEditor /> */}
       {/* <VideoPlayer/> */}
@@ -135,11 +145,11 @@ const RegisterModal = (props) => {
       </StButtonContainer>
     </StRegisterModalContainer>
     // </StRegisterModalLayout>
-  )
-}
+  );
+};
 
 const StRegisterModalLayout = styled.div`
-    /* position: fixed;
+  /* position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -166,7 +176,6 @@ const StTitleContainer = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 20px;
-
 `;
 
 const StVideoRegisterContainer = styled.div`
@@ -186,10 +195,10 @@ const StVideoRegisterContainer = styled.div`
     /* background-color: white; */
 
     img {
-    width: 234px;
-    height: 234px;
-    object-fit: fill;
-  }
+      width: 234px;
+      height: 234px;
+      object-fit: fill;
+    }
   }
 
   button {
@@ -206,7 +215,7 @@ const StVideoRegisterContainer = styled.div`
       cursor: pointer;
     }
   }
-  
+
   .uploadImg {
     transform: translate(-1px, -1px);
   }
