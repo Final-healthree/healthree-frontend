@@ -6,51 +6,54 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { register } from "../../redux/modules/regday";
 
-import Calendar from "react-calendar";
-// import "react-calendar/dist/Calendar.css";
-import "./RegCalendar.css";
+import { DayPicker } from "react-day-picker";
+import "react-day-picker/dist/style.css";
+import ko from "date-fns/locale/ko";
+
+import { addDays, formatISO9075 } from "date-fns";
 
 const RegCalendar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  let last = new Date();
-  const lastday = new Date(last.setDate(last.getDate() + 2));
-  const [day, setday] = useState([new Date(), new Date(lastday)]);
-  const onChange = (value) => {
-    setday([new Date(value), new Date(value.setDate(value.getDate() + 2))]);
+  const handleDayClick = (day) => {
+    console.log(range);
+    console.log(formatISO9075(new Date(day), { representation: "date" }));
+    setRange({ from: day, to: addDays(day, 2) });
   };
 
   const sendDay = (e) => {
-    dispatch(register(day));
+    dispatch(register(range));
     navigate("/register");
   };
 
-  function leftPad(value) {
-    if (value >= 10) {
-      return value;
-    }
+  const today = new Date();
 
-    return `0${value}`;
-  }
-
-  function toStringByFormatting(source, delimiter = "-") {
-    const year = source.getFullYear();
-    const month = leftPad(source.getMonth() + 1);
-    const day = leftPad(source.getDate());
-
-    return [year, month, day].join(delimiter);
-  }
+  const defaultSelected = {
+    from: today,
+    to: addDays(today, 2),
+  };
+  const [range, setRange] = useState(defaultSelected);
 
   return (
     <Container>
       <HeaderArea>
         <Title>목표를 세워보세요!</Title>
-        <Today>{toStringByFormatting(new Date(), ".")}</Today>
+        <Today>
+          {formatISO9075(new Date(today), { representation: "date" })}
+        </Today>
       </HeaderArea>
 
       <CalendarArea>
-        <Calendar onChange={onChange} value={day} calendarType={"US"} />
+        <style>{css}</style>
+        <DayPicker
+          showOutsideDays
+          locale={ko}
+          mode="range"
+          defaultMonth={today}
+          selected={range} //이 범위 만큼 선택
+          onDayClick={handleDayClick}
+        ></DayPicker>
       </CalendarArea>
 
       <BtnArea>
@@ -61,6 +64,42 @@ const RegCalendar = () => {
 };
 
 export default RegCalendar;
+
+const css = `
+  .rdp {
+    --rdp-cell-size: 46px;
+    --rdp-accent-color: #70CCA6;
+    --rdp-outline: none;
+  }
+  .rdp-day_outside {
+    color: #DADADA;
+  }
+
+  .rdp-caption {
+    width: 322px;
+    height: 81px;
+
+    background: #2C8D65;
+  }
+
+  .rdp-caption_label{
+    color : #fff
+  }
+
+  .rdp-head_row,
+  .rdp-head,
+  .rdp-head_cell {
+    background: #70CCA6;
+    margin : 0;
+    color : #fff;
+  }
+
+  .DayPicker-Day--monday {
+    color: #00bcd4;
+  }
+
+
+`;
 
 const Container = styled.div``;
 
@@ -83,7 +122,7 @@ const CalendarArea = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 300px;
+  height: 400px;
 `;
 
 const BtnArea = styled.div`
