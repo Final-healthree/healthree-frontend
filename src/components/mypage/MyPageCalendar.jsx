@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Calendar from "react-calendar";
+
 //svg 이미지
 import stamp from "../../assets/myCalendar/stamp.svg";
 import serverAxios from "../axios/server.axios";
@@ -11,17 +11,17 @@ function MyPageCalendar() {
   const date2 = [];
   const date3 = [];
 
-  const getDates = async () => {
-    await serverAxios
-      .get(process.env.REACT_APP_REST_API_KEY + `api/users/my_calendar`)
-      .then((data) => {
-        setDates([...dates, ...data.data.result.date]);
-      });
-  };
+  // const getDates = async () => {
+  //   await serverAxios
+  //     .get(process.env.REACT_APP_REST_API_KEY + `api/users/my_calendar`)
+  //     .then((data) => {
+  //       setDates([...dates, ...data.data.result.date]);
+  //     });
+  // };
 
-  useEffect(() => {
-    getDates();
-  }, []);
+  // useEffect(() => {
+  //   getDates();
+  // }, []);
 
   dates.map((item) => {
     if (item.date.length === 3) {
@@ -39,93 +39,7 @@ function MyPageCalendar() {
   const completeB = date3.filter((day, inx) => inx % 3 === 1);
   const completeC = date3.filter((day, inx) => inx % 3 === 2);
 
-  return (
-    <Stcalendar>
-      <Calendar
-        tileContent={(e) => {
-          if (
-            date1.find(
-              (x) =>
-                new Date(x).toLocaleDateString() === e.date.toLocaleDateString()
-            )
-          ) {
-            return (
-              <>
-                <Stamp />
-                <HilightOne />
-              </>
-            );
-          }
-          if (
-            failA.find(
-              (x) =>
-                new Date(x).toLocaleDateString() === e.date.toLocaleDateString()
-            )
-          ) {
-            return (
-              <>
-                <Stamp />
-                <OhilightAA />
-              </>
-            );
-          }
-          if (
-            failB.find(
-              (x) =>
-                new Date(x).toLocaleDateString() === e.date.toLocaleDateString()
-            )
-          ) {
-            return (
-              <>
-                <Stamp />
-                <OhilightBB />
-              </>
-            );
-          }
-
-          if (
-            completeA.find(
-              (x) =>
-                new Date(x).toLocaleDateString() === e.date.toLocaleDateString()
-            )
-          ) {
-            return (
-              <>
-                <Stamp />
-                <GhilightAA />
-              </>
-            );
-          }
-          if (
-            completeB.find(
-              (x) =>
-                new Date(x).toLocaleDateString() === e.date.toLocaleDateString()
-            )
-          ) {
-            return (
-              <>
-                <Stamp />
-                <GhilightBB />
-              </>
-            );
-          }
-          if (
-            completeC.find(
-              (x) =>
-                new Date(x).toLocaleDateString() === e.date.toLocaleDateString()
-            )
-          ) {
-            return (
-              <>
-                <Stamp />
-                <GhilightCC />
-              </>
-            );
-          }
-        }}
-      />
-    </Stcalendar>
-  );
+  return <Stcalendar />;
 }
 export default MyPageCalendar;
 const Stcalendar = styled.div`
