@@ -24,7 +24,7 @@ const Footer = () => {
         onMouseOut={() => setIsListHoverMain(false)}
         onClick={() => {
           navigate("/main");
-          setShow(true)
+          setShow(true);
         }}
       >
         <img src={isListHoverMain ? footerMainC : footerMain} />
@@ -70,5 +70,6 @@ const StFooterMain = styled.ul`
   left: 50%;
   transform: translateX(-50%);
   cursor: pointer;
+`;
 
 export default Footer;
