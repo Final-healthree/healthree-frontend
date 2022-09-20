@@ -1,30 +1,21 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { api } from "../../shared/api";
+// import { api } from "../../shared/api";
+import serverAxios from "../../components/axios/server.axios";
 
-// export const __addCertification = createAsyncThunk(
-//   "post/CERTIFICATION",
-//   async (payload) => {
-//     const response = await api.post(`/api/main/video/${payload.goalnumber}`, payload.formdata);
-//     return response.data;
-//   }
-// );
 export const __addCertification = createAsyncThunk(
   "post/CERTIFICATION",
   async (payload) => {
-    const response = await api.post(`/api/main/video/1`, payload.formdata);
+    const response = await api.post(`/api/main/video/${payload.number}`, payload.formdata);
     return response.data;
   }
 );
 
-
 const certificationSlice = createSlice({
   name: "certification",
-  initialState:{
+  initialState: {
     list: [],
   },
-  reducers: {
-
-  },
+  reducers: {},
 
   extraReducers: (builder) => {
     builder
@@ -38,8 +29,7 @@ const certificationSlice = createSlice({
       })
       .addCase(__addCertification.pending, (state, action) => {
         state.loading = true;
-      })
-
+      });
   },
 });
 
