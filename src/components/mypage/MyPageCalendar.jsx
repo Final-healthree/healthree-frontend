@@ -5,6 +5,10 @@ import styled from "styled-components";
 import stamp from "../../assets/myCalendar/stamp.svg";
 import serverAxios from "../axios/server.axios";
 
+import { DayPicker } from "react-day-picker";
+import "react-day-picker/dist/style.css";
+import ko from "date-fns/locale/ko";
+
 function MyPageCalendar() {
   const [dates, setDates] = useState([]);
   const date1 = [];
@@ -39,9 +43,53 @@ function MyPageCalendar() {
   const completeB = date3.filter((day, inx) => inx % 3 === 1);
   const completeC = date3.filter((day, inx) => inx % 3 === 2);
 
-  return <Stcalendar />;
+  return (
+    <Container>
+      <style>{css}</style>
+      <DayPicker showOutsideDays locale={ko} />
+    </Container>
+  );
 }
 export default MyPageCalendar;
+
+const css = `
+  .rdp {
+    --rdp-cell-size: 46px;
+    --rdp-accent-color: #70CCA6;
+    --rdp-outline: none;
+  }
+  .rdp-day_outside {
+    color: #DADADA;
+  }
+
+  .rdp-caption {
+    width: 322px;
+    height: 81px;
+
+    background: #2C8D65;
+  }
+
+  .rdp-caption_label{
+    color : #fff
+  }
+
+  .rdp-head_row,
+  .rdp-head,
+  .rdp-head_cell {
+    background: #70CCA6;
+    margin : 0;
+    color : #fff;
+  }
+
+  .DayPicker-Day--monday {
+    color: #00bcd4;
+  }
+
+
+`;
+
+const Container = styled.div``;
+
 const Stcalendar = styled.div`
   padding-top: 23px;
 `;

@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-
+import CommunityMain from "../components/community/CommunityMain"
 
 const Community = () => {
   return (
     <StCommunity>
-      커뮤니티
+    <CommunityMain/>
     </StCommunity>
   )
 }
