@@ -13,8 +13,8 @@ import Layout from "../components/Layout";
 const Router = () => {
   return (
     <BrowserRouter>
-      <Header />
       <Layout>
+      <Header />
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/detail/" element={<Detail />} />
@@ -23,8 +23,8 @@ const Router = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/mypage" element={<Mypage />} />
         </Routes>
-      </Layout >
       <Footer />
+      </Layout >
     </BrowserRouter>
   );
 };

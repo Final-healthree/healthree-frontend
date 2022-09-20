@@ -14,6 +14,11 @@ const Footer = () => {
   const [isListHoverCommunity, setIsListHoverCommunity] = useState(false);
   const [isListHoverMypage, setIsListHoverMypage] = useState(false);
   const [show, setShow] = useState(false);
+  const green = () => {
+    setShow(true);
+  };
+  
+
   //로그인 페이지 푸터 숨기기
   if (window.location.pathname === '/login') return null;
   return (
@@ -23,7 +28,7 @@ const Footer = () => {
         onMouseOver={() => setIsListHoverMain(true)}
         onMouseOut={() => setIsListHoverMain(false)}
         onClick={() => {
-          setShow(true)
+
           navigate("/");
         }}
       >
@@ -53,24 +58,23 @@ const Footer = () => {
   );
 };
 
+export default Footer;
 
 const StFooterMain = styled.ul`
   min-width: 360px;
   max-width: 375px;
   display: flex;
+  position: fixed;
+  bottom: 0;
   list-style: none;
   flex: 0 0 auto;
   padding: 0px 1em 0;
   justify-content: space-around;
-  background-color: #fff;
   box-shadow: 0 -7px 5px -5px #9c939376;
-  position: absolute;
-  bottom: 0;
   //중앙 정렬
   left: 50%;
   transform: translateX(-50%);
   cursor: pointer;
   `;
 
-export default Footer;
 
