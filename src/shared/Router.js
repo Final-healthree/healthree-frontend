@@ -26,8 +26,8 @@ const Router = () => {
 
   return (
     <BrowserRouter>
-      <Layout>
       <Header />
+      <Layout>
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/main" element={<Main />} />
@@ -36,8 +36,8 @@ const Router = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/mypage" element={<Mypage />} />
         </Routes>
-      <Footer />
       </Layout >
+      <Footer />
     </BrowserRouter>
   );
 };
