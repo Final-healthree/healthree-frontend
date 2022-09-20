@@ -1,11 +1,17 @@
 import React from "react";
-import MainModal from "../components/main/MainModal"
+import styled from "styled-components";
+
+
 const Community = () => {
   return (
-    <div>
-      <MainModal/>
-    </div>
+    <StCommunity>
+      커뮤니티
+    </StCommunity>
   )
 }
 
 export default Community;
+const StCommunity = styled.div`
+height: 10000px;
+background: linear-gradient(to top, #fc257e, #fcdf7e);
+`

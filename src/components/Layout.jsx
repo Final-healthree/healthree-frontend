@@ -6,11 +6,13 @@ const Layout = (props) => {
 };
 
 const StLayout = styled.div`
+  
   min-width: 360px;
-
   max-width: 375px;
-  height: 100vh;
+  padding-top: 70px;
+  height: caret-color(100vh - 70px);
   max-height: calc(100vh - 90px - 70px);
+  left: 30%;
 
   overflow-y: scroll; //스크롤 달아줌, 부모크기 고정      +)hidden 짤림
   &::-webkit-scrollbar {
@@ -23,11 +25,9 @@ const StLayout = styled.div`
     background: #dad4d4e0;
     height: 20%;
   }
-
-
-  margin: 0 auto;
+  
   background-color: #fff;
-  position: relative;
+  position: fixed;
 `;
 
 export default Layout;
