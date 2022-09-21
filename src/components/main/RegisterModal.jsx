@@ -5,9 +5,6 @@ import upload from "../../assets/main/upload.png";
 import { useDispatch, useSelector } from "react-redux";
 import { __addCertification } from "../../redux/modules/certificationSlice";
 import { useNavigate } from "react-router-dom";
-import { RdxVideo, Overlay, Controls } from 'react-html5-video-editor';
-import VideoPlayer from "./VideoPlayer";
-// import "node_modules/video-react/dist/video-react.css";
 import VideoInput from "./VideoInput";
 
 const RegisterModal = (props) => {
@@ -17,31 +14,11 @@ const RegisterModal = (props) => {
   const [attachment, setAttachment] = useState("");
   const fileInput = useRef(null);
   const [goalnumber, setGoalNumber] = useState(); 
-  const getMainGoal = useSelector((state) => state.goal.list.result);
-  const FirstDay = useSelector((state) => state.goal.list.result.day1);
-  const SecondDay = useSelector((state) => state.goal.list.result.day2);
-  const ThirdDay = useSelector((state) => state.goal.list.result.day3);
+  // const getMainGoal = useSelector((state) => state.goal.list.result);
+  // const FirstDay = useSelector((state) => state.goal.list.result.day1);
+  // const SecondDay = useSelector((state) => state.goal.list.result.day2);
+  // const ThirdDay = useSelector((state) => state.goal.list.result.day3);
   
-  // const option =  {
-  //   autoPlay: false,
-  //   loop: false,
-  //   controls: true,
-  //   volume:	1.0,
-  //   preload: "auto",
-  //   cropEnabled: true,
-  // }
-  // const VideoEditor = (props) => {
-  //   return (
-  //     <RdxVideo {...option} autoPlay loop muted poster="../../assets/main/ThumnailReady.png">
-  //       <Overlay />
-  //       <Controls />
-  //       <source src="../../assets/main/1sevideo.mp4" type="video/mp4" />
-  //     </RdxVideo>
-  //     // document.getElementById('root')
-  //   )
-  // }
-
-
 
   useEffect(() => {
     setGoalNumber(props.number);
@@ -63,16 +40,6 @@ const RegisterModal = (props) => {
     };
   }
 
-  // const addVideo = () => {
-  //   const formData = new FormData();
-  //   formData.append("video", fileInput.current.files[0]);
-  //   dispatch(__addCertification({
-  //     formData,
-  //     goalnumber
-  //   }));
-  //   // navigate("/", {replace: true});
-  //   navigate("/");
-  // }
   const addVideo = () => {
     const formData = new FormData();
     formData.append("video", fileInput.current.files[0]);
@@ -84,65 +51,40 @@ const RegisterModal = (props) => {
     navigate("/");
   }
 
-  const getDay = (e) => {
-      if (e === 1){
-        return FirstDay.slice(0,10);
-      }
-      else if (e === 2){
-        return SecondDay.slice(0,10);
-      } 
-      else if (e === 3) {
-        return ThirdDay.slice(0,10);
-      }
-      
-    
-  }
+  // const getDay = (e) => {
+  //     if (e === 1){
+  //       return FirstDay.slice(0,10);
+  //     }
+  //     else if (e === 2){
+  //       return SecondDay.slice(0,10);
+  //     } 
+  //     else if (e === 3) {
+  //       return ThirdDay.slice(0,10);
+  //     }     
+  // }
 
   return (
-    // <StRegisterModalLayout>
-    <StRegisterModalContainer>
-      <StTitleContainer>
-        <span className="goalTitle">{getMainGoal?.goal}</span>
-        {/* <span>{goalnumber === 1 ? FirstDay : SecondDay}</span> */}
-        <span className="goalDate">{getDay(goalnumber)}</span>
-      </StTitleContainer>
-      <StVideoRegisterContainer>
-        {/* <input
-          id="file-input"
-          type="file"
-          accept="video/*"
-          name="video"
-          ref={fileInput}
-          onChange={selectVideo}
-          style={{ display: "none" }}
-        />
-        <div className="imgDiv">
-          <img src={attachment ? attachment : Thumnail} alt=""/>
-        </div>
-
-        <button>
-          <label htmlFor="file-input">
-            <img className="uploadImg" src={upload} alt="" />
-            &nbsp;업로드
-          </label>
-        </button> */}
-      </StVideoRegisterContainer>
-      <VideoInput width={400} height={300} number={goalnumber}/>
-      {/* <VideoEditor /> */}
-      {/* <VideoPlayer/> */}
-      <StButtonContainer>
-        {/* <button onClick={addVideo}>확인</button> */}
-      </StButtonContainer>
-    </StRegisterModalContainer>
-    // {/* </StRegisterModalLayout> */}
+    //<StRegisterModalLayout>
+      <StRegisterModalContainer>
+        <StTitleContainer>
+          {/* <span className="goalTitle">{getMainGoal?.goal}</span> */}
+          {/* <span>{goalnumber === 1 ? FirstDay : SecondDay}</span> */}
+          {/* <span className="goalDate">{getDay(goalnumber)}</span> */}
+        </StTitleContainer>
+        <VideoInput width={400} height={300} number={goalnumber}/>
+        <StButtonContainer>
+          {/* <button onClick={addVideo}>확인</button> */}
+        </StButtonContainer>
+      </StRegisterModalContainer>
+    //</StRegisterModalLayout>
   )
 }
 
 const StRegisterModalLayout = styled.div`
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 350px;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.4);
     display: flex;
@@ -153,9 +95,9 @@ const StRegisterModalLayout = styled.div`
 const StRegisterModalContainer = styled.div`
   position: absolute;
   top: 0;
+  left: 0;
   width: 350px;
   height: 500px;
-  /* background-color: red; */
   margin-top: 50px;
   background-color: rgb(255, 255, 255);
   border-radius: 2px;
@@ -177,48 +119,48 @@ const StTitleContainer = styled.div`
 
 `;
 
-const StVideoRegisterContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-flow: column;
-  width: max-content;
-  margin: 0 auto;
+// const StVideoRegisterContainer = styled.div`
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   flex-flow: column;
+//   width: max-content;
+//   margin: 0 auto;
 
-  .imgDiv {
-    width: 234px;
-    height: 234px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* background-color: white; */
+//   .imgDiv {
+//     width: 234px;
+//     height: 234px;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     /* background-color: white; */
 
-    img {
-    width: 234px;
-    height: 234px;
-    object-fit: fill;
-  }
-  }
+//     img {
+//     width: 234px;
+//     height: 234px;
+//     object-fit: fill;
+//   }
+//   }
 
-  button {
-    width: 72px;
-    height: 32px;
-    align-self: flex-end;
-    position: relative;
-    right: 12px;
-    margin-top: 5px;
-    label {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-    }
-  }
+//   button {
+//     width: 72px;
+//     height: 32px;
+//     align-self: flex-end;
+//     position: relative;
+//     right: 12px;
+//     margin-top: 5px;
+//     label {
+//       display: flex;
+//       justify-content: center;
+//       align-items: center;
+//       cursor: pointer;
+//     }
+//   }
   
-  .uploadImg {
-    transform: translate(-1px, -1px);
-  }
-`;
+//   .uploadImg {
+//     transform: translate(-1px, -1px);
+//   }
+// `;
 
 const StButtonContainer = styled.div`
   margin-top: 25px;

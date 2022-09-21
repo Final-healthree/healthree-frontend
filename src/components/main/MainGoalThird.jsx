@@ -88,11 +88,11 @@ const StTitleContainer  = styled.div`
   padding: 0 25px;
   width: 200px;
 
-  p {
+  & > p {
     font-weight: 600;
   }
 
-  .date {
+  & > .date {
     font-weight: 300;
   }
 
@@ -102,11 +102,10 @@ const StButtonContainer = styled.div`
   display: flex;
   justify-content: center;
 
-  button {
+  & > button {
     width: 95%;
     height: 52px;
     background: #70CCA6;  
-    /* color: white; */
     cursor: pointer;
     border: none;
     border-radius: 2px;

@@ -49,8 +49,8 @@ const MainGoalFirst = (props) => {
         <img src= {stamp} alt=""/>
         } */}
       <StTitleContainer>
-        <p>{getMainGoal?.goal}</p>
-        <p className="date">{getMainGoal?.day1.slice(0,10)}</p>
+        {/* <p>{getMainGoal?.goal}</p> */}
+        {/* <p className="date">{getMainGoal?.day1.slice(0,10)}</p> */}
       </StTitleContainer>
       </StMainGoalTextContainer>
       <StButtonContainer>
@@ -92,12 +92,12 @@ const StMainGoalTextContainer = styled.div`
   flex-flow: column;
   position : relative;
   
-  .isGoal {
+  & > .isGoal {
     font-size: 70px;
     margin-bottom: 10px;
   }
 
-  .successGoal {
+  & > .successGoal {
     font-size: 70px;
     margin-bottom: 10px;
     color: #A0A0A0;
@@ -114,11 +114,11 @@ const StTitleContainer  = styled.div`
   padding: 0 25px;
   width: 200px;
 
-  p {
+  & > p {
     font-weight: 600;
   }
 
-  .date {
+  & > .date {
     font-weight: 300;
   }
 
@@ -128,11 +128,10 @@ const StButtonContainer = styled.div`
   display: flex;
   justify-content: center;
 
-  button {
+  & > button {
     width: 95%;
     height: 52px;
     background: #70CCA6;  
-    /* color: white; */
     cursor: pointer;
     border: none;
     border-radius: 2px;

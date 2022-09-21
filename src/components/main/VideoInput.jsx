@@ -131,14 +131,16 @@ const StVideoRegisterContainer = styled.div`
   }
   }
 
-  button {
+  & > button {
     width: 72px;
     height: 32px;
     align-self: flex-end;
     position: relative;
     right: 12px;
     margin-top: 5px;
-
+    background: #70CCA6;
+    border: none;
+    border-radius: 2px;  
   }
 
   .uploadImg {
@@ -153,9 +155,12 @@ const StButtonContainer = styled.div`
   align-items: center;
 
   & > button {
-    /* width: 220px;
-    height: 45px; */
-
+    width: 95%;
+    height: 52px;
+    background: #70CCA6;  
+    cursor: pointer;
+    border: none;
+    border-radius: 2px;
   }
 
 `;
