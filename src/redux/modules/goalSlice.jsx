@@ -4,8 +4,13 @@ import { api } from "../../shared/api";
 export const __loadMainGoal = createAsyncThunk(
   "user/MAINGOAL",
   async () => {
-    const response = await api.get("/api/main/Goal_day");
-    return response.data;
+    const response = await api.get("/api/goals/progress")
+    .then(()=>{
+      return response.data;
+    })
+    // .catch((err)=>{
+    //   console.log(err)
+    // })
   }
 );
 

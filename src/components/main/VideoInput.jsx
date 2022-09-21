@@ -13,6 +13,7 @@ export default function VideoInput(props) {
   const inputRef = useRef();
   const dispatch = useDispatch();
   const [source, setSource] = useState();
+  const [state, setState] = useState();
   const navigate = useNavigate();
 
 
@@ -20,11 +21,13 @@ export default function VideoInput(props) {
     const file = event.target.files[0];
     const url = URL.createObjectURL(file);
     setSource(url);
+    setState(file);
   };
 
   const addVideo = () => {
     const formData = new FormData();
-    formData.append("video", source);
+    formData?.append('video', state);
+    console.log(state);
     dispatch(__addCertification({
       formData,
       number
