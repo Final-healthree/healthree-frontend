@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 //svg 이미지
-import stamp from "../../assets/myCalendar/stamp.svg";
 import serverAxios from "../axios/server.axios";
 
 import { DayPicker } from "react-day-picker";
@@ -10,7 +9,64 @@ import "react-day-picker/dist/style.css";
 import ko from "date-fns/locale/ko";
 
 function MyPageCalendar() {
-  const [dates, setDates] = useState([]);
+  const data = [
+    {
+      goal_id: 38,
+      date: ["2022-09-03 09:00:00", "2022-09-04 09:00:00"],
+    },
+    {
+      goal_id: 89,
+      date: ["2022-08-01 09:00:00", "2022-08-02 09:00:00"],
+    },
+    {
+      goal_id: 90,
+      date: ["2022-08-04 09:00:00", "2022-08-05 09:00:00"],
+    },
+    {
+      goal_id: 91,
+      date: ["2022-08-07 09:00:00"],
+    },
+    {
+      goal_id: 92,
+      date: [
+        "2022-08-10 09:00:00",
+        "2022-08-11 09:00:00",
+        "2022-08-12 09:00:00",
+      ],
+    },
+    {
+      goal_id: 93,
+      date: [
+        "2022-08-13 09:00:00",
+        "2022-08-14 09:00:00",
+        "2022-08-15 09:00:00",
+      ],
+    },
+    {
+      goal_id: 94,
+      date: [
+        "2022-08-16 09:00:00",
+        "2022-08-17 09:00:00",
+        "2022-08-18 09:00:00",
+      ],
+    },
+    {
+      goal_id: 95,
+      date: [
+        "2022-08-19 09:00:00",
+        "2022-08-20 09:00:00",
+        "2022-08-21 09:00:00",
+      ],
+    },
+    {
+      goal_id: 108,
+      date: [
+        "2022-09-14 09:00:00",
+        "2022-09-15 09:00:00",
+        "2022-09-16 09:00:00",
+      ],
+    },
+  ];
   const date1 = [];
   const date2 = [];
   const date3 = [];
@@ -27,7 +83,7 @@ function MyPageCalendar() {
   //   getDates();
   // }, []);
 
-  dates.map((item) => {
+  data.map((item) => {
     if (item.date.length === 3) {
       date3.push(...item.date);
     } else if (item.date.length === 2) {
@@ -43,10 +99,25 @@ function MyPageCalendar() {
   const completeB = date3.filter((day, inx) => inx % 3 === 1);
   const completeC = date3.filter((day, inx) => inx % 3 === 2);
 
+  const bookedDays = [new Date(2022, 8, 8), new Date(2022, 8, 9)];
+  const bookedStyle = { border: "2px solid currentColor" };
+
+  const secondDay = [new Date("2022-09-03 09:00:00"), new Date(2022, 8, 13)];
+  const secondStyle = {
+    color: "#fff",
+    backgroundColor: "#70CCA6",
+  };
+  console.log(date2);
+  console.log(failA);
   return (
     <Container>
       <style>{css}</style>
-      <DayPicker showOutsideDays locale={ko} />
+      <DayPicker
+        showOutsideDays
+        locale={ko}
+        modifiers={{ booked: bookedDays, second: secondDay }}
+        modifiersStyles={{ booked: bookedStyle, second: secondStyle }}
+      />
     </Container>
   );
 }
@@ -99,7 +170,7 @@ const Stamp = styled.div`
   height: 25px;
   position: absolute;
   transform: translate(5px, -22px);
-  background-image: url(${stamp});
+
   background-size: cover;
   background-position: center;
   z-index: 2;
