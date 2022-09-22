@@ -9,67 +9,54 @@ import "react-day-picker/dist/style.css";
 import ko from "date-fns/locale/ko";
 
 function MyPageCalendar() {
-  const data = [
-    {
-      goal_id: 38,
-      date: ["2022-09-03 09:00:00", "2022-09-04 09:00:00"],
-    },
-    {
-      goal_id: 89,
-      date: ["2022-08-01 09:00:00", "2022-08-02 09:00:00"],
-    },
-    {
-      goal_id: 90,
-      date: ["2022-08-04 09:00:00", "2022-08-05 09:00:00"],
-    },
-    {
-      goal_id: 91,
-      date: ["2022-08-07 09:00:00"],
-    },
-    {
-      goal_id: 92,
-      date: [
-        "2022-08-10 09:00:00",
-        "2022-08-11 09:00:00",
-        "2022-08-12 09:00:00",
-      ],
-    },
-    {
-      goal_id: 93,
-      date: [
-        "2022-08-13 09:00:00",
-        "2022-08-14 09:00:00",
-        "2022-08-15 09:00:00",
-      ],
-    },
-    {
-      goal_id: 94,
-      date: [
-        "2022-08-16 09:00:00",
-        "2022-08-17 09:00:00",
-        "2022-08-18 09:00:00",
-      ],
-    },
-    {
-      goal_id: 95,
-      date: [
-        "2022-08-19 09:00:00",
-        "2022-08-20 09:00:00",
-        "2022-08-21 09:00:00",
-      ],
-    },
-    {
-      goal_id: 108,
-      date: [
-        "2022-09-14 09:00:00",
-        "2022-09-15 09:00:00",
-        "2022-09-16 09:00:00",
-      ],
-    },
-  ];
-  const date1 = [];
-  const date2 = [];
-  const date3 = [];
+  const dataList = {
+    success: [
+      {
+        goal_id: 92,
+        date: [
+          "2022-08-10 09:00:00",
+          "2022-08-11 09:00:00",
+          "2022-08-12 09:00:00",
+        ],
+      },
+      {
+        goal_id: 93,
+        date: [
+          "2022-08-13 09:00:00",
+          "2022-08-14 09:00:00",
+          "2022-08-15 09:00:00",
+        ],
+      },
+      {
+        goal_id: 94,
+        date: [
+          "2022-08-16 09:00:00",
+          "2022-08-17 09:00:00",
+          "2022-08-18 09:00:00",
+        ],
+      },
+    ],
+    fail: [
+      {
+        goal_id: 38,
+        date: ["2022-09-03 09:00:00", "2022-09-04 09:00:00"],
+      },
+      {
+        goal_id: 89,
+        date: ["2022-08-01 09:00:00", "2022-08-02 09:00:00"],
+      },
+      {
+        goal_id: 90,
+        date: ["2022-08-04 09:00:00", "2022-08-05 09:00:00"],
+      },
+      {
+        goal_id: 91,
+        date: ["2022-08-07 09:00:00"],
+      },
+    ],
+  };
+  const { getDateOption } = require("./get-date-option");
+  const { modifiers, modifiersStyles } = getDateOption(dataList.fail);
 
   // const getDates = async () => {
   //   await serverAxios
@@ -80,43 +67,19 @@ function MyPageCalendar() {
   // };
 
   // useEffect(() => {
-  //   getDates();
+  //   getDateOption(dataList.success);
   // }, []);
 
-  data.map((item) => {
-    if (item.date.length === 3) {
-      date3.push(...item.date);
-    } else if (item.date.length === 2) {
-      date2.push(...item.date);
-    } else {
-      date1.push(item.date);
-    }
-  });
+  // console.log(dataList);
 
-  const failA = date2.filter((day, inx) => inx % 2 === 0);
-  const failB = date2.filter((day, inx) => inx % 2 !== 0);
-  const completeA = date3.filter((day, inx) => inx % 3 === 0);
-  const completeB = date3.filter((day, inx) => inx % 3 === 1);
-  const completeC = date3.filter((day, inx) => inx % 3 === 2);
-
-  const bookedDays = [new Date(2022, 8, 8), new Date(2022, 8, 9)];
-  const bookedStyle = { border: "2px solid currentColor" };
-
-  const secondDay = [new Date("2022-09-03 09:00:00"), new Date(2022, 8, 13)];
-  const secondStyle = {
-    color: "#fff",
-    backgroundColor: "#70CCA6",
-  };
-  console.log(date2);
-  console.log(failA);
   return (
     <Container>
       <style>{css}</style>
       <DayPicker
-        showOutsideDays
         locale={ko}
-        modifiers={{ booked: bookedDays, second: secondDay }}
-        modifiersStyles={{ booked: bookedStyle, second: secondStyle }}
+        modifiers={modifiers}
+        modifiersStyles={modifiersStyles}
+        showOutsideDays
       />
     </Container>
   );
@@ -163,88 +126,4 @@ const Container = styled.div``;
 
 const Stcalendar = styled.div`
   padding-top: 23px;
-`;
-
-const Stamp = styled.div`
-  width: 25px;
-  height: 25px;
-  position: absolute;
-  transform: translate(5px, -22px);
-
-  background-size: cover;
-  background-position: center;
-  z-index: 2;
-`;
-
-const HilightOne = styled.div`
-  width: 33px;
-  height: 33px;
-  position: absolute;
-  transform: translate(2px, -26px);
-  border-radius: 100px 100px 100px 100px;
-  background-color: #eeae67;
-  background-size: cover;
-  background-position: center;
-  z-index: -100;
-`;
-
-const OhilightAA = styled.div`
-  width: 41px;
-  height: 33px;
-  position: absolute;
-  transform: translate(2px, -26px);
-  border-radius: 100px 0px 0px 100px;
-  background-color: #eeae67;
-  background-size: cover;
-  background-position: center;
-  z-index: -100;
-`;
-
-const OhilightBB = styled.div`
-  width: 41px;
-  height: 33px;
-  position: absolute;
-  transform: translate(-7px, -26px);
-  border-radius: 0px 100px 100px 0px;
-  background-color: #eeae67;
-
-  background-size: cover;
-  background-position: center;
-  z-index: -100;
-`;
-
-const GhilightAA = styled.div`
-  width: 41px;
-  height: 33px;
-  position: absolute;
-  transform: translate(3px, -26px);
-  border-radius: 100px 0px 0px 100px;
-  background-color: #70cca6;
-  background-size: cover;
-  background-position: center;
-  z-index: -100;
-`;
-
-const GhilightBB = styled.div`
-  width: 50px;
-  height: 33px;
-  position: absolute;
-  transform: translate(-7px, -26px);
-  border-radius: 0px 0px 0x 0px;
-  background-color: #70cca6;
-  background-size: cover;
-  background-position: center;
-  z-index: -100;
-`;
-
-const GhilightCC = styled.div`
-  width: 42px;
-  height: 33px;
-  position: absolute;
-  transform: translate(-7px, -26px);
-  border-radius: 0px 100px 100px 0px;
-  background-color: #70cca6;
-  background-size: cover;
-  background-position: center;
-  z-index: -100;
 `;
