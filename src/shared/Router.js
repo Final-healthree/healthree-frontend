@@ -4,11 +4,13 @@ import Main from "../pages/Main";
 import Login from "../pages/Login";
 import Detail from "../pages/Detail";
 import Community from "../pages/Community";
+import CommunityDetail from "../pages/CommunityDetail";
 import Register from "../pages/Register";
 import Mypage from "../pages/MyPage";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Layout from "../components/Layout";
+
 
 // import { useSelector } from "react-redux";
 // import { useEffect } from "react";
@@ -33,6 +35,7 @@ const Router = () => {
           <Route path="/main" element={<Main />} />
           <Route path="/detail/" element={<Detail />} />
           <Route path="/community" element={<Community />} />
+          <Route path="/community/detail" element={<CommunityDetail/>} />
           <Route path="/register" element={<Register />} />
           <Route path="/mypage" element={<Mypage />} />
         </Routes>
