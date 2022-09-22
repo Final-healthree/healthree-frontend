@@ -10,38 +10,48 @@ import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import ko from "date-fns/locale/ko";
 
-import { addDays, formatISO9075 } from "date-fns";
+import { addDays, format } from "date-fns";
+
+// function CustomCaption(props: CaptionProps) {
+//   // const { goToMonth, nextMonth, previousMonth } = useNavigation();
+//   return <h2>{format(props.displayMonth, "MMM yyy")}</h2>;
+// }
 
 const RegCalendar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleDayClick = (day) => {
-    console.log(range);
-    console.log(formatISO9075(new Date(day), { representation: "date" }));
     setRange({ from: day, to: addDays(day, 2) });
   };
 
   const sendDay = (e) => {
-    dispatch(register(range));
+    dispatch(
+      register({
+        start: format(range.from, "yyyy/MM/dd"),
+        last: format(range.to, "yyyy/MM/dd"),
+      })
+    );
     navigate("/register");
   };
 
   const today = new Date();
-
   const defaultSelected = {
     from: today,
     to: addDays(today, 2),
   };
   const [range, setRange] = useState(defaultSelected);
 
+  const week = [{ dayOfWeek: [0, 6] }];
+  const weekStyle = {
+    color: "red",
+  };
+
   return (
     <Container>
       <HeaderArea>
         <Title>목표를 세워보세요!</Title>
-        <Today>
-          {formatISO9075(new Date(today), { representation: "date" })}
-        </Today>
+        <Today>{format(new Date(today), "yyyy.MM.dd")}</Today>
       </HeaderArea>
 
       <CalendarArea>
@@ -53,6 +63,9 @@ const RegCalendar = () => {
           defaultMonth={today}
           selected={range} //이 범위 만큼 선택
           onDayClick={handleDayClick}
+          modifiers={{ week: week }}
+          modifiersStyles={{ week: weekStyle }}
+          disabled={[{ before: new Date() }]}
         ></DayPicker>
       </CalendarArea>
 
@@ -96,6 +109,10 @@ const css = `
 
   .DayPicker-Day--monday {
     color: #00bcd4;
+  }
+
+  .rdp-nav_button {
+    color : #fff;
   }
 
 
