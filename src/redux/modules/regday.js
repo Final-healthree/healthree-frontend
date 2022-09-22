@@ -11,8 +11,8 @@ const regSlice = createSlice({
   reducers: {
     // 리듀서 안에서 만든 함수 자체가 리듀서의 로직이자, 액션크리에이터가 된다.
     register: (state, action) => {
-      state.start = action.payload[0];
-      state.last = action.payload[1];
+      state.start = action.payload.start;
+      state.last = action.payload.last;
     },
   },
 });

@@ -18,7 +18,6 @@ const Footer = () => {
   const green = () => {
     setShow(true);
   };
-  
 
   //로그인 페이지 푸터 숨기기
   if (window.location.pathname === "/") return null;
@@ -28,9 +27,7 @@ const Footer = () => {
         onMouseOver={() => setIsListHoverMain(true)}
         onMouseOut={() => setIsListHoverMain(false)}
         onClick={() => {
-
           navigate("/main");
-
         }}
       >
         <img src={isListHoverMain ? footerMainC : footerMain} />
@@ -77,4 +74,4 @@ const StFooterMain = styled.ul`
   left: 50%;
   transform: translateX(-50%);
   cursor: pointer;
-  `;
+`;

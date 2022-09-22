@@ -11,21 +11,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Layout from "../components/Layout";
 
-
-// import { useSelector } from "react-redux";
-// import { useEffect } from "react";
-// import { useDispatch } from "react-redux";
-// import { getToken } from "../redux/modules/getToken";
-
 const Router = () => {
-  // const dispatch = useDispatch();
-  // const token = localStorage.getItem("Token");
-  // const sendToken = useSelector((state) => state.getToken);
-
-  // useEffect(() => {
-  //   dispatch(getToken(token));
-  // }, []);
-
   return (
     <BrowserRouter>
       <Header />
@@ -39,7 +25,7 @@ const Router = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/mypage" element={<Mypage />} />
         </Routes>
-      </Layout >
+      </Layout>
       <Footer />
     </BrowserRouter>
   );

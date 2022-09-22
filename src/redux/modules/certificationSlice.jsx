@@ -5,7 +5,10 @@ import serverAxios from "../../components/axios/server.axios";
 export const __addCertification = createAsyncThunk(
   "post/CERTIFICATION",
   async (payload) => {
-    const response = await api.post(`/api/main/video/${payload.number}`, payload.formdata);
+    const response = await serverAxios.post(
+      `/api/main/video/${payload.number}`,
+      payload.formdata
+    );
     return response.data;
   }
 );
