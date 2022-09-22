@@ -1,36 +1,35 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+
 import RegCalendar from "../components/register/Calendar";
-// import GoalSlider from "../components/main/GoalSlider";
-// import serverAxios from "../components/axios/server.axios";
-// import { useState } from "react";
+import GoalSlider from "../components/main/GoalSlider";
+import MyVideo from "../components/video/MyVideo";
+import serverAxios from "../components/axios/server.axios";
 
 const Main = () => {
-  // const [existGoal, setExistGoal] = useState(false);
+  const [existgoal, setExistgoal] = useState(false);
 
-  // let getToken = localStorage.getItem("Token");
-  // if (getToken === null) {
-  //   let token = new URL(window.location.href).searchParams.get("token");
-  //   localStorage.setItem("Token", token);
-  // }
+  if (window.location.href.includes("token")) {
+    const [url, token] = window.location.href.split("=");
+    localStorage.setItem("Token", token);
+  }
 
-  // const ToMainGoal = async () => {
-  //   await new Promise((resolve) => setTimeout(resolve, 10));
-  //   await serverAxios
-  //     .get(process.env.REACT_APP_REST_API_KEY + `api/main/goal_day`)
-  //     .then((res) => {
-  //       setExistGoal(res.data.success);
-  //       // console.log(res);
-  //     });
-  // };
+  const ToMainGoal = async () => {
+    await serverAxios
+      .get(process.env.REACT_APP_REST_API_KEY + `api/goals/exist`)
+      .then((res) => {
+        setExistgoal(res.data.success);
+      });
+  };
 
-  // useEffect(() => {
-  //   ToMainGoal();
-  // }, []);
+  useEffect(() => {
+    ToMainGoal();
+  }, []);
 
   return (
     <StMainContainer>
-      <RegCalendar />
+      {existgoal ? <MyVideo /> : <RegCalendar />}
     </StMainContainer>
   );
 };
