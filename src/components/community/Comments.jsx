@@ -77,12 +77,12 @@ const StComment = styled.div`
   background-color: #2b50e2;
   width: 270px;
 `;
+
 const StCommentTime = styled.div`
-width: 340px
+width: 340px;
 justify-content:flex-end;
 color: #70CCA6;
 background-color: #e22b2b;
-
 `;
 
 const StHr = styled.hr`
