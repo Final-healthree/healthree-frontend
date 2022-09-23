@@ -10,6 +10,7 @@ import Mypage from "../pages/MyPage";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Layout from "../components/Layout";
+import Rank from "../pages/Rank";
 
 const Router = () => {
   return (
@@ -24,6 +25,8 @@ const Router = () => {
           <Route path="/community/detail" element={<CommunityDetail/>} />
           <Route path="/register" element={<Register />} />
           <Route path="/mypage" element={<Mypage />} />
+          <Route path="/rank" element={<Rank />} />
+
         </Routes>
       </Layout>
       <Footer />
