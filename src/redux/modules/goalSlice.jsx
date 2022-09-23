@@ -2,15 +2,10 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 // import { api } from "../../shared/api";
 import serverAxios from "../../components/axios/server.axios";
 
-
-export const __loadMainGoal = createAsyncThunk(
-  "user/MAINGOAL",
-  async () => {
-    const response = await api.get("/api/goals/progress")
-    return response.data;
-  }
-);
-
+export const __loadMainGoal = createAsyncThunk("user/MAINGOAL", async () => {
+  const response = await serverAxios.get("/api/goals/progress");
+  return response.data;
+});
 
 const goalSlice = createSlice({
   name: "goal",
@@ -32,7 +27,7 @@ const goalSlice = createSlice({
       })
       .addCase(__loadMainGoal.pending, (state, action) => {
         state.loading = true;
-      })
+      });
   },
 });
 
