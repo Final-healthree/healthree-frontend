@@ -25,7 +25,7 @@ const MyVideo = () => {
     await serverAxios
       .get(
         process.env.REACT_APP_REST_API_KEY +
-          `api/users/my_video?pagecount=5&&page=${page}`
+          `api/videos/mine?pagecount=5&&page=${page}`
       )
       .then((res) => {
         console.log(res);
@@ -76,9 +76,9 @@ const MyVideo = () => {
               {items.length - 1 === idx ? (
                 <VideoBox ref={ref}>
                   <VideoImg onClick={showModal}>
-                    <span>{data.goal_name}</span>
                     <source src={data.final_video} type="video/mp4" />
                   </VideoImg>
+                  <p style={{ margin: "0" }}>{data.goal_name}</p>
                   <VideoDate>
                     {data.day1.slice(0, 10)} ~ {data.day3.slice(0, 10)}
                   </VideoDate>
@@ -88,7 +88,7 @@ const MyVideo = () => {
                   <VideoImg onClick={showModal}>
                     <source src={data.final_video} type="video/mp4" />
                   </VideoImg>
-                  <span>{data.goal_name}</span>
+                  <p style={{ margin: "0" }}>{data.goal_name}</p>
                   <VideoDate>
                     {data.day1.slice(0, 10)} ~ {data.day3.slice(0, 10)}
                   </VideoDate>
@@ -136,19 +136,18 @@ const EmptyP = styled.p`
   height: 36px;
   /* top: calc(50% - 36px / 2 + 123px); */
   top: 330px;
-
   display: flex;
   align-items: center;
   text-align: center;
   letter-spacing: -0.01em;
-
   color: #4b4b4b;
 `;
 
 const VideoArea = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
+  text-align: center;
+  flex-flow: wrap;
   gap: 30px;
   padding: 20px 0;
   box-sizing: border-box;
@@ -156,22 +155,23 @@ const VideoArea = styled.div`
 
 const VideoBox = styled.div`
   height: 170px;
-  width: 320px;
-
+  width: 153px;
   cursor: pointer;
 `;
 
 const VideoImg = styled.video`
   height: 150px;
-  width: 320px;
+  width: 150px;
   background-color: #4b4b4b;
-
   filter: drop-shadow(6px 6px 5px rgba(0, 0, 0, 0.12));
   mix-blend-mode: multiply;
   border-radius: 2px;
 `;
 
-const VideoDate = styled.span``;
+const VideoDate = styled.p`
+  margin: 0;
+  font-size: 12px;
+`;
 
 const LoaderWrap = styled.div`
   width: 100%;

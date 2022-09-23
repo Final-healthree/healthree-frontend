@@ -9,6 +9,7 @@ import serverAxios from "../components/axios/server.axios";
 
 const Main = () => {
   const [existgoal, setExistgoal] = useState(false);
+  console.log(existgoal);
 
   if (window.location.href.includes("token")) {
     const [url, token] = window.location.href.split("=");
