@@ -26,8 +26,6 @@ function getTargetsByDateList(dataList) {
     }
   }
 
-  console.log(squareTarget);
-
   return {
     circleTarget,
     leftCircleTarget,
@@ -36,6 +34,4 @@ function getTargetsByDateList(dataList) {
   };
 }
 
-module.exports = {
-  getTargetsByDateList,
-};
+export default getTargetsByDateList;
