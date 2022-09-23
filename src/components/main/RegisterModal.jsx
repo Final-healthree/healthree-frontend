@@ -9,13 +9,14 @@ import VideoInput from "./VideoInput";
 
 const RegisterModal = (props) => {
   const { modal } = props;
-
   const [state, setState] = useState();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [attachment, setAttachment] = useState("");
+  const [attachment, setAttachment] = useState(false);
+  const [newvideo, setNewVideo] = useState("");
   const fileInput = useRef(null);
-  const [goalnumber, setGoalNumber] = useState(); 
+  // const [goalnumber, setGoalNumber] = useState();
+  const [goalnumber, setGoalNumber] = useState(props.number);
   const getMainGoal = useSelector((state) => state.goal.list.result);
   const FirstDay = useSelector((state) => state.goal.list.result.day1.date);
   const SecondDay = useSelector((state) => state.goal.list.result.day2.date);
@@ -42,16 +43,19 @@ const RegisterModal = (props) => {
     };
   }
 
+
   const addVideo = () => {
     const formData = new FormData();
-    formData.append("video", fileInput.current.files[0]);
-    dispatch(__addCertification({
-      formData,
-      goalnumber
-    }));
+    formData.append("video", fileInput.current);
+    dispatch(
+      __addCertification({
+        formData,
+        goalnumber,
+      })
+    );
     // navigate("/", {replace: true});
     navigate("/");
-  }
+  };
 
   const getDay = (e) => {
       if (e === 1){
@@ -123,6 +127,7 @@ const StTitleContainer = styled.div`
 
 `;
 
+
 // const StVideoRegisterContainer = styled.div`
 //   display: flex;
 //   justify-content: center;
@@ -165,6 +170,7 @@ const StTitleContainer = styled.div`
 //     transform: translate(-1px, -1px);
 //   }
 // `;
+
 
 const StButtonContainer = styled.div`
   margin-top: 25px;

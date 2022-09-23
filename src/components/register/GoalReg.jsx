@@ -4,20 +4,15 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 import serverAxios from "../axios/server.axios";
 
+import { addDays, format } from "date-fns";
+
 const GoalReg = () => {
   const regDay = useSelector((state) => state.registerday);
-  console.log(regDay);
-  const year = regDay.start.getFullYear();
-  const month = regDay.start.getMonth() + 1;
-  const Month = leftPad(month);
-  const Day = leftPad(regDay.start.getDate() + 1);
-
-  console.log(typeof month);
 
   const [info, setInfo] = useState({
-    day1: toStringByFormatting(regDay.start),
-    day2: `${year}-${Month}-${Day}`,
-    day3: toStringByFormatting(regDay.last),
+    day1: format(new Date(regDay.start), "yyyy-MM-dd"),
+    day2: format(addDays(new Date(regDay.start), 1), "yyyy-MM-dd"),
+    day3: format(new Date(regDay.last), "yyyy-MM-dd"),
     goal_name: "",
   });
 
@@ -32,25 +27,9 @@ const GoalReg = () => {
     value.length > 0 ? setConfirm(true) : setConfirm(false);
   };
 
-  function leftPad(value) {
-    if (value >= 10) {
-      return value;
-    }
-
-    return `0${value}`;
-  }
-
-  function toStringByFormatting(source, delimiter = "-") {
-    const year = source.getFullYear();
-    const month = leftPad(source.getMonth() + 1);
-    const day = leftPad(source.getDate());
-
-    return [year, month, day].join(delimiter);
-  }
-
   const submit = async () => {
     await serverAxios
-      .post(process.env.REACT_APP_REST_API_KEY + "api/main/register", info)
+      .post(process.env.REACT_APP_REST_API_KEY + "api/goals/register", info)
       .then((res) => {
         alert(res.data.messgae);
         console.log(res);
@@ -65,8 +44,6 @@ const GoalReg = () => {
         }
       });
   };
-
-  console.log(info);
 
   return (
     <Container>
@@ -87,8 +64,8 @@ const GoalReg = () => {
 
         <Label>목표 기간</Label>
         <Period>
-          {toStringByFormatting(regDay.start, "/")} ~ {""}
-          {toStringByFormatting(regDay.last, "/")}
+          {regDay.start} ~ {""}
+          {regDay.last}
         </Period>
       </GoalArea>
 

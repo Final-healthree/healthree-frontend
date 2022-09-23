@@ -4,6 +4,7 @@ import Main from "../pages/Main";
 import Login from "../pages/Login";
 import Detail from "../pages/Detail";
 import Community from "../pages/Community";
+import CommunityDetail from "../pages/CommunityDetail";
 import Register from "../pages/Register";
 import Mypage from "../pages/MyPage";
 import Header from "../components/Header";
@@ -16,14 +17,15 @@ const Router = () => {
       <Header />
       <Layout>
         <Routes>
-          <Route path="/" element={<Main />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/main" element={<Main />} />
           <Route path="/detail/" element={<Detail />} />
-          <Route path="/login" element={<Login />} />
           <Route path="/community" element={<Community />} />
+          <Route path="/community/detail" element={<CommunityDetail/>} />
           <Route path="/register" element={<Register />} />
           <Route path="/mypage" element={<Mypage />} />
         </Routes>
-      </Layout >
+      </Layout>
       <Footer />
     </BrowserRouter>
   );

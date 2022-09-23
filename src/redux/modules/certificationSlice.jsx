@@ -19,15 +19,12 @@ export const __addCertification = createAsyncThunk(
   }
 );
 
-
 const certificationSlice = createSlice({
   name: "certification",
-  initialState:{
+  initialState: {
     list: [],
   },
-  reducers: {
-
-  },
+  reducers: {},
 
   extraReducers: (builder) => {
     builder
@@ -41,8 +38,7 @@ const certificationSlice = createSlice({
       })
       .addCase(__addCertification.pending, (state, action) => {
         state.loading = true;
-      })
-
+      });
   },
 });
 

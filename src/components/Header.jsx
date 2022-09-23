@@ -12,14 +12,12 @@ const Header = () => {
 
   return (
     <StHeader>
-      <img src={back} onClick={() => navigate('/')} style = {{width:'30px'}} />
+      {/* <img src={back} onclick={() => navigate('/login')} style = {{width:'30px'}}/> */}
       <img src={headerLogo} />
     </StHeader>
-  );
+  );  
 };
-
 export default Header;
-
 const StHeader = styled.div`
   min-width: 360px;
   max-width: 375px;
@@ -30,6 +28,4 @@ const StHeader = styled.div`
   /* justify-content: flex-start; */
   left: 50%;
   transform: translateX(-50%);
-  cursor: pointer;
-
 `;

@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { api } from "../../shared/api";
+// import { api } from "../../shared/api";
+import serverAxios from "../../components/axios/server.axios";
+
 
 export const __loadMainGoal = createAsyncThunk(
   "user/MAINGOAL",
@@ -9,14 +11,13 @@ export const __loadMainGoal = createAsyncThunk(
   }
 );
 
+
 const goalSlice = createSlice({
   name: "goal",
-  initialState:{
+  initialState: {
     list: [],
   },
-  reducers: {
-
-  },
+  reducers: {},
 
   extraReducers: (builder) => {
     builder
@@ -32,7 +33,6 @@ const goalSlice = createSlice({
       .addCase(__loadMainGoal.pending, (state, action) => {
         state.loading = true;
       })
-
   },
 });
 
