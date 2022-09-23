@@ -5,13 +5,9 @@ const serverAxios = axios.create({
 });
 /** @param { Request } req */
 const requestHandler = async (req) => {
-  //   const accessToken = getToken().accessToken;
-  //   request.headers.Authorization = `Bearer ${accessToken}`;
   const Token = localStorage.getItem("Token");
-  // console.log(Token);
-
   const isMyTokenExpired = isExpired(Token);
- 
+
   if (isMyTokenExpired === true) {
     //True인 경우
     // 1. 토큰이 만료된 경우
