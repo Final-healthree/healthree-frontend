@@ -1,14 +1,13 @@
-function getDateOption(dataList) {
-  const { getTargetsByDateList } = require("./hi");
-  const { getCalenderCss } = require("./hello");
+import getTargetsByDateList from "./hi";
+import getCalenderCss from "./hello";
 
+function getDateOption(props) {
+  console.log(props);
   const failCssList = getCalenderCss("fail");
-  const failTargetList = getTargetsByDateList(dataList);
+  const failTargetList = getTargetsByDateList(props.fail);
 
   const successCssList = getCalenderCss("success");
-  const successTargetList = getTargetsByDateList(dataList);
-
-  console.log(dataList);
+  const successTargetList = getTargetsByDateList(props.success);
 
   return {
     modifiers: {
@@ -16,10 +15,7 @@ function getDateOption(dataList) {
       "circle-on-fail": failTargetList.circleTarget,
       "left-circle-on-fail": failTargetList.leftCircleTarget,
       "right-circle-on-fail": failTargetList.rightCircleTarget,
-      "square-on-fail": failTargetList.squareTarget,
-
       // 성공
-      "circle-on-success": successTargetList.circleTarget,
       "left-circle-on-success": successTargetList.leftCircleTarget,
       "right-circle-on-success": successTargetList.rightCircleTarget,
       "square-on-success": successTargetList.squareTarget,
@@ -29,9 +25,7 @@ function getDateOption(dataList) {
       "circle-on-fail": failCssList.circleCss,
       "left-circle-on-fail": failCssList.leftCircleCss,
       "right-circle-on-fail": failCssList.rightCircleCss,
-      "square-on-fail": failCssList.squareCss,
       // 성공
-      "circle-on-success": successCssList.circleCss,
       "left-circle-on-success": successCssList.leftCircleCss,
       "right-circle-on-success": successCssList.rightCircleCss,
       "square-on-success": successCssList.squareCss,
@@ -39,6 +33,4 @@ function getDateOption(dataList) {
   };
 }
 
-module.exports = {
-  getDateOption,
-};
+export default getDateOption;
