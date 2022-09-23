@@ -5,12 +5,7 @@ export const __loadMainGoal = createAsyncThunk(
   "user/MAINGOAL",
   async () => {
     const response = await api.get("/api/goals/progress")
-    .then(()=>{
-      return response.data;
-    })
-    // .catch((err)=>{
-    //   console.log(err)
-    // })
+    return response.data;
   }
 );
 
@@ -30,6 +25,12 @@ const goalSlice = createSlice({
         // state.loading = false;
         state.list = action.payload;
         // state.session = true;
+      })
+      .addCase(__loadMainGoal.rejected, (state, action) => {
+        state.loading = false;
+      })
+      .addCase(__loadMainGoal.pending, (state, action) => {
+        state.loading = true;
       })
 
   },

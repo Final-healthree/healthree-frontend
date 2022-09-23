@@ -8,16 +8,18 @@ import { useNavigate } from "react-router-dom";
 import VideoInput from "./VideoInput";
 
 const RegisterModal = (props) => {
+  const { modal } = props;
+
   const [state, setState] = useState();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [attachment, setAttachment] = useState("");
   const fileInput = useRef(null);
   const [goalnumber, setGoalNumber] = useState(); 
-  // const getMainGoal = useSelector((state) => state.goal.list.result);
-  // const FirstDay = useSelector((state) => state.goal.list.result.day1);
-  // const SecondDay = useSelector((state) => state.goal.list.result.day2);
-  // const ThirdDay = useSelector((state) => state.goal.list.result.day3);
+  const getMainGoal = useSelector((state) => state.goal.list.result);
+  const FirstDay = useSelector((state) => state.goal.list.result.day1.date);
+  const SecondDay = useSelector((state) => state.goal.list.result.day2.date);
+  const ThirdDay = useSelector((state) => state.goal.list.result.day3);
   
 
   useEffect(() => {
@@ -51,27 +53,27 @@ const RegisterModal = (props) => {
     navigate("/");
   }
 
-  // const getDay = (e) => {
-  //     if (e === 1){
-  //       return FirstDay.slice(0,10);
-  //     }
-  //     else if (e === 2){
-  //       return SecondDay.slice(0,10);
-  //     } 
-  //     else if (e === 3) {
-  //       return ThirdDay.slice(0,10);
-  //     }     
-  // }
+  const getDay = (e) => {
+      if (e === 1){
+        return FirstDay.slice(0,10);
+      }
+      else if (e === 2){
+        return SecondDay.slice(0,10);
+      } 
+      else if (e === 3) {
+        return ThirdDay.slice(0,10);
+      }     
+  }
 
   return (
-    //<StRegisterModalLayout>
+    // <StRegisterModalLayout>
       <StRegisterModalContainer>
         <StTitleContainer>
-          {/* <span className="goalTitle">{getMainGoal?.goal}</span> */}
+          <span className="goalTitle">{getMainGoal?.goal}</span>
           {/* <span>{goalnumber === 1 ? FirstDay : SecondDay}</span> */}
-          {/* <span className="goalDate">{getDay(goalnumber)}</span> */}
+          <span className="goalDate">{getDay(goalnumber)}</span>
         </StTitleContainer>
-        <VideoInput width={400} height={300} number={goalnumber}/>
+        <VideoInput width={400} height={300} number={goalnumber} modal={modal}/>
         <StButtonContainer>
           {/* <button onClick={addVideo}>확인</button> */}
         </StButtonContainer>
@@ -81,27 +83,29 @@ const RegisterModal = (props) => {
 }
 
 const StRegisterModalLayout = styled.div`
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 350px;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: absolute;
+  top: 0;
+  width: 350px;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const StRegisterModalContainer = styled.div`
   position: absolute;
   top: 0;
-  left: 0;
   width: 350px;
   height: 500px;
   margin-top: 50px;
   background-color: rgb(255, 255, 255);
   border-radius: 2px;
-  box-shadow: 2px 4px 6px 2px rgba(34, 36, 38, 0.15);
+  box-shadow: 2px 4px 6px 2px rgba(34, 36, 38, 0.15); 
+`;
+
+const StModalCloseBtn = styled.button`
+  
 `;
 
 const StTitleContainer = styled.div`

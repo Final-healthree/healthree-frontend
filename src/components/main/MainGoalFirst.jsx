@@ -9,16 +9,13 @@ import stamp from "../../assets/main/stamp.png"
 const MainGoalFirst = (props) => {
   const [modalopen, setModalOpen] = useState(false);
   const dispatch = useDispatch();
-  const [goalnumber, setGoalNumber] = useState(); 
   const getMainGoal = useSelector((state) => state.goal.list.result);
-  const videoUploadCheck = useSelector((state) => state.certification.list);
+  // const videoUploadCheck = useSelector((state) => state.certification.list.success);
+  const videoUploadCheck = useSelector((state) => state.goal.list.result?.day1);
+  const videoUploadCheck1 = useSelector((state) => state);
 
-  console.log(videoUploadCheck)
-  
-  // useEffect(() => {
-  //   setGoalNumber(props.number);
-  // }, []);
-  
+  // console.log(videoUploadCheck)
+  console.log(videoUploadCheck1)
 
   useEffect(() => {
     dispatch(__loadMainGoal());
@@ -28,51 +25,51 @@ const MainGoalFirst = (props) => {
     <StMainLayout>
       <StGuideTextContainer>
         <h1>1/3</h1>
+        {/* <span>오늘 목표 인증을 아직 안하셨군요!</span><br />
+        <span>목표를 인증하고,</span><br />
+        <span>작심 1일을 시작하세요!</span> */}
+        {videoUploadCheck?.uploaded === false ?
+        <>
         <span>오늘 목표 인증을 아직 안하셨군요!</span><br />
         <span>목표를 인증하고,</span><br />
         <span>작심 1일을 시작하세요!</span>
-        {/* {videoUploadCheck === false? 
-        <span>오늘 목표 인증을 아직 안하셨군요!</span><br />
-        <span>목표를 인증하고,</span><br />
-        <span>작심 1일을 시작하세요!</span>
+        </> 
         :
+        <>
         <span>오늘 목표를 완성하셨네요!</span><br />
         <span>훌룽해요!</span>
-        }  */}
+        </>
+        } 
       </StGuideTextContainer>
       <StMainGoalTextContainer>
-        <h1 className="isGoal">작심 1일</h1>
-        {/* {videoUploadCheck === false ?
-        <h1 className="isGoal">작심 1일</h1>
-        :
-        <h1 className="successGoal">작심 1일</h1>
-        <img src= {stamp} alt=""/>
-        } */}
+        {videoUploadCheck?.uploaded === false ?
+          <h1 className="isGoal">작심 1일</h1>
+          :
+          <>
+          <h1 className="successGoal">작심 1일</h1>
+          <img src= {stamp} alt=""/>
+          </>
+        }
       <StTitleContainer>
-        {/* <p>{getMainGoal?.goal}</p> */}
-        {/* <p className="date">{getMainGoal?.day1.slice(0,10)}</p> */}
+        <p>{getMainGoal?.goal}</p>
+        <p className="date">{getMainGoal?.day1.date.slice(0,10)}</p>
       </StTitleContainer>
       </StMainGoalTextContainer>
       <StButtonContainer>
-        <button onClick={() => {
-          setModalOpen(!modalopen);
-        }}>동영상 등록하기</button>
-        { modalopen === true ? <RegisterModal number={1}/> : null }
-        {/* <button onClick={() => {
-          {RegisterModal && (
-            <Modal closeModal={() => setModalOpen(!modalopen)}>
-              <RegisterModal />
-            </Modal>
-          )}
-        }}>동영상 등록하기</button>
-        { modalopen === true ? <RegisterModal /> : null } */}
+        {videoUploadCheck?.uploaded === false ?
+          <button onClick={() => {
+            setModalOpen(!modalopen);
+          }}>동영상 등록하기</button>
+          :
+          ""
+        }
+        { modalopen === true ? <RegisterModal number={1} modal={setModalOpen}/> : null }
       </StButtonContainer>
     </StMainLayout>
   )
 }
 
 const StMainLayout = styled.div`
-
 `;
 
 const StGuideTextContainer = styled.div`
@@ -92,12 +89,12 @@ const StMainGoalTextContainer = styled.div`
   flex-flow: column;
   position : relative;
   
-  & > .isGoal {
+  .isGoal {
     font-size: 70px;
     margin-bottom: 10px;
   }
 
-  & > .successGoal {
+  .successGoal {
     font-size: 70px;
     margin-bottom: 10px;
     color: #A0A0A0;

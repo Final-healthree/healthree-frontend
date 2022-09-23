@@ -8,7 +8,9 @@ import { useNavigate } from "react-router-dom";
 
 
 export default function VideoInput(props) {
-  const { width, height, number } = props;
+  const { width, height, number, modal } = props;
+
+  console.log(modal)
 
   const inputRef = useRef();
   const dispatch = useDispatch();
@@ -33,8 +35,12 @@ export default function VideoInput(props) {
       number
     }));
     // navigate("/", {replace: true});
-    navigate("/");
+    modal(false)
   }
+
+  // useEffect(() => {
+  //   navigate("/");
+  // }, [])
 
   const handleChoose = (event) => {
     inputRef.current.click();

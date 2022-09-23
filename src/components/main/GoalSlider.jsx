@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect } from "react";
+import { useRef } from "react";
 import styled from "styled-components";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -7,29 +7,15 @@ import Slider from "react-slick";
 import MainGoalFirst from "./MainGoalFirst";
 import MainGoalSecond from "./MainGoalSecond";
 import MainGoalThird from "./MainGoalThird";
-import { useDispatch } from "react-redux";
-import { __loadMainGoal } from "../../redux/modules/goalSlice";
+
 
 const GoalSlider = (props) => {
-  // const dispatch = useDispatch();
+  const sliderRef = useRef();
 
-  // useEffect(() => {
-  //   console.log(props.number)
-  //   dispatch(__loadMainGoal(props.number));
-  // }, [])
-
-  // const settings = {
-  //   arrows: false,
-  //   dots: true,
-  //   infinite: true,
-  //   slidesToShow: 1,
-  //   slidesToScroll: 1,
-  //   variableWidth: true,
-  // }
 
   const settings = {
       dots: true,
-      infinite: true,
+      infinite: false,
       speed: 500,
       slidesToShow: 1,
       slidesToScroll: 1
@@ -37,9 +23,12 @@ const GoalSlider = (props) => {
 
   return (
       <div>
-        <Slider {...settings}>
+        <Slider ref={sliderRef} {...settings}>
           <div>
             <MainGoalFirst number = {1}/>
+        <button onClick={()=>{
+          sliderRef.current.slickNext()
+        }}>next</button>
           </div>
           <div>
             <MainGoalSecond number = {2}/>
