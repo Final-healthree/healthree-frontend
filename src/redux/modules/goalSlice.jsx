@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import serverAxios from "../../components/axios/server.axios";
 
 export const __loadMainGoal = createAsyncThunk("user/MAINGOAL", async () => {
-  const response = await serverAxios.get("/api/main/Goal_day");
+  const response = await serverAxios.get("/api/goals/progress");
   return response.data;
 });
 
@@ -15,12 +15,19 @@ const goalSlice = createSlice({
   reducers: {},
 
   extraReducers: (builder) => {
-    builder.addCase(__loadMainGoal.fulfilled, (state, action) => {
-      // console.log(action)
-      // state.loading = false;
-      state.list = action.payload;
-      // state.session = true;
-    });
+    builder
+      .addCase(__loadMainGoal.fulfilled, (state, action) => {
+        // console.log(action)
+        // state.loading = false;
+        state.list = action.payload;
+        // state.session = true;
+      })
+      .addCase(__loadMainGoal.rejected, (state, action) => {
+        state.loading = false;
+      })
+      .addCase(__loadMainGoal.pending, (state, action) => {
+        state.loading = true;
+      });
   },
 });
 

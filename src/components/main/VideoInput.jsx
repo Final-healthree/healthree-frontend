@@ -8,11 +8,14 @@ import { useNavigate } from "react-router-dom";
 
 
 export default function VideoInput(props) {
-  const { width, height, number } = props;
+  const { width, height, number, modal } = props;
+
+  console.log(modal)
 
   const inputRef = useRef();
   const dispatch = useDispatch();
   const [source, setSource] = useState();
+  const [state, setState] = useState();
   const navigate = useNavigate();
 
 
@@ -20,18 +23,24 @@ export default function VideoInput(props) {
     const file = event.target.files[0];
     const url = URL.createObjectURL(file);
     setSource(url);
+    setState(file);
   };
 
   const addVideo = () => {
     const formData = new FormData();
-    formData.append("video", source);
+    formData?.append('video', state);
+    console.log(state);
     dispatch(__addCertification({
       formData,
       number
     }));
     // navigate("/", {replace: true});
-    navigate("/");
+    modal(false)
   }
+
+  // useEffect(() => {
+  //   navigate("/");
+  // }, [])
 
   const handleChoose = (event) => {
     inputRef.current.click();
@@ -128,14 +137,16 @@ const StVideoRegisterContainer = styled.div`
   }
   }
 
-  button {
+  & > button {
     width: 72px;
     height: 32px;
     align-self: flex-end;
     position: relative;
     right: 12px;
     margin-top: 5px;
-
+    background: #70CCA6;
+    border: none;
+    border-radius: 2px;  
   }
 
   .uploadImg {
@@ -150,9 +161,12 @@ const StButtonContainer = styled.div`
   align-items: center;
 
   & > button {
-    /* width: 220px;
-    height: 45px; */
-
+    width: 95%;
+    height: 52px;
+    background: #70CCA6;  
+    cursor: pointer;
+    border: none;
+    border-radius: 2px;
   }
 
 `;

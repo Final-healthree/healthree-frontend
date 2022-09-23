@@ -1,14 +1,20 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { api } from "../../shared/api";
-import serverAxios from "../../components/axios/server.axios";
+import { __loadMainGoal } from "./goalSlice";
+
 
 export const __addCertification = createAsyncThunk(
   "post/CERTIFICATION",
-  async (payload) => {
-    const response = await serverAxios.post(
-      `/api/main/video/${payload.number}`,
-      payload.formdata
-    );
+  async (payload, thunkAPI) => {
+    console.log(payload)
+    const response = await api.post(`/api/videos/${payload.number}`, payload.formData, 
+    {
+      headers: {
+      "Content-Type": "multipart/form-data",
+      },
+    }
+      );
+    thunkAPI.dispatch(__loadMainGoal())
     return response.data;
   }
 );

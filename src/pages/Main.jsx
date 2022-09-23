@@ -4,11 +4,14 @@ import styled from "styled-components";
 
 import RegCalendar from "../components/register/Calendar";
 import GoalSlider from "../components/main/GoalSlider";
-import MyVideo from "../components/video/MyVideo";
 import serverAxios from "../components/axios/server.axios";
 
+import { existgoal } from "../redux/modules/existgoal";
+
 const Main = () => {
-  const [existgoal, setExistgoal] = useState(false);
+  const exist = useSelector((state) => state.existgoal.exist);
+  const dispatch = useDispatch();
+  console.log(exist);
 
   if (window.location.href.includes("token")) {
     const [url, token] = window.location.href.split("=");
@@ -19,7 +22,7 @@ const Main = () => {
     await serverAxios
       .get(process.env.REACT_APP_REST_API_KEY + `api/goals/exist`)
       .then((res) => {
-        setExistgoal(res.data.success);
+        dispatch(existgoal({ exist: res.data.success }));
       });
   };
 
@@ -29,7 +32,7 @@ const Main = () => {
 
   return (
     <StMainContainer>
-      {existgoal ? <MyVideo /> : <RegCalendar />}
+      {exist ? <GoalSlider /> : <RegCalendar />}
     </StMainContainer>
   );
 };
