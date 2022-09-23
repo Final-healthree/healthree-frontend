@@ -1,17 +1,27 @@
 import React, { Fragment, useEffect, useState } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+
+import mainLogo from '../assets/kakaoLogin/mainLogo.svg'
 import LoginForm from "../components/login/LoginForm";
+import teamName from "../assets/kakaoLogin/teamName.svg";
 
 const Login = () => {
+
   return (
     <>
-    <StLoginForm>
-      <Logo>
-      <img src="https://i.pinimg.com/originals/1b/ff/88/1bff88afa70639dedcdd72c2d73ddc84.jpg" />
-      </Logo>
-      <LoginForm/>
-    </StLoginForm>
+      <StLoginForm>
+
+        <StLogo>
+          <img src={mainLogo} />
+        </StLogo>
+
+        <LoginForm />
+
+        <StTeamName>
+          <img src={teamName} />
+        </StTeamName>
+
+      </StLoginForm>
     </>
   )
 }
@@ -19,15 +29,16 @@ const Login = () => {
 export default Login;
 
 const StLoginForm = styled.div` 
+
 display: flex;
-flex-flow: column;
+flex-flow: column;     //다단
 justify-content: center;
 align-items: center;
+gap: 140px;
 
 `
-const Logo = styled.div`
-img{
-width: 300px;
-height:300px;
-}
+const StLogo = styled.div`
+  margin-top: 100px;
+`
+const StTeamName = styled.div`
 `
