@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
+
 import serverAxios from "../axios/server.axios";
 import { useParams, useNavigate } from "react-router-dom";
 function Comments() {
@@ -51,12 +52,12 @@ function Comments() {
 export default Comments;
 
 const CommentArea = styled.div`
-min-width: 360px;
-max-width: 375px;
-height: 450px;
-background-color: #DADADA;
-transform: translate(5%, 5%);
-/* display: flex; */
+  min-width: 360px;
+  max-width: 375px;
+  height: 450px;
+  background-color: #dadada;
+  transform: translate(5%, 5%);
+  /* display: flex; */
 `;
 const StProfile = styled.div`
   width: 100px;
@@ -75,30 +76,28 @@ const StImg = styled.div`
   overflow: hidden;
 `;
 
-
 const StComment = styled.div`
   background-color: #2b50e2;
   width: 270px;
 `;
 const StCommentTime = styled.div`
-width: 340px
-justify-content:flex-end;
-color: #70CCA6;
-background-color: #e22b2b;
-
+  width: 340px;
+  justify-content: flex-end;
+  color: #70cca6;
+  background-color: #e22b2b;
 `;
 
 const StHr = styled.hr`
-border: none;
-width: 90%;
-height: 1px;
-margin-left : auto;
-margin-right : auto;
-background-color: grey;
-
+  border: none;
+  width: 90%;
+  height: 1px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: grey;
 `;
 
 const Bind = styled.div`
+
 display: flex;
 `;
 
