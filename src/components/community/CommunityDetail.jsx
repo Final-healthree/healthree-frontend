@@ -13,19 +13,6 @@ const CommunityDetailPost = () => {
   const [getpost, setGetpost] = useState({});
   const [like, setLike] = useState(false);
 
-  const postInfo = async () => {
-    await serverAxios
-      .get(process.env.REACT_APP_REST_API_KEY + `api/posts/${param.postid}`)
-      .then((res) => {
-        console.log(res);
-        setGetpost(res.data.result);
-      });
-  };
-
-  useEffect(() => {
-    postInfo();
-  }, []);
-
   const onlike = (postid, like) => {
     if (like) {
       serverAxios
@@ -40,14 +27,29 @@ const CommunityDetailPost = () => {
         .post(process.env.REACT_APP_REST_API_KEY + `api/posts/like/${postid}`)
         .then((res) => {
           if (res.data.result === "좋아요 성공") {
+            console.log(res);
             setLike(true);
           }
         });
     }
   };
 
-  console.log(getpost.post);
+  const postInfo = async () => {
+    await serverAxios
+      .get(process.env.REACT_APP_REST_API_KEY + `api/posts/${param.postid}`)
+      .then((res) => {
+        console.log(res);
+        setGetpost(res.data.result);
+      });
+  };
 
+  useEffect(() => {
+    postInfo();
+  }, []);
+
+  console.log(typeof (getpost.post && getpost.post[0].final_video));
+  console.log(getpost.post && getpost.post[0].final_video);
+  const url = getpost.post && getpost.post[0].final_video;
   return (
     <>
       <StContent>
@@ -56,14 +58,19 @@ const CommunityDetailPost = () => {
           <StNickName>{getpost.nickname}</StNickName>
         </StProfile>
         <div>
-          {/* <StVideo controls="controls">
-            <source src={getpost.post.final_video} type="video/mp4" />
-          </StVideo> */}
+          <StVideo controls>
+            {getpost.post && (
+              <source src={getpost.post[0].final_video} type="video/mp4" />
+            )}
+          </StVideo>
           <StBottom>
-            <Date>22.08.30</Date>
-            <Likes>
-              <img src={unLikeimg} />
-            </Likes>
+            <Date>{getpost.post && getpost.post[0].day1}</Date>
+            <Likes
+              onClick={() => {
+                onlike(getpost.post && getpost.post[0].post_id, like);
+              }}
+              src={like ? likeimg : unLikeimg}
+            />
           </StBottom>
         </div>
       </StContent>
@@ -116,4 +123,4 @@ const Date = styled.p`
   margin: 0;
 `;
 
-const Likes = styled.div``;
+const Likes = styled.img``;

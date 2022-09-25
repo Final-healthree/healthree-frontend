@@ -17,7 +17,6 @@ function CommunityMain() {
   const [ref, inView] = useInView();
   const navigate = useNavigate();
 
-  const [postid, setPostid] = useState("");
   const [like, setLike] = useState(false);
 
   const onlike = (postid, like) => {
@@ -68,6 +67,8 @@ function CommunityMain() {
       setMore(more + 5);
     }
   }, [inView, loading]);
+
+  console.log(posts);
 
   return (
     <Container>
