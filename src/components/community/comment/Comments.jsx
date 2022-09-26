@@ -53,10 +53,11 @@ console.log(comments)
               </StCommentText>
             </StContentContainer>
             <StCommentBottom>
-              <DeleteComment comment_id={comments.comment_id} />
               <StDate>
-                <DateComment date={comments.date} />
+            <EditComment />
+              <DeleteComment comment_id={comments.comment_id} />
               </StDate>
+                <DateComment date={comments.date} />
             </StCommentBottom>
             <Hr />
           </div>
@@ -126,3 +127,4 @@ border: solid 1px #f2f2f2f4;
 const StED = styled.div`
 display: flex;
 `
+
