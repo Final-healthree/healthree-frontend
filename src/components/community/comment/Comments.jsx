@@ -5,10 +5,12 @@ import serverAxios from "../../axios/server.axios";
 
 import InputComment from "./InputComment"
 import DeleteComment from "./DeleteComment";
+import EditComment from "./EditComment";
 import DateComment from "./DateComment";
 function Comments() {
   const params = useParams();
   const [page, setPage] = useState(1);
+  const [newComments, setNewComments] = useState()
 
   const [comments, setComments] = useState([])
   console.log(params)
@@ -26,27 +28,30 @@ function Comments() {
   useEffect(() => {
     getInfo();
   }, [page]);
-
+console.log(comments)
   return (
 <>
     <StWrapper>
-      {comments.map((comments) => (
-        <div key={comments.comment_id}>
+      {comments.map((comment) => (
+        <div key={comment.comment_id}>
           <StContentContainer>
             <StProfile>
-              <StImg src={comments.profile_image} />
+              <StImg src={comment.profile_image} />
               <StNameText>
-                <span>{comments.nickname}</span>
+                <span>{comment.nickname}</span>
               </StNameText>
             </StProfile>
             <StCommentText>
-              <span>{comments.comment}</span>
+              <span>{comment.comment}</span>
             </StCommentText>
           </StContentContainer>
           <StCommentBottom>
-          <DeleteComment comment_id = {comments.comment_id}/>
+          <StED>
+          <EditComment comment = {comment} newComments = {newComments} setNewComments = {setNewComments}/>
+          <DeleteComment comment_id = {comment.comment_id}/>
+          </StED>
           <StDate>
-          <DateComment date = {comments.date} />
+          <DateComment date = {comment.date} />
           </StDate>
           </StCommentBottom>
           <Hr/>
@@ -110,4 +115,8 @@ justify-content: space-between;
 `
 const Hr = styled.hr`
 border: solid 1px #f2f2f2f4;
+`
+
+const StED = styled.div`
+display: flex;
 `
