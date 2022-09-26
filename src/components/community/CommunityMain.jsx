@@ -7,6 +7,10 @@ import serverAxios from "../axios/server.axios";
 
 import likeimg from "../../assets/community/like.svg";
 import unLikeimg from "../../assets/community/unLike.svg";
+import comments from "../../assets/community/comments.svg";
+import play from "../../assets/video/play.svg";
+
+import { format } from "date-fns";
 
 function CommunityMain() {
   const [posts, setPosts] = useState([]);
@@ -17,7 +21,6 @@ function CommunityMain() {
   const [ref, inView] = useInView();
   const navigate = useNavigate();
 
-  const [postid, setPostid] = useState("");
   const [like, setLike] = useState(false);
 
   const onlike = (postid, like) => {
@@ -69,6 +72,8 @@ function CommunityMain() {
     }
   }, [inView, loading]);
 
+  console.log(posts);
+
   return (
     <Container>
       {posts.map((post, idx) => (
@@ -83,23 +88,25 @@ function CommunityMain() {
                 onClick={() => {
                   navigate(`/community/${post.post_id}`);
                 }}
+                src={post.thumbnail}
               />
               <StBottom>
                 <div>
                   <Goal>{post.goal_name}</Goal>
-                  <Period>{post.day1}</Period>
+                  <Period>{format(new Date(), "yy-MM-dd")}</Period>
                 </div>
                 <div>
-                  <img src={likeimg} />
+                  <Icon src={comments} />
                   <span>{post.comment_cnt}</span>
                 </div>
                 <div>
-                  <Likes
+                  <Icon
                     onClick={() => {
                       onlike(post.post_id, like);
                     }}
                     src={like ? likeimg : unLikeimg}
                   />
+                  <span>{post.like_cnt}</span>
                 </div>
               </StBottom>
             </StContent>
@@ -113,25 +120,28 @@ function CommunityMain() {
                 onClick={() => {
                   navigate(`/community/${post.post_id}`);
                 }}
+                src={post.thumbnail}
               />
-
-              {/* <img src={videoImg} /> */}
               <StBottom>
                 <div>
                   <Goal>{post.goal_name}</Goal>
-                  <Period>{post.day1}</Period>
+                  <Period>
+                    {format(new Date(), "yy.MM.dd")} ~{" "}
+                    {format(new Date(), "yy.MM.dd")}{" "}
+                  </Period>
                 </div>
                 <div>
-                  <img src={likeimg} />
+                  <Icon src={comments} />
                   <span>{post.comment_cnt}</span>
                 </div>
                 <div>
-                  <Likes
+                  <Icon
                     onClick={() => {
                       onlike(post.post_id, like);
                     }}
                     src={like ? likeimg : unLikeimg}
                   />
+                  <span>{post.like_cnt}</span>
                 </div>
               </StBottom>
             </StContent>
@@ -147,7 +157,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px;
+  gap: 60px;
   padding: 20px 0;
   box-sizing: border-box;
 `;
@@ -155,6 +165,7 @@ const Container = styled.div`
 const StContent = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
 
   width: 340px;
   height: 405px;
@@ -174,18 +185,20 @@ const StImg = styled.img`
   border-radius: 50%;
 `;
 
-const VideoImg = styled.video`
-  height: 335.85px;
-  width: 340px;
-  background: #dadada;
+const VideoImg = styled.img`
+  height: 330px;
+  width: 330px;
   box-shadow: 6px 6px 5px rgba(0, 0, 0, 0.12);
-  border-radius: 2px;
+  border-radius: 3px;
+  border: none;
+
+  margin: 0 auto;
 `;
 
 const StBottom = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 8px 4px;
+  padding: 16px 4px 8px;
 `;
 const Goal = styled.p`
   padding-left: 0px;
@@ -195,7 +208,7 @@ const Goal = styled.p`
 const Period = styled.p`
   margin: 0;
 `;
-const Likes = styled.img`
+const Icon = styled.img`
   width: 20px;
   height: 20px;
 `;
