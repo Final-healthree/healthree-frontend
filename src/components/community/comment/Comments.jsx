@@ -5,12 +5,14 @@ import serverAxios from "../../axios/server.axios";
 
 import InputComment from "./InputComment";
 import DeleteComment from "./DeleteComment";
+import EditComment from "./EditComment";
 import DateComment from "./DateComment";
 import Pagination from "./Pagination";
 
 function Comments() {
   const params = useParams();
   const [page, setPage] = useState(1);
+  const [newComments, setNewComments] = useState()
 
   const [comments, setComments] = useState([]);
   console.log(params);
@@ -32,8 +34,9 @@ function Comments() {
   useEffect(() => {
     getInfo();
   }, [page]);
-
+console.log(comments)
   return (
+
     <>
       <StWrapper>
         {comments.map((comments) => (
@@ -62,6 +65,7 @@ function Comments() {
       <InputComment data={params.postid} />
       <Pagination total={20} limit={5} page={page} setPage={setPage} />
     </>
+
   );
 }
 
@@ -115,5 +119,10 @@ const StCommentBottom = styled.div`
   justify-content: space-between;
 `;
 const Hr = styled.hr`
-  border: solid 1px #f2f2f2f4;
-`;
+
+border: solid 1px #f2f2f2f4;
+`
+
+const StED = styled.div`
+display: flex;
+`
