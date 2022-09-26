@@ -52,11 +52,11 @@ console.log(comments)
               </StCommentText>
             </StContentContainer>
             <StCommentBottom>
-            <EditComment comment = {comment} newComments = {newComments} setNewComments = {setNewComments}/>
-              <DeleteComment comment_id={comments.comment_id} />
               <StDate>
-                <DateComment date={comments.date} />
+            <EditComment />
+              <DeleteComment comment_id={comments.comment_id} />
               </StDate>
+                <DateComment date={comments.date} />
             </StCommentBottom>
             <Hr />
           </div>
