@@ -24,7 +24,11 @@ const certificationSlice = createSlice({
   initialState: {
     list: [],
   },
-  reducers: {},
+  reducers: {
+    ModalDoor: (state, action) => {
+      state.value = action.payload;
+    },
+  },
 
   extraReducers: (builder) => {
     builder
@@ -42,4 +46,5 @@ const certificationSlice = createSlice({
   },
 });
 
+export const { ModalDoor } = certificationSlice.actions;
 export default certificationSlice.reducer;
