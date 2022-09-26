@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-//svg 이미지
 import serverAxios from "../axios/server.axios";
 
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import ko from "date-fns/locale/ko";
+
+import getDateOption from "./get-date-option";
 
 function MyPageCalendar() {
   const dataList = {
@@ -55,8 +56,10 @@ function MyPageCalendar() {
       },
     ],
   };
-  const { getDateOption } = require("./get-date-option");
-  const { modifiers, modifiersStyles } = getDateOption(dataList.fail);
+  const { modifiers, modifiersStyles } = getDateOption({
+    success: dataList.success,
+    fail: dataList.fail,
+  });
 
   // const getDates = async () => {
   //   await serverAxios

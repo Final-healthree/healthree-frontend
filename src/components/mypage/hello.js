@@ -46,19 +46,12 @@ function getCalenderCss(type) {
       borderRadius: "0 50% 50% 0",
       height: "40px",
     };
-    const squareCss = {
-      color: "#fff",
-      backgroundColor: "#EEAE67",
-      height: "40px",
-      width: "40px",
-    };
     return {
       circleCss,
       leftCircleCss,
       rightCircleCss,
-      squareCss,
     };
   }
 }
 
-module.exports = { getCalenderCss };
+export default getCalenderCss;
