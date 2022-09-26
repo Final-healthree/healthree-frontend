@@ -21,9 +21,30 @@ function EditComment({comment, newComments, setNewComments}) {
     }
 
     return (
-        <EditBtn>
-        수정하기
-    </EditBtn>
+        <>
+        <div className="content">
+        {isEdit ? (
+            <textarea
+            ref={localContentInput}
+            value={localContent}
+            onChange={HandleContent}
+            />
+            ) : (
+                content
+                )}
+      </div>
+        {isEdit ? (
+            <div>
+              <button onClick={handleQuitEdit}>수정 취소</button>
+              <button onClick={handleEdit}>수정 완료</button>
+            </div>
+          ) : (
+              <div>
+              <button onClick={HandleRemove}>삭제하기</button>
+              <button onClick={toggleIsEdit}>수정하기</button>
+            </div>
+          )}
+          </>
     );
 };
 
