@@ -3,14 +3,12 @@ import styled from "styled-components";
 import Thumnail from "../../assets/main/Thumnail.png";
 import upload from "../../assets/main/upload.png";
 import { useDispatch, useSelector } from "react-redux";
-import { __addCertification } from "../../redux/modules/certificationSlice";
+import certificationSlice, { __addCertification, ModalDoor } from "../../redux/modules/certificationSlice";
 import { useNavigate } from "react-router-dom";
 
 
 export default function VideoInput(props) {
   const { width, height, number, modal } = props;
-
-  console.log(modal)
 
   const inputRef = useRef();
   const dispatch = useDispatch();
@@ -34,8 +32,8 @@ export default function VideoInput(props) {
       formData,
       number
     }));
-    // navigate("/", {replace: true});
-    modal(false)
+    dispatch(ModalDoor(true));
+    modal(false);
   }
 
   // useEffect(() => {
@@ -107,6 +105,8 @@ const Stbutton = styled.button`
   justify-content: center;
   align-items: center;
   cursor:pointer;
+  font-family: sans-serif;
+  font-weight: 500;
 `;
 
 const StVideoRegisterContainer = styled.div`
