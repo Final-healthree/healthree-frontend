@@ -8,11 +8,16 @@ import footerCommunity from "../assets/headerFooter/footerCommunity.svg";
 import footerCommunityC from "../assets/headerFooter/footerCommunityC.svg";
 import footerMypage from "../assets/headerFooter/footerMypage.svg";
 import footerMypageC from "../assets/headerFooter/footerMypageC.svg";
+import footerRank from "../assets/headerFooter/footerRank.svg"
+import footerRankC from "../assets/headerFooter/footerRankC.svg"
+
 const Footer = () => {
   const navigate = useNavigate();
   const [isListHoverMain, setIsListHoverMain] = useState(false);
   const [isListHoverCommunity, setIsListHoverCommunity] = useState(false);
   const [isListHoverMypage, setIsListHoverMypage] = useState(false);
+  const [isListHoverRank, setIsListHoverRank] = useState(false);
+
 
   const [show, setShow] = useState(false);
   const green = () => {
@@ -51,6 +56,16 @@ const Footer = () => {
         }}
       >
         <img src={isListHoverMypage ? footerMypageC : footerMypage} />
+      </li>
+
+      <li
+        onMouseOver={() => setIsListHoverRank(true)}
+        onMouseOut={() => setIsListHoverRank(false)}
+        onClick={() => {
+          navigate("/Rank");
+        }}
+      >
+        <img src={isListHoverRank ? footerRankC : footerRank} />
       </li>
     </StFooterMain>
   );
