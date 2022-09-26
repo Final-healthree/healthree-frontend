@@ -30,7 +30,7 @@ const MainGoalSecond = (props) => {
         :
         <>
         <span>오늘 목표를 완성하셨네요!</span><br />
-        <span>훌룽해요!</span>
+        <span>훌륭해요!</span>
         </>
         } 
       </StGuideTextContainer>
@@ -105,11 +105,13 @@ const StTitleContainer  = styled.div`
   width: 200px;
 
   & > p {
-    font-weight: 600;
+    font-weight: 700;
+    font-family: sans-serif;
   }
 
   & > .date {
     font-weight: 300;
+    font-family: sans-serif;
   }
 
 `;

@@ -29,7 +29,7 @@ const Main = () => {
 
   return (
     <StMainContainer>
-      {existgoal ? <MyVideo /> : <RegCalendar />}
+      {existgoal ? <GoalSlider /> : <RegCalendar />}
     </StMainContainer>
   );
 };
