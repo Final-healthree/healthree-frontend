@@ -36,6 +36,7 @@ function Comments() {
   }, [page]);
 console.log(comments)
   return (
+
     <>
       <StWrapper>
         {comments.map((comments) => (
@@ -65,6 +66,7 @@ console.log(comments)
       <InputComment data={params.postid} />
       <Pagination total={20} limit={5} page={page} setPage={setPage} />
     </>
+
   );
 }
 
