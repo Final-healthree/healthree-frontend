@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 const MainModal = (props) => {
   const { number, date } = props;
   const [modalOpen, setModalOpen] = useState(false);
-  const ModalisCheck = useSelector((state) => state.certification)
+  const ModalisCheck = useSelector((state) => state)
   console.log(ModalisCheck)
   
   return (

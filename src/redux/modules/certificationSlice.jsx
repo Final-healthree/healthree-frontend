@@ -26,7 +26,7 @@ const certificationSlice = createSlice({
   },
   reducers: {
     ModalDoor: (state, action) => {
-      state.value = action.payload;
+      state.list = action.payload;
     },
   },
 

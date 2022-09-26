@@ -49,14 +49,17 @@ const MainGoalFirst = (props) => {
         </>
         } 
       </StGuideTextContainer>
-      <FailModal number={1} date={getMainGoal?.day1.date.slice(0,10)} />
+      {/* <FailModal number={1} date={getMainGoal?.day1.date.slice(0,10)} /> */}
 
       {today.getTime() - selectedDay.getTime() > 0 ?
         ""
        : 
-       <FailModal number={1} date={getMainGoal?.day1.date.slice(0,10)} />
-       }
-      { failmodalClose === true ? <FailModal setModal={setFailModalClose}/> : null }
+       failmodalClose === true ? 
+        <FailModal number={1} date={getMainGoal?.day1.date.slice(0,10)} setModal={setFailModalClose}/> 
+        : null }
+      {/* { failmodalClose === true ? 
+      <FailModal number={1} date={getMainGoal?.day1.date.slice(0,10)} setModal={setFailModalClose}/> 
+      : null } */}
       <StMainGoalTextContainer>
         {videoUploadCheck?.uploaded === false ?
           <h1 className="isGoal">작심 1일</h1>
