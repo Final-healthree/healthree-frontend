@@ -70,7 +70,7 @@ const RegCalendar = () => {
       </CalendarArea>
 
       <BtnArea>
-        <RegBtn onClick={sendDay}>날짜 등록하기</RegBtn>
+        <RegBtn onClick={sendDay}>운동 시작하기</RegBtn>
       </BtnArea>
     </Container>
   );
