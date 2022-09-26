@@ -25,7 +25,7 @@ const MyVideo = () => {
     await serverAxios
       .get(
         process.env.REACT_APP_REST_API_KEY +
-          `api/videos/mine?pagecount=5&&page=${page}`
+          `api/videos/mine?pagecount=8&&page=${page}`
       )
       .then((res) => {
         console.log(res);
@@ -48,10 +48,16 @@ const MyVideo = () => {
 
   const [modalOpen, setModalOpen] = useState(false);
   const [url, setUrl] = useState("");
+  const [goalId, setGoalId] = useState("");
+
+  const sendModal = (video, goal) => {
+    console.log(video, goal);
+    setUrl(video);
+    setGoalId(goal);
+  };
 
   const showModal = (data) => {
     setModalOpen(true);
-    setUrl();
   };
 
   // console.log("inView", inView);
@@ -72,7 +78,10 @@ const MyVideo = () => {
       ) : (
         <VideoArea>
           {items.map((data, idx) => (
-            <div key={data.goal_id} onClick={() => setUrl(data.final_video)}>
+            <div
+              key={data.goal_id}
+              onClick={() => sendModal(data.final_video, data.goal_id)}
+            >
               {items.length - 1 === idx ? (
                 <VideoBox ref={ref}>
                   <VideoImg onClick={showModal}>
@@ -96,7 +105,9 @@ const MyVideo = () => {
               )}
             </div>
           ))}
-          {modalOpen && <VideoModal url={url} setModalOpen={setModalOpen} />}
+          {modalOpen && (
+            <VideoModal url={url} goal={goalId} setModalOpen={setModalOpen} />
+          )}
 
           {inView && items.length >= more ? (
             <LoaderWrap>

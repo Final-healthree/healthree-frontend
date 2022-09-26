@@ -5,17 +5,25 @@ import Modal from "./Modal";
 import { __loadMainGoal } from "../../redux/modules/goalSlice";
 import { useDispatch, useSelector } from "react-redux";
 import stamp from "../../assets/main/stamp.png"
+import MainModal from "./MainModal";
+import FailModal from "./FailModal";
+
 
 const MainGoalFirst = (props) => {
   const [modalopen, setModalOpen] = useState(false);
+  const [failmodalClose, setFailModalClose] = useState(true);
   const dispatch = useDispatch();
   const getMainGoal = useSelector((state) => state.goal.list.result);
-  // const videoUploadCheck = useSelector((state) => state.certification.list.success);
+  const date = (getMainGoal?.day1.date.slice(0,10))
+  const today = new Date();
+  const selectedDay = new Date(date);
+
+  console.log(date)
   const videoUploadCheck = useSelector((state) => state.goal.list.result?.day1);
-  const videoUploadCheck1 = useSelector((state) => state);
+  // const videoUploadCheck1 = useSelector((state) => state);
 
   // console.log(videoUploadCheck)
-  console.log(videoUploadCheck1)
+  // console.log(videoUploadCheck1)
 
   useEffect(() => {
     dispatch(__loadMainGoal());
@@ -37,10 +45,18 @@ const MainGoalFirst = (props) => {
         :
         <>
         <span>오늘 목표를 완성하셨네요!</span><br />
-        <span>훌룽해요!</span>
+        <span>훌륭해요!</span>
         </>
         } 
       </StGuideTextContainer>
+      <FailModal number={1} date={getMainGoal?.day1.date.slice(0,10)} />
+
+      {today.getTime() - selectedDay.getTime() > 0 ?
+        ""
+       : 
+       <FailModal number={1} date={getMainGoal?.day1.date.slice(0,10)} />
+       }
+      { failmodalClose === true ? <FailModal setModal={setFailModalClose}/> : null }
       <StMainGoalTextContainer>
         {videoUploadCheck?.uploaded === false ?
           <h1 className="isGoal">작심 1일</h1>
@@ -55,6 +71,7 @@ const MainGoalFirst = (props) => {
         <p className="date">{getMainGoal?.day1.date.slice(0,10)}</p>
       </StTitleContainer>
       </StMainGoalTextContainer>
+      <MainModal number={1} date={getMainGoal?.day1.date.slice(0,10)}/>
       <StButtonContainer>
         {videoUploadCheck?.uploaded === false ?
           <button onClick={() => {
@@ -109,14 +126,16 @@ const StTitleContainer  = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 0 25px;
-  width: 200px;
+  width: 220px;
 
   & > p {
-    font-weight: 600;
+    font-weight: 700;
+    font-family: sans-serif;
   }
 
   & > .date {
     font-weight: 300;
+    font-family: sans-serif;
   }
 
 `;

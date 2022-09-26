@@ -119,10 +119,12 @@ const StTitleContainer = styled.div`
 
   .goalTitle {
     font-weight: 900;
+    /* font-family: sans-serif; */
   }
 
   .goalDate {
     font-weight: 300;
+    font-family: sans-serif;
   }
 
 `;
