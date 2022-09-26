@@ -24,10 +24,11 @@ function Comments() {
       )
       .then((res) => {
         console.log(res);
-        setComments([...comments, ...res.data.result]);
+        setComments([...res.data.result]);
       });
   };
 
+  console.log(comments);
   useEffect(() => {
     getInfo();
   }, [page]);
@@ -59,12 +60,7 @@ function Comments() {
         ))}
       </StWrapper>
       <InputComment data={params.postid} />
-      <Pagination
-        total={comments.length}
-        limit={5}
-        page={page}
-        setPage={setPage}
-      />
+      <Pagination total={20} limit={5} page={page} setPage={setPage} />
     </>
   );
 }
