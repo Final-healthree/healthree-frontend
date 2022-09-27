@@ -25,16 +25,16 @@ const GoalSlider = (props) => {
       <div>
         <Slider ref={sliderRef} {...settings}>
           <div>
-            <MainGoalFirst number = {1} ref={sliderRef}/>
+            <MainGoalFirst number = {1} />
         <button onClick={()=>{
           sliderRef.current.slickNext()
         }}>next</button>
           </div>
           <div>
-            <MainGoalSecond number = {2} ref={sliderRef}/>
+            <MainGoalSecond number = {2} />
           </div>
           <div>
-            <MainGoalThird number = {3}/>
+            <MainGoalThird number = {3} />
           </div>
         </Slider>
       </div>

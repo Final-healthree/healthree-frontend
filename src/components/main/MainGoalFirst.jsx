@@ -9,7 +9,6 @@ import FailModal from "./FailModal";
 
 
 const MainGoalFirst = (props) => {
-  const { ref } = props;
   const [modalopen, setModalOpen] = useState(false);
   const [failmodalClose, setFailModalClose] = useState(true);
   const dispatch = useDispatch();
@@ -18,7 +17,6 @@ const MainGoalFirst = (props) => {
   const today = new Date();
   const selectedDay = new Date(date);
 
-  console.log(date)
   const videoUploadCheck = useSelector((state) => state.goal.list.result?.day1);
   // const videoUploadCheck1 = useSelector((state) => state);
 
@@ -51,6 +49,7 @@ const MainGoalFirst = (props) => {
       </StGuideTextContainer>
       {/* <FailModal number={1} date={getMainGoal?.day1.date.slice(0,10)} setModal={setFailModalClose}/>  */}
 
+      <FailModal number={1} date={getMainGoal?.day1.date.slice(0,10)} setModal={setFailModalClose}/> 
       {videoUploadCheck?.uploaded === false ?
       today.getTime() - selectedDay.getTime() > 0 ?
         ""
@@ -83,7 +82,7 @@ const MainGoalFirst = (props) => {
           :
           ""
         }
-        { modalopen === true ? <RegisterModal number={1} modal={setModalOpen} ref={ref}/> : null }
+        { modalopen === true ? <RegisterModal number={1} modal={setModalOpen} /> : null }
       </StButtonContainer>
     </StMainLayout>
   )
