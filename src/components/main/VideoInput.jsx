@@ -3,10 +3,10 @@ import styled from "styled-components";
 import Thumnail from "../../assets/main/Thumnail.png";
 import upload from "../../assets/main/upload.png";
 import { useDispatch } from "react-redux";
-import { __addCertification } from "../../redux/modules/certificationSlice";
+import { __addCertification, ModalDoor } from "../../redux/modules/certificationSlice";
 
 export default function VideoInput(props) {
-  const { width, height, number, modal } = props;
+  const { width, height, number, modal, setGoalmodal } = props;
 
   const inputRef = useRef();
   const dispatch = useDispatch();
@@ -30,6 +30,7 @@ export default function VideoInput(props) {
       number
     }));
     modal(false);
+    setGoalmodal(true);
   }
 
 
@@ -85,7 +86,9 @@ export default function VideoInput(props) {
 
         {/* <div className="VideoInput_footer">{source || "Nothing selectd"}</div> */}
       </StVideoRegisterContainer>
-      <span>* 세로 영상만 지원합니다 쓰파</span>
+      <StUploadGuide>
+        <span>* 세로 영상만 지원합니다.</span>
+      </StUploadGuide>
       <StButtonContainer>
         <button onClick={addVideo}>확인</button>
       </StButtonContainer>
@@ -148,10 +151,13 @@ const StVideoRegisterContainer = styled.div`
   }
   `;
 
-
+const StUploadGuide = styled.div`
+  text-align: center;
+  margin-top: 30px;
+`;
 
 const StButtonContainer = styled.div`
-  margin-top: 80px;
+  margin-top: 50px;
   display: flex;
   justify-content: center;
   align-items: center;

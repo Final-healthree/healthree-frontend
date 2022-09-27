@@ -11,7 +11,6 @@ import { existgoal } from "../redux/modules/existgoal";
 const Main = () => {
   const exist = useSelector((state) => state.existgoal.exist);
   const dispatch = useDispatch();
-  console.log(exist);
 
   if (window.location.href.includes("token")) {
     const [url, token] = window.location.href.split("=");

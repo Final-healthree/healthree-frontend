@@ -10,11 +10,13 @@ import FailModal from "./FailModal";
 const MainGoalSecond = (props) => {
   const [modalopen, setModalOpen] = useState(false);
   const [failmodalClose, setFailModalClose] = useState(true);
+  const [goalmodalOpen, setGoalmodalOpen] = useState(false);
   const dispatch = useDispatch();
   const getMainGoal = useSelector((state) => state.goal.list.result);
-  const date = (getMainGoal?.day1.date.slice(0,10))
+  const date = (getMainGoal?.day2.date.slice(0,10))
   const today = new Date();
-  const selectedDay = new Date(date);
+  const selectedDay = new Date((new Date(date).getTime() + (24-9) * 60 * 60 * 1000));
+
   
   const videoUploadCheck = useSelector((state) => state.goal.list.result?.day2);
 
@@ -40,15 +42,18 @@ const MainGoalSecond = (props) => {
         } 
       </StGuideTextContainer>
       {videoUploadCheck?.uploaded === false ?
-      today.getTime() - selectedDay.getTime() > 0 ?
+      today < selectedDay ?
         ""
        : 
        failmodalClose === true ? 
         <FailModal number={2} date={getMainGoal?.day2.date.slice(0,10)} setModal={setFailModalClose}/> 
         : null
       :
-       <MainModal number={2} date={getMainGoal?.day2.date.slice(0,10)}/>
+      ""
+      //  <MainModal number={2} date={getMainGoal?.day2.date.slice(0,10)}/>
       }
+      {goalmodalOpen === true ? <MainModal number={2} date={getMainGoal?.day1.date.slice(0,10)}/> : null}
+
       <StMainGoalTextContainer>
         {videoUploadCheck?.uploaded === false ?
           <h1 className="isGoal">작심 2일</h1>
@@ -72,7 +77,8 @@ const MainGoalSecond = (props) => {
           :
           ""
         }
-        { modalopen === true ? <RegisterModal number={2} modal={setModalOpen}/> : null }
+        { modalopen === true ? 
+        <RegisterModal number={2} modal={setModalOpen} setGoalmodal={setGoalmodalOpen}/> : null }
       </StButtonContainer>
     </StMainLayout>
   )

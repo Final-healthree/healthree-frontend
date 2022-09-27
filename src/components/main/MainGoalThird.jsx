@@ -12,11 +12,18 @@ const MainGoalThird = (props) => {
   const [failmodalClose, setFailModalClose] = useState(true);
   const dispatch = useDispatch();
   const getMainGoal = useSelector((state) => state.goal.list.result);
-  const date = (getMainGoal?.day1.date.slice(0,10))
+  const status = useSelector((state) => state.certification.status);
+  const date = (getMainGoal?.day3.slice(0,10));
   const today = new Date();
-  const selectedDay = new Date(date);
+  const selectedDay = new Date((new Date(date).getTime() + (24-9) * 60 * 60 * 1000));
+
  
   const videoUploadCheck = useSelector((state) => state.certification.list);
+  const videoUploadCheckFirst = useSelector((state) => state.goal.list.result?.day1);
+  const videoUploadCheckSecond = useSelector((state) => state.goal.list.result?.day2);
+
+  console.log(videoUploadCheckSecond)
+
 
   useEffect(() => {
     dispatch(__loadMainGoal());
@@ -26,7 +33,7 @@ const MainGoalThird = (props) => {
     <StMainLayout>
       <StGuideTextContainer>
         <h1>3/3</h1>
-        {videoUploadCheck?.success === undefined ?
+        {videoUploadCheck?.uploaded === false ?
         <>
         <span>오늘 목표 인증을 아직 안하셨군요!</span><br />
         <span>목표를 인증하고,</span><br />
@@ -39,17 +46,19 @@ const MainGoalThird = (props) => {
         </>
         } 
       </StGuideTextContainer>
+      {/* {videoUploadCheck?.uploaded === false ? */}
       {videoUploadCheck?.success === undefined ?
-      today.getTime() - selectedDay.getTime() > 0 ?
-        ""
+      today < selectedDay ?
+      ""
        : 
        failmodalClose === true ? 
-        <FailModal number={3} date={getMainGoal?.day3.date.slice(0,10)} setModal={setFailModalClose}/> 
+        <FailModal number={3} date={getMainGoal?.day3.slice(0,10)} setModal={setFailModalClose}/> 
         : null
       :
-       <MainModal number={3} date={getMainGoal?.day3.date.slice(0,10)}/>
+       <MainModal number={3} date={getMainGoal?.day3.slice(0,10)}/>
       }
       <StMainGoalTextContainer>
+        {/* {videoUploadCheckSecond?.uploaded === undefined && true? */}
         {videoUploadCheck?.success === undefined ?
           <h1 className="isGoal">작심 3일</h1>
           :
@@ -62,6 +71,7 @@ const MainGoalThird = (props) => {
         <p>{getMainGoal?.goal}</p>
         <p className="date">{getMainGoal?.day3.slice(0,10)}</p>
       </StTitleContainer>
+      <StStatus>{status}</StStatus>
       </StMainGoalTextContainer>
       <StButtonContainer>
       {videoUploadCheck?.success === undefined ?
@@ -71,7 +81,8 @@ const MainGoalThird = (props) => {
           :
           ""
         }
-        { modalopen === true ? <RegisterModal number={3} modal={setModalOpen}/> : null }
+        { modalopen === true ? 
+        <RegisterModal number={3} modal={setModalOpen} /> : null }
       </StButtonContainer>
     </StMainLayout>
   )
@@ -111,6 +122,12 @@ const StMainGoalTextContainer = styled.div`
   & > img {
     position: absolute;
   }
+`;
+
+const StStatus = styled.p`
+  /* position: absolute;
+  font-size: 30px;
+  color: ; */
 `;
 
 const StTitleContainer  = styled.div`

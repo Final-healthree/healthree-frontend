@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import VideoInput from "./VideoInput";
 
 const RegisterModal = (props) => {
-  const { modal, ref } = props;
+  const { modal, setGoalmodal } = props;
   const [state, setState] = useState();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -77,7 +77,7 @@ const RegisterModal = (props) => {
           {/* <span>{goalnumber === 1 ? FirstDay : SecondDay}</span> */}
           <span className="goalDate">{getDay(goalnumber)}</span>
         </StTitleContainer>
-        <VideoInput width={400} height={300} number={goalnumber} modal={modal} ref={ref}/>
+        <VideoInput width={400} height={300} number={goalnumber} modal={modal} setGoalmodal={setGoalmodal}/>
         <StButtonContainer>
           {/* <button onClick={addVideo}>확인</button> */}
         </StButtonContainer>
