@@ -70,7 +70,7 @@ const RegCalendar = () => {
       </CalendarArea>
 
       <BtnArea>
-        <RegBtn onClick={sendDay}>날짜 등록하기</RegBtn>
+        <RegBtn onClick={sendDay}>운동 시작하기</RegBtn>
       </BtnArea>
     </Container>
   );
@@ -133,6 +133,9 @@ const Title = styled.h3`
 
 const Today = styled.span`
   color: #4b4b4b;
+  font-family: sans-serif;
+  font-weight: 300;
+  font-size: 16px;
 `;
 
 const CalendarArea = styled.div`
@@ -140,6 +143,7 @@ const CalendarArea = styled.div`
   justify-content: center;
   align-items: center;
   height: 400px;
+  margin-top: -10px;
 `;
 
 const BtnArea = styled.div`

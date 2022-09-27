@@ -1,45 +1,50 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-
 import Modal1 from "../../assets/main/modal/Modal1.svg";
 import Modal2 from "../../assets/main/modal/Modal2.svg";
 import Modal3 from "../../assets/main/modal/Modal3.svg";
-import ModalFail from "../../assets/main/modal/ModalFail.svg";
+import { useSelector } from "react-redux";
 
-const MainModal = () => {
-  const [modal, setModal] = useState(false);
+
+const MainModal = (props) => {
+  const { number } = props;
+  const [modalOpen, setModalOpen] = useState(true);
+  const ModalisCheck = useSelector((state) => state)
+  console.log(ModalisCheck)
+  
   return (
     <div>
-      <button
+      {/* <button
         onClick={() => {
-          setModal(true);
+          setModalOpen(true);
         }}
       >
         {" "}
         모달{" "}
-      </button>
-      {modal ? <Modal page={3} setModal={setModal} /> : null}
+      </button> */}
+      {modalOpen ? <Modal page={number} setModal={setModalOpen} /> : null}
     </div>
   );
 };
 
-function Modal({ page, setModal }) {
-  const num = page;
-  console.log(num);
+
+function Modal(props) {
+  const {page, setModal } =props;
+
+
   return (
     <div>
       <StModal>
         <h3>축하합니다!</h3>
         <div>
-          {num === 1 ? (
-            <img src={Modal1} />
-          ) : num === 2 ? (
-            <img src={Modal2} />
+          {page === 1 ? (
+            <img src={Modal1} alt="" />
+          ) : page === 2 ? (
+            <img src={Modal2} alt="" />
           ) : (
-            <img src={Modal3} />
+            <img src={Modal3} alt="" />
           )}
         </div>
-
         <h5>작심 {page}일에 성공하셨습니다</h5>
         <button
           onClick={() => {
@@ -58,8 +63,8 @@ export default MainModal;
 
 const StModal = styled.div`
   position: fixed;
-  left: 0;
-  right: 0;
+  /* left: 0; */
+  /* right: 0; */
   top: 0;
   bottom: 0;
 
@@ -69,9 +74,22 @@ const StModal = styled.div`
 
   z-index: 100;
   margin: auto;
+  margin-left: 19px;
 
   width: 311px;
   height: 299px;
 
-  text-align: center; ;
+  text-align: center;
+
+  & > div {
+    margin-left: 82px;
+  }
+
+  & > button {
+    width: 155px;
+    height: 32px;
+    background: #70CCA6;
+    border-radius: 2px;
+    border: none;
+  }
 `;

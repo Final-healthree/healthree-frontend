@@ -35,7 +35,7 @@ const Footer = () => {
           navigate("/main");
         }}
       >
-        <img src={isListHoverMain ? footerMainC : footerMain} />
+        <img src={isListHoverMain ? footerMainC : footerMain} alt=""/>
       </li>
 
       <li

@@ -1,22 +1,17 @@
-import { React, useState, useRef, useEffect } from "react";
+import { React, useState, useRef } from "react";
 import styled from "styled-components";
 import Thumnail from "../../assets/main/Thumnail.png";
 import upload from "../../assets/main/upload.png";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { __addCertification } from "../../redux/modules/certificationSlice";
-import { useNavigate } from "react-router-dom";
-
 
 export default function VideoInput(props) {
-  const { width, height, number, modal } = props;
-
-  console.log(modal)
+  const { width, height, number, modal, ref } = props;
 
   const inputRef = useRef();
   const dispatch = useDispatch();
   const [source, setSource] = useState();
   const [state, setState] = useState();
-  const navigate = useNavigate();
 
 
   const handleFileChange = (event) => {
@@ -34,13 +29,10 @@ export default function VideoInput(props) {
       formData,
       number
     }));
-    // navigate("/", {replace: true});
-    modal(false)
+    modal(false);
+    ref.current.slickNext()
   }
 
-  // useEffect(() => {
-  //   navigate("/");
-  // }, [])
 
   const handleChoose = (event) => {
     inputRef.current.click();
@@ -94,6 +86,7 @@ export default function VideoInput(props) {
 
         {/* <div className="VideoInput_footer">{source || "Nothing selectd"}</div> */}
       </StVideoRegisterContainer>
+      <span>* 세로 영상만 지원합니다 쓰파</span>
       <StButtonContainer>
         <button onClick={addVideo}>확인</button>
       </StButtonContainer>
@@ -107,6 +100,8 @@ const Stbutton = styled.button`
   justify-content: center;
   align-items: center;
   cursor:pointer;
+  font-family: sans-serif;
+  font-weight: 500;
 `;
 
 const StVideoRegisterContainer = styled.div`
@@ -153,6 +148,8 @@ const StVideoRegisterContainer = styled.div`
     transform: translate(-0px, -1px);
   }
   `;
+
+
 
 const StButtonContainer = styled.div`
   margin-top: 80px;

@@ -1,16 +1,21 @@
 import { React, useState, useEffect } from "react";
 import styled from "styled-components";
 import RegisterModal from "./RegisterModal";
-import Modal from "./Modal";
 import { __loadMainGoal } from "../../redux/modules/goalSlice";
 import { useDispatch, useSelector } from "react-redux";
-import stamp from "../../assets/main/stamp.png"
+import stamp from "../../assets/main/stamp.png";
+import MainModal from "./MainModal";
+import FailModal from "./FailModal";
 
 const MainGoalSecond = (props) => {
   const [modalopen, setModalOpen] = useState(false);
+  const [failmodalClose, setFailModalClose] = useState(true);
   const dispatch = useDispatch();
   const getMainGoal = useSelector((state) => state.goal.list.result);
-  // const videoUploadCheck = useSelector((state) => state.certification.list.success);
+  const date = (getMainGoal?.day1.date.slice(0,10))
+  const today = new Date();
+  const selectedDay = new Date(date);
+  
   const videoUploadCheck = useSelector((state) => state.goal.list.result?.day2);
 
   useEffect(() => {
@@ -30,10 +35,20 @@ const MainGoalSecond = (props) => {
         :
         <>
         <span>오늘 목표를 완성하셨네요!</span><br />
-        <span>훌룽해요!</span>
+        <span>훌륭해요!</span>
         </>
         } 
       </StGuideTextContainer>
+      {videoUploadCheck?.uploaded === false ?
+      today.getTime() - selectedDay.getTime() > 0 ?
+        ""
+       : 
+       failmodalClose === true ? 
+        <FailModal number={2} date={getMainGoal?.day2.date.slice(0,10)} setModal={setFailModalClose}/> 
+        : null
+      :
+       <MainModal number={2} date={getMainGoal?.day2.date.slice(0,10)}/>
+      }
       <StMainGoalTextContainer>
         {videoUploadCheck?.uploaded === false ?
           <h1 className="isGoal">작심 2일</h1>
@@ -43,6 +58,7 @@ const MainGoalSecond = (props) => {
           <img src= {stamp} alt=""/>
           </>
         }
+        
       <StTitleContainer>
         <p>{getMainGoal?.goal}</p>
         <p className="date">{getMainGoal?.day2.date.slice(0,10)}</p>
@@ -105,11 +121,13 @@ const StTitleContainer  = styled.div`
   width: 200px;
 
   & > p {
-    font-weight: 600;
+    font-weight: 700;
+    font-family: sans-serif;
   }
 
   & > .date {
     font-weight: 300;
+    font-family: sans-serif;
   }
 
 `;

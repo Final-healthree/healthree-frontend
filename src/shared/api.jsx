@@ -1,15 +1,15 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "http://wetube-phenomenonlee.shop/",
+  baseURL: "https://wetube-phenomenonlee.shop/",
+  // baseURL: "http://3.35.55.219/",
   // baseURL: "http://52.78.100.140/",
   // baseURL: "http://54.180.113.121/",
   // baseURL: "http://15.164.233.193/",
   headers: {
     // Authorization: `Bearer ${token}`,
-    // Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOjMsIm5pY2tuYW1lIjoi7Jyg7JiBIiwicHJvZmlsZV9pbWFnZSI6Imh0dHA6Ly9rLmtha2FvY2RuLm5ldC9kbi9ielNMRDgvYnRySTJjd3lZYmcvMDJvTkNvWVVlZXF4czdReVp3a2E2MC9pbWdfNjQweDY0MC5qcGcifSwiaWF0IjoxNjYzNjQ5OTA5LCJleHAiOjE2NjM3MzYzMDl9.qNH-DrnMXV2r59mdtaf-a8_tVuDVkrmoRqUEEzAyLso`,
-    // Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOjIsIm5pY2tuYW1lIjoi7J207IOB7ZiEIiwicHJvZmlsZV9pbWFnZSI6Imh0dHA6Ly9rLmtha2FvY2RuLm5ldC9kbi80SWxMcS9idHJJUkZaMWdyUy9GQWFYOXlNMGc3UWN4M05LcmhzblNLL2ltZ182NDB4NjQwLmpwZyJ9LCJpYXQiOjE2NjM4MzE2OTcsImV4cCI6MTY2MzkxODA5N30.FdpX1za0v5V_SfaOfkEB9PlMu7sC5WjvgSJFvv0I50g`,
-    Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOjEsIm5pY2tuYW1lIjoi7J207IOB7ZiEIiwicHJvZmlsZV9pbWFnZSI6Imh0dHA6Ly9rLmtha2FvY2RuLm5ldC9kbi80SWxMcS9idHJJUkZaMWdyUy9GQWFYOXlNMGc3UWN4M05LcmhzblNLL2ltZ182NDB4NjQwLmpwZyJ9LCJpYXQiOjE2NjM4NjQzMjMsImV4cCI6MTY2Mzk1MDcyM30.V0l9_F-0cfC37kS0o3ZWd09LCLvOjQa_2W09XmghUR4`,
+    // Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOjQsIm5pY2tuYW1lIjoi7LCo7IiY6528IiwicHJvZmlsZV9pbWFnZSI6Imh0dHA6Ly9rLmtha2FvY2RuLm5ldC9kbi9iZndUZHAvYnRxMEEwMXc4OFEvS1RGMTJrS081eG5kUm4xMGtxbXV4MC9pbWdfNjQweDY0MC5qcGcifSwiaWF0IjoxNjY0MTcxMzE2LCJleHAiOjE2NjQyNTc3MTZ9.blSwXXRBIaMrTlG6fQjl5MAFgZEromfFAFvNEC5hohE`,
+    Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOjEsIm5pY2tuYW1lIjoi7Jyg7JiBIiwicHJvZmlsZV9pbWFnZSI6Imh0dHA6Ly9rLmtha2FvY2RuLm5ldC9kbi9ielNMRDgvYnRySTJjd3lZYmcvMDJvTkNvWVVlZXF4czdReVp3a2E2MC9pbWdfNjQweDY0MC5qcGcifSwiaWF0IjoxNjY0MTU2MDAwLCJleHAiOjE2NjQyNDI0MDB9.7ez9Z_IZhXRN_zLXKMuRQsQ2KeKrdSLYME0rWbHgLfk`,
     
     "Content-Type": "application/json;charset=UTF-8",
     // "Content-Type": "multipart/form-data",

@@ -1,15 +1,21 @@
 import { React, useState, useEffect } from "react";
 import styled from "styled-components";
 import RegisterModal from "./RegisterModal";
-import Modal from "./Modal";
 import { __loadMainGoal } from "../../redux/modules/goalSlice";
 import { useDispatch, useSelector } from "react-redux";
-import stamp from "../../assets/main/stamp.png"
+import stamp from "../../assets/main/stamp.png";
+import MainModal from "./MainModal";
+import FailModal from "./FailModal";
 
 const MainGoalThird = (props) => {
   const [modalopen, setModalOpen] = useState(false);
+  const [failmodalClose, setFailModalClose] = useState(true);
   const dispatch = useDispatch();
   const getMainGoal = useSelector((state) => state.goal.list.result);
+  const date = (getMainGoal?.day1.date.slice(0,10))
+  const today = new Date();
+  const selectedDay = new Date(date);
+ 
   const videoUploadCheck = useSelector((state) => state.certification.list);
 
   console.log(videoUploadCheck)
@@ -31,10 +37,20 @@ const MainGoalThird = (props) => {
         :
         <>
         <span>오늘 목표를 완성하셨네요!</span><br />
-        <span>훌룽해요!</span>
+        <span>훌륭해요!</span>
         </>
         } 
       </StGuideTextContainer>
+      {videoUploadCheck?.success === undefined ?
+      today.getTime() - selectedDay.getTime() > 0 ?
+        ""
+       : 
+       failmodalClose === true ? 
+        <FailModal number={3} date={getMainGoal?.day3.date.slice(0,10)} setModal={setFailModalClose}/> 
+        : null
+      :
+       <MainModal number={3} date={getMainGoal?.day3.date.slice(0,10)}/>
+      }
       <StMainGoalTextContainer>
         {videoUploadCheck?.success === undefined ?
           <h1 className="isGoal">작심 3일</h1>
@@ -106,11 +122,13 @@ const StTitleContainer  = styled.div`
   width: 200px;
 
   & > p {
-    font-weight: 600;
+    font-weight: 700;
+    font-family: sans-serif;
   }
 
   & > .date {
     font-weight: 300;
+    font-family: sans-serif;
   }
 
 `;
