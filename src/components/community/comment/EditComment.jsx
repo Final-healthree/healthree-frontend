@@ -54,7 +54,9 @@ function StCommentText(props) {
   );
 }
 
+
 export default StCommentText;
+
 
 const StComment = styled.input`
   border: none;
