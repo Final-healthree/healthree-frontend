@@ -2,7 +2,6 @@ import getTargetsByDateList from "./hi";
 import getCalenderCss from "./hello";
 
 function getDateOption(props) {
-  console.log(props);
   const failCssList = getCalenderCss("fail");
   const failTargetList = getTargetsByDateList(props.fail);
 
