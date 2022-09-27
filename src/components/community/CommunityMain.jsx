@@ -23,21 +23,24 @@ function CommunityMain() {
 
   const [like, setLike] = useState(true);
 
-  const onlike = (postid, like) => {
-    if (like) {
+  const onlike = (postid, islike) => {
+    console.log(postid, islike);
+    if (islike) {
       serverAxios
         .delete(process.env.REACT_APP_REST_API_KEY + `api/posts/like/${postid}`)
         .then((res) => {
+          console.log(res);
           if (res.data.result === "좋아요 취소 성공") {
-            setLike(!like);
+            setLike(false);
           }
         });
     } else {
       serverAxios
         .post(process.env.REACT_APP_REST_API_KEY + `api/posts/like/${postid}`)
         .then((res) => {
+          console.log(res);
           if (res.data.result === "좋아요 성공") {
-            setLike(!like);
+            setLike(true);
           }
         });
     }
@@ -102,13 +105,13 @@ function CommunityMain() {
                   <span>{post.comment_cnt}</span>
                 </div>
                 <div>
-                  <Icon
+                  {/* <Icon
                     onClick={() => {
                       onlike(post.post_id, post.is_like);
                     }}
                     src={like === post.is_like ? likeimg : unLikeimg}
                   />
-                  <span>{post.like_cnt}</span>
+                  <span>{post.like_cnt}</span> */}
                 </div>
               </StBottom>
             </StContent>
@@ -139,9 +142,9 @@ function CommunityMain() {
                 <div>
                   <Icon
                     onClick={() => {
-                      onlike(post.post_id, like);
+                      onlike(post.post_id, post.is_like);
                     }}
-                    src={like === post.is_like ? likeimg : unLikeimg}
+                    src={like ? likeimg : unLikeimg}
                   />
                   <span>{post.like_cnt}</span>
                 </div>
@@ -215,4 +218,5 @@ const Period = styled.p`
 const Icon = styled.img`
   width: 20px;
   height: 20px;
+  cursor: pointer;
 `;
