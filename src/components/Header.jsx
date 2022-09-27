@@ -7,12 +7,12 @@ import headerLogo from "../assets/headerFooter/headerLogo.svg";
 
 const Header = () => {
   const navigate = useNavigate();
+
     //로그인 페이지 헤더 숨기기
-    if (window.location.pathname === '/login') return null;
+    if (window.location.pathname === '/') return null;
 
   return (
     <StHeader>
-      {/* <img src={back} onclick={() => navigate('/login')} style = {{width:'30px'}}/> */}
       <img src={headerLogo} alt=""/>
     </StHeader>
   );  
@@ -24,9 +24,11 @@ const StHeader = styled.div`
   width: 375px;
   height: 70px;
   display: flex;
+  
   position: sticky;
   top: 0;
-  left: 50%;
+
+  /* left: 50%; */
   /* justify-content: flex-start; */
-  transform: translateX(-50%);
+  /* transform: translateX(50%); */
 `;

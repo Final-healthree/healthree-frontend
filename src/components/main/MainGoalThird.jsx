@@ -18,8 +18,6 @@ const MainGoalThird = (props) => {
  
   const videoUploadCheck = useSelector((state) => state.certification.list);
 
-  console.log(videoUploadCheck)
-
   useEffect(() => {
     dispatch(__loadMainGoal());
   }, [])

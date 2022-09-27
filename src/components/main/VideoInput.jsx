@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { __addCertification } from "../../redux/modules/certificationSlice";
 
 export default function VideoInput(props) {
-  const { width, height, number, modal, ref } = props;
+  const { width, height, number, modal } = props;
 
   const inputRef = useRef();
   const dispatch = useDispatch();
@@ -30,7 +30,6 @@ export default function VideoInput(props) {
       number
     }));
     modal(false);
-    ref.current.slickNext()
   }
 
 
