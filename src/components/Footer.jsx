@@ -86,8 +86,9 @@ const StFooterMain = styled.ul`
   
   position: sticky;
   bottom: 0;
+  
   //중앙 정렬
-  left: 50%;
-  transform: translateX(-50%);
+  /* left: 50%; */
+  /* transform: translateX(-50%); */
   cursor: pointer;
 `;

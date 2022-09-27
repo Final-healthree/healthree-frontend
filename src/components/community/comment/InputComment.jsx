@@ -28,14 +28,14 @@ function CommentInput(props) {
   return (
     <StWrap>
       <InputBox>
-        <input
+        <Input
           onChange={onChangeHandler}
           type="text"
           value={newcomments.comment}
           placeholder="Text"
         />
-        <InPutBtn onClick={onSubmitHandler}>댓글달기</InPutBtn>
       </InputBox>
+        <InPutBtn onClick={onSubmitHandler}>댓글달기</InPutBtn>
     </StWrap>
   );
 }
@@ -44,20 +44,29 @@ export default CommentInput;
 
 const StWrap = styled.div`
   width: 100%;
-  min-height: 88px;
+  min-height: 20px;
 
   padding: 10px 24px;
-
   display: flex;
-  gap: 10px;
 
-  position: absolute;
-  bottom: 0;
+  gap: 6px
+
+  /* position: absolute; */
+  /* bottom: 0; */
 `;
-const InputBox = styled.button`
-  border: 0;
+const Input = styled.input`
+width : 270px;
+height : 27px;
+font-size : 16px
+`
+
+const InputBox = styled.div`
+  
+border: 0;
   outline: 0;
   background-color: transparent;
+  gap: 10px;
+
 `;
 
 const InPutBtn = styled.button`
