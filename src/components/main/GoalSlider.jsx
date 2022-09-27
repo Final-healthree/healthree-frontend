@@ -26,9 +26,9 @@ const GoalSlider = (props) => {
         <Slider ref={sliderRef} {...settings}>
           <div>
             <MainGoalFirst number = {1} />
-        <button onClick={()=>{
+        {/* <button onClick={()=>{
           sliderRef.current.slickNext()
-        }}>next</button>
+        }}>next</button> */}
           </div>
           <div>
             <MainGoalSecond number = {2} />

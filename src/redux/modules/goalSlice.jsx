@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { api } from "../../shared/api";
 import serverAxios from "../../components/axios/server.axios";
 
 export const __loadMainGoal = createAsyncThunk("user/MAINGOAL", async () => {
@@ -11,6 +10,7 @@ const goalSlice = createSlice({
   name: "goal",
   initialState: {
     list: [],
+    status: "",
   },
   reducers: {},
 
@@ -19,14 +19,15 @@ const goalSlice = createSlice({
       .addCase(__loadMainGoal.fulfilled, (state, action) => {
         // console.log(action)
         // state.loading = false;
-        state.list = action.payload;
         // state.session = true;
+        state.list = action.payload;
+        state.status = "complete";
       })
       .addCase(__loadMainGoal.rejected, (state, action) => {
-        state.loading = false;
+        state.status = "false";
       })
       .addCase(__loadMainGoal.pending, (state, action) => {
-        state.loading = true;
+        state.status = "Loading";
       });
   },
 });
