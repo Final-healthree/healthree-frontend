@@ -10,17 +10,19 @@ const Layout = (props) => {
 const StLayout = styled.div`
   min-width: 360px;
   max-width: 375px;
-  height: 100vh;
-  max-height: calc(100vh - 90px - 70px);
-  overflow-y: scroll; //스크롤 달아줌, 부모크기 고정      +)hidden 짤림
+  height: 700vh;
+  max-height: calc(100vh - 200px);
   margin: 0 auto;
   /* background-color: #fff; */
   position: relative;
-
+  overflow-y: scroll;
+  
   ::-webkit-scrollbar {
-  display: none; /* Chrome , Safari , Opera */
-  background-image: 0% 0% / 100% 100% no-repeat;
-  }
+  display: none; 
+};
+
+background-image: 0% 0% / 100% 100% no-repeat;
+
 `;
 
 export default Layout;

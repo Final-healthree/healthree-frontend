@@ -24,8 +24,10 @@ const StHeader = styled.div`
   width: 375px;
   height: 70px;
   display: flex;
+  
   position: sticky;
   top: 0;
+
   left: 50%;
   /* justify-content: flex-start; */
   transform: translateX(-50%);

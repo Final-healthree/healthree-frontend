@@ -83,7 +83,8 @@ const StFooterMain = styled.ul`
   justify-content: space-around;
   background-color: #fff;
   box-shadow: 0 -7px 5px -5px #9c939376;
-  position: absolute;
+  
+  position: sticky;
   bottom: 0;
   //중앙 정렬
   left: 50%;

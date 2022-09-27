@@ -21,8 +21,8 @@ function Comments() {
     await serverAxios
       .get(
         process.env.REACT_APP_REST_API_KEY +
-          `api/comments/${params.postid}` +
-          `?pagecount=5&&page=${page}`
+        `api/comments/${params.postid}` +
+        `?pagecount=5&&page=${page}`
       )
       .then((res) => {
         console.log(res);
@@ -34,7 +34,7 @@ function Comments() {
   useEffect(() => {
     getInfo();
   }, [page]);
-console.log(comments)
+  console.log(comments)
   return (
 
     <>
@@ -54,17 +54,19 @@ console.log(comments)
             </StContentContainer>
             <StCommentBottom>
               <StDate>
-            <EditComment />
-              <DeleteComment comment_id={comments.comment_id} />
+                <EditComment />
+                <DeleteComment comment_id={comments.comment_id} />
               </StDate>
-                <DateComment date={comments.date} />
+              <DateComment date={comments.date} />
             </StCommentBottom>
             <Hr />
           </div>
         ))}
       </StWrapper>
-      <InputComment data={params.postid} />
       <Pagination total={20} limit={5} page={page} setPage={setPage} />
+      <StInputArea>
+        <InputComment data={params.postid} />
+      </StInputArea>
     </>
 
   );
@@ -119,12 +121,14 @@ const StCommentBottom = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+
 const Hr = styled.hr`
-
 border: solid 1px #f2f2f2f4;
-`
+`;
 
-const StED = styled.div`
-display: flex;
-`
+const StInputArea = styled.div`
+
+position: sticky;
+bottom: 100px;
+`;
 
