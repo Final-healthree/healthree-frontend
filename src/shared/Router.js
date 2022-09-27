@@ -15,8 +15,8 @@ import Rank from "../pages/Rank";
 const Router = () => {
   return (
     <BrowserRouter>
-      <Header />
       <Layout>
+      <Header />
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/main" element={<Main />} />
@@ -26,10 +26,9 @@ const Router = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/rank" element={<Rank />} />
-
         </Routes>
-      </Layout>
       <Footer />
+      </Layout>
     </BrowserRouter>
   );
 };

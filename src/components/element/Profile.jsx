@@ -8,9 +8,8 @@ function Profile() {
 
   const getProfile = async () => {
     await serverAxios
-      .get(process.env.REACT_APP_REST_API_KEY + `api/users/my_calendar`)
+      .get(process.env.REACT_APP_REST_API_KEY + `api/goals/mine`)
       .then((result) => {
-        // console.log(result);
         setProfileImage(result.data.result.profile_image);
         setNickName(result.data.result.nickname);
       });
