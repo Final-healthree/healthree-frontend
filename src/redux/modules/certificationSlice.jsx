@@ -1,12 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { api } from "../../shared/api";
 import { __loadMainGoal } from "./goalSlice";
+import serverAxios from "../../components/axios/server.axios";
 
 
 export const __addCertification = createAsyncThunk(
   "post/CERTIFICATION",
   async (payload, thunkAPI) => {
-    const response = await api.post(`/api/videos/${payload.number}`, payload.formData, 
+    const response = await serverAxios.post(`/api/videos/${payload.number}`, payload.formData, 
     {
       headers: {
       "Content-Type": "multipart/form-data",
@@ -21,8 +22,7 @@ export const __addCertification = createAsyncThunk(
 export const __addFail = createAsyncThunk(
   "goal/FAIL",
   async (payload, thunkAPI) => {
-    console.log(payload)
-    const response = await api.put(`api/goals/fail/${payload}`, payload);
+    const response = await serverAxios.patch(`api/goals/fail/${payload}`, payload);
     return response.data;
   }
 );
@@ -31,6 +31,7 @@ const certificationSlice = createSlice({
   name: "certification",
   initialState: {
     list: [],
+    status: "",
   },
   reducers: {
     ModalDoor: (state, action) => {
@@ -43,13 +44,13 @@ const certificationSlice = createSlice({
       .addCase(__addCertification.fulfilled, (state, action) => {
         // state.list = [action.payload, ...state.list];
         state.list = action.payload;
-        state.loading = false;
+        state.status = 'complete';
       })
       .addCase(__addCertification.rejected, (state, action) => {
-        state.loading = false;
+        state.status = 'false';
       })
       .addCase(__addCertification.pending, (state, action) => {
-        state.loading = true;
+        state.status = '동영상을 합치는 중입니다...';
       })
       .addCase(__addFail.fulfilled, (state, action) => {
         // state.list = [action.payload, ...state.list];
