@@ -21,7 +21,7 @@ function CommunityMain() {
   const [ref, inView] = useInView();
   const navigate = useNavigate();
 
-  const [like, setLike] = useState(false);
+  const [like, setLike] = useState(true);
 
   const onlike = (postid, like) => {
     if (like) {
@@ -29,7 +29,7 @@ function CommunityMain() {
         .delete(process.env.REACT_APP_REST_API_KEY + `api/posts/like/${postid}`)
         .then((res) => {
           if (res.data.result === "좋아요 취소 성공") {
-            setLike(false);
+            setLike(!like);
           }
         });
     } else {
@@ -37,7 +37,7 @@ function CommunityMain() {
         .post(process.env.REACT_APP_REST_API_KEY + `api/posts/like/${postid}`)
         .then((res) => {
           if (res.data.result === "좋아요 성공") {
-            setLike(true);
+            setLike(!like);
           }
         });
     }
@@ -102,9 +102,9 @@ function CommunityMain() {
                 <div>
                   <Icon
                     onClick={() => {
-                      onlike(post.post_id, like);
+                      onlike(post.post_id, post.is_like);
                     }}
-                    src={like ? likeimg : unLikeimg}
+                    src={like === post.is_like ? likeimg : unLikeimg}
                   />
                   <span>{post.like_cnt}</span>
                 </div>
@@ -139,7 +139,7 @@ function CommunityMain() {
                     onClick={() => {
                       onlike(post.post_id, like);
                     }}
-                    src={like ? likeimg : unLikeimg}
+                    src={like === post.is_like ? likeimg : unLikeimg}
                   />
                   <span>{post.like_cnt}</span>
                 </div>
