@@ -21,7 +21,7 @@ function CommunityMain() {
   const [ref, inView] = useInView();
   const navigate = useNavigate();
 
-  const [like, setLike] = useState(false);
+  const [like, setLike] = useState(true);
 
   const onlike = (postid, like) => {
     if (like) {
@@ -29,7 +29,7 @@ function CommunityMain() {
         .delete(process.env.REACT_APP_REST_API_KEY + `api/posts/like/${postid}`)
         .then((res) => {
           if (res.data.result === "좋아요 취소 성공") {
-            setLike(false);
+            setLike(!like);
           }
         });
     } else {
@@ -37,7 +37,7 @@ function CommunityMain() {
         .post(process.env.REACT_APP_REST_API_KEY + `api/posts/like/${postid}`)
         .then((res) => {
           if (res.data.result === "좋아요 성공") {
-            setLike(true);
+            setLike(!like);
           }
         });
     }
@@ -55,7 +55,6 @@ function CommunityMain() {
           `api/posts?pagecount=5&&page=${page}`
       )
       .then((res) => {
-        console.log(res);
         setPosts([...posts, ...res.data.result.post]);
       });
     setLoading(false);
@@ -93,7 +92,10 @@ function CommunityMain() {
               <StBottom>
                 <div>
                   <Goal>{post.goal_name}</Goal>
-                  <Period>{format(new Date(), "yy-MM-dd")}</Period>
+                  <Period>
+                    {format(new Date(post.day1), "yy.MM.dd")} ~{" "}
+                    {format(new Date(post.day3), "yy.MM.dd")}{" "}
+                  </Period>
                 </div>
                 <div>
                   <Icon src={comments} />
@@ -102,9 +104,9 @@ function CommunityMain() {
                 <div>
                   <Icon
                     onClick={() => {
-                      onlike(post.post_id, like);
+                      onlike(post.post_id, post.is_like);
                     }}
-                    src={like ? likeimg : unLikeimg}
+                    src={like === post.is_like ? likeimg : unLikeimg}
                   />
                   <span>{post.like_cnt}</span>
                 </div>
@@ -126,8 +128,8 @@ function CommunityMain() {
                 <div>
                   <Goal>{post.goal_name}</Goal>
                   <Period>
-                    {format(new Date(), "yy.MM.dd")} ~{" "}
-                    {format(new Date(), "yy.MM.dd")}{" "}
+                    {format(new Date(post.day1), "yy.MM.dd")} ~{" "}
+                    {format(new Date(post.day3), "yy.MM.dd")}{" "}
                   </Period>
                 </div>
                 <div>
@@ -139,7 +141,7 @@ function CommunityMain() {
                     onClick={() => {
                       onlike(post.post_id, like);
                     }}
-                    src={like ? likeimg : unLikeimg}
+                    src={like === post.is_like ? likeimg : unLikeimg}
                   />
                   <span>{post.like_cnt}</span>
                 </div>
@@ -206,7 +208,9 @@ const Goal = styled.p`
   font-weight: 700;
 `;
 const Period = styled.p`
-  margin: 0;
+  margin-top: 4px;
+  font-size: 14px;
+  font-weight: 300;
 `;
 const Icon = styled.img`
   width: 20px;

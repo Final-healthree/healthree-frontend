@@ -21,7 +21,8 @@ export const __addCertification = createAsyncThunk(
 export const __addFail = createAsyncThunk(
   "goal/FAIL",
   async (payload, thunkAPI) => {
-    const response = await api.patch(`api/goals/fail/${payload}`, payload);
+    console.log(payload)
+    const response = await api.put(`api/goals/fail/${payload}`, payload);
     return response.data;
   }
 );

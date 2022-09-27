@@ -4,122 +4,120 @@ import styled from "styled-components";
 import serverAxios from "../../axios/server.axios";
 
 import InputComment from "./InputComment";
-import DeleteComment from "./DeleteComment";
-import EditComment from "./EditComment";
+import StCommentText from "./EditComment";
 import DateComment from "./DateComment";
 import Pagination from "./Pagination";
 
 function Comments() {
   const params = useParams();
   const [page, setPage] = useState(1);
-  const [newComments, setNewComments] = useState()
 
   const [comments, setComments] = useState([]);
-  console.log(params);
+  const [total, setTotal] = useState(0);
 
   const getInfo = async () => {
     await serverAxios
       .get(
         process.env.REACT_APP_REST_API_KEY +
-        `api/comments/${params.postid}` +
-        `?pagecount=5&&page=${page}`
+          `api/comments/${params.postid}` +
+          `?pagecount=4&&page=${page}`
       )
       .then((res) => {
-        console.log(res);
-        setComments([...res.data.result]);
+        setComments([...res.data.result.comment]);
+        setTotal(res.data.result.comment_cnt);
       });
   };
 
-  console.log(comments);
   useEffect(() => {
     getInfo();
   }, [page]);
-  console.log(comments)
-  return (
 
+  return (
     <>
       <StWrapper>
         {comments.map((comments) => (
           <div key={comments.comment_id}>
             <StContentContainer>
-              <StProfile>
-                <StImg src={comments.profile_image} />
-                <StNameText>
-                  <span>{comments.nickname}</span>
-                </StNameText>
-              </StProfile>
-              <StCommentText>
-                <span>{comments.comment}</span>
-              </StCommentText>
+              <div style={{ display: "flex", flexDirection: "row" }}>
+                <StProfile>
+                  <StImg src={comments.profile_image} />
+                  <StNameText>{comments.nickname}</StNameText>
+                </StProfile>
+                <Stcontent>
+                  <StCommentText
+                    value={comments.comment}
+                    comment_id={comments.comment_id}
+                    userId={comments.user_id}
+                  />
+                </Stcontent>
+              </div>
+              <ReplyTime>{DateComment({ date: comments.date })}</ReplyTime>
             </StContentContainer>
-            <StCommentBottom>
-              <StDate>
-                <EditComment />
-                <DeleteComment comment_id={comments.comment_id} />
-              </StDate>
-              <DateComment date={comments.date} />
-            </StCommentBottom>
-            <Hr />
           </div>
         ))}
       </StWrapper>
-      <Pagination total={20} limit={5} page={page} setPage={setPage} />
-      <StInputArea>
-        <InputComment data={params.postid} />
-      </StInputArea>
+      <InputComment data={params.postid} />
+      <Pagination total={total} limit={4} page={page} setPage={setPage} />
     </>
-
   );
 }
 
 export default Comments;
 
 const StWrapper = styled.div`
-  margin: 8px;
-  padding: 8px;
   display: flex;
   flex-direction: column;
-  border: 1px, solid grey;
-  border-radius: 16px;
+  padding: 10px 0;
 `;
 
 const StProfile = styled.div`
   display: flex;
   gap: 10px;
   align-items: center;
+  margin-right: 5px;
 `;
 
 const StImg = styled.img`
   width: 34px;
   height: 34px;
   border-radius: 50%;
+  border: 1px solid #dadada;
+`;
+
+const StNameText = styled.span`
+  color: black;
+  font-size: 14px;
+  width: 70px;
 `;
 
 const StContentContainer = styled.div`
-  margin-left: 8px;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  padding: 10px;
+  border-bottom: 1px solid #dadada;
+`;
+
+const Stcontent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
+
+  height: 50px;
+  width: 210px;
+  box-sizing: border-box;
+  padding-top: 9px;
+
+  gap: 20px;
 `;
 
-const StNameText = styled.div`
-  color: black;
-  font-size: 16px;
-  font-weight: bold;
-`;
-
-const StCommentText = styled.div`
-  color: black;
-  font-size: 16px;
-`;
-
-const StDate = styled.div`
-  color: #70cca6;
-  font-size: 14px;
-`;
 const StCommentBottom = styled.div`
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
+  
+  padding-top: 20px;
 `;
 
 const Hr = styled.hr`
@@ -132,3 +130,14 @@ position: sticky;
 bottom: 100px;
 `;
 
+
+const ReplyTime = styled.p`
+  display: flex;
+  justify-content: flex-end;
+  color: #70cca6;
+  width: 350px;
+  height: 18px;
+  font-family: sans-serif;
+  font-size: 10px;
+  margin: 0;
+`;
