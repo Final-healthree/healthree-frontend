@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Main from "../pages/Main";
 import Login from "../pages/Login";
-import Detail from "../pages/Detail";
 import Community from "../pages/Community";
 import CommunityDetail from "../pages/CommunityDetail";
 import Register from "../pages/Register";
@@ -16,7 +15,7 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Layout>
-      <Header />
+        <Header />
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/main" element={<Main />} />
@@ -26,7 +25,7 @@ const Router = () => {
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/rank" element={<Rank />} />
         </Routes>
-      <Footer />
+        <Footer />
       </Layout>
     </BrowserRouter>
   );
