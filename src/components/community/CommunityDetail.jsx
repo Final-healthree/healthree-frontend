@@ -2,11 +2,13 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
 import likeimg from "../../assets/community/like.svg";
 import unLikeimg from "../../assets/community/unLike.svg";
 import serverAxios from "../axios/server.axios";
+import backBtn from "../../assets/community/backbtn.svg";
 
 import { format } from "date-fns";
 
@@ -47,7 +49,6 @@ const CommunityDetailPost = () => {
     await serverAxios
       .get(process.env.REACT_APP_REST_API_KEY + `api/posts/${param.postid}`)
       .then((res) => {
-        console.log(res);
         setGetpost(res.data.result);
       });
   };
@@ -76,6 +77,9 @@ const CommunityDetailPost = () => {
       <StContent>
         <StTop>
           <UserInfo>
+            <BackBtn onClick={() => window.location.replace("/community")}>
+              <img src={backBtn} />
+            </BackBtn>
             <StImg src={getpost.profile_image} />
             <p style={{ margin: "0px" }}>{getpost.nickname}</p>
           </UserInfo>
@@ -101,10 +105,21 @@ const CommunityDetailPost = () => {
         <StBottom>
           <div>
             <span style={{ marginRight: "7px", fontWeight: "600" }}>
-              #{getpost.post && getpost.post.goal_name}
+              {getpost.post && getpost.post.goal_name}
             </span>
-            <span style={{ color: "#A0A0A0", fontSize: "12px" }}>22.09.26</span>
-            <Date>22.08.07 ~ 22.08.10</Date>
+            <span
+              style={{
+                color: "#A0A0A0",
+                fontSize: "12px",
+                fontFamily: "sans-serif",
+              }}
+            >
+              22.09.26
+            </span>
+            <Period>
+              {format(new Date(), "yy.MM.dd")} ~{" "}
+              {format(new Date(), "yy.MM.dd")}{" "}
+            </Period>
           </div>
           <div>
             <Likes
@@ -113,7 +128,9 @@ const CommunityDetailPost = () => {
               }}
               src={like ? likeimg : unLikeimg}
             />
-            <span>{getpost.post && getpost.post.like_cnt}</span>
+            <span style={{ fontFamily: "sans-serif" }}>
+              {getpost.post && getpost.post.like_cnt}
+            </span>
           </div>
         </StBottom>
       </StContent>
@@ -140,6 +157,11 @@ const StTop = styled.div`
   justify-content: space-between;
   margin-bottom: 40px;
   box-sizing: border-box;
+`;
+
+const BackBtn = styled.button`
+  background-color: #fff;
+  border: none;
 `;
 
 const UserInfo = styled.div`
@@ -180,12 +202,14 @@ const StVideo = styled.video`
 const StBottom = styled.div`
   display: flex;
   justify-content: space-around;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 `;
 
-const Date = styled.p`
+const Period = styled.p`
   margin: 0;
   font-size: 14px;
+  font-family: sans-serif;
+  font-weight: 600;
 `;
 
 const Likes = styled.img``;
