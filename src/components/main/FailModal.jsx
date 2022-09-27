@@ -1,10 +1,21 @@
-import { React, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import ModalFail from "../../assets/main/modal/ModalFail.svg";
 import fill from "../../assets/main/modal/fill.png";
+import { existgoal } from "../../redux/modules/existgoal";
+import { __addFail } from "../../redux/modules/certificationSlice";
+import { useDispatch } from "react-redux";
 
 const FailModal = (props) => {
   const { number, page, setModal } = props;
+  const dispatch = useDispatch();
+
+  const ReturnCalendar = () => {
+    dispatch(existgoal({
+      exist: false
+    }));
+    dispatch(__addFail(number))
+  };
 
   return (
     <StModalLayout>
@@ -13,14 +24,18 @@ const FailModal = (props) => {
         <img src={ModalFail} alt="" />
         <h5>작심 {number}일에 실패하셨습니다</h5>
         <StBtnLayout>
-          <button className="check"
+          <button
+            className="check"
             onClick={() => {
               setModal(false);
             }}
-          >확인</button>
-          <button className="retry"
-            onClick={()=>{
-
+          >
+            확인
+          </button>
+          <button
+            className="retry"
+            onClick={() => {
+              ReturnCalendar()
             }}
           >
             <img src={fill} alt="" />
@@ -31,7 +46,6 @@ const FailModal = (props) => {
     </StModalLayout>
   );
 };
-
 
 const StModalLayout = styled.div`
   position: fixed;
@@ -56,7 +70,7 @@ const StModalLayout = styled.div`
 
 const StModalContainer = styled.div`
   margin-top: 40px;
-  
+
   & > img {
     margin: 0 auto;
   }
@@ -67,25 +81,25 @@ const StBtnLayout = styled.div`
   justify-content: center;
   gap: 10px;
 
-    & > .check {
-      width: 93px;
-      height: 32px;
-      background: #dadada;
-      border-radius: 2px;
-      border: none;
-    }
+  & > .check {
+    width: 93px;
+    height: 32px;
+    background: #dadada;
+    border-radius: 2px;
+    border: none;
+  }
 
-    & > .retry {
-      width: 155px;
-      height: 32px;
-      background: #70cca6;
-      border-radius: 2px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding-right: 15px;
-      border: none;
-    }
+  & > .retry {
+    width: 155px;
+    height: 32px;
+    background: #70cca6;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 15px;
+    border: none;
+  }
 `;
 
 export default FailModal;

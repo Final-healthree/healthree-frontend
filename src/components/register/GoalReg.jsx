@@ -109,8 +109,12 @@ const GoalInput = styled.input`
   box-sizing: border-box;
   width: 340px;
   height: 52px;
-  border: 2px solid ${(props) => props.borderColor};
+  border: 1px solid ${(props) => props.borderColor};
   margin-bottom: 20px;
+  font-family: sans-serif;
+  padding-left: 15px;
+  font-weight: 500;
+  font-size: 16px;
 `;
 
 const Period = styled.div`
