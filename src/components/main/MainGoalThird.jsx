@@ -22,7 +22,6 @@ const MainGoalThird = (props) => {
   const videoUploadCheckFirst = useSelector((state) => state.goal.list.result?.day1);
   const videoUploadCheckSecond = useSelector((state) => state.goal.list.result?.day2);
 
-  console.log(videoUploadCheckSecond)
 
 
   useEffect(() => {
@@ -134,7 +133,7 @@ const StTitleContainer  = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 0 25px;
-  width: 200px;
+  width: 240px;
 
   & > p {
     font-weight: 700;

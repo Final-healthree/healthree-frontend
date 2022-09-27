@@ -6,16 +6,13 @@ import Profile from "../components/element/Profile";
 
 const Mypage = () => {
   return (
-    <StMainContainer>
-      <Profile/>
+    <>
+      <Profile />
       <Tab />
-    </StMainContainer>
+    </>
   );
 };
 
 export default Mypage;
 
-const StMainContainer = styled.div`
-  width: 100%;
-  height: 500px;
-`;
+

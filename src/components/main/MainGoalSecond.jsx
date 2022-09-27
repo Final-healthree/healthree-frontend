@@ -124,7 +124,7 @@ const StTitleContainer  = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 0 25px;
-  width: 200px;
+  width: 240px;
 
   & > p {
     font-weight: 700;

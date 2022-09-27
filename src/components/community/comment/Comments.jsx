@@ -4,7 +4,6 @@ import styled from "styled-components";
 import serverAxios from "../../axios/server.axios";
 
 import InputComment from "./InputComment";
-import DeleteComment from "./DeleteComment";
 import StCommentText from "./EditComment";
 import DateComment from "./DateComment";
 import Pagination from "./Pagination";
@@ -21,7 +20,7 @@ function Comments() {
       .get(
         process.env.REACT_APP_REST_API_KEY +
           `api/comments/${params.postid}` +
-          `?pagecount=5&&page=${page}`
+          `?pagecount=4&&page=${page}`
       )
       .then((res) => {
         setComments([...res.data.result.comment]);
@@ -36,30 +35,29 @@ function Comments() {
   return (
     <>
       <StWrapper>
+        <InputComment data={params.postid} />
         {comments.map((comments) => (
           <div key={comments.comment_id}>
             <StContentContainer>
-              <StProfile>
-                <StImg src={comments.profile_image} />
-                <StNameText>{comments.nickname}</StNameText>
-              </StProfile>
-              <Stcontent>
-                <StCommentText
-                  value={comments.comment}
-                  comment_id={comments.comment_id}
-                  userId={comments.user_id}
-                />
-                <StCommentBottom>
-                  <DeleteComment comment_id={comments.comment_id} />
-                  <DateComment date={comments.date} />
-                </StCommentBottom>
-              </Stcontent>
+              <div style={{ display: "flex", flexDirection: "row" }}>
+                <StProfile>
+                  <StImg src={comments.profile_image} />
+                  <StNameText>{comments.nickname}</StNameText>
+                </StProfile>
+                <Stcontent>
+                  <StCommentText
+                    value={comments.comment}
+                    comment_id={comments.comment_id}
+                    userId={comments.user_id}
+                  />
+                </Stcontent>
+              </div>
+              <ReplyTime>{DateComment({ date: comments.date })}</ReplyTime>
             </StContentContainer>
           </div>
         ))}
       </StWrapper>
-      {/* <InputComment data={params.postid} /> */}
-      <Pagination total={total} limit={5} page={page} setPage={setPage} />
+      <Pagination total={total} limit={4} page={page} setPage={setPage} />
     </>
   );
 }
@@ -94,7 +92,7 @@ const StNameText = styled.span`
 
 const StContentContainer = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: flex-start;
   padding: 10px;
   border-bottom: 1px solid #dadada;
@@ -103,17 +101,43 @@ const StContentContainer = styled.div`
 const Stcontent = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-  height: 69px;
-  width: 192px;
+  height: 50px;
+  width: 210px;
   box-sizing: border-box;
   padding-top: 9px;
+
+  gap: 20px;
 `;
 
 const StCommentBottom = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-
+  
   padding-top: 20px;
+`;
+
+const Hr = styled.hr`
+border: solid 1px #f2f2f2f4;
+`;
+
+const StInputArea = styled.div`
+
+position: sticky;
+bottom: 100px;
+`;
+
+
+const ReplyTime = styled.p`
+  display: flex;
+  justify-content: flex-end;
+  color: #70cca6;
+  width: 350px;
+  height: 18px;
+  font-family: sans-serif;
+  font-size: 10px;
+  margin: 0;
 `;

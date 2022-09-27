@@ -21,7 +21,7 @@ const Main = () => {
     await serverAxios
       .get(process.env.REACT_APP_REST_API_KEY + `api/goals/exist`)
       .then((res) => {
-        dispatch(existgoal({ exist: res.data.success }));
+        dispatch(existgoal({ exist: res.data.result }));
       });
   };
 
@@ -30,16 +30,13 @@ const Main = () => {
   }, []);
 
   return (
-    <StMainContainer>
+    <>
       {exist ? <GoalSlider /> : <RegCalendar />}
-    </StMainContainer>
+    </>
+
   );
 };
 
-const StMainContainer = styled.div`
-  /* width: 100%; */
-  /* height: calc(100vh-54px-70px); */
-  /* height: 100vh; */
-`;
+
 
 export default Main;

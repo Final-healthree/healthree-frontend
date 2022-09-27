@@ -22,7 +22,6 @@ export const __addCertification = createAsyncThunk(
 export const __addFail = createAsyncThunk(
   "goal/FAIL",
   async (payload, thunkAPI) => {
-    console.log(payload)
     const response = await serverAxios.patch(`api/goals/fail/${payload}`, payload);
     return response.data;
   }

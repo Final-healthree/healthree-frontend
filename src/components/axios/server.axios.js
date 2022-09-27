@@ -25,7 +25,6 @@ const requestHandler = async (req) => {
       return req;
     }
   } else {
-    // console.log("성공");
     req.headers.Authorization = `Bearer ${Token}`;
 
     return req;

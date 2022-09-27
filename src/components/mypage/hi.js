@@ -1,11 +1,9 @@
 function getTargetsByDateList(dataList) {
-  console.log(dataList);
   const circleTarget = [];
   const leftCircleTarget = [];
   const rightCircleTarget = [];
   const squareTarget = [];
   for (const date of dataList) {
-    console.log(date);
     const { date: dateScope, goal_id } = date;
 
     if (dateScope.length === 1) {

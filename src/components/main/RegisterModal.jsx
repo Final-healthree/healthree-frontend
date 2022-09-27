@@ -27,8 +27,6 @@ const RegisterModal = (props) => {
     setGoalNumber(props.number);
   }, []);
   
-  console.log(goalnumber)
-
 
   const selectVideo = (e) => {
     const reader = new FileReader();
