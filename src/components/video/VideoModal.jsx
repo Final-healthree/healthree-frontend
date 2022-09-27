@@ -16,7 +16,11 @@ const VideoModal = (props) => {
   const ShareVideo = () => {
     serverAxios
       .post(process.env.REACT_APP_REST_API_KEY + `api/videos/share/${goalId}`)
-      .then((res) => console.log(res));
+      .then((res) => {
+        if (res.data.success === true) {
+          alert("공유 성공");
+        }
+      });
   };
 
   return (

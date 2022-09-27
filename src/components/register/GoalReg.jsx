@@ -6,8 +6,14 @@ import serverAxios from "../axios/server.axios";
 
 import { addDays, format } from "date-fns";
 
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { existgoal } from "../../redux/modules/existgoal";
+
 const GoalReg = () => {
   const regDay = useSelector((state) => state.registerday);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [info, setInfo] = useState({
     day1: format(new Date(regDay.start), "yyyy-MM-dd"),
@@ -32,7 +38,8 @@ const GoalReg = () => {
       .post(process.env.REACT_APP_REST_API_KEY + "api/goals/register", info)
       .then((res) => {
         alert(res.data.messgae);
-        console.log(res);
+        dispatch(existgoal({ exist: true }));
+        navigate("/main");
       })
       .catch((error) => {
         const type = error.response.data.message;

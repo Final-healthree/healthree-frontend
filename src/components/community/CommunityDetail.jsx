@@ -49,6 +49,7 @@ const CommunityDetailPost = () => {
     await serverAxios
       .get(process.env.REACT_APP_REST_API_KEY + `api/posts/${param.postid}`)
       .then((res) => {
+        console.log(res);
         setGetpost(res.data.result);
       });
   };
@@ -114,11 +115,12 @@ const CommunityDetailPost = () => {
                 fontFamily: "sans-serif",
               }}
             >
-              22.09.26
+              {getpost.post &&
+                format(new Date(getpost.post.createdAt), "yy.MM.dd")}
             </span>
             <Period>
-              {format(new Date(), "yy.MM.dd")} ~{" "}
-              {format(new Date(), "yy.MM.dd")}{" "}
+              {getpost.post && format(new Date(getpost.post.day1), "yy.MM.dd")}~{" "}
+              {getpost.post && format(new Date(getpost.post.day3), "yy.MM.dd")}{" "}
             </Period>
           </div>
           <div>

@@ -10,70 +10,26 @@ import ko from "date-fns/locale/ko";
 import getDateOption from "./get-date-option";
 
 function MyPageCalendar() {
-  const dataList = {
-    success: [
-      {
-        goal_id: 92,
-        date: [
-          "2022-08-10 09:00:00",
-          "2022-08-11 09:00:00",
-          "2022-08-12 09:00:00",
-        ],
-      },
-      {
-        goal_id: 93,
-        date: [
-          "2022-08-13 09:00:00",
-          "2022-08-14 09:00:00",
-          "2022-08-15 09:00:00",
-        ],
-      },
-      {
-        goal_id: 94,
-        date: [
-          "2022-08-16 09:00:00",
-          "2022-08-17 09:00:00",
-          "2022-08-18 09:00:00",
-        ],
-      },
-    ],
-    fail: [
-      {
-        goal_id: 38,
-        date: ["2022-09-03 09:00:00", "2022-09-04 09:00:00"],
-      },
-      {
-        goal_id: 89,
-        date: ["2022-08-01 09:00:00", "2022-08-02 09:00:00"],
-      },
-      {
-        goal_id: 90,
-        date: ["2022-08-04 09:00:00", "2022-08-05 09:00:00"],
-      },
-      {
-        goal_id: 91,
-        date: ["2022-08-07 09:00:00"],
-      },
-    ],
+  const [success, setSuccess] = useState([]);
+  const [fail, setFail] = useState([]);
+
+  const getDates = async () => {
+    await serverAxios
+      .get(process.env.REACT_APP_REST_API_KEY + `api/goals/mine`)
+      .then((res) => {
+        setSuccess([...success, ...res.data.result.date.success]);
+        setFail([...fail, ...res.data.result.date.fail]);
+      });
   };
+
+  useEffect(() => {
+    getDates();
+  }, []);
+
   const { modifiers, modifiersStyles } = getDateOption({
-    success: dataList.success,
-    fail: dataList.fail,
+    success: success,
+    fail: fail,
   });
-
-  // const getDates = async () => {
-  //   await serverAxios
-  //     .get(process.env.REACT_APP_REST_API_KEY + `api/users/my_calendar`)
-  //     .then((data) => {
-  //       setDates([...dates, ...data.data.result.date]);
-  //     });
-  // };
-
-  // useEffect(() => {
-  //   getDateOption(dataList.success);
-  // }, []);
-
-  // console.log(dataList);
 
   return (
     <Container>

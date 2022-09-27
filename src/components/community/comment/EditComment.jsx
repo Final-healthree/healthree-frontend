@@ -15,9 +15,11 @@ function StCommentText(props) {
     comment: props.value,
   });
 
-  const [onEdit, setOnEdit] = useState(true);
+  const [edit, setEdit] = useState(true);
+  const [input, setInput] = useState(false);
+
   const editHandler = () => {
-    setOnEdit(false);
+    setEdit(false);
   };
 
   const onChange = (e) => {
@@ -28,7 +30,7 @@ function StCommentText(props) {
   };
 
   const saveHandler = () => {
-    setOnEdit(true);
+    setEdit(true);
     serverAxios
       .put(
         process.env.REACT_APP_REST_API_KEY + `api/comments/${commentID}`,
@@ -57,21 +59,21 @@ function StCommentText(props) {
   return (
     <div>
       <StComment
-        disabled={onEdit}
+        disabled={edit}
         value={editComment.comment}
         onChange={onChange}
       />
       {myDecodedToken.payload.user_id === userID ? (
         <BtnArea>
-          {onEdit === true ? (
-            <EditBtn onClick={editHandler}>수정</EditBtn>
+          {edit === true ? (
+            <EditBtn onClick={() => editHandler()}>수정</EditBtn>
           ) : (
-            <EditBtn onClick={saveHandler}>완료</EditBtn>
+            <EditBtn onClick={() => saveHandler()}>완료</EditBtn>
           )}
-          {onEdit === true ? (
-            <EditBtn onClick={onDeleteHandler}>삭제</EditBtn>
+          {edit === true ? (
+            <EditBtn onClick={() => onDeleteHandler()}>삭제</EditBtn>
           ) : (
-            <EditBtn onClick={setOnEdit(true)}>취소</EditBtn>
+            <EditBtn onClick={() => setEdit(true)}>취소</EditBtn>
           )}
         </BtnArea>
       ) : null}
@@ -82,12 +84,13 @@ function StCommentText(props) {
 export default StCommentText;
 
 const StComment = styled.input`
-  border: none;
-  font-size: 14px;
+  border: ${(props) => (props.disabled ? "none" : "1px solid gray")};
+  border-radius: 2px;
+  font-size: 13px;
   background-color: #fff;
   font-weight: 600;
   font-family: sans-serif;
-  width: 200px;
+  width: 230px;
   white-space: nowrap;
 `;
 const BtnArea = styled.div`
