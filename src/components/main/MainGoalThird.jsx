@@ -32,7 +32,7 @@ const MainGoalThird = (props) => {
     <StMainLayout>
       <StGuideTextContainer>
         <h1>3/3</h1>
-        {videoUploadCheck?.uploaded === false ?
+        {videoUploadCheck?.uploaded === undefined ?
         <>
         <span>오늘 목표 인증을 아직 안하셨군요!</span><br />
         <span>목표를 인증하고,</span><br />
