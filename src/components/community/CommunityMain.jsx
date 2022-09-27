@@ -74,8 +74,6 @@ function CommunityMain() {
     }
   }, [inView, loading]);
 
-  console.log(posts);
-
   return (
     <Container>
       {posts.map((post, idx) => (
