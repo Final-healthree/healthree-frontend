@@ -30,16 +30,13 @@ const Main = () => {
   }, []);
 
   return (
-    <StMainContainer>
+    <>
       {exist ? <GoalSlider /> : <RegCalendar />}
-    </StMainContainer>
+    </>
+
   );
 };
 
-const StMainContainer = styled.div`
-  /* width: 100%; */
-  /* height: calc(100vh-54px-70px); */
-  /* height: 100vh; */
-`;
+
 
 export default Main;
