@@ -9,7 +9,7 @@ export const api = axios.create({
   headers: {
     // Authorization: `Bearer ${token}`,
     // Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOjQsIm5pY2tuYW1lIjoi7LCo7IiY6528IiwicHJvZmlsZV9pbWFnZSI6Imh0dHA6Ly9rLmtha2FvY2RuLm5ldC9kbi9iZndUZHAvYnRxMEEwMXc4OFEvS1RGMTJrS081eG5kUm4xMGtxbXV4MC9pbWdfNjQweDY0MC5qcGcifSwiaWF0IjoxNjY0MTcxMzE2LCJleHAiOjE2NjQyNTc3MTZ9.blSwXXRBIaMrTlG6fQjl5MAFgZEromfFAFvNEC5hohE`,
-    Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOjEsIm5pY2tuYW1lIjoi7Jyg7JiBIiwicHJvZmlsZV9pbWFnZSI6Imh0dHA6Ly9rLmtha2FvY2RuLm5ldC9kbi9ielNMRDgvYnRySTJjd3lZYmcvMDJvTkNvWVVlZXF4czdReVp3a2E2MC9pbWdfNjQweDY0MC5qcGcifSwiaWF0IjoxNjY0MTU2MDAwLCJleHAiOjE2NjQyNDI0MDB9.7ez9Z_IZhXRN_zLXKMuRQsQ2KeKrdSLYME0rWbHgLfk`,
+    Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOjQsIm5pY2tuYW1lIjoi7LCo7IiY6528IiwicHJvZmlsZV9pbWFnZSI6Imh0dHA6Ly9rLmtha2FvY2RuLm5ldC9kbi9iZndUZHAvYnRxMEEwMXc4OFEvS1RGMTJrS081eG5kUm4xMGtxbXV4MC9pbWdfNjQweDY0MC5qcGcifSwiaWF0IjoxNjY0MjUyNjE0LCJleHAiOjE2NjQzMzkwMTR9.He4t55-fLbQENyHx6eJtE-mbd-X0haDM1P-JoIqdwBo`,
     
     "Content-Type": "application/json;charset=UTF-8",
     // "Content-Type": "multipart/form-data",

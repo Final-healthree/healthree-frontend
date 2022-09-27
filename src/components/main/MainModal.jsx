@@ -3,14 +3,11 @@ import styled from "styled-components";
 import Modal1 from "../../assets/main/modal/Modal1.svg";
 import Modal2 from "../../assets/main/modal/Modal2.svg";
 import Modal3 from "../../assets/main/modal/Modal3.svg";
-import { useSelector } from "react-redux";
 
 
 const MainModal = (props) => {
   const { number } = props;
   const [modalOpen, setModalOpen] = useState(true);
-  const ModalisCheck = useSelector((state) => state)
-  console.log(ModalisCheck)
   
   return (
     <div>
