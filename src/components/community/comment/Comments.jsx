@@ -35,6 +35,7 @@ function Comments() {
   return (
     <>
       <StWrapper>
+        <InputComment data={params.postid} />
         {comments.map((comments) => (
           <div key={comments.comment_id}>
             <StContentContainer>
@@ -56,7 +57,6 @@ function Comments() {
           </div>
         ))}
       </StWrapper>
-      <InputComment data={params.postid} />
       <Pagination total={total} limit={4} page={page} setPage={setPage} />
     </>
   );
