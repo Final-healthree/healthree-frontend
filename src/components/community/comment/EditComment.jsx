@@ -1,37 +1,70 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import serverAxios from "../../axios/server.axios";
 
-function EditComment({comment, newComments, setNewComments}) {
+import { decodeToken } from "react-jwt";
 
-    console.log(comment)
-    const [editComment, setEditComment] = useState({
-       comment :"",
+function StCommentText(props) {
+  const token = localStorage.getItem("Token");
+  const myDecodedToken = decodeToken(token);
+
+  const commentID = props.comment_id;
+  const userID = props.userId;
+
+  const [editComment, setEditComment] = useState({
+    comment: props.value,
+  });
+
+  const [onEdit, setOnEdit] = useState(true);
+  const editHandler = () => {
+    setOnEdit(!onEdit);
+  };
+
+  const onChange = (e) => {
+    setEditComment({
+      ...editComment,
+      comment: e.target.value,
     });
+  };
 
-    const [isEdit, setIsEdit] = useState(false);
-    
-    // const handleToggle() {
-    //     setIsEdit(!isEdit
+  const saveHandler = () => {
+    setOnEdit(!onEdit);
+    serverAxios
+      .put(
+        process.env.REACT_APP_REST_API_KEY + `api/comments/${commentID}`,
+        editComment
+      )
+      .then((res) => console.log(res));
+  };
 
-    // }
-    
-    const onEditHandler = () => {
-        
-    }
+  return (
+    <div>
+      <StComment
+        disabled={onEdit}
+        value={editComment.comment}
+        onChange={onChange}
+      />
+      {myDecodedToken.payload.user_id === userID ? (
+        <div>
+          <EditBtn onClick={editHandler}>수정하기</EditBtn>
+          <EditBtn onClick={saveHandler}>완료하기</EditBtn>
+        </div>
+      ) : null}
+    </div>
+  );
+}
 
-    return (
-        <EditBtn>
-        수정하기
-    </EditBtn>
-    );
-};
+export default StCommentText;
 
-export default EditComment;
+const StComment = styled.input`
+  border: none;
+  font-size: 16px;
+  background-color: #fff;
+`;
 
 const EditBtn = styled.button`
-color: gray;
-background-color: transparent;
-border:0;
-outline: 0;
-`
+  color: gray;
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+`;
