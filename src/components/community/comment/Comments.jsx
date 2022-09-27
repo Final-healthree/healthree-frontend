@@ -5,6 +5,7 @@ import serverAxios from "../../axios/server.axios";
 
 import InputComment from "./InputComment";
 import DeleteComment from "./DeleteComment";
+import StCommentText from "./EditComment";
 import DateComment from "./DateComment";
 import Pagination from "./Pagination";
 
@@ -13,7 +14,7 @@ function Comments() {
   const [page, setPage] = useState(1);
 
   const [comments, setComments] = useState([]);
-  console.log(params);
+  const [total, setTotal] = useState(0);
 
   const getInfo = async () => {
     await serverAxios
@@ -23,12 +24,11 @@ function Comments() {
           `?pagecount=5&&page=${page}`
       )
       .then((res) => {
-        console.log(res);
-        setComments([...res.data.result]);
+        setComments([...res.data.result.comment]);
+        setTotal(res.data.result.comment_cnt);
       });
   };
 
-  console.log(comments);
   useEffect(() => {
     getInfo();
   }, [page]);
@@ -41,26 +41,25 @@ function Comments() {
             <StContentContainer>
               <StProfile>
                 <StImg src={comments.profile_image} />
-                <StNameText>
-                  <span>{comments.nickname}</span>
-                </StNameText>
+                <StNameText>{comments.nickname}</StNameText>
               </StProfile>
-              <StCommentText>
-                <span>{comments.comment}</span>
-              </StCommentText>
+              <Stcontent>
+                <StCommentText
+                  value={comments.comment}
+                  comment_id={comments.comment_id}
+                  userId={comments.user_id}
+                />
+                <StCommentBottom>
+                  <DeleteComment comment_id={comments.comment_id} />
+                  <DateComment date={comments.date} />
+                </StCommentBottom>
+              </Stcontent>
             </StContentContainer>
-            <StCommentBottom>
-              <DeleteComment comment_id={comments.comment_id} />
-              <StDate>
-                <DateComment date={comments.date} />
-              </StDate>
-            </StCommentBottom>
-            <Hr />
           </div>
         ))}
       </StWrapper>
-      <InputComment data={params.postid} />
-      <Pagination total={20} limit={5} page={page} setPage={setPage} />
+      {/* <InputComment data={params.postid} /> */}
+      <Pagination total={total} limit={5} page={page} setPage={setPage} />
     </>
   );
 }
@@ -68,52 +67,53 @@ function Comments() {
 export default Comments;
 
 const StWrapper = styled.div`
-  margin: 8px;
-  padding: 8px;
   display: flex;
   flex-direction: column;
-  border: 1px, solid grey;
-  border-radius: 16px;
+  padding: 10px 0;
 `;
 
 const StProfile = styled.div`
   display: flex;
   gap: 10px;
   align-items: center;
+  margin-right: 5px;
 `;
 
 const StImg = styled.img`
   width: 34px;
   height: 34px;
   border-radius: 50%;
+  border: 1px solid #dadada;
+`;
+
+const StNameText = styled.span`
+  color: black;
+  font-size: 14px;
+  width: 70px;
 `;
 
 const StContentContainer = styled.div`
-  margin-left: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 10px;
+  border-bottom: 1px solid #dadada;
+`;
+
+const Stcontent = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+
+  height: 69px;
+  width: 192px;
+  box-sizing: border-box;
+  padding-top: 9px;
 `;
 
-const StNameText = styled.div`
-  color: black;
-  font-size: 16px;
-  font-weight: bold;
-`;
-
-const StCommentText = styled.div`
-  color: black;
-  font-size: 16px;
-`;
-
-const StDate = styled.div`
-  color: #70cca6;
-  font-size: 14px;
-`;
 const StCommentBottom = styled.div`
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
-`;
-const Hr = styled.hr`
-  border: solid 1px #f2f2f2f4;
+
+  padding-top: 20px;
 `;

@@ -13,7 +13,7 @@ const StLayout = styled.div`
   overflow-y: scroll; //스크롤 달아줌, 부모크기 고정      +)hidden 짤림
   margin: 0 auto;
   background-color: #fff;
-  position: relative;
+  /* position: relative; */
 
   ::-webkit-scrollbar {
     display: none; /* Chrome , Safari , Opera */

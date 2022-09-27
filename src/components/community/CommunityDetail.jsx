@@ -125,7 +125,7 @@ export default CommunityDetailPost;
 
 const StContent = styled.div`
   width: 375px;
-  height: 375px;
+  height: 400px;
 
   display: flex;
   flex-direction: column;
@@ -138,7 +138,8 @@ const StTop = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
+  box-sizing: border-box;
 `;
 
 const UserInfo = styled.div`
@@ -179,6 +180,7 @@ const StVideo = styled.video`
 const StBottom = styled.div`
   display: flex;
   justify-content: space-around;
+  margin-bottom: 40px;
 `;
 
 const Date = styled.p`

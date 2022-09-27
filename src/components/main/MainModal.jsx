@@ -3,15 +3,11 @@ import styled from "styled-components";
 import Modal1 from "../../assets/main/modal/Modal1.svg";
 import Modal2 from "../../assets/main/modal/Modal2.svg";
 import Modal3 from "../../assets/main/modal/Modal3.svg";
-import FailModal from "./FailModal"
-import { useSelector } from "react-redux";
 
 
 const MainModal = (props) => {
-  const { number, date } = props;
-  const [modalOpen, setModalOpen] = useState(false);
-  const ModalisCheck = useSelector((state) => state.certification)
-  console.log(ModalisCheck)
+  const { number } = props;
+  const [modalOpen, setModalOpen] = useState(true);
   
   return (
     <div>
@@ -23,16 +19,14 @@ const MainModal = (props) => {
         {" "}
         모달{" "}
       </button> */}
-      {modalOpen ? <Modal page={number} setModal={setModalOpen} date={date} /> : null}
+      {modalOpen ? <Modal page={number} setModal={setModalOpen} /> : null}
     </div>
   );
 };
 
 
 function Modal(props) {
-  const {page, setModal, date } =props;
-  const today = new Date();
-  const selectedDay = new Date(date);
+  const {page, setModal } =props;
 
 
   return (
@@ -58,11 +52,6 @@ function Modal(props) {
           확인{" "}
         </button>
       </StModal>
-      {/* {today.getTime() - selectedDay.getTime() > 0 ?
-        ""
-       : 
-      <FailModal page={page} setModal={setModal}/>
-       } */}
     </div>
   );
 }

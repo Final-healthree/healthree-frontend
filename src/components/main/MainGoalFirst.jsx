@@ -1,7 +1,6 @@
 import { React, useState, useEffect } from "react";
 import styled from "styled-components";
 import RegisterModal from "./RegisterModal";
-import Modal from "./Modal";
 import { __loadMainGoal } from "../../redux/modules/goalSlice";
 import { useDispatch, useSelector } from "react-redux";
 import stamp from "../../assets/main/stamp.png"
@@ -18,7 +17,6 @@ const MainGoalFirst = (props) => {
   const today = new Date();
   const selectedDay = new Date(date);
 
-  console.log(date)
   const videoUploadCheck = useSelector((state) => state.goal.list.result?.day1);
   // const videoUploadCheck1 = useSelector((state) => state);
 
@@ -49,14 +47,19 @@ const MainGoalFirst = (props) => {
         </>
         } 
       </StGuideTextContainer>
-      <FailModal number={1} date={getMainGoal?.day1.date.slice(0,10)} />
+      {/* <FailModal number={1} date={getMainGoal?.day1.date.slice(0,10)} setModal={setFailModalClose}/>  */}
 
-      {today.getTime() - selectedDay.getTime() > 0 ?
+      <FailModal number={1} date={getMainGoal?.day1.date.slice(0,10)} setModal={setFailModalClose}/> 
+      {videoUploadCheck?.uploaded === false ?
+      today.getTime() - selectedDay.getTime() > 0 ?
         ""
        : 
-       <FailModal number={1} date={getMainGoal?.day1.date.slice(0,10)} />
-       }
-      { failmodalClose === true ? <FailModal setModal={setFailModalClose}/> : null }
+       failmodalClose === true ? 
+        <FailModal number={1} date={getMainGoal?.day1.date.slice(0,10)} setModal={setFailModalClose}/> 
+        : null
+      :
+       <MainModal number={1} date={getMainGoal?.day1.date.slice(0,10)}/>
+      }
       <StMainGoalTextContainer>
         {videoUploadCheck?.uploaded === false ?
           <h1 className="isGoal">작심 1일</h1>
@@ -71,7 +74,6 @@ const MainGoalFirst = (props) => {
         <p className="date">{getMainGoal?.day1.date.slice(0,10)}</p>
       </StTitleContainer>
       </StMainGoalTextContainer>
-      <MainModal number={1} date={getMainGoal?.day1.date.slice(0,10)}/>
       <StButtonContainer>
         {videoUploadCheck?.uploaded === false ?
           <button onClick={() => {
@@ -80,7 +82,7 @@ const MainGoalFirst = (props) => {
           :
           ""
         }
-        { modalopen === true ? <RegisterModal number={1} modal={setModalOpen}/> : null }
+        { modalopen === true ? <RegisterModal number={1} modal={setModalOpen} /> : null }
       </StButtonContainer>
     </StMainLayout>
   )
