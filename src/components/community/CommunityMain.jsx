@@ -5,12 +5,12 @@ import styled from "styled-components";
 
 import serverAxios from "../axios/server.axios";
 
-import likeimg from "../../assets/community/like.svg";
-import unLikeimg from "../../assets/community/unLike.svg";
 import comments from "../../assets/community/comments.svg";
 import play from "../../assets/video/play.svg";
 
 import { format } from "date-fns";
+
+import OnLike from "./setLike";
 
 function CommunityMain() {
   const [posts, setPosts] = useState([]);
@@ -21,30 +21,30 @@ function CommunityMain() {
   const [ref, inView] = useInView();
   const navigate = useNavigate();
 
-  const [like, setLike] = useState(true);
+  // const [like, setLike] = useState(true);
 
-  const onlike = (postid, islike) => {
-    console.log(postid, islike);
-    if (islike) {
-      serverAxios
-        .delete(process.env.REACT_APP_REST_API_KEY + `api/posts/like/${postid}`)
-        .then((res) => {
-          console.log(res);
-          if (res.data.result === "좋아요 취소 성공") {
-            setLike(false);
-          }
-        });
-    } else {
-      serverAxios
-        .post(process.env.REACT_APP_REST_API_KEY + `api/posts/like/${postid}`)
-        .then((res) => {
-          console.log(res);
-          if (res.data.result === "좋아요 성공") {
-            setLike(true);
-          }
-        });
-    }
-  };
+  // const onlike = (postid, islike) => {
+  //   console.log(postid, islike);
+  //   if (islike) {
+  //     serverAxios
+  //       .delete(process.env.REACT_APP_REST_API_KEY + `api/posts/like/${postid}`)
+  //       .then((res) => {
+  //         console.log(res);
+  //         if (res.data.result === "좋아요 취소 성공") {
+  //           setLike(false);
+  //         }
+  //       });
+  //   } else {
+  //     serverAxios
+  //       .post(process.env.REACT_APP_REST_API_KEY + `api/posts/like/${postid}`)
+  //       .then((res) => {
+  //         console.log(res);
+  //         if (res.data.result === "좋아요 성공") {
+  //           setLike(true);
+  //         }
+  //       });
+  //   }
+  // };
 
   const getItems = async () => {
     setLoading(true);
@@ -73,8 +73,6 @@ function CommunityMain() {
       setMore(more + 5);
     }
   }, [inView, loading]);
-
-  console.log(posts);
 
   return (
     <Container>
@@ -106,10 +104,10 @@ function CommunityMain() {
                 </div>
                 <div>
                   {/* <Icon
-                    onClick={() => {
-                      onlike(post.post_id, post.is_like);
-                    }}
-                    src={like === post.is_like ? likeimg : unLikeimg}
+                    // onClick={() => {
+                    //   onlike(post.post_id, post.is_like);
+                    // }}
+                    src={OnLike({ islike: post.is_like })}
                   />
                   <span>{post.like_cnt}</span> */}
                 </div>
@@ -141,10 +139,10 @@ function CommunityMain() {
                 </div>
                 <div>
                   <Icon
-                    onClick={() => {
-                      onlike(post.post_id, post.is_like);
-                    }}
-                    src={like ? likeimg : unLikeimg}
+                  // onClick={() => {
+                  //   onlike(post.post_id, post.is_like);
+                  // }}
+                  // src={OnLike({ islike: post.is_like })}
                   />
                   <span>{post.like_cnt}</span>
                 </div>

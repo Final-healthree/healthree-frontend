@@ -78,6 +78,10 @@ const css = `
     color: #00bcd4;
   }
 
+  .rdp-nav_button {
+    color : #fff;
+  }
+
 
 `;
 
