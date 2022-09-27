@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
@@ -15,8 +15,8 @@ const Footer = () => {
   const navigate = useNavigate();
   const [isListHoverMain, setIsListHoverMain] = useState(false);
   const [isListHoverCommunity, setIsListHoverCommunity] = useState(false);
-  const [isListHoverMypage, setIsListHoverMypage] = useState(false);
   const [isListHoverRank, setIsListHoverRank] = useState(false);
+  const [isListHoverMypage, setIsListHoverMypage] = useState(false);
 
 
   const [show, setShow] = useState(false);
@@ -49,16 +49,6 @@ const Footer = () => {
       </li>
 
       <li
-        onMouseOver={() => setIsListHoverMypage(true)}
-        onMouseOut={() => setIsListHoverMypage(false)}
-        onClick={() => {
-          navigate("/Mypage");
-        }}
-      >
-        <img src={isListHoverMypage ? footerMypageC : footerMypage} />
-      </li>
-
-      <li
         onMouseOver={() => setIsListHoverRank(true)}
         onMouseOut={() => setIsListHoverRank(false)}
         onClick={() => {
@@ -66,6 +56,16 @@ const Footer = () => {
         }}
       >
         <img src={isListHoverRank ? footerRankC : footerRank} />
+      </li>
+
+      <li
+        onMouseOver={() => setIsListHoverMypage(true)}
+        onMouseOut={() => setIsListHoverMypage(false)}
+        onClick={() => {
+          navigate("/Mypage");
+        }}
+      >
+        <img src={isListHoverMypage ? footerMypageC : footerMypage} />
       </li>
     </StFooterMain>
   );

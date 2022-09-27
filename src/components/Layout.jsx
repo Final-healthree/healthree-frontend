@@ -1,9 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 
+import phone from "../assets/layout/phone.png"
+
 const Layout = (props) => {
 
-  return <StLayout>{props.children}</StLayout>;
+  return <StLayout>
+    {props.children}
+    </StLayout>;
 };
 
 const StLayout = styled.div`
