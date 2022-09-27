@@ -6,7 +6,6 @@ import { __loadMainGoal } from "./goalSlice";
 export const __addCertification = createAsyncThunk(
   "post/CERTIFICATION",
   async (payload, thunkAPI) => {
-    console.log(payload)
     const response = await api.post(`/api/videos/${payload.number}`, payload.formData, 
     {
       headers: {
@@ -15,6 +14,14 @@ export const __addCertification = createAsyncThunk(
     }
       );
     thunkAPI.dispatch(__loadMainGoal())
+    return response.data;
+  }
+);
+
+export const __addFail = createAsyncThunk(
+  "goal/FAIL",
+  async (payload, thunkAPI) => {
+    const response = await api.patch(`api/goals/fail/${payload}`, payload);
     return response.data;
   }
 );
@@ -41,6 +48,17 @@ const certificationSlice = createSlice({
         state.loading = false;
       })
       .addCase(__addCertification.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(__addFail.fulfilled, (state, action) => {
+        // state.list = [action.payload, ...state.list];
+        state.list = action.payload;
+        state.loading = false;
+      })
+      .addCase(__addFail.rejected, (state, action) => {
+        state.loading = false;
+      })
+      .addCase(__addFail.pending, (state, action) => {
         state.loading = true;
       });
   },
