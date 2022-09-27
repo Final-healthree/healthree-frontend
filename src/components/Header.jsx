@@ -7,12 +7,12 @@ import headerLogo from "../assets/headerFooter/headerLogo.svg";
 
 const Header = () => {
   const navigate = useNavigate();
+
     //로그인 페이지 헤더 숨기기
-    if (window.location.pathname === '/login') return null;
+    if (window.location.pathname === '/') return null;
 
   return (
     <StHeader>
-      {/* <img src={back} onclick={() => navigate('/login')} style = {{width:'30px'}}/> */}
       <img src={headerLogo} alt=""/>
     </StHeader>
   );  
