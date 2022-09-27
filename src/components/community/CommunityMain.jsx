@@ -55,7 +55,6 @@ function CommunityMain() {
           `api/posts?pagecount=5&&page=${page}`
       )
       .then((res) => {
-        console.log(res);
         setPosts([...posts, ...res.data.result.post]);
       });
     setLoading(false);
@@ -93,7 +92,10 @@ function CommunityMain() {
               <StBottom>
                 <div>
                   <Goal>{post.goal_name}</Goal>
-                  <Period>{format(new Date(), "yy-MM-dd")}</Period>
+                  <Period>
+                    {format(new Date(post.day1), "yy.MM.dd")} ~{" "}
+                    {format(new Date(post.day3), "yy.MM.dd")}{" "}
+                  </Period>
                 </div>
                 <div>
                   <Icon src={comments} />
@@ -126,8 +128,8 @@ function CommunityMain() {
                 <div>
                   <Goal>{post.goal_name}</Goal>
                   <Period>
-                    {format(new Date(), "yy.MM.dd")} ~{" "}
-                    {format(new Date(), "yy.MM.dd")}{" "}
+                    {format(new Date(post.day1), "yy.MM.dd")} ~{" "}
+                    {format(new Date(post.day3), "yy.MM.dd")}{" "}
                   </Period>
                 </div>
                 <div>
@@ -206,7 +208,9 @@ const Goal = styled.p`
   font-weight: 700;
 `;
 const Period = styled.p`
-  margin: 0;
+  margin-top: 4px;
+  font-size: 14px;
+  font-weight: 300;
 `;
 const Icon = styled.img`
   width: 20px;
