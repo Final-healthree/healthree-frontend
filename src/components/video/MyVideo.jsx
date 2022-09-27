@@ -28,7 +28,6 @@ const MyVideo = () => {
           `api/videos/mine?pagecount=8&&page=${page}`
       )
       .then((res) => {
-        console.log(res);
         setItems([...items, ...res.data.result.video_list]);
       });
     setLoading(false);
@@ -51,7 +50,6 @@ const MyVideo = () => {
   const [goalId, setGoalId] = useState("");
 
   const sendModal = (video, goal) => {
-    console.log(video, goal);
     setUrl(video);
     setGoalId(goal);
   };
@@ -84,9 +82,7 @@ const MyVideo = () => {
             >
               {items.length - 1 === idx ? (
                 <VideoBox ref={ref}>
-                  <VideoImg onClick={showModal}>
-                    <source src={data.final_video} type="video/mp4" />
-                  </VideoImg>
+                  <VideoImg src={data.thumbnail} onClick={showModal} />
                   <p style={{ margin: "0" }}>{data.goal_name}</p>
                   <VideoDate>
                     {data.day1.slice(0, 10)} ~ {data.day3.slice(0, 10)}
@@ -94,9 +90,7 @@ const MyVideo = () => {
                 </VideoBox>
               ) : (
                 <VideoBox>
-                  <VideoImg onClick={showModal}>
-                    <source src={data.final_video} type="video/mp4" />
-                  </VideoImg>
+                  <VideoImg src={data.thumbnail} onClick={showModal} />
                   <p style={{ margin: "0" }}>{data.goal_name}</p>
                   <VideoDate>
                     {data.day1.slice(0, 10)} ~ {data.day3.slice(0, 10)}
@@ -170,18 +164,29 @@ const VideoBox = styled.div`
   cursor: pointer;
 `;
 
-const VideoImg = styled.video`
+// const VideoImg = styled.video`
+//   height: 150px;
+//   width: 150px;
+//   background-color: #4b4b4b;
+//   filter: drop-shadow(6px 6px 5px rgba(0, 0, 0, 0.12));
+//   mix-blend-mode: multiply;
+//   border-radius: 2px;
+// `;
+
+const VideoImg = styled.img`
   height: 150px;
   width: 150px;
-  background-color: #4b4b4b;
-  filter: drop-shadow(6px 6px 5px rgba(0, 0, 0, 0.12));
-  mix-blend-mode: multiply;
-  border-radius: 2px;
+  box-shadow: 6px 6px 5px rgba(0, 0, 0, 0.12);
+  border-radius: 3px;
+  border: none;
+
+  margin: 0 auto;
 `;
 
 const VideoDate = styled.p`
   margin: 0;
   font-size: 12px;
+  font-family: sans-serif;
 `;
 
 const LoaderWrap = styled.div`
