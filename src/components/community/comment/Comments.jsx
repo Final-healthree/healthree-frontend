@@ -112,13 +112,24 @@ const Stcontent = styled.div`
   gap: 20px;
 `;
 
-// const StCommentBottom = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: space-between;
+const StCommentBottom = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  
+  padding-top: 20px;
+`;
 
-//   padding-top: 20px;
-// `;
+const Hr = styled.hr`
+border: solid 1px #f2f2f2f4;
+`;
+
+const StInputArea = styled.div`
+
+position: sticky;
+bottom: 100px;
+`;
+
 
 const ReplyTime = styled.p`
   display: flex;

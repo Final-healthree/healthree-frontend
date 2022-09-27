@@ -26,7 +26,6 @@ const Router = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/rank" element={<Rank />} />
-
         </Routes>
       </Layout>
       <Footer />
