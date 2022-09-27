@@ -6,7 +6,7 @@ export const __addCertification = createAsyncThunk(
   "post/CERTIFICATION",
   async (payload, thunkAPI) => {
     const response = await serverAxios.post(
-      `/serverAxios/videos/${payload.number}`,
+      `/api/videos/${payload.number}`,
       payload.formData,
       {
         headers: {
@@ -23,7 +23,7 @@ export const __addFail = createAsyncThunk(
   "goal/FAIL",
   async (payload, thunkAPI) => {
     const response = await serverAxios.patch(
-      `serverAxios/goals/fail/${payload}`,
+      `api/goals/fail/${payload}`,
       payload
     );
     return response.data;
