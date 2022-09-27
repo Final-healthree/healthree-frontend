@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { api } from "../../shared/api";
 import serverAxios from "../../components/axios/server.axios";
 
 export const __loadMainGoal = createAsyncThunk("user/MAINGOAL", async () => {

@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { api } from "../../shared/api";
 import { __loadMainGoal } from "./goalSlice";
 import serverAxios from "../../components/axios/server.axios";
 
