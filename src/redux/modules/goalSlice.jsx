@@ -21,13 +21,13 @@ const goalSlice = createSlice({
         // state.loading = false;
         // state.session = true;
         state.list = action.payload;
-        state.status = 'complete';
+        state.status = "complete";
       })
       .addCase(__loadMainGoal.rejected, (state, action) => {
-        state.status = 'false';
+        state.status = "false";
       })
       .addCase(__loadMainGoal.pending, (state, action) => {
-        state.status = 'Loading';
+        state.status = "Loading";
       });
   },
 });
