@@ -1,19 +1,21 @@
 import React from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+
 //svg 이미지
 import headerLogo from "../assets/headerFooter/headerLogo.svg";
 // import back from "../assets/images/back.svg";
 
 const Header = () => {
-  const navigate = useNavigate();
-
   //로그인 페이지 헤더 숨기기
-  if (window.location.pathname === "/") return null;
+  const token = localStorage.getItem("Token");
+  if (token === null) return null;
 
   return (
     <StHeader>
-      <Img src={headerLogo} alt="" />
+      <img src={headerLogo} alt="" />
+      <Goservey href="https://forms.gle/LT9BUCvyHzBCET449">
+        설문조사 하러가기
+      </Goservey>
     </StHeader>
   );
 };
@@ -23,9 +25,22 @@ const StHeader = styled.div`
   position: sticky;
   top: 0;
   border-bottom: 1px solid gray;
+  flex-direction: row;
+  padding: 3px 0;
 `;
 
-const Img = styled.img`
-  width: 370;
-  height: 60px;
+const Goservey = styled.a`
+  display: flex;
+  align-items: center;
+  font-family: sans-serif;
+  font-weight: 700;
+  text-decoration: none;
+  color: black;
+  font-size: 14px;
+  margin-left: 35px;
+
+  :hover {
+    color: #2c8d65;
+    font-weight: 900;
+  }
 `;
