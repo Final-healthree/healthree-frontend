@@ -1,5 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { __loadMainGoal } from "./goalSlice";
+
+// import { __loadMainGoal } from "./goalSlice";
+// import { __loadMainGoalthree } from "./goalThreeSlice";
+
 import serverAxios from "../../components/axios/server.axios";
 
 export const __addCertification = createAsyncThunk(
@@ -13,9 +16,12 @@ export const __addCertification = createAsyncThunk(
           "Content-Type": "multipart/form-data",
         },
       }
-    );
-    thunkAPI.dispatch(__loadMainGoal());
-    return response.data;
+
+    )
+    // thunkAPI.dispatch(__loadMainGoal());
+    // thunkAPI.dispatch(__loadMainGoalthree());
+    return 'day'+payload.number;
+
   }
 );
 
@@ -29,6 +35,12 @@ export const __addFail = createAsyncThunk(
     return response.data;
   }
 );
+
+export const __loadMainGoal = createAsyncThunk("user/MAINGOAL", 
+  async (payload, thunkAPI) => {
+    const response = await serverAxios.get("/api/goals/progress");
+    return response.data;
+});
 
 const certificationSlice = createSlice({
   name: "certification",
@@ -44,9 +56,9 @@ const certificationSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
-      .addCase(__addCertification.fulfilled, (state, action) => {
-        // state.list = [action.payload, ...state.list];
-        state.list = action.payload;
+
+      .addCase(__addCertification.fulfilled, (state, {payload}) => {
+        state.list.result[payload].uploaded = true;
         state.status = "complete";
       })
       .addCase(__addCertification.rejected, (state, action) => {
@@ -56,7 +68,6 @@ const certificationSlice = createSlice({
         state.status = "동영상을 합치는 중입니다...";
       })
       .addCase(__addFail.fulfilled, (state, action) => {
-        // state.list = [action.payload, ...state.list];
         state.list = action.payload;
         state.loading = false;
       })
@@ -65,6 +76,16 @@ const certificationSlice = createSlice({
       })
       .addCase(__addFail.pending, (state, action) => {
         state.loading = true;
+      })
+      .addCase(__loadMainGoal.fulfilled, (state, action) => {
+        state.list = action.payload;
+        state.status = "complete";
+      })
+      .addCase(__loadMainGoal.rejected, (state, action) => {
+        state.status = "false";
+      })
+      .addCase(__loadMainGoal.pending, (state, action) => {
+        state.status = "Loading";
       });
   },
 });

@@ -1,7 +1,5 @@
 import { React, useState, useRef, useEffect } from "react";
 import styled from "styled-components";
-import Thumnail from "../../assets/main/Thumnail.png";
-import upload from "../../assets/main/upload.png";
 import { useDispatch, useSelector } from "react-redux";
 import { __addCertification } from "../../redux/modules/certificationSlice";
 import { useNavigate } from "react-router-dom";
@@ -15,12 +13,11 @@ const RegisterModal = (props) => {
   const [attachment, setAttachment] = useState(false);
   const [newvideo, setNewVideo] = useState("");
   const fileInput = useRef(null);
-  // const [goalnumber, setGoalNumber] = useState();
   const [goalnumber, setGoalNumber] = useState(props.number);
   const getMainGoal = useSelector((state) => state.goal.list.result);
   const FirstDay = useSelector((state) => state.goal.list.result.day1.date);
   const SecondDay = useSelector((state) => state.goal.list.result.day2.date);
-  const ThirdDay = useSelector((state) => state.goal.list.result.day3);
+  const ThirdDay = useSelector((state) => state.goal.list.result.day3.date);
   
 
   useEffect(() => {
@@ -37,7 +34,6 @@ const RegisterModal = (props) => {
         currentTarget: { result },
       } = finishiedEvent;
       setAttachment(result);
-      console.log(theFile)
     };
   }
 
@@ -51,7 +47,6 @@ const RegisterModal = (props) => {
         goalnumber,
       })
     );
-    // navigate("/", {replace: true});
     navigate("/");
   };
 
@@ -72,7 +67,6 @@ const RegisterModal = (props) => {
       <StRegisterModalContainer>
         <StTitleContainer>
           <span className="goalTitle">{getMainGoal?.goal}</span>
-          {/* <span>{goalnumber === 1 ? FirstDay : SecondDay}</span> */}
           <span className="goalDate">{getDay(goalnumber)}</span>
         </StTitleContainer>
         <VideoInput width={400} height={300} number={goalnumber} modal={modal} setGoalmodal={setGoalmodal}/>
@@ -126,50 +120,6 @@ const StTitleContainer = styled.div`
   }
 
 `;
-
-
-// const StVideoRegisterContainer = styled.div`
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   flex-flow: column;
-//   width: max-content;
-//   margin: 0 auto;
-
-//   .imgDiv {
-//     width: 234px;
-//     height: 234px;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     /* background-color: white; */
-
-//     img {
-//     width: 234px;
-//     height: 234px;
-//     object-fit: fill;
-//   }
-//   }
-
-//   button {
-//     width: 72px;
-//     height: 32px;
-//     align-self: flex-end;
-//     position: relative;
-//     right: 12px;
-//     margin-top: 5px;
-//     label {
-//       display: flex;
-//       justify-content: center;
-//       align-items: center;
-//       cursor: pointer;
-//     }
-//   }
-  
-//   .uploadImg {
-//     transform: translate(-1px, -1px);
-//   }
-// `;
 
 
 const StButtonContainer = styled.div`

@@ -1,15 +1,16 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import serverAxios from "../../components/axios/server.axios";
 
-export const __loadMainGoal = createAsyncThunk("user/MAINGOAL", 
+export const __loadMainGoalthree = createAsyncThunk("user/MAINGOAL", 
   async (payload, thunkAPI) => {
-    const response = await serverAxios.get("/api/goals/progress");
+    console.log(payload)
+    const response = 
+    await serverAxios.get(`/api/goals/progress?goal_id=${payload.goalThirdResult}`, 
+    payload.goalThirdResult)
     return response.data;
 });
-
-
 const goalSlice = createSlice({
-  name: "goal",
+  name: "goalThree",
   initialState: {
     list: [],
     status: "",
@@ -18,14 +19,17 @@ const goalSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
-      .addCase(__loadMainGoal.fulfilled, (state, action) => {
+      .addCase(__loadMainGoalthree.fulfilled, (state, action) => {
+        // console.log(action)
+        // state.loading = false;
+        // state.session = true;
         state.list = action.payload;
         state.status = "complete";
       })
-      .addCase(__loadMainGoal.rejected, (state, action) => {
+      .addCase(__loadMainGoalthree.rejected, (state, action) => {
         state.status = "false";
       })
-      .addCase(__loadMainGoal.pending, (state, action) => {
+      .addCase(__loadMainGoalthree.pending, (state, action) => {
         state.status = "Loading";
       });
   },
