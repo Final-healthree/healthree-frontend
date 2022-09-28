@@ -50,7 +50,7 @@ const ModalBody = styled.div`
   margin: auto;
 
   width: 375px;
-  height: 700px;
+  height: 100%;
 `;
 
 const ShowVideo = styled.video`

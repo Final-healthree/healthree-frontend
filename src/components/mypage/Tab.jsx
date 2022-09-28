@@ -68,6 +68,9 @@ const StTap = styled.div`
   border-bottom: solid 2px ${(props) => props.borderColor};
 
   margin-left: 10px;
+  font-family: sans-serif;
+  font-weight: 800;
+  font-size: 19px;
 
   &:hover {
     color: #70cca6;
