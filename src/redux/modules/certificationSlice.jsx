@@ -1,8 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-
-// import { __loadMainGoal } from "./goalSlice";
-// import { __loadMainGoalthree } from "./goalThreeSlice";
-
 import serverAxios from "../../components/axios/server.axios";
 
 export const __addCertification = createAsyncThunk(
@@ -18,8 +14,6 @@ export const __addCertification = createAsyncThunk(
       }
 
     )
-    // thunkAPI.dispatch(__loadMainGoal());
-    // thunkAPI.dispatch(__loadMainGoalthree());
     return 'day'+payload.number;
 
   }
@@ -56,13 +50,12 @@ const certificationSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
-
       .addCase(__addCertification.fulfilled, (state, {payload}) => {
         state.list.result[payload].uploaded = true;
         state.status = "complete";
       })
       .addCase(__addCertification.rejected, (state, action) => {
-        state.status = "false";
+        state.status = "파일을 다시 올려주세요!";
       })
       .addCase(__addCertification.pending, (state, action) => {
         state.status = "동영상을 합치는 중입니다...";

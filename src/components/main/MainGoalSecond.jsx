@@ -28,14 +28,19 @@ const MainGoalSecond = (props) => {
         <h1>2/3</h1>
         {videoUploadCheck?.uploaded === false ?
           <>
-            <span>오늘 목표 인증을 아직 안하셨군요!</span><br />
-            <span>목표를 인증하고,</span><br />
-            <span>작심 2일을 시작하세요!</span>
+            <span>
+              오늘 목표 인증을 아직 안하셨군요!<br />
+              목표를 인증하고,<br />
+              작심 2일을 시작하세요!
+            </span>
           </> 
         :
           <>
-            <span>오늘 목표를 완성하셨네요!</span><br />
-            <span>훌륭해요!</span>
+            <span>
+              오늘 목표를 완성하셨네요!<br />
+              아주 훌륭합니다!<br />
+              고지가 코앞입니다.
+            </span>
           </>
         } 
       </StGuideTextContainer>
