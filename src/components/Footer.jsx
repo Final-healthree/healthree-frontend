@@ -8,8 +8,8 @@ import footerCommunity from "../assets/headerFooter/footerCommunity.svg";
 import footerCommunityC from "../assets/headerFooter/footerCommunityC.svg";
 import footerMypage from "../assets/headerFooter/footerMypage.svg";
 import footerMypageC from "../assets/headerFooter/footerMypageC.svg";
-import footerRank from "../assets/headerFooter/footerRank.svg"
-import footerRankC from "../assets/headerFooter/footerRankC.svg"
+// import footerRank from "../assets/headerFooter/footerRank.svg";
+// import footerRankC from "../assets/headerFooter/footerRankC.svg";
 
 const Footer = () => {
   const navigate = useNavigate();
@@ -17,7 +17,6 @@ const Footer = () => {
   const [isListHoverCommunity, setIsListHoverCommunity] = useState(false);
   const [isListHoverRank, setIsListHoverRank] = useState(false);
   const [isListHoverMypage, setIsListHoverMypage] = useState(false);
-
 
   const [show, setShow] = useState(false);
   const green = () => {
@@ -35,7 +34,7 @@ const Footer = () => {
           navigate("/main");
         }}
       >
-        <img src={isListHoverMain ? footerMainC : footerMain} alt=""/>
+        <img src={isListHoverMain ? footerMainC : footerMain} alt="" />
       </li>
 
       <li
@@ -48,7 +47,7 @@ const Footer = () => {
         <img src={isListHoverCommunity ? footerCommunityC : footerCommunity} />
       </li>
 
-      <li
+      {/* <li
         onMouseOver={() => setIsListHoverRank(true)}
         onMouseOut={() => setIsListHoverRank(false)}
         onClick={() => {
@@ -56,7 +55,7 @@ const Footer = () => {
         }}
       >
         <img src={isListHoverRank ? footerRankC : footerRank} />
-      </li>
+      </li> */}
 
       <li
         onMouseOver={() => setIsListHoverMypage(true)}
@@ -74,21 +73,18 @@ const Footer = () => {
 export default Footer;
 
 const StFooterMain = styled.ul`
-  min-width: 360px;
-  max-width: 375px;
   display: flex;
   list-style: none;
-  flex: 0 0 auto;
   padding: 0px 1em 0;
   justify-content: space-around;
   background-color: #fff;
   box-shadow: 0 -7px 5px -5px #9c939376;
-  
+  margin: 0;
+
   position: sticky;
   bottom: 0;
-  
-  //중앙 정렬
-  /* left: 50%; */
-  /* transform: translateX(-50%); */
+  width: 100%;
+  box-sizing: border-box;
+
   cursor: pointer;
 `;

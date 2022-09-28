@@ -49,7 +49,6 @@ const CommunityDetailPost = () => {
     await serverAxios
       .get(process.env.REACT_APP_REST_API_KEY + `api/posts/${param.postid}`)
       .then((res) => {
-        console.log(res);
         setGetpost(res.data.result);
       });
   };
@@ -123,7 +122,7 @@ const CommunityDetailPost = () => {
               {getpost.post && format(new Date(getpost.post.day3), "yy.MM.dd")}{" "}
             </Period>
           </div>
-          <div>
+          {/* <div>
             <Likes
               onClick={() => {
                 onlike(getpost.post.post_id, like);
@@ -133,7 +132,7 @@ const CommunityDetailPost = () => {
             <span style={{ fontFamily: "sans-serif" }}>
               {getpost.post && getpost.post.like_cnt}
             </span>
-          </div>
+          </div> */}
         </StBottom>
       </StContent>
     </>

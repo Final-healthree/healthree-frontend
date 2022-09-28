@@ -22,7 +22,12 @@ function CommentInput(props) {
         process.env.REACT_APP_REST_API_KEY + `api/comments/${props.data}`,
         newcomments
       )
-      .then((res) => console.log(res));
+      .then((res) => {
+        if (res.data.success) {
+          alert("댓글 생성 완료");
+          window.location.reload();
+        }
+      });
   };
 
   return (
@@ -35,7 +40,7 @@ function CommentInput(props) {
           placeholder="Text"
         />
       </InputBox>
-        <InPutBtn onClick={onSubmitHandler}>댓글달기</InPutBtn>
+      <InPutBtn onClick={onSubmitHandler}>댓글달기</InPutBtn>
     </StWrap>
   );
 }
@@ -49,24 +54,22 @@ const StWrap = styled.div`
   padding: 10px 24px;
   display: flex;
 
-  gap: 6px
+  gap: 6px;
 
   /* position: absolute; */
   /* bottom: 0; */
 `;
 const Input = styled.input`
-width : 270px;
-height : 27px;
-font-size : 16px
-`
+  width: 270px;
+  height: 27px;
+  font-size: 16px;
+`;
 
 const InputBox = styled.div`
-  
-border: 0;
+  border: 0;
   outline: 0;
   background-color: transparent;
   gap: 10px;
-
 `;
 
 const InPutBtn = styled.button`

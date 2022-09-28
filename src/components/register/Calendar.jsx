@@ -118,7 +118,10 @@ const css = `
 
 `;
 
-const Container = styled.div``;
+const Container = styled.div`
+  overflow: auto;
+  flex: 1;
+`;
 
 const HeaderArea = styled.div`
   display: flex;

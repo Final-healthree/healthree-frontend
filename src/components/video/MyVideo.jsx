@@ -118,7 +118,9 @@ const MyVideo = () => {
 
 export default MyVideo;
 
-const Container = styled.div``;
+const Container = styled.div`
+  padding: 0 16px;
+`;
 
 const EmptyArea = styled.div`
   display: flex;

@@ -35,7 +35,7 @@ const StArea = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 0px 0px 10px 0px;
+  padding: 10px;
 `;
 
 const StProfile = styled.div`

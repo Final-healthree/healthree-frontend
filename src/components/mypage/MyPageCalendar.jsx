@@ -85,7 +85,10 @@ const css = `
 
 `;
 
-const Container = styled.div``;
+const Container = styled.div`
+  overflow: auto;
+  flex: 1;
+`;
 
 const Stcalendar = styled.div`
   padding-top: 23px;
