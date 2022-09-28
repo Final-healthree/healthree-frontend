@@ -15,7 +15,7 @@ function CommentInput(props) {
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     if (newcomments === "") {
-      return alert("댓글을 입력해주세요");
+      return alert("댓글을 입력해주세요:(");
     }
     await serverAxios
       .post(
@@ -24,7 +24,7 @@ function CommentInput(props) {
       )
       .then((res) => {
         if (res.data.success) {
-          alert("댓글 생성 완료");
+          alert("댓글이 등록되었어요:)");
           window.location.reload();
         }
       });
@@ -37,7 +37,7 @@ function CommentInput(props) {
           onChange={onChangeHandler}
           type="text"
           value={newcomments.comment}
-          placeholder="Text"
+          placeholder="댓글을 달아주세요:)"
         />
       </InputBox>
       <InPutBtn onClick={onSubmitHandler}>댓글달기</InPutBtn>
