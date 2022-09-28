@@ -34,6 +34,9 @@ const GoalReg = () => {
   };
 
   const submit = async () => {
+    if (info.goal_name.length === 0) {
+      alert("목표를 입력해주세요");
+    }
     await serverAxios
       .post(process.env.REACT_APP_REST_API_KEY + "api/goals/register", info)
       .then((res) => {
@@ -85,7 +88,10 @@ const GoalReg = () => {
 
 export default GoalReg;
 
-const Container = styled.div``;
+const Container = styled.div`
+  overflow: auto;
+  flex: 1;
+`;
 
 const HeaderArea = styled.div`
   display: flex;
@@ -103,7 +109,7 @@ const GoalArea = styled.div`
   padding: 0 13px;
   /* margin: 30px 0; */
 
-  height: 278px;
+  height: 390px;
 `;
 
 const Label = styled.div`
@@ -134,6 +140,8 @@ const Period = styled.div`
   background: #70cca6;
 
   font-weight: 600;
+
+  font-family: sans-serif;
 `;
 
 const BtnArea = styled.div`
@@ -144,15 +152,16 @@ const BtnArea = styled.div`
 
 const RegBtn = styled.button`
   position: absolute;
-  top: 130px;
-
+  top: 85px;
   width: 340px;
   height: 52px;
   background: #70cca6;
   border-radius: 2px;
   border: none;
   font-size: medium;
-  font-weight: 700;
+  font-weight: 900;
+
+  font-family: sans-serif;
 
   cursor: pointer;
 `;

@@ -2,8 +2,8 @@ import { React, useState, useRef } from "react";
 import styled from "styled-components";
 import Thumnail from "../../assets/main/Thumnail.png";
 import upload from "../../assets/main/upload.png";
-import { useDispatch } from "react-redux";
-import { __addCertification, ModalDoor } from "../../redux/modules/certificationSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { __addCertification } from "../../redux/modules/certificationSlice";
 
 export default function VideoInput(props) {
   const { width, height, number, modal, setGoalmodal } = props;
@@ -12,8 +12,9 @@ export default function VideoInput(props) {
   const dispatch = useDispatch();
   const [source, setSource] = useState();
   const [state, setState] = useState();
+  const aaa = useSelector((state)=>state.certification.list.result)
 
-
+  console.log(aaa.day1.uploaded)
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     const url = URL.createObjectURL(file);
@@ -31,6 +32,7 @@ export default function VideoInput(props) {
     }));
     modal(false);
     setGoalmodal(true);
+
   }
 
 
@@ -65,26 +67,9 @@ export default function VideoInput(props) {
             />
           )}
         </div>
-
-        {/* {!source && 
-        <Stbutton onClick={handleChoose}>
-          <img className="uploadImg" src={upload} alt="" />
-          &nbsp;업로드</Stbutton>} */}
-
         <Stbutton onClick={handleChoose}>
           <img className="uploadImg" src={upload} alt="" />
           &nbsp;업로드</Stbutton>
-        {/* {source && (
-          <video
-            className="VideoInput_video"
-            width="100%"
-            height={height}
-            controls
-            src={source}
-          />
-        )} */}
-
-        {/* <div className="VideoInput_footer">{source || "Nothing selectd"}</div> */}
       </StVideoRegisterContainer>
       <StUploadGuide>
         <span>* 세로 영상만 지원합니다.</span>

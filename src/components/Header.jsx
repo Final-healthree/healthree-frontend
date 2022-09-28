@@ -8,27 +8,24 @@ import headerLogo from "../assets/headerFooter/headerLogo.svg";
 const Header = () => {
   const navigate = useNavigate();
 
-    //로그인 페이지 헤더 숨기기
-    if (window.location.pathname === '/') return null;
+  //로그인 페이지 헤더 숨기기
+  if (window.location.pathname === "/") return null;
 
   return (
     <StHeader>
-      <img src={headerLogo} alt=""/>
+      <Img src={headerLogo} alt="" />
     </StHeader>
-  );  
+  );
 };
 export default Header;
 const StHeader = styled.div`
-  /* min-width: 360px;
-  max-width: 375px; */
-  width: 375px;
-  height: 70px;
   display: flex;
-  
   position: sticky;
   top: 0;
+  border-bottom: 1px solid gray;
+`;
 
-  /* left: 50%; */
-  /* justify-content: flex-start; */
-  /* transform: translateX(50%); */
+const Img = styled.img`
+  width: 370;
+  height: 60px;
 `;

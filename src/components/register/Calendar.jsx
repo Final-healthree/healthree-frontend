@@ -118,7 +118,10 @@ const css = `
 
 `;
 
-const Container = styled.div``;
+const Container = styled.div`
+  overflow: auto;
+  flex: 1;
+`;
 
 const HeaderArea = styled.div`
   display: flex;
@@ -154,7 +157,7 @@ const BtnArea = styled.div`
 
 const RegBtn = styled.button`
   position: absolute;
-  top: 130px;
+  top: 85px;
 
   width: 340px;
   height: 52px;
@@ -162,6 +165,7 @@ const RegBtn = styled.button`
   border-radius: 2px;
   border: none;
   font-size: medium;
-  font-weight: 700;
+  font-weight: 900;
+  font-family: sans-serif;
   cursor: pointer;
 `;

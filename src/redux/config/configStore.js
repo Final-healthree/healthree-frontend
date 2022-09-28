@@ -4,6 +4,7 @@ import registerday from "../modules/regday";
 import existgoal from "../modules/existgoal";
 import certificationReducer from "../modules/certificationSlice";
 import goalReducer from "../modules/goalSlice";
+import goalThreeReducer from "../modules/goalThreeSlice";
 
 const middlewares = [thunk];
 const rootReducer = combineReducers({
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   existgoal,
   certification: certificationReducer,
   goal: goalReducer,
+  goalThree: goalThreeReducer,
 });
 
 const store = configureStore({

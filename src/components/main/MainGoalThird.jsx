@@ -1,87 +1,85 @@
 import { React, useState, useEffect } from "react";
 import styled from "styled-components";
 import RegisterModal from "./RegisterModal";
-import { __loadMainGoal } from "../../redux/modules/goalSlice";
+import { __loadMainGoal } from "../../redux/modules/certificationSlice";
 import { useDispatch, useSelector } from "react-redux";
 import stamp from "../../assets/main/stamp.png";
 import MainModal from "./MainModal";
 import FailModal from "./FailModal";
 
 const MainGoalThird = (props) => {
+  const { number } = props;
   const [modalopen, setModalOpen] = useState(false);
   const [failmodalClose, setFailModalClose] = useState(true);
+  const [goalmodalOpen, setGoalmodalOpen] = useState(false);
   const dispatch = useDispatch();
   const getMainGoal = useSelector((state) => state.goal.list.result);
   const status = useSelector((state) => state.certification.status);
-  const date = (getMainGoal?.day3.slice(0,10));
+  const date = getMainGoal?.day3.date.slice(0, 10);
   const today = new Date();
   const selectedDay = new Date((new Date(date).getTime() + (24-9) * 60 * 60 * 1000));
-
- 
-  const videoUploadCheck = useSelector((state) => state.certification.list);
-  const videoUploadCheckFirst = useSelector((state) => state.goal.list.result?.day1);
-  const videoUploadCheckSecond = useSelector((state) => state.goal.list.result?.day2);
-
-
-
+  const videoUploadCheck = useSelector((state) => state.certification.list.result?.day3);
+  
   useEffect(() => {
     dispatch(__loadMainGoal());
   }, [])
+
 
   return (
     <StMainLayout>
       <StGuideTextContainer>
         <h1>3/3</h1>
-        {videoUploadCheck?.uploaded === undefined ?
-        <>
-        <span>오늘 목표 인증을 아직 안하셨군요!</span><br />
-        <span>목표를 인증하고,</span><br />
-        <span>작심 3일을 시작하세요!</span>
-        </> 
+        {videoUploadCheck?.uploaded === false ?
+          <>
+            <span>오늘 목표 인증을 아직 안하셨군요!</span><br />
+            <span>목표를 인증하고,</span><br />
+            <span>작심 3일을 시작하세요!</span>
+          </> 
         :
-        <>
-        <span>오늘 목표를 완성하셨네요!</span><br />
-        <span>훌륭해요!</span>
-        </>
+          <>
+            <span>오늘 목표를 완성하셨네요!</span><br />
+            <span>훌륭해요!</span>
+          </>
         } 
       </StGuideTextContainer>
-      {/* {videoUploadCheck?.uploaded === false ? */}
-      {videoUploadCheck?.success === undefined ?
-      today < selectedDay ?
-      ""
+      {videoUploadCheck?.uploaded === false ?
+        today < selectedDay ?
+          ""
        : 
-       failmodalClose === true ? 
-        <FailModal number={3} date={getMainGoal?.day3.slice(0,10)} setModal={setFailModalClose}/> 
-        : null
+        failmodalClose === true ? 
+          <FailModal number={3} date={getMainGoal?.day3.date.slice(0,10)} setModal={setFailModalClose}/> 
+          : null
       :
-       <MainModal number={3} date={getMainGoal?.day3.slice(0,10)}/>
+          ""
       }
+
+      {goalmodalOpen === true ? <MainModal number={3} date={getMainGoal?.day3.date.slice(0,10)}/> : null}
+
       <StMainGoalTextContainer>
-        {/* {videoUploadCheckSecond?.uploaded === undefined && true? */}
-        {videoUploadCheck?.success === undefined ?
+        {videoUploadCheck?.uploaded === false ?
           <h1 className="isGoal">작심 3일</h1>
           :
           <>
-          <h1 className="successGoal">작심 3일</h1>
-          <img src= {stamp} alt=""/>
+            <h1 className="successGoal">작심 3일</h1>
+            <img src= {stamp} alt=""/>
           </>
         }
       <StTitleContainer>
         <p>{getMainGoal?.goal}</p>
-        <p className="date">{getMainGoal?.day3.slice(0,10)}</p>
+        <p className="date">{getMainGoal?.day3.date.slice(0,10)}</p>
       </StTitleContainer>
       <StStatus>{status}</StStatus>
       </StMainGoalTextContainer>
       <StButtonContainer>
-      {videoUploadCheck?.success === undefined ?
-          <button onClick={() => {
-            setModalOpen(!modalopen);
-          }}>동영상 등록하기</button>
-          :
-          ""
-        }
+      {videoUploadCheck?.uploaded === false ?
+        <button onClick={() => {
+          setModalOpen(!modalopen);
+        }}>동영상 등록하기</button>
+        :
+        ""
+      }
         { modalopen === true ? 
-        <RegisterModal number={3} modal={setModalOpen} /> : null }
+        <RegisterModal number={3} modal={setModalOpen} setGoalmodal={setGoalmodalOpen} /> : null }
       </StButtonContainer>
     </StMainLayout>
   )
