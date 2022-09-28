@@ -13,7 +13,7 @@ const Header = () => {
   return (
     <StHeader>
       <img src={headerLogo} alt="" />
-      <Goservey href="https://forms.gle/LT9BUCvyHzBCET449">
+      <Goservey href="https://forms.gle/hknQyvw9iR4DfuzKA">
         설문조사 하러가기
       </Goservey>
     </StHeader>
@@ -27,6 +27,7 @@ const StHeader = styled.div`
   border-bottom: 1px solid gray;
   flex-direction: row;
   padding: 3px 0;
+  background-color: #fff;
 `;
 
 const Goservey = styled.a`
