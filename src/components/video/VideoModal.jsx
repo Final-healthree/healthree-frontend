@@ -73,7 +73,7 @@ const ShareBtn = styled.button`
   left: 277px;
 
   position: absolute;
-  top: 540px;
+  top: 720px;
 
   background: #70cca6;
   border-radius: 2px;
