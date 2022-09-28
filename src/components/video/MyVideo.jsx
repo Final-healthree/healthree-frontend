@@ -119,7 +119,13 @@ const MyVideo = () => {
 export default MyVideo;
 
 const Container = styled.div`
+  flex: 1;
+  overflow: auto;
   padding: 0 16px;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const EmptyArea = styled.div`

@@ -1,25 +1,23 @@
 import React from "react";
 import { useRef } from "react";
 import styled from "styled-components";
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import MainGoalFirst from "./MainGoalFirst";
 import MainGoalSecond from "./MainGoalSecond";
 import MainGoalThird from "./MainGoalThird";
 
-
 const GoalSlider = (props) => {
   const sliderRef = useRef();
 
-
   const settings = {
-      dots: true,
-      infinite: false,
-      speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 1
-    };
+    dots: true,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
 
   return (
       <StSliderLayout>
@@ -45,5 +43,7 @@ const StSliderLayout = styled.div`
   overflow: auto;
   flex: 1;
 `;
+
+const StSliderContainer = styled.div``;
 
 export default GoalSlider;
