@@ -6,6 +6,7 @@ import styled from "styled-components";
 import serverAxios from "../axios/server.axios";
 
 import comments from "../../assets/community/comments.svg";
+import noncomment from "../../assets/community/noncomment.svg";
 import play from "../../assets/video/play.svg";
 
 import { format } from "date-fns";
@@ -74,8 +75,6 @@ function CommunityMain() {
     }
   }, [inView, loading]);
 
-  console.log(posts);
-
   return (
     <Container>
       {posts.map((post, idx) => (
@@ -101,18 +100,18 @@ function CommunityMain() {
                   </Period>
                 </div>
                 <div>
-                  <Icon src={comments} />
+                  <Icon src={post.comment_cnt > 0 ? comments : noncomment} />
                   <span>{post.comment_cnt}</span>
                 </div>
-                <div>
-                  {/* <Icon
-                    // onClick={() => {
-                    //   onlike(post.post_id, post.is_like);
-                    // }}
+                {/* <div>
+                  <Icon
+                     onClick={() => {
+                       onlike(post.post_id, post.is_like);
+                     }}
                     src={OnLike({ islike: post.is_like })}
                   />
-                  <span>{post.like_cnt}</span> */}
-                </div>
+                  <span>{post.like_cnt}</span>
+                </div> */}
               </StBottom>
             </StContent>
           ) : (
@@ -136,18 +135,18 @@ function CommunityMain() {
                   </Period>
                 </div>
                 <div>
-                  <Icon src={comments} />
+                  <Icon src={post.comment_cnt > 0 ? comments : noncomment} />
                   <span>{post.comment_cnt}</span>
                 </div>
-                <div>
+                {/* <div>
                   <Icon
-                  // onClick={() => {
-                  //   onlike(post.post_id, post.is_like);
-                  // }}
-                  // src={OnLike({ islike: post.is_like })}
+                   onClick={() => {
+                     onlike(post.post_id, post.is_like);
+                   }}
+                  src={OnLike({ islike: post.is_like })}
                   />
                   <span>{post.like_cnt}</span>
-                </div>
+                </div> */}
               </StBottom>
             </StContent>
           )}
@@ -165,6 +164,13 @@ const Container = styled.div`
   gap: 60px;
   padding: 20px 0;
   box-sizing: border-box;
+  overflow: auto;
+  flex: 1;
+  margin-top: 20px;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const StContent = styled.div`

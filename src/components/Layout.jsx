@@ -1,28 +1,28 @@
 import React from "react";
 import styled from "styled-components";
 
-// import phone from "../assets/layout/phone.png"
-
 const Layout = (props) => {
   return <StLayout>{props.children}</StLayout>;
 };
 
 const StLayout = styled.div`
-  min-width: 360px;
-  max-width: 375px;
+  display: flex;
+  flex-direction: column;
+  max-width: 370px;
+  min-width: 370px;
   height: 100vh;
-  max-height: calc(100vh - 30px);
+
   margin: 0 auto;
-  /* background-color: #fff; */
+
   position: relative;
   overflow-y: scroll;
-  
+
   ::-webkit-scrollbar {
-  display: none; 
-};
-
-background-image: 0% 0% / 100% 100% no-repeat;
-
+    display: none;
+  }
+  box-sizing: border-box;
+  box-shadow: 5px 5px 5px 5px #9c939376;
+  border-radius: 2px;
 `;
 
 export default Layout;

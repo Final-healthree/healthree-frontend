@@ -74,18 +74,19 @@ const GoalReg = () => {
           {regDay.start} ~ {""}
           {regDay.last}
         </Period>
-      </GoalArea>
 
-      <BtnArea>
         <RegBtn onClick={submit}>목표 등록하기</RegBtn>
-      </BtnArea>
+      </GoalArea>
     </Container>
   );
 };
 
 export default GoalReg;
 
-const Container = styled.div``;
+const Container = styled.div`
+  overflow: auto;
+  flex: 1;
+`;
 
 const HeaderArea = styled.div`
   display: flex;
@@ -102,8 +103,6 @@ const Title = styled.h3`
 const GoalArea = styled.div`
   padding: 0 13px;
   /* margin: 30px 0; */
-
-  height: 278px;
 `;
 
 const Label = styled.div`
@@ -136,16 +135,7 @@ const Period = styled.div`
   font-weight: 600;
 `;
 
-const BtnArea = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: center;
-`;
-
 const RegBtn = styled.button`
-  position: absolute;
-  top: 130px;
-
   width: 340px;
   height: 52px;
   background: #70cca6;
@@ -153,6 +143,8 @@ const RegBtn = styled.button`
   border: none;
   font-size: medium;
   font-weight: 700;
+
+  margin-top: 60px;
 
   cursor: pointer;
 `;

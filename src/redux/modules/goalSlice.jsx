@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { api } from "../../shared/api";
 import serverAxios from "../../components/axios/server.axios";
 
 export const __loadMainGoal = createAsyncThunk("user/MAINGOAL", 
@@ -21,13 +20,13 @@ const goalSlice = createSlice({
     builder
       .addCase(__loadMainGoal.fulfilled, (state, action) => {
         state.list = action.payload;
-        state.status = 'complete';
+        state.status = "complete";
       })
       .addCase(__loadMainGoal.rejected, (state, action) => {
-        state.status = 'false';
+        state.status = "false";
       })
       .addCase(__loadMainGoal.pending, (state, action) => {
-        state.status = 'Loading';
+        state.status = "Loading";
       });
   },
 });
