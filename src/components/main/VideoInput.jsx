@@ -14,7 +14,6 @@ export default function VideoInput(props) {
   const [state, setState] = useState();
   const aaa = useSelector((state)=>state.certification.list.result)
 
-  console.log(aaa.day1.uploaded)
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     const url = URL.createObjectURL(file);
@@ -25,7 +24,6 @@ export default function VideoInput(props) {
   const addVideo = () => {
     const formData = new FormData();
     formData?.append('video', state);
-    console.log(state);
     dispatch(__addCertification({
       formData,
       number
