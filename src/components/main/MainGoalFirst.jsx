@@ -88,7 +88,9 @@ const MainGoalFirst = (props) => {
   )
 }
 
-const StMainLayout = styled.div``;
+const StMainLayout = styled.div`
+
+`;
 
 const StGuideTextContainer = styled.div`
   margin-top: 30px;

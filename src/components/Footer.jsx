@@ -44,7 +44,7 @@ const Footer = () => {
           navigate("/community");
         }}
       >
-        <img src={isListHoverCommunity ? footerCommunityC : footerCommunity} />
+        <img src={isListHoverCommunity ? footerCommunityC : footerCommunity} alt=""/>
       </li>
 
       {/* <li
@@ -64,7 +64,7 @@ const Footer = () => {
           navigate("/Mypage");
         }}
       >
-        <img src={isListHoverMypage ? footerMypageC : footerMypage} />
+        <img src={isListHoverMypage ? footerMypageC : footerMypage} alt=""/>
       </li>
     </StFooterMain>
   );

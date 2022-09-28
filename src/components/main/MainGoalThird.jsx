@@ -13,7 +13,7 @@ const MainGoalThird = (props) => {
   const [failmodalClose, setFailModalClose] = useState(true);
   const [goalmodalOpen, setGoalmodalOpen] = useState(false);
   const dispatch = useDispatch();
-  const getMainGoal = useSelector((state) => state.certification.list.result);
+  const getMainGoal = useSelector((state) => state.goal.list.result);
   const status = useSelector((state) => state.certification.status);
   const date = getMainGoal?.day3.date.slice(0, 10);
   const today = new Date();

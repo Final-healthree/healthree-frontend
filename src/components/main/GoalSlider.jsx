@@ -20,28 +20,28 @@ const GoalSlider = (props) => {
   };
 
   return (
-    <StSliderLayout>
-      <Slider ref={sliderRef} {...settings}>
-        <StSliderContainer>
-          <MainGoalFirst number={1} />
-          {/* <button onClick={()=>{
+      <StSliderLayout>
+        <Slider ref={sliderRef} {...settings}>
+          <div>
+            <MainGoalFirst number = {1} />
+        {/* <button onClick={()=>{
           sliderRef.current.slickNext()
         }}>next</button> */}
-        </StSliderContainer>
-        <StSliderContainer>
-          <MainGoalSecond number={2} />
-        </StSliderContainer>
-        <StSliderContainer>
-          <MainGoalThird number={3} />
-        </StSliderContainer>
-      </Slider>
-    </StSliderLayout>
-  );
-};
+          </div>
+          <div>
+            <MainGoalSecond number = {2} />
+          </div>
+          <div>
+            <MainGoalThird number = {3} />
+          </div>
+        </Slider>
+      </StSliderLayout>
+  )
+}
 
 const StSliderLayout = styled.div`
-  flex: 1;
   overflow: auto;
+  flex: 1;
 `;
 
 const StSliderContainer = styled.div``;
