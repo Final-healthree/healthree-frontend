@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
 import styled from "styled-components";
 import RegisterModal from "./RegisterModal";
-import { __loadMainGoal } from "../../redux/modules/goalSlice";
+import { __loadMainGoal } from "../../redux/modules/certificationSlice";
 import { useDispatch, useSelector } from "react-redux";
 import stamp from "../../assets/main/stamp.png";
 import MainModal from "./MainModal";
@@ -12,13 +12,11 @@ const MainGoalSecond = (props) => {
   const [failmodalClose, setFailModalClose] = useState(true);
   const [goalmodalOpen, setGoalmodalOpen] = useState(false);
   const dispatch = useDispatch();
-  const getMainGoal = useSelector((state) => state.goal.list.result);
-  const date = (getMainGoal?.day2.date.slice(0,10))
+  const getMainGoal = useSelector((state) => state.certification.list.result);
+  const date = getMainGoal?.day2.date.slice(0, 10);
   const today = new Date();
   const selectedDay = new Date((new Date(date).getTime() + (24-9) * 60 * 60 * 1000));
-
-  
-  const videoUploadCheck = useSelector((state) => state.goal.list.result?.day2);
+  const videoUploadCheck = useSelector((state) => state.certification.list.result?.day2);
 
   useEffect(() => {
     dispatch(__loadMainGoal());
@@ -29,38 +27,38 @@ const MainGoalSecond = (props) => {
       <StGuideTextContainer>
         <h1>2/3</h1>
         {videoUploadCheck?.uploaded === false ?
-        <>
-        <span>오늘 목표 인증을 아직 안하셨군요!</span><br />
-        <span>목표를 인증하고,</span><br />
-        <span>작심 2일을 시작하세요!</span>
-        </> 
+          <>
+            <span>오늘 목표 인증을 아직 안하셨군요!</span><br />
+            <span>목표를 인증하고,</span><br />
+            <span>작심 2일을 시작하세요!</span>
+          </> 
         :
-        <>
-        <span>오늘 목표를 완성하셨네요!</span><br />
-        <span>훌륭해요!</span>
-        </>
+          <>
+            <span>오늘 목표를 완성하셨네요!</span><br />
+            <span>훌륭해요!</span>
+          </>
         } 
       </StGuideTextContainer>
       {videoUploadCheck?.uploaded === false ?
-      today < selectedDay ?
-        ""
+        today < selectedDay ?
+          ""
        : 
-       failmodalClose === true ? 
-        <FailModal number={2} date={getMainGoal?.day2.date.slice(0,10)} setModal={setFailModalClose}/> 
-        : null
+        failmodalClose === true ? 
+          <FailModal number={2} date={getMainGoal?.day2.date.slice(0,10)} setModal={setFailModalClose}/> 
+          : null
       :
-      ""
-      //  <MainModal number={2} date={getMainGoal?.day2.date.slice(0,10)}/>
+          ""
       }
-      {goalmodalOpen === true ? <MainModal number={2} date={getMainGoal?.day1.date.slice(0,10)}/> : null}
+      
+      {goalmodalOpen === true ? <MainModal number={2} date={getMainGoal?.day2.date.slice(0,10)}/> : null}
 
       <StMainGoalTextContainer>
         {videoUploadCheck?.uploaded === false ?
           <h1 className="isGoal">작심 2일</h1>
           :
           <>
-          <h1 className="successGoal">작심 2일</h1>
-          <img src= {stamp} alt=""/>
+            <h1 className="successGoal">작심 2일</h1>
+            <img src= {stamp} alt=""/>
           </>
         }
         
