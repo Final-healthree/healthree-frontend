@@ -22,7 +22,7 @@ const GoalSlider = (props) => {
     };
 
   return (
-      <div>
+      <StSliderLayout>
         <Slider ref={sliderRef} {...settings}>
           <div>
             <MainGoalFirst number = {1} />
@@ -37,12 +37,13 @@ const GoalSlider = (props) => {
             <MainGoalThird number = {3} />
           </div>
         </Slider>
-      </div>
+      </StSliderLayout>
   )
 }
 
 const StSliderLayout = styled.div`
-
+  overflow: auto;
+  flex: 1;
 `;
 
 export default GoalSlider;
