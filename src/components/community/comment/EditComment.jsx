@@ -38,7 +38,7 @@ function StCommentText(props) {
       )
       .then((res) => {
         if (res.data.success === true) {
-          alert("수정 완료");
+          alert("수정 완료:)");
         }
       });
   };
@@ -50,7 +50,7 @@ function StCommentText(props) {
       )
       .then((res) => {
         if (res.data.success === true) {
-          alert("삭제 완료");
+          alert("삭제 완료:)");
           window.location.reload();
         }
       });
