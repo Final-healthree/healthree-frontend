@@ -52,7 +52,7 @@ const certificationSlice = createSlice({
     builder
       .addCase(__addCertification.fulfilled, (state, {payload}) => {
         state.list.result[payload].uploaded = true;
-        state.status = "complete";
+        state.status = "";
       })
       .addCase(__addCertification.rejected, (state, action) => {
         state.status = "파일을 다시 올려주세요!";
@@ -72,7 +72,7 @@ const certificationSlice = createSlice({
       })
       .addCase(__loadMainGoal.fulfilled, (state, action) => {
         state.list = action.payload;
-        state.status = "complete";
+        state.status = "";
       })
       .addCase(__loadMainGoal.rejected, (state, action) => {
         state.status = "false";
