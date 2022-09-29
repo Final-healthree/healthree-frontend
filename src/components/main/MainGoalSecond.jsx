@@ -13,6 +13,7 @@ const MainGoalSecond = (props) => {
   const [goalmodalOpen, setGoalmodalOpen] = useState(false);
   const dispatch = useDispatch();
   const getMainGoal = useSelector((state) => state.certification.list.result);
+  const status = useSelector((state) => state.certification.status);
   const date = getMainGoal?.day2.date.slice(0, 10);
   const today = new Date();
   const selectedDay = new Date((new Date(date).getTime() + (24-9) * 60 * 60 * 1000));
@@ -47,14 +48,14 @@ const MainGoalSecond = (props) => {
       {videoUploadCheck?.uploaded === false ?
         today < selectedDay ?
           ""
-       : 
+      : 
         failmodalClose === true ? 
           <FailModal number={2} date={getMainGoal?.day2.date.slice(0,10)} setModal={setFailModalClose}/> 
-          : null
+        : null
       :
           ""
       }
-      
+    
       {goalmodalOpen === true ? <MainModal number={2} date={getMainGoal?.day2.date.slice(0,10)}/> : null}
 
       <StMainGoalTextContainer>
@@ -67,10 +68,11 @@ const MainGoalSecond = (props) => {
           </>
         }
         
-      <StTitleContainer>
-        <p>{getMainGoal?.goal}</p>
-        <p className="date">{getMainGoal?.day2.date.slice(0,10)}</p>
-      </StTitleContainer>
+        <StTitleContainer>
+          <p>{getMainGoal?.goal}</p>
+          <p className="date">{getMainGoal?.day2.date.slice(0,10)}</p>
+        </StTitleContainer>
+        <StStatus>{status}</StStatus>
       </StMainGoalTextContainer>
       <StButtonContainer>
       {videoUploadCheck?.uploaded === false ?
@@ -121,6 +123,12 @@ const StMainGoalTextContainer = styled.div`
   & > img {
     position: absolute;
   }
+`;
+
+const StStatus = styled.p`
+  /* position: absolute;
+  font-size: 30px;
+  color: ; */
 `;
 
 const StTitleContainer  = styled.div`
