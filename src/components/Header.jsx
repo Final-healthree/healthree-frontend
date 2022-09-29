@@ -1,20 +1,18 @@
 import React from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
 
 //svg 이미지
 import headerLogo from "../assets/headerFooter/headerLogo.svg";
 // import back from "../assets/images/back.svg";
 
 const Header = () => {
-  const navigate = useNavigate();
   //로그인 페이지 헤더 숨기기
   const token = localStorage.getItem("Token");
   if (token === null) return null;
 
   return (
     <StHeader>
-        <img src={headerLogo} alt="" onClick={navigate("/main")} sytle={{ cursor: "pointer" }} />
+        <img src={headerLogo} alt=""/>
         <Goservey href="https://forms.gle/hknQyvw9iR4DfuzKA">
           설문조사 하러가기
         </Goservey>
