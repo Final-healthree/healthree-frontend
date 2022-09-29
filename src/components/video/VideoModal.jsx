@@ -50,7 +50,7 @@ const ModalBody = styled.div`
   margin: auto;
 
   width: 375px;
-  height: 700px;
+  height: 100%;
 `;
 
 const ShowVideo = styled.video`
@@ -73,7 +73,7 @@ const ShareBtn = styled.button`
   left: 277px;
 
   position: absolute;
-  top: 540px;
+  top: 720px;
 
   background: #70cca6;
   border-radius: 2px;

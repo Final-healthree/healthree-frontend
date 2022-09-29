@@ -15,14 +15,19 @@ function CommentInput(props) {
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     if (newcomments === "") {
-      return alert("댓글을 입력해주세요");
+      return alert("댓글을 입력해주세요:(");
     }
     await serverAxios
       .post(
         process.env.REACT_APP_REST_API_KEY + `api/comments/${props.data}`,
         newcomments
       )
-      .then((res) => console.log(res));
+      .then((res) => {
+        if (res.data.success) {
+          alert("댓글이 등록되었어요:)");
+          window.location.reload();
+        }
+      });
   };
 
   return (
@@ -32,10 +37,10 @@ function CommentInput(props) {
           onChange={onChangeHandler}
           type="text"
           value={newcomments.comment}
-          placeholder="Text"
+          placeholder="댓글을 달아주세요:)"
         />
       </InputBox>
-        <InPutBtn onClick={onSubmitHandler}>댓글달기</InPutBtn>
+      <InPutBtn onClick={onSubmitHandler}>댓글달기</InPutBtn>
     </StWrap>
   );
 }
@@ -49,24 +54,22 @@ const StWrap = styled.div`
   padding: 10px 24px;
   display: flex;
 
-  gap: 6px
+  gap: 6px;
 
   /* position: absolute; */
   /* bottom: 0; */
 `;
 const Input = styled.input`
-width : 270px;
-height : 27px;
-font-size : 16px
-`
+  width: 270px;
+  height: 27px;
+  font-size: 16px;
+`;
 
 const InputBox = styled.div`
-  
-border: 0;
+  border: 0;
   outline: 0;
   background-color: transparent;
   gap: 10px;
-
 `;
 
 const InPutBtn = styled.button`

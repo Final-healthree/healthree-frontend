@@ -1,21 +1,21 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { __loadMainGoal } from "./goalSlice";
 import serverAxios from "../../components/axios/server.axios";
 
 export const __addCertification = createAsyncThunk(
   "post/CERTIFICATION",
   async (payload, thunkAPI) => {
     const response = await serverAxios.post(
-      `/serverAxios/videos/${payload.number}`,
+      `/api/videos/${payload.number}`,
       payload.formData,
       {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       }
-    );
-    thunkAPI.dispatch(__loadMainGoal());
-    return response.data;
+
+    )
+    return 'day'+payload.number;
+
   }
 );
 
@@ -23,12 +23,18 @@ export const __addFail = createAsyncThunk(
   "goal/FAIL",
   async (payload, thunkAPI) => {
     const response = await serverAxios.patch(
-      `serverAxios/goals/fail/${payload}`,
+      `api/goals/fail/${payload}`,
       payload
     );
     return response.data;
   }
 );
+
+export const __loadMainGoal = createAsyncThunk("user/MAINGOAL", 
+  async (payload, thunkAPI) => {
+    const response = await serverAxios.get("/api/goals/progress");
+    return response.data;
+});
 
 const certificationSlice = createSlice({
   name: "certification",
@@ -44,19 +50,17 @@ const certificationSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
-      .addCase(__addCertification.fulfilled, (state, action) => {
-        // state.list = [action.payload, ...state.list];
-        state.list = action.payload;
+      .addCase(__addCertification.fulfilled, (state, {payload}) => {
+        state.list.result[payload].uploaded = true;
         state.status = "complete";
       })
       .addCase(__addCertification.rejected, (state, action) => {
-        state.status = "false";
+        state.status = "파일을 다시 올려주세요!";
       })
       .addCase(__addCertification.pending, (state, action) => {
         state.status = "동영상을 합치는 중입니다...";
       })
       .addCase(__addFail.fulfilled, (state, action) => {
-        // state.list = [action.payload, ...state.list];
         state.list = action.payload;
         state.loading = false;
       })
@@ -65,6 +69,16 @@ const certificationSlice = createSlice({
       })
       .addCase(__addFail.pending, (state, action) => {
         state.loading = true;
+      })
+      .addCase(__loadMainGoal.fulfilled, (state, action) => {
+        state.list = action.payload;
+        state.status = "complete";
+      })
+      .addCase(__loadMainGoal.rejected, (state, action) => {
+        state.status = "false";
+      })
+      .addCase(__loadMainGoal.pending, (state, action) => {
+        state.status = "Loading";
       });
   },
 });

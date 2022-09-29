@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
 import styled from "styled-components";
 import RegisterModal from "./RegisterModal";
-import { __loadMainGoal } from "../../redux/modules/goalSlice";
+import { __loadMainGoal } from "../../redux/modules/certificationSlice";
 import { useDispatch, useSelector } from "react-redux";
 import stamp from "../../assets/main/stamp.png";
 import MainModal from "./MainModal";
@@ -12,24 +12,11 @@ const MainGoalFirst = (props) => {
   const [failmodalClose, setFailModalClose] = useState(true);
   const [goalmodalOpen, setGoalmodalOpen] = useState(false);
   const dispatch = useDispatch();
-  const getMainGoal = useSelector((state) => state.goal.list.result);
+  const getMainGoal = useSelector((state) => state.certification.list.result);
   const date = getMainGoal?.day1.date.slice(0, 10);
   const today = new Date();
   const selectedDay = new Date((new Date(date).getTime() + (24-9) * 60 * 60 * 1000));
-
-
-
-  // const curr = new Date(); // 요청 할 때 한국 시간 구하기
-  // const utc = curr.getTime(); //+ curr.getTimezoneOffset() * 60 * 1000; // 2. UTC 시간 계산
-  // const lastDate = new Date(utc + (9 + 24) * 60 * 60 * 1000);
-
-  const videoUploadCheck = useSelector((state) => state.goal.list.result?.day1);
-  const videoUploadCheck1 = useSelector((state) => state.certification.list);
-
-  const videoUploadCheck2 = useSelector((state) => state);
-
-  // console.log(videoUploadCheck)
-  // console.log(videoUploadCheck2)
+  const videoUploadCheck = useSelector((state) => state.certification.list.result?.day1);
 
   useEffect(() => {
     dispatch(__loadMainGoal());
@@ -39,36 +26,36 @@ const MainGoalFirst = (props) => {
     <StMainLayout>
       <StGuideTextContainer>
         <h1>1/3</h1>
-        {/* <span>오늘 목표 인증을 아직 안하셨군요!</span><br />
-        <span>목표를 인증하고,</span><br />
-        <span>작심 1일을 시작하세요!</span> */}
         {videoUploadCheck?.uploaded === false ? 
           <>
-            <span>오늘 목표 인증을 아직 안하셨군요!</span>
-            <br />
-            <span>목표를 인증하고,</span>
-            <br />
-            <span>작심 1일을 시작하세요!</span>
+            <span>
+              오늘 목표 인증을 아직 안하셨군요!<br />
+              목표를 인증하고,<br />
+              작심 1일을 시작하세요!
+            </span>
           </>
          : 
           <>
-            <span>오늘 목표를 완성하셨네요!</span>
-            <br />
-            <span>훌륭해요!</span>
+            <span>
+              오늘 목표를 완성하셨네요!<br />
+              훌륭해요!
+            </span>
           </>
         }
       </StGuideTextContainer>
-      {videoUploadCheck1?.success === false ?
-      today < selectedDay ?
-      ""
-       : 
-       failmodalClose === true ? 
-        <FailModal number={1} date={getMainGoal?.day1.date.slice(0,10)} setModal={setFailModalClose}/> 
-        : null
-      :
-      ""
+      {videoUploadCheck?.uploaded === false ? 
+        today < selectedDay ?
+          ""
+        : 
+        failmodalClose === true ? 
+          <FailModal number={1} date={getMainGoal?.day1.date.slice(0,10)} setModal={setFailModalClose}/> 
+          : null
+        :
+          ""
       }
+
       {goalmodalOpen === true ? <MainModal number={1} date={getMainGoal?.day1.date.slice(0,10)}/> : null}
+      
       <StMainGoalTextContainer>
         {videoUploadCheck?.uploaded === false ? 
           <h1 className="isGoal">작심 1일</h1>
@@ -102,7 +89,9 @@ const MainGoalFirst = (props) => {
   )
 }
 
-const StMainLayout = styled.div``;
+const StMainLayout = styled.div`
+
+`;
 
 const StGuideTextContainer = styled.div`
   margin-top: 30px;

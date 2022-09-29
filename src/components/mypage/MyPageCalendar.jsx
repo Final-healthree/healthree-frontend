@@ -17,10 +17,12 @@ function MyPageCalendar() {
     await serverAxios
       .get(process.env.REACT_APP_REST_API_KEY + `api/goals/mine`)
       .then((res) => {
-        setSuccess([...success, ...res.data.result.date.success]);
-        setFail([...fail, ...res.data.result.date.fail]);
+       
+        setSuccess([...res.data.result.date.success]);
+        setFail([...res.data.result.date.fail]);
       });
   };
+
 
   useEffect(() => {
     getDates();
@@ -85,7 +87,10 @@ const css = `
 
 `;
 
-const Container = styled.div``;
+const Container = styled.div`
+  overflow: auto;
+  flex: 1;
+`;
 
 const Stcalendar = styled.div`
   padding-top: 23px;

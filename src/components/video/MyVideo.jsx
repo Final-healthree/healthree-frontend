@@ -118,7 +118,15 @@ const MyVideo = () => {
 
 export default MyVideo;
 
-const Container = styled.div``;
+const Container = styled.div`
+  flex: 1;
+  overflow: auto;
+  padding: 0 16px;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+`;
 
 const EmptyArea = styled.div`
   display: flex;
@@ -130,7 +138,7 @@ const EmptyImg = styled.div`
   position: absolute;
   width: 144.74px;
   height: 154.36px;
-  top: 150px;
+  top: 200px;
   background-image: url(${emptyImg});
   background-size: cover;
   background-position: center;
@@ -140,7 +148,7 @@ const EmptyP = styled.p`
   position: absolute;
   height: 36px;
   /* top: calc(50% - 36px / 2 + 123px); */
-  top: 330px;
+  top: 380px;
   display: flex;
   align-items: center;
   text-align: center;

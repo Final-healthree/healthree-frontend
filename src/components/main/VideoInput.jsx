@@ -2,8 +2,8 @@ import { React, useState, useRef } from "react";
 import styled from "styled-components";
 import Thumnail from "../../assets/main/Thumnail.png";
 import upload from "../../assets/main/upload.png";
-import { useDispatch } from "react-redux";
-import { __addCertification, ModalDoor } from "../../redux/modules/certificationSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { __addCertification } from "../../redux/modules/certificationSlice";
 
 export default function VideoInput(props) {
   const { width, height, number, modal, setGoalmodal } = props;
@@ -12,7 +12,7 @@ export default function VideoInput(props) {
   const dispatch = useDispatch();
   const [source, setSource] = useState();
   const [state, setState] = useState();
-
+  const aaa = useSelector((state)=>state.certification.list.result)
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -24,13 +24,13 @@ export default function VideoInput(props) {
   const addVideo = () => {
     const formData = new FormData();
     formData?.append('video', state);
-    console.log(state);
     dispatch(__addCertification({
       formData,
       number
     }));
     modal(false);
     setGoalmodal(true);
+
   }
 
 
@@ -65,29 +65,17 @@ export default function VideoInput(props) {
             />
           )}
         </div>
-
-        {/* {!source && 
-        <Stbutton onClick={handleChoose}>
-          <img className="uploadImg" src={upload} alt="" />
-          &nbsp;업로드</Stbutton>} */}
-
         <Stbutton onClick={handleChoose}>
           <img className="uploadImg" src={upload} alt="" />
           &nbsp;업로드</Stbutton>
-        {/* {source && (
-          <video
-            className="VideoInput_video"
-            width="100%"
-            height={height}
-            controls
-            src={source}
-          />
-        )} */}
-
-        {/* <div className="VideoInput_footer">{source || "Nothing selectd"}</div> */}
       </StVideoRegisterContainer>
       <StUploadGuide>
-        <span>* 세로 영상만 지원합니다.</span>
+        <span>
+          * 세로 영상만 지원합니다.<br/>
+          <br />
+          {/* 영상은 편집된 영상이 아닌 원본 영상만 가능합니다. <br/> */}
+          (영상은 10mb, 3초 이하의 새로 찍은 영상을 넣어 주세요!)
+        </span>
       </StUploadGuide>
       <StButtonContainer>
         <button onClick={addVideo}>확인</button>
@@ -154,10 +142,17 @@ const StVideoRegisterContainer = styled.div`
 const StUploadGuide = styled.div`
   text-align: center;
   margin-top: 30px;
+  
+
+  & > span {
+    font-weight: 600;
+    font-family: sans-serif;
+    font-size: 15px;
+  }
 `;
 
 const StButtonContainer = styled.div`
-  margin-top: 50px;
+  margin-top: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
