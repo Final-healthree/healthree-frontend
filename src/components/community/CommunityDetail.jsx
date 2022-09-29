@@ -38,7 +38,7 @@ const CommunityDetailPost = () => {
         .post(process.env.REACT_APP_REST_API_KEY + `api/posts/like/${postid}`)
         .then((res) => {
           if (res.data.result === "좋아요 성공") {
-            console.log(res);
+         
             setLike(true);
           }
         });

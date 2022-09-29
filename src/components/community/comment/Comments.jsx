@@ -68,6 +68,7 @@ const StWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 10px 0;
+  flex: 1;
 `;
 
 const StProfile = styled.div`
