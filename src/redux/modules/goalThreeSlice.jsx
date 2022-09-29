@@ -3,7 +3,7 @@ import serverAxios from "../../components/axios/server.axios";
 
 export const __loadMainGoalthree = createAsyncThunk("user/MAINGOAL", 
   async (payload, thunkAPI) => {
-    console.log(payload)
+    // console.log(payload)
     const response = 
     await serverAxios.get(`/api/goals/progress?goal_id=${payload.goalThirdResult}`, 
     payload.goalThirdResult)
