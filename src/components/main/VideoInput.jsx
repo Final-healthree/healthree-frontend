@@ -70,7 +70,12 @@ export default function VideoInput(props) {
           &nbsp;업로드</Stbutton>
       </StVideoRegisterContainer>
       <StUploadGuide>
-        <span>* 세로 영상만 지원합니다.</span>
+        <span>
+          * 세로 영상만 지원합니다.<br/>
+          <br />
+          {/* 영상은 편집된 영상이 아닌 원본 영상만 가능합니다. <br/> */}
+          (영상은 10mb, 3초 이하의 새로 찍은 영상을 넣어 주세요!)
+        </span>
       </StUploadGuide>
       <StButtonContainer>
         <button onClick={addVideo}>확인</button>
@@ -137,10 +142,17 @@ const StVideoRegisterContainer = styled.div`
 const StUploadGuide = styled.div`
   text-align: center;
   margin-top: 30px;
+  
+
+  & > span {
+    font-weight: 600;
+    font-family: sans-serif;
+    font-size: 15px;
+  }
 `;
 
 const StButtonContainer = styled.div`
-  margin-top: 50px;
+  margin-top: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
