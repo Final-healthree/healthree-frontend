@@ -12,7 +12,7 @@ export default function VideoInput(props) {
   const dispatch = useDispatch();
   const [source, setSource] = useState();
   const [state, setState] = useState();
-  const aaa = useSelector((state)=>state.certification.list.result)
+  const aaa = useSelector((state) => state.certification.list.result);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -23,16 +23,16 @@ export default function VideoInput(props) {
 
   const addVideo = () => {
     const formData = new FormData();
-    formData?.append('video', state);
-    dispatch(__addCertification({
-      formData,
-      number
-    }));
+    formData?.append("video", state);
+    dispatch(
+      __addCertification({
+        formData,
+        number,
+      })
+    );
     modal(false);
     setGoalmodal(true);
-
-  }
-
+  };
 
   const handleChoose = (event) => {
     inputRef.current.click();
@@ -52,9 +52,7 @@ export default function VideoInput(props) {
           style={{ display: "none" }}
         />
         <div className="imgDiv">
-          {source ? 
-          "":
-          <img src={Thumnail} alt=""/> }
+          {source ? "" : <img src={Thumnail} alt="" />}
           {source && (
             <video
               className="VideoInput_video"
@@ -67,10 +65,16 @@ export default function VideoInput(props) {
         </div>
         <Stbutton onClick={handleChoose}>
           <img className="uploadImg" src={upload} alt="" />
-          &nbsp;업로드</Stbutton>
+          &nbsp;업로드
+        </Stbutton>
       </StVideoRegisterContainer>
       <StUploadGuide>
-        <span>* 세로 영상만 지원합니다.</span>
+        <span>
+          * 세로 영상만 지원합니다.
+          <br />
+          <br />
+          (1초 ~ 3초 이하의 새로찍은 영상으로 올려주세요!)
+        </span>
       </StUploadGuide>
       <StButtonContainer>
         <button onClick={addVideo}>확인</button>
@@ -79,12 +83,11 @@ export default function VideoInput(props) {
   );
 }
 
-
 const Stbutton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor:pointer;
+  cursor: pointer;
   font-family: sans-serif;
   font-weight: 500;
 `;
@@ -105,16 +108,16 @@ const StVideoRegisterContainer = styled.div`
     align-items: center;
     /* background-color: white; */
 
-  video {
-    width: 234px;
-    height: 234px;
-    object-fit: fill;
-  }
-  img {
-    width: 234px;
-    height: 234px;
-    object-fit: fill;
-  }
+    video {
+      width: 234px;
+      height: 234px;
+      object-fit: fill;
+    }
+    img {
+      width: 234px;
+      height: 234px;
+      object-fit: fill;
+    }
   }
 
   & > button {
@@ -124,23 +127,29 @@ const StVideoRegisterContainer = styled.div`
     position: relative;
     right: 12px;
     margin-top: 5px;
-    background: #70CCA6;
+    background: #70cca6;
     border: none;
-    border-radius: 2px;  
+    border-radius: 2px;
   }
 
   .uploadImg {
     transform: translate(-0px, -1px);
   }
-  `;
+`;
 
 const StUploadGuide = styled.div`
   text-align: center;
   margin-top: 30px;
+
+  & > span {
+    font-weight: 600;
+    font-family: sans-serif;
+    font-size: 15px;
+  }
 `;
 
 const StButtonContainer = styled.div`
-  margin-top: 50px;
+  margin-top: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -148,10 +157,9 @@ const StButtonContainer = styled.div`
   & > button {
     width: 95%;
     height: 52px;
-    background: #70CCA6;  
+    background: #70cca6;
     cursor: pointer;
     border: none;
     border-radius: 2px;
   }
-
 `;

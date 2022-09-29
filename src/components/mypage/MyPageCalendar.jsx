@@ -17,13 +17,12 @@ function MyPageCalendar() {
     await serverAxios
       .get(process.env.REACT_APP_REST_API_KEY + `api/goals/mine`)
       .then((res) => {
-        console.log(res);
+       
         setSuccess([...res.data.result.date.success]);
         setFail([...res.data.result.date.fail]);
       });
   };
 
-  console.log(fail);
 
   useEffect(() => {
     getDates();

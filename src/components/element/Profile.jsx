@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 function Profile() {
   const navigate = useNavigate();
   const token = localStorage.getItem("Token");
-  console.log(token);
+
   const [profileImage, setProfileImage] = useState();
   const [nickName, setNickName] = useState();
 
