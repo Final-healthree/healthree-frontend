@@ -64,6 +64,42 @@ const StModal = styled.div`
 
 `;
 
+//정우님 모달 구현 코드
+// const Modal = styled.div`
+// display: flex;
+// flex-flow: column;
+
+// height: 100%;
+// width: 100%;
+
+// position: absolute;
+// top: 0;
+// left: ${(props) => (props.toggle ? "0%" : "100%")};
+// z-index: ${(props) => (props.toggle ? 100 : -1)};
+
+// transition-duration: 0.7s;
+
+// background: white;
+// `;
+
+// export default Modal;
+// const OpacityModal = styled.div`
+// height: 100%;
+// width: 100%;
+
+// position: absolute;
+// top: 0;
+// left: 0;
+// z-index: ${(props) => (props.toggle ? 100 : -1)};
+// opacity: ${(props) => (props.toggle ? 1 : 0)};
+
+// transition-duration: 0.3s;
+
+// background: white;
+// `;
+
+// export default OpacityModal;
+//여기까지
 
 
 const StModalButton = styled.button``;

@@ -29,19 +29,19 @@ const MainGoalSecond = (props) => {
         <h1>2/3</h1>
         {videoUploadCheck?.uploaded === false ?
           <>
-            <span>
+            <p>
               오늘 목표 인증을 아직 안하셨군요!<br />
               목표를 인증하고,<br />
               작심 2일을 시작하세요!
-            </span>
+            </p>
           </> 
         :
           <>
-            <span>
+            <p>
               오늘 목표를 완성하셨네요!<br />
               아주 훌륭합니다!<br />
               고지가 코앞입니다.
-            </span>
+            </p>
           </>
         } 
       </StGuideTextContainer>
@@ -53,10 +53,8 @@ const MainGoalSecond = (props) => {
           <FailModal number={2} date={getMainGoal?.day2.date.slice(0,10)} setModal={setFailModalClose}/> 
         : null
       :
-          ""
+        goalmodalOpen === true ? <MainModal number={2} date={getMainGoal?.day1.date.slice(0,10)}/> : null
       }
-    
-      {goalmodalOpen === true ? <MainModal number={2} date={getMainGoal?.day2.date.slice(0,10)}/> : null}
 
       <StMainGoalTextContainer>
         {videoUploadCheck?.uploaded === false ?
@@ -97,6 +95,10 @@ const StGuideTextContainer = styled.div`
   margin-top: 30px;
   text-align: left;
   padding-left: 20px;
+
+  & > p {
+    line-height: 1.5;
+  }
 `;
 
 const StMainGoalTextContainer = styled.div`

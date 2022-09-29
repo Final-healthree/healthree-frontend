@@ -19,7 +19,8 @@ const MainGoalThird = (props) => {
   const today = new Date();
   const selectedDay = new Date((new Date(date).getTime() + (24-9) * 60 * 60 * 1000));
   const videoUploadCheck = useSelector((state) => state.certification.list.result?.day3);
-  
+
+
   useEffect(() => {
     dispatch(__loadMainGoal());
   }, [])
@@ -31,19 +32,19 @@ const MainGoalThird = (props) => {
         <h1>3/3</h1>
         {videoUploadCheck?.uploaded === false ?
           <>
-            <span>
+            <p>
               오늘 목표 인증을 아직 안하셨군요!<br />
               목표를 인증하고,<br />
               작심 3일을 시작하세요!
-            </span>
+            </p>
           </> 
         :
           <>
-            <span>
+            <p>
               오늘 목표를 완성하셨네요!<br />
               아주 훌륭합니다!<br />
               1일부터 3일까지의 쇼츠를 확인하세요.
-            </span>
+            </p>
           </>
         } 
       </StGuideTextContainer>
@@ -55,10 +56,8 @@ const MainGoalThird = (props) => {
           <FailModal number={3} date={getMainGoal?.day3.date.slice(0,10)} setModal={setFailModalClose}/> 
           : null
       :
-        <MainModal number={3} date={getMainGoal?.day3.date.slice(0,10)}/>
+        goalmodalOpen === true ? <MainModal number={3} date={getMainGoal?.day1.date.slice(0,10)}/> : null
       }
-
-      {/* {goalmodalOpen === true ? <MainModal number={3} date={getMainGoal?.day3.date.slice(0,10)}/> : null} */}
 
       <StMainGoalTextContainer>
         {videoUploadCheck?.uploaded === false ?
@@ -98,6 +97,10 @@ const StGuideTextContainer = styled.div`
   margin-top: 30px;
   text-align: left;
   padding-left: 20px;
+
+  & > p {
+    line-height: 1.5;
+  }
 `;
 
 const StMainGoalTextContainer = styled.div`

@@ -12,7 +12,6 @@ export default function VideoInput(props) {
   const dispatch = useDispatch();
   const [source, setSource] = useState();
   const [state, setState] = useState();
-  const aaa = useSelector((state) => state.certification.list.result);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -46,7 +45,7 @@ export default function VideoInput(props) {
           className="VideoInput_input"
           type="file"
           onChange={handleFileChange}
-          accept=".mov,.mp4"
+          accept="video/*"
           name="video"
           id="file-input"
           style={{ display: "none" }}
