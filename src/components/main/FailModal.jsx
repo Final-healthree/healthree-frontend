@@ -5,10 +5,12 @@ import fill from "../../assets/main/modal/fill.png";
 import { existgoal } from "../../redux/modules/existgoal";
 import { __addFail } from "../../redux/modules/certificationSlice";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const FailModal = (props) => {
   const { number, page, setModal } = props;
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const ReturnCalendar = () => {
     dispatch(existgoal({
@@ -28,9 +30,11 @@ const FailModal = (props) => {
             className="check"
             onClick={() => {
               setModal(false);
+              ReturnCalendar()
+              navigate("/Mypage")
             }}
           >
-            확인
+            마이페이지로 가기
           </button>
           <button
             className="retry"
@@ -71,6 +75,10 @@ const StModalLayout = styled.div`
 const StModalContainer = styled.div`
   margin-top: 40px;
 
+  & > h5 {
+    font-family: sans-serif;
+  }
+
   & > img {
     margin: 0 auto;
   }
@@ -81,8 +89,13 @@ const StBtnLayout = styled.div`
   justify-content: center;
   gap: 10px;
 
+  & > button {
+    font-family: sans-serif;
+    font-weight: 700;
+  }
+
   & > .check {
-    width: 93px;
+    /* width: 93px; */
     height: 32px;
     background: #dadada;
     border-radius: 2px;

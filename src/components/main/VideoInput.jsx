@@ -73,8 +73,7 @@ export default function VideoInput(props) {
         <span>
           * 세로 영상만 지원합니다.<br/>
           <br />
-          {/* 영상은 편집된 영상이 아닌 원본 영상만 가능합니다. <br/> */}
-          (영상은 10mb, 3초 이하의 새로 찍은 영상을 넣어 주세요!)
+          (1초이상 3초 이하의 새로찍은 영상으로 올려주세요!)
         </span>
       </StUploadGuide>
       <StButtonContainer>

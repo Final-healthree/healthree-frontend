@@ -65,7 +65,7 @@ function Modal(props) {
                 }}
                 >
                 <img src={fill} alt="" />
-                &nbsp;재도전하기
+                &nbsp;새로운 도전하기
               </button>
             </StBtnLayout>
             :
