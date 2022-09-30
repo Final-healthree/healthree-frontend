@@ -4,7 +4,8 @@ import serverAxios from "../../components/axios/server.axios";
 export const __addCertification = createAsyncThunk(
   "post/CERTIFICATION",
   async (payload, thunkAPI) => {
-    const response = await serverAxios.post(
+    try{
+      const response = await serverAxios.post(
       `/api/videos/${payload.number}`,
       payload.formData,
       {
@@ -15,8 +16,13 @@ export const __addCertification = createAsyncThunk(
 
     )
     return 'day'+payload.number;
-
+    }
+    catch(err){
+      console.log(err)
+      alert("파일을 다시 올려주세요!");
+    }
   }
+    
 );
 
 export const __addFail = createAsyncThunk(
@@ -41,6 +47,7 @@ const certificationSlice = createSlice({
   initialState: {
     list: [],
     status: "",
+    toggle: false,
   },
   reducers: {
     ModalDoor: (state, action) => {
@@ -53,6 +60,7 @@ const certificationSlice = createSlice({
       .addCase(__addCertification.fulfilled, (state, {payload}) => {
         state.list.result[payload].uploaded = true;
         state.status = "";
+        state.toggle = true;
       })
       .addCase(__addCertification.rejected, (state, action) => {
         state.status = "파일을 다시 올려주세요!";

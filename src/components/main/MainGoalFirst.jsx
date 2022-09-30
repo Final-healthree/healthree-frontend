@@ -8,6 +8,7 @@ import MainModal from "./MainModal";
 import FailModal from "./FailModal";
 
 const MainGoalFirst = (props) => {
+  const { number } = props;
   const [modalopen, setModalOpen] = useState(false);
   const [failmodalClose, setFailModalClose] = useState(true);
   const [goalmodalOpen, setGoalmodalOpen] = useState(false);
@@ -18,7 +19,11 @@ const MainGoalFirst = (props) => {
   const today = new Date();
   const selectedDay = new Date((new Date(date).getTime() + (24-9) * 60 * 60 * 1000));
   const videoUploadCheck = useSelector((state) => state.certification.list.result?.day1);
+  const a = useSelector((state) => state);
 
+
+  console.log(a)
+  
   useEffect(() => {
     dispatch(__loadMainGoal());
   }, []);
@@ -29,18 +34,19 @@ const MainGoalFirst = (props) => {
         <h1>1/3</h1>
         {videoUploadCheck?.uploaded === false ? 
           <>
-            <span>
+            <p>
               오늘 목표 인증을 아직 안하셨군요!<br />
               목표를 인증하고,<br />
               작심 1일을 시작하세요!
-            </span>
+            </p>
           </>
          : 
           <>
-            <span>
+            <p>
               오늘 목표를 완성하셨네요!<br />
-              훌륭해요!
-            </span>
+              훌륭해요!<br />
+              시작이 반 입니다.
+            </p>
           </>
         }
       </StGuideTextContainer>
@@ -52,11 +58,9 @@ const MainGoalFirst = (props) => {
           <FailModal number={1} date={getMainGoal?.day1.date.slice(0,10)} setModal={setFailModalClose}/> 
           : null
         :
-          ""
+        goalmodalOpen === true ? <MainModal number={1} date={getMainGoal?.day1.date.slice(0,10)}/> : null
       }
 
-      {goalmodalOpen === true ? <MainModal number={1} date={getMainGoal?.day1.date.slice(0,10)}/> : null}
-      
       <StMainGoalTextContainer>
         {videoUploadCheck?.uploaded === false ? 
           <h1 className="isGoal">작심 1일</h1>
@@ -99,6 +103,10 @@ const StGuideTextContainer = styled.div`
   margin-top: 30px;
   text-align: left;
   padding-left: 20px;
+
+  & > p {
+    line-height: 1.5;
+  }
 `;
 
 const StMainGoalTextContainer = styled.div`
@@ -125,6 +133,7 @@ const StMainGoalTextContainer = styled.div`
 
   & > img {
     position: absolute;
+    width: 370px;
   }
 `;
 
