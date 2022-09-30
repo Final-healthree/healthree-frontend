@@ -14,7 +14,6 @@ import Rank from "../pages/Rank";
 const Router = () => {
   return (
     <BrowserRouter>
-    <BackGround> 
       <Layout>
         <Header />
         <Routes>
@@ -28,7 +27,6 @@ const Router = () => {
         </Routes>
         <Footer />
       </Layout>
-    </BackGround>
     </BrowserRouter>
   );
 };
