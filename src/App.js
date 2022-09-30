@@ -7,10 +7,10 @@ import Web from "./components/Layout/Web"
 function App() {
   return (
     <div>
-      <Web>
+      {/* <Web> */}
         <GlobalStyle />
         <Router />
-      </Web>
+      {/* </Web> */}
     </div>
   );
 }
