@@ -162,11 +162,8 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 60px;
-  padding: 20px 0;
+  padding: 20px 0 70px;
   box-sizing: border-box;
-  overflow: auto;
-  flex: 1;
-  margin-top: 20px;
 
   ::-webkit-scrollbar {
     display: none;

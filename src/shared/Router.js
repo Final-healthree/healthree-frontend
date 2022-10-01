@@ -6,29 +6,30 @@ import Community from "../pages/Community";
 import CommunityDetail from "../pages/CommunityDetail";
 import Register from "../pages/Register";
 import Mypage from "../pages/MyPage";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import Layout from "../components/Layout";
-import Rank from "../pages/Rank";
+import Pullpage from "../components/layout/Pullpage";
+import Layout from "../components/layout/Layout";
+import Header from "../components/layout/Header";
+import Footer from "../components/layout/Footer";
 import Setting from "../pages/Setting";
 
 const Router = () => {
   return (
     <BrowserRouter>
-      <Layout>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/main" element={<Main />} />
-          <Route path="/community" element={<Community />} />
-          <Route path="/community/:postid" element={<CommunityDetail />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/mypage" element={<Mypage />} />
-          <Route path="/rank" element={<Rank />} />
-          <Route path="/setting" element={<Setting />} />
-        </Routes>
-        <Footer />
-      </Layout>
+      <Pullpage>
+        <Layout>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/main" element={<Main />} />
+            <Route path="/community" element={<Community />} />
+            <Route path="/community/:postid" element={<CommunityDetail />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/mypage" element={<Mypage />} />
+            <Route path="/setting" element={<Setting />} />
+          </Routes>
+          <Footer />
+        </Layout>
+      </Pullpage>
     </BrowserRouter>
   );
 };

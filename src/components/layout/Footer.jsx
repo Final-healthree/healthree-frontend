@@ -2,14 +2,12 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-import footerMain from "../assets/headerFooter/footerMain.svg";
-import footerMainC from "../assets/headerFooter/footerMainC.svg";
-import footerCommunity from "../assets/headerFooter/footerCommunity.svg";
-import footerCommunityC from "../assets/headerFooter/footerCommunityC.svg";
-import footerMypage from "../assets/headerFooter/footerMypage.svg";
-import footerMypageC from "../assets/headerFooter/footerMypageC.svg";
-// import footerRank from "../assets/headerFooter/footerRank.svg";
-// import footerRankC from "../assets/headerFooter/footerRankC.svg";
+import footerMain from "../../assets/headerFooter/footerMain.svg";
+import footerMainC from "../../assets/headerFooter/footerMainC.svg";
+import footerCommunity from "../../assets/headerFooter/footerCommunity.svg";
+import footerCommunityC from "../../assets/headerFooter/footerCommunityC.svg";
+import footerMypage from "../../assets/headerFooter/footerMypage.svg";
+import footerMypageC from "../../assets/headerFooter/footerMypageC.svg";
 
 const Footer = () => {
   const navigate = useNavigate();
@@ -44,7 +42,10 @@ const Footer = () => {
           navigate("/community");
         }}
       >
-        <img src={isListHoverCommunity ? footerCommunityC : footerCommunity} alt=""/>
+        <img
+          src={isListHoverCommunity ? footerCommunityC : footerCommunity}
+          alt=""
+        />
       </li>
 
       {/* <li
@@ -64,7 +65,7 @@ const Footer = () => {
           navigate("/Mypage");
         }}
       >
-        <img src={isListHoverMypage ? footerMypageC : footerMypage} alt=""/>
+        <img src={isListHoverMypage ? footerMypageC : footerMypage} alt="" />
       </li>
     </StFooterMain>
   );
@@ -72,18 +73,19 @@ const Footer = () => {
 
 export default Footer;
 
-const StFooterMain = styled.ul`
+const StFooterMain = styled.div`
   display: flex;
   list-style: none;
-  padding: 0px 1em 0;
   justify-content: space-around;
   background-color: #fff;
   box-shadow: 0 -7px 5px -5px #9c939376;
   margin: 0;
 
-  position: sticky;
-  bottom: 0;
   width: 100%;
+  height: 60px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
   box-sizing: border-box;
 
   cursor: pointer;
