@@ -32,7 +32,7 @@ function Profile() {
   return (
     <StArea>
       <StProfile>
-        <img style={{ width: "34px", height: "34px" }} src={profileImage} />
+        <img style={{ width: "34px", height: "34px" }} src={profileImage} alt=""/>
       </StProfile>
       <StNickName>{nickName}</StNickName>
       <Login onClick={Logout}>로그아웃</Login>

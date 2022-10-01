@@ -9,6 +9,8 @@ import ko from "date-fns/locale/ko";
 
 import getDateOption from "./get-date-option";
 
+import CalendarCss from "../calendar/calendar";
+
 function MyPageCalendar() {
   const [success, setSuccess] = useState([]);
   const [fail, setFail] = useState([]);
@@ -17,12 +19,10 @@ function MyPageCalendar() {
     await serverAxios
       .get(process.env.REACT_APP_REST_API_KEY + `api/goals/mine`)
       .then((res) => {
-       
         setSuccess([...res.data.result.date.success]);
         setFail([...res.data.result.date.fail]);
       });
   };
-
 
   useEffect(() => {
     getDates();
@@ -35,7 +35,8 @@ function MyPageCalendar() {
 
   return (
     <Container>
-      <style>{css}</style>
+      <CalendarCss />
+
       <DayPicker
         locale={ko}
         modifiers={modifiers}
@@ -47,51 +48,8 @@ function MyPageCalendar() {
 }
 export default MyPageCalendar;
 
-const css = `
-  .rdp {
-    --rdp-cell-size: 46px;
-    --rdp-accent-color: #70CCA6;
-    --rdp-outline: none;
-  }
-  .rdp-day_outside {
-    color: #DADADA;
-  }
-
-  .rdp-caption {
-    width: 322px;
-    height: 81px;
-
-    background: #2C8D65;
-  }
-
-  .rdp-caption_label{
-    color : #fff
-  }
-
-  .rdp-head_row,
-  .rdp-head,
-  .rdp-head_cell {
-    background: #70CCA6;
-    margin : 0;
-    color : #fff;
-  }
-
-  .DayPicker-Day--monday {
-    color: #00bcd4;
-  }
-
-  .rdp-nav_button {
-    color : #fff;
-  }
-
-
-`;
-
 const Container = styled.div`
   overflow: auto;
   flex: 1;
-`;
-
-const Stcalendar = styled.div`
-  padding-top: 23px;
+  margin: 0 auto;
 `;

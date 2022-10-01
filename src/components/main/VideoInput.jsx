@@ -12,7 +12,6 @@ export default function VideoInput(props) {
   const dispatch = useDispatch();
   const [source, setSource] = useState();
   const [state, setState] = useState();
-  const aaa = useSelector((state) => state.certification.list.result);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -38,6 +37,20 @@ export default function VideoInput(props) {
     inputRef.current.click();
   };
 
+  const except = () => {
+    dispatch(__addCertification())
+    .then((res)=>{
+      if(res.payload===400) {
+
+      } else if(res.payload===403) {
+
+      }
+    })
+    
+  }
+
+
+
   return (
     <div className="VideoInput">
       <StVideoRegisterContainer>
@@ -46,7 +59,7 @@ export default function VideoInput(props) {
           className="VideoInput_input"
           type="file"
           onChange={handleFileChange}
-          accept=".mov,.mp4"
+          accept="video/*"
           name="video"
           id="file-input"
           style={{ display: "none" }}
@@ -121,7 +134,7 @@ const StVideoRegisterContainer = styled.div`
   }
 
   & > button {
-    width: 72px;
+    width: 75px;
     height: 32px;
     align-self: flex-end;
     position: relative;
@@ -130,6 +143,7 @@ const StVideoRegisterContainer = styled.div`
     background: #70cca6;
     border: none;
     border-radius: 2px;
+    font-weight: 700;
   }
 
   .uploadImg {
@@ -161,5 +175,8 @@ const StButtonContainer = styled.div`
     cursor: pointer;
     border: none;
     border-radius: 2px;
+    font-family: sans-serif;
+    font-weight: 700;
+    font-size: 16px;
   }
 `;
