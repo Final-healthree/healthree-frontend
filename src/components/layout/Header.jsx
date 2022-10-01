@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 //svg 이미지
-import headerLogo from "../assets/headerFooter/headerLogo.svg";
+import headerLogo from "../../assets/headerFooter/headerLogo.svg";
 // import back from "../assets/images/back.svg";
 
 const Header = () => {
@@ -12,7 +12,7 @@ const Header = () => {
 
   return (
     <StHeader>
-      <img src={headerLogo} alt="" />
+      <Img src={headerLogo} alt="" />
       <Goservey href="https://forms.gle/hknQyvw9iR4DfuzKA">설문조사</Goservey>
       <Goservey2 href="https://forms.gle/khRnXR5PzqhHZEe58">버그신고</Goservey2>
     </StHeader>
@@ -22,11 +22,18 @@ export default Header;
 const StHeader = styled.div`
   display: flex;
   position: sticky;
+  width: 100%;
+  height: 60px;
   top: 0;
+  left: 0;
   border-bottom: 1px solid gray;
   flex-direction: row;
   padding: 3px 0;
   background-color: #fff;
+`;
+
+const Img = styled.img`
+  border-radius: 30px;
 `;
 
 const Goservey = styled.a`
