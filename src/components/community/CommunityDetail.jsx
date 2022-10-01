@@ -9,6 +9,8 @@ import likeimg from "../../assets/community/like.svg";
 import unLikeimg from "../../assets/community/unLike.svg";
 import serverAxios from "../axios/server.axios";
 import backBtn from "../../assets/community/backbtn.svg";
+import trash from "../../assets/community/trash.png"
+import PlayCircle from "../../assets/community/PlayCircle.png"
 
 import { format } from "date-fns";
 
@@ -78,13 +80,27 @@ const CommunityDetailPost = () => {
         <StTop>
           <UserInfo>
             <BackBtn onClick={() => window.location.replace("/community")}>
-              <img src={backBtn} />
+              <img src={backBtn} alt=""/>
             </BackBtn>
             <StImg src={getpost.profile_image} />
-            <p style={{ margin: "0px" }}>{getpost.nickname}</p>
+            <div className="userDiv">
+              <p style={{ margin: "0px" }}>{getpost.nickname}</p>
+              <span
+                style={{
+                  color: "#A0A0A0",
+                  fontSize: "12px",
+                  fontFamily: "sans-serif",
+                }}
+              >
+                {getpost.post &&
+                  format(new Date(getpost.post.createdAt), "yy.MM.dd")}
+              </span>
+            </div>
           </UserInfo>
           {myDecodedToken.payload.user_id === getpost.user_id ? (
-            <DelBtn onClick={deletePost}>삭제</DelBtn>
+            <DelBtn onClick={deletePost}>
+              <img src={trash} alt="" />
+            </DelBtn>
           ) : null}
         </StTop>
         <VideoArea onClick={showVideo}>
@@ -95,19 +111,23 @@ const CommunityDetailPost = () => {
               )}
             </StVideo>
           ) : (
+            <>
             <img
+              className="videoThumbnail"
               src={getpost.post && getpost.post.thumbnail}
-              style={{ width: "230px", height: "230px", padding: "auto" }}
-            />
+              style={{ width: "320px", height: "315px", padding: "auto" }}
+            alt="" />
+            <img className="playThumbnail" src={PlayCircle} alt="" />
+            </>
           )}
         </VideoArea>
 
         <StBottom>
-          <div>
+          <div className="titleDiv">
             <span style={{ marginRight: "7px", fontWeight: "600" }}>
               {getpost.post && getpost.post.goal_name}
             </span>
-            <span
+            {/* <span
               style={{
                 color: "#A0A0A0",
                 fontSize: "12px",
@@ -116,8 +136,9 @@ const CommunityDetailPost = () => {
             >
               {getpost.post &&
                 format(new Date(getpost.post.createdAt), "yy.MM.dd")}
-            </span>
+            </span> */}
             <Period>
+              &nbsp; &nbsp;
               {getpost.post && format(new Date(getpost.post.day1), "yy.MM.dd")}~{" "}
               {getpost.post && format(new Date(getpost.post.day3), "yy.MM.dd")}{" "}
             </Period>
@@ -144,6 +165,7 @@ export default CommunityDetailPost;
 const StContent = styled.div`
   width: 375px;
   height: 400px;
+  margin-top: 23px;
 
   display: flex;
   flex-direction: column;
@@ -156,7 +178,7 @@ const StTop = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 40px;
+  margin-bottom: 11px;
   box-sizing: border-box;
 `;
 
@@ -168,6 +190,10 @@ const BackBtn = styled.button`
 const UserInfo = styled.div`
   display: flex;
   align-items: center;
+
+  & > .userDiv {
+    margin-top: 10px;
+  }
 `;
 const StImg = styled.img`
   width: 34px;
@@ -180,10 +206,16 @@ const DelBtn = styled.button`
   width: 60px;
   height: 25px;
   border-radius: 2px;
-  border: 2px solid #70cca6;
+  /* border: 2px solid #70cca6; */
+  border: none;
   background-color: #fff;
+  margin-right: 15px;
+  margin-bottom: 7px;
+
+  cursor: pointer;
 
   font-size: 12px;
+  font-family: sans-serif;
   font-weight: 500;
 `;
 
@@ -191,19 +223,37 @@ const VideoArea = styled.div`
   display: flex;
   justify-content: center;
 
-  height: 230px;
-  width: 375px;
+  height: 340px;
+  width: 370px;
   margin-bottom: 20px;
+  position: relative;
+
+  & > .videoThumbnail {
+    cursor: pointer;
+  }
+
+  & > .playThumbnail {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+  }
 `;
 const StVideo = styled.video`
-  height: 223px;
-  width: 223px;
+  width: 320px;
+  height: 315px;
 `;
 
 const StBottom = styled.div`
   display: flex;
-  justify-content: space-around;
+  /* justify-content: space-around; */
   margin-bottom: 30px;
+
+  & > .titleDiv {
+    display: flex;
+    margin-left: 26px;
+  }
 `;
 
 const Period = styled.p`
