@@ -8,16 +8,18 @@ import MainModal from "./MainModal";
 import FailModal from "./FailModal";
 
 const MainGoalFirst = (props) => {
+  const { number } = props;
   const [modalopen, setModalOpen] = useState(false);
   const [failmodalClose, setFailModalClose] = useState(true);
   const [goalmodalOpen, setGoalmodalOpen] = useState(false);
   const dispatch = useDispatch();
   const getMainGoal = useSelector((state) => state.certification.list.result);
+  const status = useSelector((state) => state.certification.status);
   const date = getMainGoal?.day1.date.slice(0, 10);
   const today = new Date();
   const selectedDay = new Date((new Date(date).getTime() + (24-9) * 60 * 60 * 1000));
   const videoUploadCheck = useSelector((state) => state.certification.list.result?.day1);
-
+  
   useEffect(() => {
     dispatch(__loadMainGoal());
   }, []);
@@ -28,18 +30,19 @@ const MainGoalFirst = (props) => {
         <h1>1/3</h1>
         {videoUploadCheck?.uploaded === false ? 
           <>
-            <span>
+            <p>
               오늘 목표 인증을 아직 안하셨군요!<br />
               목표를 인증하고,<br />
               작심 1일을 시작하세요!
-            </span>
+            </p>
           </>
          : 
           <>
-            <span>
+            <p>
               오늘 목표를 완성하셨네요!<br />
-              훌륭해요!
-            </span>
+              훌륭해요!<br />
+              시작이 반 입니다.
+            </p>
           </>
         }
       </StGuideTextContainer>
@@ -51,11 +54,9 @@ const MainGoalFirst = (props) => {
           <FailModal number={1} date={getMainGoal?.day1.date.slice(0,10)} setModal={setFailModalClose}/> 
           : null
         :
-          ""
+        goalmodalOpen === true ? <MainModal number={1} date={getMainGoal?.day1.date.slice(0,10)}/> : null
       }
 
-      {goalmodalOpen === true ? <MainModal number={1} date={getMainGoal?.day1.date.slice(0,10)}/> : null}
-      
       <StMainGoalTextContainer>
         {videoUploadCheck?.uploaded === false ? 
           <h1 className="isGoal">작심 1일</h1>
@@ -69,19 +70,37 @@ const MainGoalFirst = (props) => {
           <p>{getMainGoal?.goal}</p>
           <p className="date">{getMainGoal?.day1.date.slice(0, 10)}</p>
         </StTitleContainer>
+        <StStatus>{status}</StStatus>
       </StMainGoalTextContainer>
       <StButtonContainer>
-        {videoUploadCheck?.uploaded === false ? 
-          <button
-            onClick={() => {
-              setModalOpen(!modalopen);
-            }}
-          >
-            동영상 등록하기
-          </button>
-         : 
-          ""
-        }
+        
+      {/* 해당 날짜에만 버튼을 보여줘서 다른날 업로드를 막는다. */}  
+      {/* {today.getDate() === selectedDay.getDate()-1?
+        videoUploadCheck?.uploaded === false ? 
+        <button
+          onClick={() => {
+            setModalOpen(!modalopen);
+          }}
+        >
+          동영상 등록하기
+        </button>
+        : 
+        ""
+        :
+        ""
+      } */}
+
+      {videoUploadCheck?.uploaded === false ? 
+        <button
+          onClick={() => {
+            setModalOpen(!modalopen);
+          }}
+        >
+          동영상 등록하기
+        </button>
+        : 
+        ""
+      }
         { modalopen === true ? 
         <RegisterModal number={1} modal={setModalOpen} setGoalmodal={setGoalmodalOpen} /> : null }
       </StButtonContainer>
@@ -97,6 +116,10 @@ const StGuideTextContainer = styled.div`
   margin-top: 30px;
   text-align: left;
   padding-left: 20px;
+
+  & > p {
+    line-height: 1.5;
+  }
 `;
 
 const StMainGoalTextContainer = styled.div`
@@ -123,7 +146,14 @@ const StMainGoalTextContainer = styled.div`
 
   & > img {
     position: absolute;
+    width: 370px;
   }
+`;
+
+const StStatus = styled.p`
+  /* position: absolute;
+  font-size: 30px;
+  color: ; */
 `;
 
 const StTitleContainer = styled.div`
@@ -154,6 +184,10 @@ const StButtonContainer = styled.div`
     cursor: pointer;
     border: none;
     border-radius: 2px;
+
+    font-family: sans-serif;
+    font-size: 15px;
+    font-weight: 700;
   }
 `;
 export default MainGoalFirst;

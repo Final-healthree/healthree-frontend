@@ -13,6 +13,7 @@ const MainGoalSecond = (props) => {
   const [goalmodalOpen, setGoalmodalOpen] = useState(false);
   const dispatch = useDispatch();
   const getMainGoal = useSelector((state) => state.certification.list.result);
+  const status = useSelector((state) => state.certification.status);
   const date = getMainGoal?.day2.date.slice(0, 10);
   const today = new Date();
   const selectedDay = new Date((new Date(date).getTime() + (24-9) * 60 * 60 * 1000));
@@ -28,34 +29,32 @@ const MainGoalSecond = (props) => {
         <h1>2/3</h1>
         {videoUploadCheck?.uploaded === false ?
           <>
-            <span>
+            <p>
               오늘 목표 인증을 아직 안하셨군요!<br />
               목표를 인증하고,<br />
               작심 2일을 시작하세요!
-            </span>
+            </p>
           </> 
         :
           <>
-            <span>
+            <p>
               오늘 목표를 완성하셨네요!<br />
               아주 훌륭합니다!<br />
               고지가 코앞입니다.
-            </span>
+            </p>
           </>
         } 
       </StGuideTextContainer>
       {videoUploadCheck?.uploaded === false ?
         today < selectedDay ?
           ""
-       : 
+      : 
         failmodalClose === true ? 
           <FailModal number={2} date={getMainGoal?.day2.date.slice(0,10)} setModal={setFailModalClose}/> 
-          : null
+        : null
       :
-          ""
+        goalmodalOpen === true ? <MainModal number={2} date={getMainGoal?.day1.date.slice(0,10)}/> : null
       }
-      
-      {goalmodalOpen === true ? <MainModal number={2} date={getMainGoal?.day2.date.slice(0,10)}/> : null}
 
       <StMainGoalTextContainer>
         {videoUploadCheck?.uploaded === false ?
@@ -67,12 +66,30 @@ const MainGoalSecond = (props) => {
           </>
         }
         
-      <StTitleContainer>
-        <p>{getMainGoal?.goal}</p>
-        <p className="date">{getMainGoal?.day2.date.slice(0,10)}</p>
-      </StTitleContainer>
+        <StTitleContainer>
+          <p>{getMainGoal?.goal}</p>
+          <p className="date">{getMainGoal?.day2.date.slice(0,10)}</p>
+        </StTitleContainer>
+        <StStatus>{status}</StStatus>
       </StMainGoalTextContainer>
       <StButtonContainer>
+
+      {/* 해당 날짜에만 버튼을 보여줘서 다른날 업로드를 막는다. */}  
+      {/* {today.getDate() === selectedDay.getDate()-1 ?
+        videoUploadCheck?.uploaded === false ? 
+        <button
+          onClick={() => {
+            setModalOpen(!modalopen);
+          }}
+        >
+          동영상 등록하기
+        </button>
+        : 
+        ""
+        :
+        ""
+      } */}
+
       {videoUploadCheck?.uploaded === false ?
           <button onClick={() => {
             setModalOpen(!modalopen);
@@ -95,6 +112,10 @@ const StGuideTextContainer = styled.div`
   margin-top: 30px;
   text-align: left;
   padding-left: 20px;
+
+  & > p {
+    line-height: 1.5;
+  }
 `;
 
 const StMainGoalTextContainer = styled.div`
@@ -121,6 +142,12 @@ const StMainGoalTextContainer = styled.div`
   & > img {
     position: absolute;
   }
+`;
+
+const StStatus = styled.p`
+  /* position: absolute;
+  font-size: 30px;
+  color: ; */
 `;
 
 const StTitleContainer  = styled.div`
@@ -152,6 +179,10 @@ const StButtonContainer = styled.div`
     cursor: pointer;
     border: none;
     border-radius: 2px;
+
+    font-family: sans-serif;
+    font-size: 15px;
+    font-weight: 700;
   }
 `;
 export default MainGoalSecond;
