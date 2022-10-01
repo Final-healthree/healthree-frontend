@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import footerMain from "../../assets/headerFooter/footerMain.svg";
 import footerMainC from "../../assets/headerFooter/footerMainC.svg";
@@ -11,13 +11,15 @@ import footerMypageC from "../../assets/headerFooter/footerMypageC.svg";
 
 const Footer = () => {
   const navigate = useNavigate();
-  const pathName = useLocation().pathname;
   const [isListHoverMain, setIsListHoverMain] = useState(false);
   const [isListHoverCommunity, setIsListHoverCommunity] = useState(false);
-  const [isListHoverRank, setIsListHoverRank] = useState(false);
+  const [isListHoverSetting, setIsListHoverSetting] = useState(false);
   const [isListHoverMypage, setIsListHoverMypage] = useState(false);
 
-  
+  const [isChecked, setIsChecked] = useState(false); 
+  const toggleMenu = () => {
+    setIsChecked(isChecked => !isChecked);    //on,off boolean 값
+  }
   
 
   //로그인 페이지 푸터 숨기기
@@ -30,10 +32,11 @@ const Footer = () => {
         onMouseOut={() => setIsListHoverMain(false)}
         onClick={() => {
           navigate("/main");
-        
+          ()=>toggleMenu()
         }}
       >
-        <img src={isListHoverMain === true || pathName === "/main" ? footerMainC : footerMain} alt="" />
+       
+        <img src={isListHoverMain ? footerMainC : footerMain} alt="" />
       </li>
 
       <li
@@ -44,16 +47,16 @@ const Footer = () => {
         }}
       >
         <img
-          src={isListHoverCommunity === true || pathName === "/community" ? footerCommunityC : footerCommunity}
+          src={isListHoverCommunity ? footerCommunityC : footerCommunity}
           alt=""
         />
       </li>
 
       {/* <li
-        onMouseOver={() => setIsListHoverRank(true)}
-        onMouseOut={() => setIsListHoverRank(false)}
+        onMouseOver={() => setIsListHoverSetting(true)}
+        onMouseOut={() => setIsListHoverSetting(false)}
         onClick={() => {
-          navigate("/Rank");
+          navigate("/setting");
         }}
       >
         <img src={isListHoverRank ? footerRankC : footerRank} />
@@ -63,11 +66,11 @@ const Footer = () => {
         onMouseOver={() => setIsListHoverMypage(true)}
         onMouseOut={() => setIsListHoverMypage(false)}
         onClick={() => {
-          navigate("/mypage");
+          navigate("/Mypage");
         }}
       >
         <img 
-        src={isListHoverMypage === true || pathName === "/mypage" ? footerMypageC : footerMypage} 
+        src={isListHoverMypage ? footerMypageC : footerMypage} 
         alt="" />
       </li>
     </StFooterMain>
