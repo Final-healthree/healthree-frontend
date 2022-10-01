@@ -10,6 +10,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Layout from "../components/Layout";
 import Rank from "../pages/Rank";
+import Setting from "../pages/Setting";
 
 const Router = () => {
   return (
@@ -24,6 +25,7 @@ const Router = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/rank" element={<Rank />} />
+          <Route path="/setting" element={<Setting />} />
         </Routes>
         <Footer />
       </Layout>
