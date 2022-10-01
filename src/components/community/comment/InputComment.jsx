@@ -51,18 +51,22 @@ const StWrap = styled.div`
   width: 100%;
   min-height: 20px;
 
-  padding: 10px 24px;
+  margin-left: 16px;
+  margin-top: 15px;
+  margin-bottom: 3px;
   display: flex;
 
-  gap: 6px;
+  gap: 7px;
 
   /* position: absolute; */
   /* bottom: 0; */
 `;
 const Input = styled.input`
-  width: 270px;
+  width: 260px;
   height: 27px;
-  font-size: 16px;
+  font-size: 15px;
+  font-family: sans-serif;
+  padding-left: 5px;
 `;
 
 const InputBox = styled.div`
@@ -75,6 +79,8 @@ const InputBox = styled.div`
 const InPutBtn = styled.button`
   color: black;
   background-color: #70cca6;
-  border: 0;
+  border: none;
   outline: 0;
+  font-family: sans-serif;
+  font-weight: 700;
 `;

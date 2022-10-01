@@ -37,6 +37,20 @@ export default function VideoInput(props) {
     inputRef.current.click();
   };
 
+  const except = () => {
+    dispatch(__addCertification())
+    .then((res)=>{
+      if(res.payload===400) {
+
+      } else if(res.payload===403) {
+
+      }
+    })
+    
+  }
+
+
+
   return (
     <div className="VideoInput">
       <StVideoRegisterContainer>
@@ -120,7 +134,7 @@ const StVideoRegisterContainer = styled.div`
   }
 
   & > button {
-    width: 72px;
+    width: 75px;
     height: 32px;
     align-self: flex-end;
     position: relative;
@@ -129,6 +143,7 @@ const StVideoRegisterContainer = styled.div`
     background: #70cca6;
     border: none;
     border-radius: 2px;
+    font-weight: 700;
   }
 
   .uploadImg {
@@ -160,5 +175,8 @@ const StButtonContainer = styled.div`
     cursor: pointer;
     border: none;
     border-radius: 2px;
+    font-family: sans-serif;
+    font-weight: 700;
+    font-size: 16px;
   }
 `;

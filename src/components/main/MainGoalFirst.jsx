@@ -19,10 +19,6 @@ const MainGoalFirst = (props) => {
   const today = new Date();
   const selectedDay = new Date((new Date(date).getTime() + (24-9) * 60 * 60 * 1000));
   const videoUploadCheck = useSelector((state) => state.certification.list.result?.day1);
-  const a = useSelector((state) => state);
-
-
-  console.log(a)
   
   useEffect(() => {
     dispatch(__loadMainGoal());
@@ -37,7 +33,8 @@ const MainGoalFirst = (props) => {
             <p>
               오늘 목표 인증을 아직 안하셨군요!<br />
               목표를 인증하고,<br />
-              작심 1일을 시작하세요!
+              작심 1일을 시작하세요!<br />
+              테스트
             </p>
           </>
          : 
@@ -77,17 +74,34 @@ const MainGoalFirst = (props) => {
         <StStatus>{status}</StStatus>
       </StMainGoalTextContainer>
       <StButtonContainer>
-        {videoUploadCheck?.uploaded === false ? 
-          <button
-            onClick={() => {
-              setModalOpen(!modalopen);
-            }}
-          >
-            동영상 등록하기
-          </button>
-         : 
-          ""
-        }
+        
+      {/* 해당 날짜에만 버튼을 보여줘서 다른날 업로드를 막는다. */}  
+      {/* {today.getDate() === selectedDay.getDate()-1?
+        videoUploadCheck?.uploaded === false ? 
+        <button
+          onClick={() => {
+            setModalOpen(!modalopen);
+          }}
+        >
+          동영상 등록하기
+        </button>
+        : 
+        ""
+        :
+        ""
+      } */}
+
+      {videoUploadCheck?.uploaded === false ? 
+        <button
+          onClick={() => {
+            setModalOpen(!modalopen);
+          }}
+        >
+          동영상 등록하기
+        </button>
+        : 
+        ""
+      }
         { modalopen === true ? 
         <RegisterModal number={1} modal={setModalOpen} setGoalmodal={setGoalmodalOpen} /> : null }
       </StButtonContainer>
@@ -171,6 +185,10 @@ const StButtonContainer = styled.div`
     cursor: pointer;
     border: none;
     border-radius: 2px;
+
+    font-family: sans-serif;
+    font-size: 15px;
+    font-weight: 700;
   }
 `;
 export default MainGoalFirst;

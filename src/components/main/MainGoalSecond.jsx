@@ -74,6 +74,23 @@ const MainGoalSecond = (props) => {
         <StStatus>{status}</StStatus>
       </StMainGoalTextContainer>
       <StButtonContainer>
+
+      {/* 해당 날짜에만 버튼을 보여줘서 다른날 업로드를 막는다. */}  
+      {/* {today.getDate() === selectedDay.getDate()-1 ?
+        videoUploadCheck?.uploaded === false ? 
+        <button
+          onClick={() => {
+            setModalOpen(!modalopen);
+          }}
+        >
+          동영상 등록하기
+        </button>
+        : 
+        ""
+        :
+        ""
+      } */}
+
       {videoUploadCheck?.uploaded === false ?
           <button onClick={() => {
             setModalOpen(!modalopen);
@@ -163,6 +180,10 @@ const StButtonContainer = styled.div`
     cursor: pointer;
     border: none;
     border-radius: 2px;
+
+    font-family: sans-serif;
+    font-size: 15px;
+    font-weight: 700;
   }
 `;
 export default MainGoalSecond;
