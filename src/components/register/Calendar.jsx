@@ -11,7 +11,7 @@ import "react-day-picker/dist/style.css";
 import ko from "date-fns/locale/ko";
 
 import { addDays, format } from "date-fns";
-
+import CalendarCss from "../calendar/calendar";
 // function CustomCaption(props: CaptionProps) {
 //   // const { goToMonth, nextMonth, previousMonth } = useNavigation();
 //   return <h2>{format(props.displayMonth, "MMM yyy")}</h2>;
@@ -55,7 +55,7 @@ const RegCalendar = () => {
       </HeaderArea>
 
       <CalendarArea>
-        <style>{css}</style>
+        <CalendarCss />
         <DayPicker
           showOutsideDays
           locale={ko}
@@ -78,49 +78,9 @@ const RegCalendar = () => {
 
 export default RegCalendar;
 
-const css = `
-  .rdp {
-    --rdp-cell-size: 46px;
-    --rdp-accent-color: #70CCA6;
-    --rdp-outline: none;
-  }
-  .rdp-day_outside {
-    color: #DADADA;
-  }
-
-  .rdp-caption {
-    width: 322px;
-    height: 81px;
-
-    background: #2C8D65;
-  }
-
-  .rdp-caption_label{
-    color : #fff
-  }
-
-  .rdp-head_row,
-  .rdp-head,
-  .rdp-head_cell {
-    background: #70CCA6;
-    margin : 0;
-    color : #fff;
-  }
-
-  .DayPicker-Day--monday {
-    color: #00bcd4;
-  }
-
-  .rdp-nav_button {
-    color : #fff;
-  }
-
-
-`;
-
 const Container = styled.div`
-  overflow: auto;
   flex: 1;
+  overflow: auto;
 `;
 
 const HeaderArea = styled.div`
@@ -128,7 +88,7 @@ const HeaderArea = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  padding: 16px 8px;
+  padding: 0 8px;
 `;
 const Title = styled.h3`
   margin: 0;
@@ -144,9 +104,9 @@ const Today = styled.span`
 const CalendarArea = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 400px;
-  margin-top: -10px;
+  align-items: flex-start;
+  margin: 0 auto;
+  height: 445px;
 `;
 
 const BtnArea = styled.div`
@@ -157,7 +117,7 @@ const BtnArea = styled.div`
 
 const RegBtn = styled.button`
   position: absolute;
-  top: 85px;
+  top: 20px;
 
   width: 340px;
   height: 52px;
