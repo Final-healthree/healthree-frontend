@@ -8,17 +8,20 @@ import footerCommunity from "../../assets/headerFooter/footerCommunity.svg";
 import footerCommunityC from "../../assets/headerFooter/footerCommunityC.svg";
 import footerMypage from "../../assets/headerFooter/footerMypage.svg";
 import footerMypageC from "../../assets/headerFooter/footerMypageC.svg";
+import footerSetting from "../../assets/headerFooter/footerSetting.svg";
+import footerSettingC from "../../assets/headerFooter/footerSettingC.svg";
+
 
 const Footer = () => {
   const navigate = useNavigate();
   const pathName = useLocation().pathname;
   const [isListHoverMain, setIsListHoverMain] = useState(false);
   const [isListHoverCommunity, setIsListHoverCommunity] = useState(false);
-  const [isListHoverRank, setIsListHoverRank] = useState(false);
+  const [isListHoverSetting, setIsListHoverSetting] = useState(false);
   const [isListHoverMypage, setIsListHoverMypage] = useState(false);
 
-  
-  
+
+
 
   //로그인 페이지 푸터 숨기기
   if (window.location.pathname === "/") return null;
@@ -30,7 +33,7 @@ const Footer = () => {
         onMouseOut={() => setIsListHoverMain(false)}
         onClick={() => {
           navigate("/main");
-        
+
         }}
       >
         <img src={isListHoverMain === true || pathName === "/main" ? footerMainC : footerMain} alt="" />
@@ -49,16 +52,6 @@ const Footer = () => {
         />
       </li>
 
-      {/* <li
-        onMouseOver={() => setIsListHoverRank(true)}
-        onMouseOut={() => setIsListHoverRank(false)}
-        onClick={() => {
-          navigate("/Rank");
-        }}
-      >
-        <img src={isListHoverRank ? footerRankC : footerRank} />
-      </li> */}
-
       <li
         onMouseOver={() => setIsListHoverMypage(true)}
         onMouseOut={() => setIsListHoverMypage(false)}
@@ -66,9 +59,20 @@ const Footer = () => {
           navigate("/mypage");
         }}
       >
-        <img 
-        src={isListHoverMypage === true || pathName === "/mypage" ? footerMypageC : footerMypage} 
-        alt="" />
+        <img
+          src={isListHoverMypage === true || pathName === "/mypage" ? footerMypageC : footerMypage}
+          alt="" />
+      </li>
+
+      <li
+        onMouseOver={() => setIsListHoverSetting(true)}
+        onMouseOut={() => setIsListHoverSetting(false)}
+        onClick={() => {
+          navigate("/Setting");
+        }}
+      >
+        <img
+         src={isListHoverSetting === true || pathName === "/setting" ? footerSettingC : footerSetting} />
       </li>
     </StFooterMain>
   );
