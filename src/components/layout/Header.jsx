@@ -1,20 +1,23 @@
 import React from "react";
 import styled from "styled-components";
-
+import { useNavigate } from "react-router-dom";
 //svg 이미지
 import headerLogo from "../../assets/headerFooter/headerLogo.svg";
 // import back from "../assets/images/back.svg";
 
 const Header = () => {
+  const navigate = useNavigate();
   //로그인 페이지 헤더 숨기기
   const token = localStorage.getItem("Token");
   if (token === null) return null;
+  
+  const style = {cursor : "pointer"};
 
   return (
     <StHeader>
-      <Img src={headerLogo} alt="" />
+      <Img onClick ={()=> navigate("/main")} src={headerLogo} alt="" style = {style} />
     </StHeader>
-  );
+  )
 };
 export default Header;
 const StHeader = styled.div`
