@@ -68,11 +68,12 @@ const Footer = () => {
         onMouseOver={() => setIsListHoverSetting(true)}
         onMouseOut={() => setIsListHoverSetting(false)}
         onClick={() => {
-          navigate("/Setting");
+          navigate("/setting");
         }}
       >
         <img
-         src={isListHoverSetting === true || pathName === "/setting" ? footerSettingC : footerSetting} />
+         src={isListHoverSetting === true || pathName === "/setting" ? footerSettingC : footerSetting} 
+         alt="" />
       </li>
     </StFooterMain>
   );
