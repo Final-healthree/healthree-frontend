@@ -13,8 +13,6 @@ const Header = () => {
   return (
     <StHeader>
       <Img src={headerLogo} alt="" />
-      <Goservey href="https://forms.gle/hknQyvw9iR4DfuzKA">설문조사</Goservey>
-      <Goservey2 href="https://forms.gle/khRnXR5PzqhHZEe58">버그신고</Goservey2>
     </StHeader>
   );
 };
@@ -34,38 +32,4 @@ const StHeader = styled.div`
 
 const Img = styled.img`
   border-radius: 30px;
-`;
-
-const Goservey = styled.a`
-  display: flex;
-  align-items: center;
-  font-family: sans-serif;
-  font-weight: 700;
-  text-decoration: none;
-  color: black;
-  font-size: 14px;
-  margin-left: 25px;
-  width: 60px;
-
-  :hover {
-    color: #2c8d65;
-    font-weight: 900;
-  }
-`;
-
-const Goservey2 = styled.a`
-  display: flex;
-  align-items: center;
-  font-family: sans-serif;
-  font-weight: 700;
-  text-decoration: none;
-  color: black;
-  font-size: 14px;
-  margin-left: 25px;
-  width: 60px;
-
-  :hover {
-    color: #2c8d65;
-    font-weight: 900;
-  }
 `;

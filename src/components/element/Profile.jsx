@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import serverAxios from "../axios/server.axios";
-import { useNavigate } from "react-router-dom";
 
 function Profile() {
-  const navigate = useNavigate();
-  const token = localStorage.getItem("Token");
-
   const [profileImage, setProfileImage] = useState();
   const [nickName, setNickName] = useState();
 
@@ -19,12 +15,6 @@ function Profile() {
       });
   };
 
-  const Logout = () => {
-    alert("로그아웃 성공");
-    localStorage.clear();
-    window.location.replace("/");
-  };
-
   useEffect(() => {
     getProfile();
   }, []);
@@ -32,10 +22,13 @@ function Profile() {
   return (
     <StArea>
       <StProfile>
-        <img style={{ width: "34px", height: "34px" }} src={profileImage} alt=""/>
+        <img
+          style={{ width: "34px", height: "34px" }}
+          src={profileImage}
+          alt=""
+        />
       </StProfile>
       <StNickName>{nickName}</StNickName>
-      <Login onClick={Logout}>로그아웃</Login>
     </StArea>
   );
 }
@@ -58,17 +51,3 @@ const StProfile = styled.div`
 `;
 
 const StNickName = styled.div``;
-
-const Login = styled.button`
-  color: #eeae67;
-  background-color: #fff;
-  border: none;
-  margin-left: 150px;
-
-  font-family: sans-serif;
-  cursor: pointer;
-
-  :hover {
-    border-bottom: 1px solid #eeae67;
-  }
-`;
