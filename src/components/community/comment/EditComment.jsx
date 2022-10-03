@@ -10,13 +10,13 @@ function StCommentText(props) {
 
   const commentID = props.comment_id;
   const userID = props.userId;
+  const remove = props.remove;
+  const setRemove = props.setRemove;
 
+  const [edit, setEdit] = useState(true);
   const [editComment, setEditComment] = useState({
     comment: props.value,
   });
-
-  const [edit, setEdit] = useState(true);
-  const [input, setInput] = useState(false);
 
   const editHandler = () => {
     setEdit(false);
@@ -31,75 +31,82 @@ function StCommentText(props) {
 
   const saveHandler = () => {
     setEdit(true);
-    serverAxios
-      .put(
-        process.env.REACT_APP_REST_API_KEY + `api/comments/${commentID}`,
-        editComment
-      )
-      .then((res) => {
-        if (res.data.success === true) {
-          alert("수정 완료:)");
-        }
-      });
+    serverAxios.put(`api/comments/${commentID}`, editComment).then((res) => {
+      if (res.data.success === true) {
+      }
+    });
   };
 
   const onDeleteHandler = async () => {
-    await serverAxios
-      .delete(
-        process.env.REACT_APP_REST_API_KEY + `api/comments/${props.comment_id}`
-      )
-      .then((res) => {
-        if (res.data.success === true) {
-          alert("삭제 완료:)");
-          window.location.reload();
-        }
-      });
+    await serverAxios.delete(`api/comments/${props.comment_id}`).then((res) => {
+      if (res.data.success === true) {
+        setRemove(!remove);
+      }
+    });
   };
 
   return (
-    <div>
+    <Stcontent>
       <StComment
         disabled={edit}
         value={editComment.comment}
         onChange={onChange}
+        maxLength={40}
       />
+
       {myDecodedToken.payload.user_id === userID ? (
         <BtnArea>
           {edit === true ? (
-            <EditBtn onClick={() => editHandler()}>수정</EditBtn>
+            <EditBtn onClick={() => editHandler()}>수정하기</EditBtn>
           ) : (
-            <EditBtn onClick={() => saveHandler()}>완료</EditBtn>
+            <EditBtn onClick={() => saveHandler()}>완료하기</EditBtn>
           )}
           {edit === true ? (
-            <EditBtn onClick={() => onDeleteHandler()}>삭제</EditBtn>
+            <EditBtn onClick={() => onDeleteHandler()}>삭제하기</EditBtn>
           ) : (
-            <EditBtn onClick={() => setEdit(true)}>취소</EditBtn>
+            <EditBtn onClick={() => setEdit(true)}>취소하기</EditBtn>
           )}
         </BtnArea>
       ) : null}
-    </div>
+    </Stcontent>
   );
 }
 
 export default StCommentText;
 
-const StComment = styled.input`
+const Stcontent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  box-sizing: border-box;
+  padding-top: 9px;
+`;
+
+const StComment = styled.textarea`
   border: ${(props) => (props.disabled ? "none" : "1px solid gray")};
   border-radius: 2px;
   font-size: 13px;
   background-color: #fff;
   font-weight: 600;
   font-family: sans-serif;
-  width: 230px;
-  white-space: nowrap;
+  width: 180px;
+  height: 40px;
+  resize: none;
 `;
+
 const BtnArea = styled.div`
-  bottom: 0;
+  display: flex;
+  margin: 0;
 `;
 const EditBtn = styled.button`
-  color: gray;
+  width: 60px;
+  height: 15px;
+  color: #a0a0a0;
   background-color: transparent;
-  border: 0;
-  outline: 0;
+  border: none;
   font-family: sans-serif;
+  font-size: 11px;
+
+  cursor: pointer;
 `;

@@ -38,7 +38,7 @@ const GoalReg = () => {
       alert("목표를 입력해주세요");
     }
     await serverAxios
-      .post(process.env.REACT_APP_REST_API_KEY + "api/goals/register", info)
+      .post("/api/goals/register", info)
       .then((res) => {
         alert(res.data.messgae);
         dispatch(existgoal({ exist: true }));

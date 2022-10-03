@@ -15,8 +15,8 @@ const Pullpage = (props) => {
 };
 
 const Web = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 90vw;
+  height: 90vh;
   background: url(${web_intro});
   background-size: 714px 197px;
   background-position: 20% 30%;
