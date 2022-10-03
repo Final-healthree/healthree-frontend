@@ -33,7 +33,11 @@ const MainGoalFirst = (props) => {
             <p>
               오늘 목표 인증을 아직 안하셨군요!<br />
               목표를 인증하고,<br />
+<<<<<<< Updated upstream
               작심 1일을 시작하세요!
+=======
+              작심 1일을 시작하세요!<br />
+>>>>>>> Stashed changes
             </p>
           </>
          : 
