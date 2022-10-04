@@ -3,6 +3,7 @@ import styled from "styled-components";
 import serverAxios from "../axios/server.axios";
 import { useNavigate } from "react-router-dom";
 import btn from "../../assets/setting/PaginationBtn.png"
+import GuideModal from "./GuideModal";
 
 const SettingDetail = () => {
   const navigate = useNavigate();
@@ -10,6 +11,7 @@ const SettingDetail = () => {
 
   const [profileImage, setProfileImage] = useState();
   const [nickName, setNickName] = useState();
+  const [modalopen, setModalOpen] =useState(false);
 
   const getProfile = async () => {
     await serverAxios
@@ -41,14 +43,19 @@ const SettingDetail = () => {
 
       <StSettingContainer>
         <div>
-          <p>앱 다운로드</p>
-          <img src={btn} alt="" />
+          <p>앱 다운로드(준비 중입니다)</p>
+          <img  
+          src={btn} alt="" />
         </div>
           <hr />
         <div>
           <p>사용자 가이드</p>
-          <img src={btn} alt="" />
+          <img onClick={()=>{
+            setModalOpen(true);
+          }}
+          src={btn} alt="" />
         </div>
+          { modalopen === true ? <GuideModal setmodal={setModalOpen} /> : null }
           <hr />
         <div>
           <p>버그 신고</p>
@@ -58,6 +65,14 @@ const SettingDetail = () => {
           src={btn} alt="" />
         </div>
           <hr />
+        <div>
+        <p>설문 조사 하러가기!</p>
+        <img onClick={()=>{
+          window.open("https://forms.gle/hknQyvw9iR4DfuzKA", "_blank")
+        }} 
+        src={btn} alt="" />
+      </div>
+        <hr />
         <div>
           <p>로그아웃</p>
           <img onClick={()=>{

@@ -6,7 +6,6 @@ import GlobalStyle from "./shared/GlobalStyle";
 
 function App() {
   return (
-    
     <div>
         <GlobalStyle />
         <Router />

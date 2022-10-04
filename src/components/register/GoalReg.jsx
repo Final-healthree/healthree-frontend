@@ -38,19 +38,24 @@ const GoalReg = () => {
       alert("목표를 입력해주세요");
     }
     await serverAxios
-      .post(process.env.REACT_APP_REST_API_KEY + "api/goals/register", info)
+      .post("/api/goals/register", info)
       .then((res) => {
         alert(res.data.messgae);
         dispatch(existgoal({ exist: true }));
         navigate("/main");
       })
       .catch((error) => {
-        const type = error.response.data.message;
-        switch (type) {
-          case "하루에 한번만 작심삼일을 등록할 수 있습니다.":
-            alert("하루에 한번만 작심삼일을 등록할 수 있습니다.");
-            break;
-          default:
+        if (error.response.data.success === false) {
+          const type = error.response.data.message;
+          switch (type) {
+            case "이미 진행중인 작심삼일이 있습니다.":
+              alert(type);
+              break;
+            case "날짜값이 제대로 오지 않았습니다.":
+              alert(type);
+              break;
+            default:
+          }
         }
       });
   };

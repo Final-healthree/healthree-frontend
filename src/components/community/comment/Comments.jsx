@@ -14,14 +14,12 @@ function Comments() {
 
   const [comments, setComments] = useState([]);
   const [total, setTotal] = useState(0);
+  const [remove, setRemove] = useState(false);
+  const [create, setCreate] = useState(false);
 
   const getInfo = async () => {
     await serverAxios
-      .get(
-        process.env.REACT_APP_REST_API_KEY +
-          `api/comments/${params.postid}` +
-          `?pagecount=4&&page=${page}`
-      )
+      .get(`api/comments/${params.postid}` + `?pagecount=4&&page=${page}`)
       .then((res) => {
         setComments([...res.data.result.comment]);
         setTotal(res.data.result.comment_cnt);
@@ -30,34 +28,39 @@ function Comments() {
 
   useEffect(() => {
     getInfo();
-  }, [page]);
+  }, [page, remove, create]);
 
   return (
     <>
       <StWrapper>
-        <InputComment data={params.postid} />
-        {comments.map((comments) => (
-          <div key={comments.comment_id}>
+        <InputComment
+          data={params.postid}
+          create={create}
+          setCreate={setCreate}
+        />
+        {comments.map((comment) => (
+          <div key={comment.comment_id}>
             <StContentContainer>
               <div style={{ display: "flex", flexDirection: "row" }}>
                 <StProfile>
-                  <StImg src={comments.profile_image} />
-                  <StNameText>{comments.nickname}</StNameText>
+                  <StImg src={comment.profile_image} />
+                  <StNameText>{comment.nickname}</StNameText>
                 </StProfile>
-                <Stcontent>
-                  <StCommentText
-                    value={comments.comment}
-                    comment_id={comments.comment_id}
-                    userId={comments.user_id}
-                  />
-                </Stcontent>
+
+                <StCommentText
+                  value={comment.comment}
+                  comment_id={comment.comment_id}
+                  userId={comment.user_id}
+                  remove={remove}
+                  setRemove={setRemove}
+                />
               </div>
-              <ReplyTime>{DateComment({ date: comments.date })}</ReplyTime>
+              <ReplyTime>{DateComment({ date: comment.date })}</ReplyTime>
             </StContentContainer>
           </div>
         ))}
+        <Pagination total={total} limit={4} page={page} setPage={setPage} />
       </StWrapper>
-      <Pagination total={total} limit={4} page={page} setPage={setPage} />
     </>
   );
 }
@@ -67,7 +70,7 @@ export default Comments;
 const StWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 10px 0;
+  padding: 10px 10px 55px 10px;
   flex: 1;
 `;
 
@@ -86,59 +89,24 @@ const StImg = styled.img`
 `;
 
 const StNameText = styled.span`
-  color: black;
   font-size: 14px;
-  width: 70px;
+  width: 50px;
+  font-family: sans-serif;
+  font-weight: 600;
 `;
 
 const StContentContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  position: relative;
+  flex-direction: row;
   padding: 10px;
   border-bottom: 1px solid #dadada;
 `;
 
-const Stcontent = styled.div`
+const ReplyTime = styled.span`
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  height: 50px;
-  width: 210px;
-  box-sizing: border-box;
-  padding-top: 9px;
-
-  gap: 20px;
-`;
-
-const StCommentBottom = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  
-  padding-top: 20px;
-`;
-
-const Hr = styled.hr`
-border: solid 1px #f2f2f2f4;
-`;
-
-const StInputArea = styled.div`
-
-position: sticky;
-bottom: 100px;
-`;
-
-
-const ReplyTime = styled.p`
-  display: flex;
-  justify-content: flex-end;
   color: #70cca6;
-  width: 350px;
-  height: 18px;
   font-family: sans-serif;
   font-size: 10px;
-  margin: 0;
+  transform: translate(0, 80%);
 `;
