@@ -6,7 +6,7 @@ import serverAxios from "../../axios/server.axios";
 
 //아이콘
 import backBtn from "../../../assets/community/backbtn.svg";
-import trash from "../../../assets/community/trash.png";
+import trash from "../../../assets/community/delete.svg";
 import PlayCircle from "../../../assets/community/PlayCircle.png";
 
 import { format } from "date-fns";
@@ -45,8 +45,6 @@ const CommunityDetailPost = () => {
   const showVideo = () => {
     setChange(!change);
   };
-
-  console.log(getpost);
 
   return (
     <>
@@ -91,17 +89,15 @@ const CommunityDetailPost = () => {
           )}
         </VideoArea>
         <StBottom>
-          <div className="titleDiv">
-            <span style={{ marginRight: "7px", fontWeight: "600" }}>
+          <MiddleBox>
+            <span style={{ fontSize: "16px" }}>
               {getpost.post && getpost.post.goal_name}
             </span>
             <Period>
-              &nbsp; &nbsp;
-              {getpost.post &&
-                format(new Date(getpost.post.day1), "yy.MM.dd")}~{" "}
-              {getpost.post && format(new Date(getpost.post.day3), "yy.MM.dd")}{" "}
+              {getpost.post && format(new Date(getpost.post.day1), "yy.MM.dd")}{" "}
+              - {getpost.post && format(new Date(getpost.post.day3), "dd")}{" "}
             </Period>
-          </div>
+          </MiddleBox>
           {getpost.post && (
             <PostLike
               like={getpost.is_like}
@@ -119,14 +115,14 @@ export default CommunityDetailPost;
 
 const StContent = styled.div`
   width: 375px;
-  height: 400px;
+  height: 420px;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
 
   box-sizing: border-box;
-  margin: 10px auto;
+  margin: 16px auto;
 `;
 
 const StTop = styled.div`
@@ -173,13 +169,12 @@ const CreatAt = styled.p`
 `;
 
 const DelBtn = styled.button`
-  width: 55px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   border: none;
   background-color: #fff;
-  padding-top: 3px;
-  transform: translate(-50%, -50%);
   cursor: pointer;
+  margin-right: 33px;
 `;
 
 const VideoArea = styled.div`
@@ -210,17 +205,23 @@ const StVideo = styled.video`
 
 const StBottom = styled.div`
   display: flex;
-  /* justify-content: space-around; */
+  justify-content: space-between;
+  align-items: center;
+  width: 330px;
+  padding: 0px 20px 0 25px;
+`;
 
-  & > .titleDiv {
-    display: flex;
-    margin-left: 26px;
-  }
+const MiddleBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 6px;
 `;
 
 const Period = styled.p`
-  margin: 0;
+  margin-left: 4px;
   font-size: 14px;
   font-family: sans-serif;
   font-weight: 600;
+  color: #4b4b4b;
 `;
