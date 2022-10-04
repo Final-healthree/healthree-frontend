@@ -94,7 +94,8 @@ const StProfileLayout = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 10px;  
+  padding: 10px;
+  padding-top: 0px;  
 `;
 
 const StProfile = styled.div`
@@ -109,7 +110,7 @@ const StNickName = styled.div``;
 
 
 const StSettingContainer = styled.div`
-  margin-top: 30px;
+  margin-top: 10px;
  
   & > div {
     display: flex;

@@ -97,10 +97,6 @@ const MainGoalThird = (props) => {
         :
         ""
       } */}
-            <button onClick={() => {
-          setModalOpen(!modalopen);
-        }}>동영상 등록하기</button>
-
 
       {videoUploadCheck?.uploaded === false ?
         <button onClick={() => {
@@ -121,7 +117,7 @@ const StMainLayout = styled.div`
 `;
 
 const StGuideTextContainer = styled.div`
-  margin-top: 30px;
+  margin-top: 16px;
   text-align: left;
   padding-left: 20px;
 
