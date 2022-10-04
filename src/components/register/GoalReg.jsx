@@ -10,8 +10,6 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { existgoal } from "../../redux/modules/existgoalSlice";
 
-import { CaptionLabel } from "react-day-picker";
-
 const GoalReg = () => {
   const regDay = useSelector((state) => state.registerday);
   const dispatch = useDispatch();
@@ -71,11 +69,12 @@ const GoalReg = () => {
       <GoalArea>
         <Label>나의 목표</Label>
         <GoalInput
-          placeholder="목표를 입력해주세요"
+          placeholder="목표를 입력해주세요 (10자 제한)"
           onChange={onChange}
           name="goal_name"
           value={info.goal_name}
           borderColor={confirm ? "#70cca6" : "black"}
+          maxLength={10}
         ></GoalInput>
         {/* 입력에 따라 버튼이랑 테두리 유무 */}
 
