@@ -63,7 +63,12 @@ function CommunityMain() {
                   }}
                   src={post.thumbnail}
                 />
-                <PlayImg src={PlayCircle} />
+                <PlayImg
+                  onClick={() => {
+                    navigate(`/community/${post.post_id}`);
+                  }}
+                  src={PlayCircle}
+                />
               </ImgBox>
               <StBottom>
                 <StProfile>
@@ -103,7 +108,12 @@ function CommunityMain() {
                   }}
                   src={post.thumbnail}
                 />
-                <PlayImg src={PlayCircle} />
+                <PlayImg
+                  onClick={() => {
+                    navigate(`/community/${post.post_id}`);
+                  }}
+                  src={PlayCircle}
+                />
               </ImgBox>
               <StBottom>
                 <StProfile>
