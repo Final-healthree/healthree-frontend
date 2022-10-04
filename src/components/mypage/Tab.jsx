@@ -63,7 +63,7 @@ const StTap = styled.div`
   font-size: 18px;
   color: ${(props) => props.color};
   display: inline-block;
-  padding: 20px 0px 5px 0px;
+  padding: 5px 0;
 
   border-bottom: solid 2px ${(props) => props.borderColor};
 

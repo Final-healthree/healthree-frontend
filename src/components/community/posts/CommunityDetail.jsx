@@ -2,17 +2,17 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import serverAxios from "../axios/server.axios";
+import serverAxios from "../../axios/server.axios";
 
 //아이콘
-import backBtn from "../../assets/community/backbtn.svg";
-import trash from "../../assets/community/trash.png";
-import PlayCircle from "../../assets/community/PlayCircle.png";
+import backBtn from "../../../assets/community/backbtn.svg";
+import trash from "../../../assets/community/trash.png";
+import PlayCircle from "../../../assets/community/PlayCircle.png";
 
 import { format } from "date-fns";
 import { decodeToken } from "react-jwt";
 
-import PostLike from "./PostLike";
+import PostLike from "../posts/PostLike";
 
 const CommunityDetailPost = () => {
   const param = useParams();

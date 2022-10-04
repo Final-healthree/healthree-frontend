@@ -6,6 +6,10 @@ import VideoModal from "./VideoModal";
 import serverAxios from "../axios/server.axios";
 
 import emptyImg from "../../assets/images/emptyimg.svg";
+import share from "../../assets/video/share.svg";
+import PlayCircle from "../../assets/community/PlayCircle.png";
+
+import { format } from "date-fns";
 
 const MyVideo = () => {
   const [items, setItems] = useState([]);
@@ -33,6 +37,8 @@ const MyVideo = () => {
     setLoading(false);
   };
 
+  console.log(items);
+
   // `getItems` 가 바뀔 때 마다 함수 실행
   useEffect(() => {
     getItems();
@@ -58,12 +64,6 @@ const MyVideo = () => {
     setModalOpen(true);
   };
 
-  // console.log("inView", inView);
-  // console.log("more", more);
-  // console.log("item", items.length);
-  // console.log("loading", loading);
-  // console.log("page", page);
-
   return (
     <Container>
       {items.length === 0 ? (
@@ -83,17 +83,27 @@ const MyVideo = () => {
               {items.length - 1 === idx ? (
                 <VideoBox ref={ref}>
                   <VideoImg src={data.thumbnail} onClick={showModal} />
-                  <p style={{ margin: "0" }}>{data.goal_name}</p>
+                  <PlayImg src={PlayCircle} />
+                  {data.is_share === "1" ? <img src={share} /> : null}
+                  <GoalName style={{ margin: "2px" }}>
+                    {data.goal_name}
+                  </GoalName>
                   <VideoDate>
-                    {data.day1.slice(0, 10)} ~ {data.day3.slice(0, 10)}
+                    {format(new Date(data.day1), "yy.MM.dd")} ~{" "}
+                    {format(new Date(data.day3), "yy.MM.dd")}
                   </VideoDate>
                 </VideoBox>
               ) : (
                 <VideoBox>
                   <VideoImg src={data.thumbnail} onClick={showModal} />
-                  <p style={{ margin: "0" }}>{data.goal_name}</p>
+                  <PlayImg src={PlayCircle} />
+                  {data.is_share === "1" ? <img src={share} /> : null}
+                  <GoalName style={{ margin: "2px" }}>
+                    {data.goal_name}
+                  </GoalName>
                   <VideoDate>
-                    {data.day1.slice(0, 10)} ~ {data.day3.slice(0, 10)}
+                    {format(new Date(data.day1), "yy.MM.dd")} ~{" "}
+                    {format(new Date(data.day3), "yy.MM.dd")}
                   </VideoDate>
                 </VideoBox>
               )}
@@ -121,7 +131,7 @@ export default MyVideo;
 const Container = styled.div`
   flex: 1;
   overflow: auto;
-  padding: 0 16px;
+  margin: 0 auto;
 
   ::-webkit-scrollbar {
     display: none;
@@ -147,7 +157,6 @@ const EmptyImg = styled.div`
 const EmptyP = styled.p`
   position: absolute;
   height: 36px;
-  /* top: calc(50% - 36px / 2 + 123px); */
   top: 380px;
   display: flex;
   align-items: center;
@@ -158,8 +167,8 @@ const EmptyP = styled.p`
 
 const VideoArea = styled.div`
   display: flex;
-  align-items: center;
-  text-align: center;
+  justify-content: space-between;
+  width: 370px;
   flex-flow: wrap;
   gap: 30px;
   padding: 20px 0;
@@ -167,32 +176,42 @@ const VideoArea = styled.div`
 `;
 
 const VideoBox = styled.div`
-  height: 170px;
-  width: 153px;
+  height: 210px;
+  width: 170px;
   cursor: pointer;
+  position: relative;
 `;
 
-// const VideoImg = styled.video`
-//   height: 150px;
-//   width: 150px;
-//   background-color: #4b4b4b;
-//   filter: drop-shadow(6px 6px 5px rgba(0, 0, 0, 0.12));
-//   mix-blend-mode: multiply;
-//   border-radius: 2px;
-// `;
-
 const VideoImg = styled.img`
-  height: 150px;
-  width: 150px;
-  box-shadow: 6px 6px 5px rgba(0, 0, 0, 0.12);
+  position: relative;
+  height: 160px;
+  width: 160px;
+  box-shadow: 4px 4px 3px rgba(0, 0, 0, 0.12);
   border-radius: 3px;
   border: none;
 
-  margin: 0 auto;
+  margin-bottom: 3px;
+  opacity: 0.9;
+`;
+
+const PlayImg = styled.img`
+  display: flex;
+  height: 50px;
+  width: 50px;
+  top: 33%;
+  left: 34%;
+  position: absolute;
+  opacity: 1;
+  cursor: pointer;
+`;
+
+const GoalName = styled.span`
+  padding-left: 2px;
+  text-overflow: ellipsis;
 `;
 
 const VideoDate = styled.p`
-  margin: 0;
+  margin: 2px;
   font-size: 12px;
   font-family: sans-serif;
 `;
