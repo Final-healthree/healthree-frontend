@@ -1,26 +1,20 @@
 function getTargetsByDateList(dataList) {
+  console.log(dataList);
   const circleTarget = [];
   const leftCircleTarget = [];
   const rightCircleTarget = [];
   const squareTarget = [];
   for (const date of dataList) {
-    const { date: dateScope, goal_id } = date;
-
-    if (dateScope.length === 1) {
-      circleTarget.push(new Date(dateScope[0]));
-    } else if (dateScope.length === 2) {
-      leftCircleTarget.push(new Date(dateScope[0]));
-      rightCircleTarget.push(new Date(dateScope[1]));
+    const { day1, day2, day3, goal_id } = date;
+    if (day1 && day2 === undefined) {
+      circleTarget.push(new Date(day1));
+    } else if (day1 && day2 && day3 === undefined) {
+      leftCircleTarget.push(new Date(day1));
+      rightCircleTarget.push(new Date(day2));
     } else {
-      const dateScopeLength = dateScope.length;
-
-      const firstIndex = dateScope.slice(0, 1); // 배열[0]으로 가능?
-      const othersIndex = dateScope[1];
-      const lastIndex = dateScope.slice(dateScopeLength - 1, dateScopeLength);
-
-      leftCircleTarget.push(new Date(firstIndex)); // new Date로 넣기
-      squareTarget.push(new Date(othersIndex));
-      rightCircleTarget.push(new Date(lastIndex));
+      leftCircleTarget.push(new Date(day1)); // new Date로 넣기
+      squareTarget.push(new Date(day2));
+      rightCircleTarget.push(new Date(day3));
     }
   }
 

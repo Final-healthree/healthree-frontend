@@ -10,12 +10,17 @@ function getCalenderCss(type) {
       borderRadius: "50% 0 0 50%",
 
       height: "40px",
+      width: "40px",
+      border: "0",
+      transform: "translate(6px,0)",
     };
     const rightCircleCss = {
       color: "#fff",
       backgroundColor: "#70CCA6",
       borderRadius: "0 50% 50% 0",
       height: "40px",
+      width: "40px",
+      border: "0",
     };
     const squareCss = {
       color: "#fff",
@@ -33,18 +38,21 @@ function getCalenderCss(type) {
       color: "#fff",
       backgroundColor: "#EEAE67",
       height: "40px",
+      width: "40px",
     };
     const leftCircleCss = {
       color: "#fff",
       backgroundColor: "#EEAE67",
       borderRadius: "50% 0 0 50%",
       height: "40px",
+      width: "40px",
     };
     const rightCircleCss = {
       color: "#fff",
       backgroundColor: "#EEAE67",
       borderRadius: "0 50% 50% 0",
       height: "40px",
+      width: "40px",
     };
     return {
       circleCss,
