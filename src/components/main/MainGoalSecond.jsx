@@ -8,6 +8,7 @@ import MainModal from "./MainModal";
 import FailModal from "./FailModal";
 
 const MainGoalSecond = (props) => {
+  const { number } = props;
   const [modalopen, setModalOpen] = useState(false);
   const [failmodalClose, setFailModalClose] = useState(true);
   const [goalmodalOpen, setGoalmodalOpen] = useState(false);

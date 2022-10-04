@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import web_phone from "../../assets/layout/phone.png";
-import web_intro from "../../assets/layout/Frame.png";
+import web_phone from "../../assets/backgroundImg/phone.png";
+import web_intro from "../../assets/backgroundImg/Frame.png";
 
 const Pullpage = (props) => {
   return (
