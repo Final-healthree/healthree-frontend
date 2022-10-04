@@ -11,7 +11,7 @@ import PlayCircle from "../../../assets/community/PlayCircle.png";
 import { format } from "date-fns";
 import { decodeToken } from "react-jwt";
 
-import PostLike from "../posts/PostLike";
+import PostLike from "./PostLike";
 import PostDelete from "./PostDelete";
 
 const CommunityDetailPost = () => {
@@ -66,13 +66,18 @@ const CommunityDetailPost = () => {
               </CreatAt>
             </InfoBox>
           </UserInfo>
-            <DelBtn onClick={()=>{
+          {myDecodedToken.payload.user_id === getpost.user_id ? (
+            <DelBtn onClick={deletePost}>
+              <img src={trash} alt="" />
+            </DelBtn>
+          ) : null}
+            {/* <DelBtn onClick={()=>{
               setModalOpen(true);
             }}>
               <img src={trash} alt="" />
             </DelBtn>
             { modalopen === true ? <PostDelete setmodal={setModalOpen} /> : null }
-         
+          */}
         </StTop>
         <VideoArea onClick={showVideo}>
           {change ? (

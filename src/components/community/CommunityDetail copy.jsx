@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import serverAxios from "../axios/server.axios";
-
 //아이콘
 import backBtn from "../../assets/community/backbtn.svg";
 import trash from "../../assets/community/trash.png";
