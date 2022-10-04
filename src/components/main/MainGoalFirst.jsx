@@ -37,6 +37,7 @@ const MainGoalFirst = (props) => {
               목표를 인증하고,<br />
               작심 1일을 시작하세요!
 
+
             </p>
           </>
          : 

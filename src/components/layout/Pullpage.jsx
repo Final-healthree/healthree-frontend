@@ -5,6 +5,7 @@ import web_phone from "../../assets/layout/phone.png";
 import title from "../../assets/layout/title.png";
 import howtouse from "../../assets/layout/howtouse.png";
 
+
 const Pullpage = (props) => {
   return (
     <Web>
