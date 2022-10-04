@@ -113,9 +113,7 @@ const Title = styled.h3`
 
 const GoalArea = styled.div`
   padding: 0 13px;
-  /* margin: 30px 0; */
-
-  height: 390px;
+  height: 445px;
 `;
 
 const Label = styled.div`
@@ -158,7 +156,7 @@ const BtnArea = styled.div`
 
 const RegBtn = styled.button`
   position: absolute;
-  top: 85px;
+  top: 4px;
   width: 340px;
   height: 52px;
   background: #70cca6;

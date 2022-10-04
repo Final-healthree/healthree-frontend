@@ -156,7 +156,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 60px;
-  padding: 20px 0 70px;
+  padding: 16px 0 70px;
   box-sizing: border-box;
 
   ::-webkit-scrollbar {

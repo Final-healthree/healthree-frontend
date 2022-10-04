@@ -116,7 +116,7 @@ const HeaderArea = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  padding: 0 8px;
+  padding: 16px 8px 0 8px;
 `;
 const Title = styled.h3`
   margin: 0;
