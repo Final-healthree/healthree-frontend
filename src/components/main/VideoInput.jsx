@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { __addCertification } from "../../redux/modules/certificationSlice";
 
 export default function VideoInput(props) {
-  const { width, height, number, modal, setGoalmodal } = props;
+  const { width, height, number, modal, setGoalmodal, setMessage } = props;
 
   const inputRef = useRef();
   const dispatch = useDispatch();
@@ -28,7 +28,13 @@ export default function VideoInput(props) {
         formData,
         number,
       })
-    );
+    )
+    .then((res)=>{
+      if (res.error.message === "Rejected"){
+        setMessage(res.payload)
+      }
+      console.log(res.payload)
+    })
     modal(false);
     setGoalmodal(true);
   };
@@ -36,19 +42,6 @@ export default function VideoInput(props) {
   const handleChoose = (event) => {
     inputRef.current.click();
   };
-
-  const except = () => {
-    dispatch(__addCertification())
-    .then((res)=>{
-      if(res.payload===400) {
-
-      } else if(res.payload===403) {
-
-      }
-    })
-    
-  }
-
 
 
   return (

@@ -18,6 +18,10 @@ const MainGoalSecond = (props) => {
   const today = new Date();
   const selectedDay = new Date((new Date(date).getTime() + (24-9) * 60 * 60 * 1000));
   const videoUploadCheck = useSelector((state) => state.certification.list.result?.day2);
+  const [message, setMessage] = useState(); 
+
+  const a = useSelector((state) => state);
+  console.log(a)
 
   useEffect(() => {
     dispatch(__loadMainGoal());
@@ -26,7 +30,7 @@ const MainGoalSecond = (props) => {
   return (
     <StMainLayout>
       <StGuideTextContainer>
-        <h1>2/3</h1>
+        {/* <h1>2/3</h1> */}
         {videoUploadCheck?.uploaded === false ?
           <>
             <p>
@@ -70,7 +74,12 @@ const MainGoalSecond = (props) => {
           <p>{getMainGoal?.goal}</p>
           <p className="date">{getMainGoal?.day2.date.slice(0,10)}</p>
         </StTitleContainer>
-        <StStatus>{status}</StStatus>
+        {/* {videoUploadCheck?.uploaded === false ?
+          <StStatus>{status}</StStatus>
+          :
+          <StStatus>{status}</StStatus>
+        } */}
+      <StStatus>{message}</StStatus>
       </StMainGoalTextContainer>
       <StButtonContainer>
 
@@ -98,7 +107,7 @@ const MainGoalSecond = (props) => {
           ""
         }
         { modalopen === true ? 
-        <RegisterModal number={2} modal={setModalOpen} setGoalmodal={setGoalmodalOpen}/> : null }
+        <RegisterModal number={2} modal={setModalOpen} setGoalmodal={setGoalmodalOpen} setMessage={setMessage}/> : null }
       </StButtonContainer>
     </StMainLayout>
   )

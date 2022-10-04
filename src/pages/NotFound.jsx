@@ -11,7 +11,7 @@ const NotFound = () => {
     return (
         <div>
             <FullPage onClick={goBack}>
-                <img src={notFound}/>
+                <img src={notFound} alt=""/>
                 <h1>알 수 없는 요청입니다.</h1>
                 <h3>이전 페이지로 이동합니다.</h3>
             </FullPage>

@@ -19,6 +19,7 @@ const MainGoalThird = (props) => {
   const today = new Date();
   const selectedDay = new Date((new Date(date).getTime() + (24-9) * 60 * 60 * 1000));
   const videoUploadCheck = useSelector((state) => state.certification.list.result?.day3);
+  const [message, setMessage] = useState(); 
 
 
   useEffect(() => {
@@ -29,7 +30,7 @@ const MainGoalThird = (props) => {
   return (
     <StMainLayout>
       <StGuideTextContainer>
-        <h1>3/3</h1>
+        {/* <h1>3/3</h1> */}
         {videoUploadCheck?.uploaded === false ?
           <>
             <p>
@@ -72,7 +73,12 @@ const MainGoalThird = (props) => {
         <p>{getMainGoal?.goal}</p>
         <p className="date">{getMainGoal?.day3.date.slice(0,10)}</p>
       </StTitleContainer>
-      <StStatus>{status}</StStatus>
+      {/* {videoUploadCheck?.uploaded === false ?
+          <StStatus>{status}</StStatus>
+          :
+          <StStatus>{status}</StStatus>
+        } */}
+      <StStatus>{message}</StStatus>
       </StMainGoalTextContainer>
       <StButtonContainer>
 
@@ -91,6 +97,10 @@ const MainGoalThird = (props) => {
         :
         ""
       } */}
+            <button onClick={() => {
+          setModalOpen(!modalopen);
+        }}>동영상 등록하기</button>
+
 
       {videoUploadCheck?.uploaded === false ?
         <button onClick={() => {
@@ -100,7 +110,7 @@ const MainGoalThird = (props) => {
         ""
       }
         { modalopen === true ? 
-        <RegisterModal number={3} modal={setModalOpen} setGoalmodal={setGoalmodalOpen} /> : null }
+        <RegisterModal number={3} modal={setModalOpen} setGoalmodal={setGoalmodalOpen} setMessage={setMessage}/> : null }
       </StButtonContainer>
     </StMainLayout>
   )

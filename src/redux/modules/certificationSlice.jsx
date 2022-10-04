@@ -19,7 +19,8 @@ export const __addCertification = createAsyncThunk(
     }
     catch(err){
       console.log(err)
-      alert("파일을 다시 올려주세요!");
+      alert(err.response.data.message);
+      return thunkAPI.rejectWithValue(err.response.data.message);
     }
   }
     
@@ -48,6 +49,8 @@ const certificationSlice = createSlice({
     list: [],
     status: "",
     toggle: false,
+    errmsg: [],
+    order: ["","",""],
   },
   reducers: {
     ModalDoor: (state, action) => {
@@ -63,10 +66,14 @@ const certificationSlice = createSlice({
         state.toggle = true;
       })
       .addCase(__addCertification.rejected, (state, action) => {
-        state.status = "파일을 다시 올려주세요!";
+        state.status = action.payload;
+        state.errmsg = action.payload;
+        state.order = action.payload.number;
+        console.log(action.payload);
+        // state.order[action.payload.number] = action.payload.message
       })
       .addCase(__addCertification.pending, (state, action) => {
-        state.status = "동영상을 합치는 중입니다...";
+        state.status = "영상을 처리 중입니다...";
       })
       .addCase(__addFail.fulfilled, (state, action) => {
         state.list = action.payload;

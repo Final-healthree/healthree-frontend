@@ -2,66 +2,33 @@ import React, { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import serverAxios from "../../components/axios/server.axios";
 
-import serverAxios from "../axios/server.axios";
-
-import comments from "../../assets/community/comments.svg";
-import noncomment from "../../assets/community/noncomment.svg";
-import play from "../../assets/video/play.svg";
-
+import ReactLoading from "react-loading";
 import { format } from "date-fns";
 
-import OnLike from "./setLike";
+//아이콘
+import PlayCircle from "../../assets/community/PlayCircle.png";
+import comments from "../../assets/community/comments.svg";
+import noncomment from "../../assets/community/noncomment.svg";
+
+import LikeHandler from "./PostLike";
 
 function CommunityMain() {
   const [posts, setPosts] = useState([]);
   const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(false);
   const [more, setMore] = useState(0);
 
   const [ref, inView] = useInView();
   const navigate = useNavigate();
 
-  // const [like, setLike] = useState(true);
-
-  // const onlike = (postid, islike) => {
-  //   console.log(postid, islike);
-  //   if (islike) {
-  //     serverAxios
-  //       .delete(process.env.REACT_APP_REST_API_KEY + `api/posts/like/${postid}`)
-  //       .then((res) => {
-  //         console.log(res);
-  //         if (res.data.result === "좋아요 취소 성공") {
-  //           setLike(false);
-  //         }
-  //       });
-  //   } else {
-  //     serverAxios
-  //       .post(process.env.REACT_APP_REST_API_KEY + `api/posts/like/${postid}`)
-  //       .then((res) => {
-  //         console.log(res);
-  //         if (res.data.result === "좋아요 성공") {
-  //           setLike(true);
-  //         }
-  //       });
-  //   }
-  // };
-
   const getItems = async () => {
-    setLoading(true);
     if (page > 1) {
-      await new Promise((resolve) => setTimeout(resolve, 700));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
     }
-
-    await serverAxios
-      .get(
-        process.env.REACT_APP_REST_API_KEY +
-          `api/posts?pagecount=5&&page=${page}`
-      )
-      .then((res) => {
-        setPosts([...posts, ...res.data.result.post]);
-      });
-    setLoading(false);
+    await serverAxios.get(`api/posts?pagecount=5&&page=${page}`).then((res) => {
+      setPosts([...posts, ...res.data.result.post]);
+    });
   };
 
   useEffect(() => {
@@ -69,89 +36,106 @@ function CommunityMain() {
   }, [page]); //페이지가 바껴서 함수가 실행됐어
 
   useEffect(() => {
-    if (inView && !loading && posts.length >= more) {
+    console.log("inview");
+    if (inView && posts.length >= more) {
       setPage(page + 1);
-      setMore(more + 5);
+      setMore(more + 3);
     }
-  }, [inView, loading]);
+  }, [inView]);
 
   return (
     <Container>
       {posts.map((post, idx) => (
         <div key={post.post_id}>
           {posts.length - 1 === idx ? (
-            <StContent ref={ref}>
-              <StProfile>
-                <StImg src={post.profile_image} />
-                <p>{post.nickname}</p>
-              </StProfile>
-              <VideoImg
-                onClick={() => {
-                  navigate(`/community/${post.post_id}`);
-                }}
-                src={post.thumbnail}
-              />
+            <StContent>
+              <InfoBox>
+                <Goal>{post.goal_name}</Goal>
+                <Period>
+                  {format(new Date(post.day1), "yy.MM.dd")} ~{" "}
+                  {format(new Date(post.day3), "yy.MM.dd")}{" "}
+                </Period>
+              </InfoBox>
+              <ImgBox>
+                <VideoImg
+                  onClick={() => {
+                    navigate(`/community/${post.post_id}`);
+                  }}
+                  src={post.thumbnail}
+                />
+                <PlayImg src={PlayCircle} />
+              </ImgBox>
               <StBottom>
-                <div>
-                  <Goal>{post.goal_name}</Goal>
-                  <Period>
-                    {format(new Date(post.day1), "yy.MM.dd")} ~{" "}
-                    {format(new Date(post.day3), "yy.MM.dd")}{" "}
-                  </Period>
-                </div>
-                <div>
-                  <Icon src={post.comment_cnt > 0 ? comments : noncomment} />
-                  <span>{post.comment_cnt}</span>
-                </div>
-                {/* <div>
-                  <Icon
-                     onClick={() => {
-                       onlike(post.post_id, post.is_like);
-                     }}
-                    src={OnLike({ islike: post.is_like })}
+                <StProfile>
+                  <StImg src={post.profile_image} />
+                  <UserName>{post.nickname}</UserName>
+                </StProfile>
+                <IconBox>
+                  <CommentBox>
+                    <img
+                      style={{ width: "25px", height: "25px" }}
+                      src={post.comment_cnt > 0 ? comments : noncomment}
+                    />
+                    <p>{post.comment_cnt}</p>
+                  </CommentBox>
+                  <LikeHandler
+                    like={post.is_like}
+                    postid={post.post_id}
+                    cnt={post.like_cnt}
                   />
-                  <span>{post.like_cnt}</span>
-                </div> */}
+                </IconBox>
               </StBottom>
+              <div ref={ref}></div>
             </StContent>
           ) : (
             <StContent>
-              <StProfile>
-                <StImg src={post.profile_image} />
-                <p>{post.nickname}</p>
-              </StProfile>
-              <VideoImg
-                onClick={() => {
-                  navigate(`/community/${post.post_id}`);
-                }}
-                src={post.thumbnail}
-              />
+              <InfoBox>
+                <Goal>{post.goal_name}</Goal>
+                <Period>
+                  {format(new Date(post.day1), "yy.MM.dd")} ~{" "}
+                  {format(new Date(post.day3), "yy.MM.dd")}{" "}
+                </Period>
+              </InfoBox>
+              <ImgBox>
+                <VideoImg
+                  onClick={() => {
+                    navigate(`/community/${post.post_id}`);
+                  }}
+                  src={post.thumbnail}
+                />
+                <PlayImg src={PlayCircle} />
+              </ImgBox>
               <StBottom>
-                <div>
-                  <Goal>{post.goal_name}</Goal>
-                  <Period>
-                    {format(new Date(post.day1), "yy.MM.dd")} ~{" "}
-                    {format(new Date(post.day3), "yy.MM.dd")}{" "}
-                  </Period>
-                </div>
-                <div>
-                  <Icon src={post.comment_cnt > 0 ? comments : noncomment} />
-                  <span>{post.comment_cnt}</span>
-                </div>
-                {/* <div>
-                  <Icon
-                   onClick={() => {
-                     onlike(post.post_id, post.is_like);
-                   }}
-                  src={OnLike({ islike: post.is_like })}
+                <StProfile>
+                  <StImg src={post.profile_image} />
+                  <UserName>{post.nickname}</UserName>
+                </StProfile>
+                <IconBox>
+                  <CommentBox>
+                    <img
+                      style={{ width: "25px", height: "25px" }}
+                      src={post.comment_cnt > 0 ? comments : noncomment}
+                    />
+                    <p>{post.comment_cnt}</p>
+                  </CommentBox>
+                  <LikeHandler
+                    like={post.is_like}
+                    postid={post.post_id}
+                    cnt={post.like_cnt}
                   />
-                  <span>{post.like_cnt}</span>
-                </div> */}
+                </IconBox>
               </StBottom>
             </StContent>
           )}
         </div>
       ))}
+      {inView && posts.length >= more ? (
+        <LoaderWrap>
+          <ReactLoading type="spin" color="#70cca6" />
+        </LoaderWrap>
+      ) : (
+        ""
+      )}
     </Container>
   );
 }
@@ -181,45 +165,88 @@ const StContent = styled.div`
   padding: 0 auto;
 `;
 
-const StProfile = styled.div`
+const InfoBox = styled.div`
   display: flex;
-  align-items: center;
-  gap: 10px;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 5px;
 `;
 
-const StImg = styled.img`
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
+const Goal = styled.h4`
+  margin: 2px 0;
 `;
 
+const Period = styled.p`
+  margin: 2px 0;
+  font-size: 14px;
+  font-family: sans-serif;
+  color: #4b4b4b;
+`;
+
+const ImgBox = styled.div`
+  position: relative;
+  margin: 0 auto;
+`;
 const VideoImg = styled.img`
   height: 330px;
   width: 330px;
   box-shadow: 6px 6px 5px rgba(0, 0, 0, 0.12);
   border-radius: 3px;
   border: none;
+  opacity: 0.8;
 
   margin: 0 auto;
+
+  cursor: pointer;
+`;
+
+const PlayImg = styled.img`
+  display: flex;
+  top: 0;
+  left: 0;
+  transform: translate(110px, 110px);
+  position: absolute;
+  opacity: 1;
+  cursor: pointer;
 `;
 
 const StBottom = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 16px 4px 8px;
 `;
-const Goal = styled.p`
-  padding-left: 0px;
-  margin: 0;
-  font-weight: 700;
+const StProfile = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 0 5px;
 `;
-const Period = styled.p`
-  margin-top: 4px;
-  font-size: 14px;
-  font-weight: 300;
+const StImg = styled.img`
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
 `;
-const Icon = styled.img`
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
+const UserName = styled.p`
+  font-family: sans-serif;
+  font-weight: 500;
+  margin: 0 5px;
+`;
+const IconBox = styled.div`
+  display: flex;
+`;
+
+const CommentBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 50px 0 0;
+  gap: 4px;
+`;
+
+const LoaderWrap = styled.div`
+  width: 100%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  padding-bottom: 70px;
 `;

@@ -3,6 +3,8 @@ import styled from "styled-components";
 import serverAxios from "../../axios/server.axios";
 
 function CommentInput(props) {
+  const create = props.create;
+  const setCreate = props.setCreate;
   const [newcomments, setNewComments] = useState({
     comment: "",
   });
@@ -18,28 +20,24 @@ function CommentInput(props) {
       return alert("댓글을 입력해주세요:(");
     }
     await serverAxios
-      .post(
-        process.env.REACT_APP_REST_API_KEY + `api/comments/${props.data}`,
-        newcomments
-      )
+      .post(`api/comments/${props.data}`, newcomments)
       .then((res) => {
         if (res.data.success) {
-          alert("댓글이 등록되었어요:)");
-          window.location.reload();
+          setCreate(!create);
+          setNewComments({ comment: "" });
         }
       });
   };
 
   return (
     <StWrap>
-      <InputBox>
-        <Input
-          onChange={onChangeHandler}
-          type="text"
-          value={newcomments.comment}
-          placeholder="댓글을 달아주세요:)"
-        />
-      </InputBox>
+      <Input
+        onChange={onChangeHandler}
+        type="text"
+        value={newcomments.comment}
+        placeholder="댓글은 40자 이하 작성가능합니다."
+        maxLength={40}
+      />
       <InPutBtn onClick={onSubmitHandler}>댓글달기</InPutBtn>
     </StWrap>
   );
@@ -48,39 +46,33 @@ function CommentInput(props) {
 export default CommentInput;
 
 const StWrap = styled.div`
-  width: 100%;
-  min-height: 20px;
-
-  margin-left: 16px;
-  margin-top: 15px;
-  margin-bottom: 3px;
   display: flex;
-
-  gap: 7px;
-
-  /* position: absolute; */
-  /* bottom: 0; */
+  width: 355px;
+  margin: 0 auto;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #dadada;
+  padding: 20px 5px 10px;
 `;
 const Input = styled.input`
-  width: 260px;
-  height: 27px;
+  width: 254px;
+  height: 32px;
   font-size: 15px;
   font-family: sans-serif;
   padding-left: 5px;
-`;
-
-const InputBox = styled.div`
-  border: 0;
-  outline: 0;
-  background-color: transparent;
-  gap: 10px;
+  margin-right: 10px;
+  border-radius: 3px;
+  border: 1px solid #4b4b4b;
+  resize: none;
 `;
 
 const InPutBtn = styled.button`
+  width: 72px;
+  height: 34px;
   color: black;
   background-color: #70cca6;
   border: none;
-  outline: 0;
+  border-radius: 3px;
   font-family: sans-serif;
-  font-weight: 700;
+  font-weight: 600;
 `;

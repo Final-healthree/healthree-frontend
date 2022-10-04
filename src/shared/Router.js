@@ -12,10 +12,11 @@ import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
 import Setting from "../pages/Setting";
 import NotFound from "../pages/NotFound";
+
 const Router = () => {
   return (
     <BrowserRouter>
-      <Pullpage>
+
         <Layout>
           <Header />
           <Routes>
@@ -27,11 +28,10 @@ const Router = () => {
             <Route path="/mypage" element={<Mypage />} />
             <Route path="/setting" element={<Setting />} />
             <Route path="*" element={<NotFound />} />
-
           </Routes>
           <Footer />
         </Layout>
-      </Pullpage>
+
     </BrowserRouter>
   );
 };
