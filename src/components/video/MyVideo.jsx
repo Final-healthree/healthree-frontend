@@ -16,8 +16,13 @@ const MyVideo = () => {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [more, setMore] = useState(0);
-
   const [ref, inView] = useInView();
+
+  // 모달 props
+  const [modalOpen, setModalOpen] = useState(false);
+  const [url, setUrl] = useState("");
+  const [goalId, setGoalId] = useState("");
+  const [isshare, setIsShare] = useState(0);
 
   // 서버에서 아이템을 가지고 오는 함수
   const getItems = async () => {
@@ -37,12 +42,10 @@ const MyVideo = () => {
     setLoading(false);
   };
 
-  console.log(items);
-
   // `getItems` 가 바뀔 때 마다 함수 실행
   useEffect(() => {
     getItems();
-  }, [page]); //페이지가 바껴서 함수가 실행됐어
+  }, [page, isshare]); //페이지가 바껴서 함수가 실행됐어
 
   useEffect(() => {
     if (inView && !loading && items.length >= more) {
@@ -51,13 +54,10 @@ const MyVideo = () => {
     }
   }, [inView, loading]);
 
-  const [modalOpen, setModalOpen] = useState(false);
-  const [url, setUrl] = useState("");
-  const [goalId, setGoalId] = useState("");
-
-  const sendModal = (video, goal) => {
+  const sendModal = (video, goal, share) => {
     setUrl(video);
     setGoalId(goal);
+    setIsShare(share);
   };
 
   const showModal = (data) => {
@@ -78,13 +78,15 @@ const MyVideo = () => {
           {items.map((data, idx) => (
             <div
               key={data.goal_id}
-              onClick={() => sendModal(data.final_video, data.goal_id)}
+              onClick={() =>
+                sendModal(data.final_video, data.goal_id, data.is_share)
+              }
             >
               {items.length - 1 === idx ? (
                 <VideoBox ref={ref}>
                   <VideoImg src={data.thumbnail} onClick={showModal} />
-                  <PlayImg src={PlayCircle} />
-                  {data.is_share === "1" ? <img src={share} /> : null}
+                  <PlayImg src={PlayCircle} onClick={showModal} />
+                  {data.is_share === "1" ? <ShareImg src={share} /> : null}
                   <GoalName style={{ margin: "2px" }}>
                     {data.goal_name}
                   </GoalName>
@@ -96,11 +98,13 @@ const MyVideo = () => {
               ) : (
                 <VideoBox>
                   <VideoImg src={data.thumbnail} onClick={showModal} />
-                  <PlayImg src={PlayCircle} />
-                  {data.is_share === "1" ? <img src={share} /> : null}
-                  <GoalName style={{ margin: "2px" }}>
-                    {data.goal_name}
-                  </GoalName>
+                  <PlayImg src={PlayCircle} onClick={showModal} />
+                  <MiddleBox>
+                    <GoalName style={{ margin: "2px" }}>
+                      {data.goal_name}
+                    </GoalName>
+                    {data.is_share === "1" ? <ShareImg src={share} /> : null}
+                  </MiddleBox>
                   <VideoDate>
                     {format(new Date(data.day1), "yy.MM.dd")} ~{" "}
                     {format(new Date(data.day3), "yy.MM.dd")}
@@ -110,7 +114,12 @@ const MyVideo = () => {
             </div>
           ))}
           {modalOpen && (
-            <VideoModal url={url} goal={goalId} setModalOpen={setModalOpen} />
+            <VideoModal
+              url={url}
+              goal={goalId}
+              share={isshare}
+              setModalOpen={setModalOpen}
+            />
           )}
 
           {inView && items.length >= more ? (
@@ -170,22 +179,22 @@ const VideoArea = styled.div`
   justify-content: space-between;
   width: 370px;
   flex-flow: wrap;
-  gap: 30px;
+  gap: 10px;
   padding: 20px 0;
   box-sizing: border-box;
 `;
 
 const VideoBox = styled.div`
-  height: 210px;
-  width: 170px;
+  height: 225px;
+  width: 180px;
   cursor: pointer;
   position: relative;
 `;
 
 const VideoImg = styled.img`
   position: relative;
-  height: 160px;
-  width: 160px;
+  height: 180px;
+  width: 100%;
   box-shadow: 4px 4px 3px rgba(0, 0, 0, 0.12);
   border-radius: 3px;
   border: none;
@@ -198,16 +207,26 @@ const PlayImg = styled.img`
   display: flex;
   height: 50px;
   width: 50px;
-  top: 33%;
-  left: 34%;
+  top: 90px;
+  left: 90px;
+  transform: translate(-25px, -25px);
   position: absolute;
   opacity: 1;
   cursor: pointer;
 `;
 
+const MiddleBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+`;
 const GoalName = styled.span`
   padding-left: 2px;
   text-overflow: ellipsis;
+`;
+
+const ShareImg = styled.img`
+  flex: 0 0 15px;
 `;
 
 const VideoDate = styled.p`
