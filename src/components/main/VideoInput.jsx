@@ -2,7 +2,7 @@ import { React, useState, useRef } from "react";
 import styled from "styled-components";
 import Thumnail from "../../assets/main/Thumnail.png";
 import upload from "../../assets/main/upload.png";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { __addCertification } from "../../redux/modules/certificationSlice";
 
 export default function VideoInput(props) {

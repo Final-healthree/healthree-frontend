@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import serverAxios from "../axios/server.axios";
-import { useNavigate } from "react-router-dom";
 import btn from "../../assets/setting/PaginationBtn.png"
 import GuideModal from "./GuideModal";
 
 const SettingDetail = () => {
-  const navigate = useNavigate();
   const token = localStorage.getItem("Token");
 
   const [profileImage, setProfileImage] = useState();

@@ -7,7 +7,6 @@ import VideoInput from "./VideoInput";
 
 const RegisterModal = (props) => {
   const { modal, setGoalmodal,setMessage } = props;
-  const [state, setState] = useState();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [attachment, setAttachment] = useState(false);

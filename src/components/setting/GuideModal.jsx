@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import jaksam from "../../assets/main/modal/Modal2.svg"
 
@@ -42,7 +42,7 @@ const StGuideModalLayout = styled.div`
     position: relative;
     left: -13px;
     right: 0;
-    top: -180px;
+    top: -160px;
     bottom: 0;
 
     background-color: #fff;

@@ -12,12 +12,10 @@ const Header = () => {
   const token = localStorage.getItem("Token");
   if (token === null) return null;
   
-  const style = {cursor : "pointer"};
-
   return (
     <StHeader>
       {/* <Img onClick ={()=> navigate("/main")} src={headerLogo} alt="" style = {style} /> */}
-      <Img onClick ={()=> navigate("/main")} src={Logo} alt="" style = {style} />
+      <Img onClick ={()=> navigate("/main")} src={Logo} alt="" />
     </StHeader>
   )
 };
@@ -40,7 +38,8 @@ const StHeader = styled.div`
   display: flex;
   position: sticky;
   width: 100%;
-  height: 60px;
+  /* height: 60px; */
+  flex: 0 0 60px;
   top: 0;
   left: 0;
   border-bottom: 1px solid gray;
@@ -55,4 +54,5 @@ const StHeader = styled.div`
 const Img = styled.img`
   height: 16px;
   width: 71px;
+  cursor: pointer;
 `;
