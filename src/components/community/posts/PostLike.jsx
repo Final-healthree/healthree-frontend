@@ -62,9 +62,11 @@ const IconContainer = styled.div`
 const Icon = styled.img`
   width: 25px;
   height: 25px;
-  cursor: "pointer";
+  cursor: pointer;
 `;
 
 const Cnt = styled.p`
-  margin-right: 10px;
+  width: 20px;
+  height: 20px;
+  font-size: 17px;
 `;

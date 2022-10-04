@@ -78,10 +78,21 @@ function CommunityMain() {
                 <IconBox>
                   <CommentBox>
                     <img
-                      style={{ width: "25px", height: "25px" }}
+                      style={{
+                        width: "25px",
+                        height: "25px",
+                      }}
                       src={post.comment_cnt > 0 ? comments : noncomment}
                     />
-                    <p>{post.comment_cnt}</p>
+                    <p
+                      style={{
+                        width: "20px",
+                        height: "20px",
+                        fontSize: "17px",
+                      }}
+                    >
+                      {post.comment_cnt}
+                    </p>
                   </CommentBox>
                   <LikeHandler
                     like={post.is_like}
@@ -123,10 +134,21 @@ function CommunityMain() {
                 <IconBox>
                   <CommentBox>
                     <img
-                      style={{ width: "25px", height: "25px" }}
+                      style={{
+                        width: "25px",
+                        height: "25px",
+                      }}
                       src={post.comment_cnt > 0 ? comments : noncomment}
                     />
-                    <p>{post.comment_cnt}</p>
+                    <p
+                      style={{
+                        width: "20px",
+                        height: "20px",
+                        fontSize: "17px",
+                      }}
+                    >
+                      {post.comment_cnt}
+                    </p>
                   </CommentBox>
                   <LikeHandler
                     like={post.is_like}
@@ -155,8 +177,8 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 60px;
-  padding: 20px 0 70px;
+  gap: 50px;
+  padding: 16px 0 70px;
   box-sizing: border-box;
 
   ::-webkit-scrollbar {

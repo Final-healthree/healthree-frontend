@@ -15,7 +15,7 @@ export default Community;
 const Container = styled.div`
   overflow: auto;
   flex: 1;
-  margin-top: 20px;
+  margin-top: 12px;
   overflow-y: scroll;
 
   ::-webkit-scrollbar {
