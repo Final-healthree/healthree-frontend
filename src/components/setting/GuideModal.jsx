@@ -42,7 +42,7 @@ const GuideModal = (props) => {
 
 const StGuideModalLayout = styled.div`
     position: relative;
-    left: -20px;
+    left: -13px;
     right: 0;
     top: -200px;
     bottom: 0;
