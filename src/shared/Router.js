@@ -16,7 +16,7 @@ import NotFound from "../pages/NotFound";
 const Router = () => {
   return (
     <BrowserRouter>
-      <Pullpage>
+
         <Layout>
           <Header />
           <Routes>
@@ -31,7 +31,7 @@ const Router = () => {
           </Routes>
           <Footer />
         </Layout>
-      </Pullpage>
+
     </BrowserRouter>
   );
 };

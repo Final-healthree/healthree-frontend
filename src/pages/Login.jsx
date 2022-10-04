@@ -10,13 +10,13 @@ const Login = () => {
     <>
       <StLoginForm>
         <StLogo>
-          <img src={mainLogo} />
+          <img src={mainLogo} alt=""/>
         </StLogo>
 
         <LoginForm />
 
         <StTeamName>
-          <img src={teamName} />
+          <img src={teamName} alt=""/>
         </StTeamName>
       </StLoginForm>
     </>
@@ -31,6 +31,7 @@ const StLoginForm = styled.div`
   justify-content: center;
   align-items: center;
   gap: 140px;
+  height: 100%;
 `;
 const StLogo = styled.div`
   margin-top: 100px;
