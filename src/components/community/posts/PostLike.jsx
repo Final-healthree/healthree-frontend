@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import serverAxios from "../axios/server.axios";
+import serverAxios from "../../axios/server.axios";
 import styled from "styled-components";
 
 //아이콘이미지
-import onLike from "../../assets/community/like.svg";
-import offLike from "../../assets/community/unLike.svg";
+import onLike from "../../../assets/community/like.svg";
+import offLike from "../../../assets/community/unLike.svg";
 
 function LikeHandler({ like, postid, cnt }) {
   const [count, setCount] = useState(cnt);

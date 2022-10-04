@@ -22,6 +22,7 @@ const CommunityDetailPost = () => {
 
   const token = localStorage.getItem("Token");
   const myDecodedToken = decodeToken(token);
+  const [modalopen, setModalOpen] =useState(false);
 
   const postInfo = async () => {
     await serverAxios.get(`api/posts/${param.postid}`).then((res) => {

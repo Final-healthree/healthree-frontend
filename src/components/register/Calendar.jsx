@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import styled from "styled-components";
 
@@ -6,20 +6,19 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { register } from "../../redux/modules/regday";
 
-import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import ko from "date-fns/locale/ko";
 
 import { addDays, format } from "date-fns";
 import CalendarCss from "../calendar/calendar";
-// function CustomCaption(props: CaptionProps) {
-//   // const { goToMonth, nextMonth, previousMonth } = useNavigation();
-//   return <h2>{format(props.displayMonth, "MMM yyy")}</h2>;
-// }
+import { DayPicker } from "react-day-picker";
+import serverAxios from "../axios/server.axios";
 
 const RegCalendar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const today = new Date();
+  const [regtoday, setRegToday] = useState(true);
 
   const handleDayClick = (day) => {
     setRange({ from: day, to: addDays(day, 2) });
@@ -35,7 +34,6 @@ const RegCalendar = () => {
     navigate("/register");
   };
 
-  const today = new Date();
   const defaultSelected = {
     from: today,
     to: addDays(today, 2),
@@ -46,6 +44,35 @@ const RegCalendar = () => {
   const weekStyle = {
     color: "red",
   };
+
+  const formatCaption = (date, options) => {
+    const y = format(date, "yyyy");
+    const m = format(date, "MM", { locale: options?.locale });
+    return `${y}년 ${m}월 `;
+  };
+
+  const isRegToday = async () => {
+    await serverAxios
+      .get("/api/goals/is_today_register")
+      .then((res) => console.log(res.data.result));
+  };
+
+  if (!regtoday) {
+    //등록할 수 없음
+    console.log("hi");
+  }
+
+  useEffect(() => {
+    isRegToday();
+  }, []);
+
+  const disabledDays = [
+    { before: new Date() },
+    // new Date(2022, 5, 10),
+    // new Date(2022, 5, 12),
+    // new Date(2022, 5, 20),
+    // { from: new Date(2022, 4, 18), to: new Date(2022, 4, 29) }
+  ];
 
   return (
     <Container>
@@ -65,7 +92,8 @@ const RegCalendar = () => {
           onDayClick={handleDayClick}
           modifiers={{ week: week }}
           modifiersStyles={{ week: weekStyle }}
-          disabled={[{ before: new Date() }]}
+          disabled={disabledDays}
+          formatters={{ formatCaption }}
         ></DayPicker>
       </CalendarArea>
 

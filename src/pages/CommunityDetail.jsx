@@ -1,5 +1,5 @@
 import React from "react";
-import CommunityDetailPost from "../components/community/CommunityDetail";
+import CommunityDetailPost from "../components/community/posts/CommunityDetail";
 import Comments from "../components/community/comment/Comments";
 import styled from "styled-components";
 

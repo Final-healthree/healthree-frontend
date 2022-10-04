@@ -4,8 +4,8 @@ import styled from "styled-components";
 import notFound from "../assets/notFound/404.svg"
 
 const NotFound = () => {
-    const navigate = useNavigate("/")
-    const goBack = () => navigate("/")
+    const navigate = useNavigate("/main")
+    const goBack = () => navigate("/main")
     setTimeout(goBack, 2000)
     
     return (

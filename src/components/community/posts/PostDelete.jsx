@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import styled from "styled-components";
-import Delete from "../../assets/community/postDelete/delete.svg"
-import Cancle from "../../assets/community/postDelete/cancle.svg"
+import Delete from "../../../assets/community/postDelete/delete.svg"
+import Cancle from "../../../assets/community/postDelete/cancle.svg"
 
 const PostDelete = (props) => {
     const { setmodal } = props;
@@ -73,7 +73,6 @@ flex-flow: column;
 `;
 
 const StGuideTitle = styled.div`
-
 `;
 
 const StButton = styled.div`

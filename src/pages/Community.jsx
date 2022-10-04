@@ -1,5 +1,5 @@
 import React from "react";
-import CommunityMain from "../components/community/CommunityMain";
+import CommunityMain from "../components/community/posts/CommunityMain";
 import styled from "styled-components";
 
 const Community = () => {
