@@ -1,7 +1,7 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
 import registerday from "../modules/regday";
-import existgoal from "../modules/existgoal";
+import existgoalSlice from "../modules/existgoalSlice";
 import certificationReducer from "../modules/certificationSlice";
 import goalReducer from "../modules/goalSlice";
 import goalThreeReducer from "../modules/goalThreeSlice";
@@ -9,7 +9,7 @@ import goalThreeReducer from "../modules/goalThreeSlice";
 const middlewares = [thunk];
 const rootReducer = combineReducers({
   registerday,
-  existgoal,
+  existgoalSlice,
   certification: certificationReducer,
   goal: goalReducer,
   goalThree: goalThreeReducer,

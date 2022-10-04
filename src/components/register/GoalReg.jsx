@@ -8,7 +8,9 @@ import { addDays, format } from "date-fns";
 
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { existgoal } from "../../redux/modules/existgoal";
+import { existgoal } from "../../redux/modules/existgoalSlice";
+
+import { CaptionLabel } from "react-day-picker";
 
 const GoalReg = () => {
   const regDay = useSelector((state) => state.registerday);

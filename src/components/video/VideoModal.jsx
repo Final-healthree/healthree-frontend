@@ -25,6 +25,7 @@ const VideoModal = (props) => {
 
   return (
     <ModalBody onClick={closeModal}>
+      <CloseBtn onClick={closeModal}>X</CloseBtn>
       <ShowVideo controls="controls">
         <source src={url} type="video/mp4" />
       </ShowVideo>
@@ -49,7 +50,7 @@ const ModalBody = styled.div`
   gap: 20px;
   margin: auto;
 
-  width: 375px;
+  width: 100%;
   height: 100%;
 `;
 
@@ -63,6 +64,21 @@ const ShowVideo = styled.video`
   flex-direction: column;
 `;
 
+const CloseBtn = styled.button`
+  color: #70cca6;
+  border: none;
+  background: none;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  right: 12px;
+
+  position: absolute;
+  top: 130px;
+
+  font-size: 19px;
+`;
+
 const ShareBtn = styled.button`
   width: 80px;
   height: 30px;
@@ -73,7 +89,7 @@ const ShareBtn = styled.button`
   left: 277px;
 
   position: absolute;
-  top: 720px;
+  top: 550px;
 
   background: #70cca6;
   border-radius: 2px;

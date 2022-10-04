@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import ModalFail from "../../assets/main/modal/ModalFail.svg";
 import fill from "../../assets/main/modal/fill.png";
-import { existgoal } from "../../redux/modules/existgoal";
+import { existgoal } from "../../redux/modules/existgoalSlice";
 import { __addFail } from "../../redux/modules/certificationSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -13,10 +13,12 @@ const FailModal = (props) => {
   const navigate = useNavigate();
 
   const ReturnCalendar = () => {
-    dispatch(existgoal({
-      exist: false
-    }));
-    dispatch(__addFail(number))
+    dispatch(
+      existgoal({
+        exist: false,
+      })
+    );
+    dispatch(__addFail(number));
   };
 
   return (
@@ -30,8 +32,8 @@ const FailModal = (props) => {
             className="check"
             onClick={() => {
               setModal(false);
-              ReturnCalendar()
-              navigate("/Mypage")
+              ReturnCalendar();
+              navigate("/Mypage");
             }}
           >
             마이페이지로 가기
@@ -39,7 +41,7 @@ const FailModal = (props) => {
           <button
             className="retry"
             onClick={() => {
-              ReturnCalendar()
+              ReturnCalendar();
             }}
           >
             <img src={fill} alt="" />
