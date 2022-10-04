@@ -4,14 +4,13 @@ import Modal1 from "../../assets/main/modal/Modal1.svg";
 import Modal2 from "../../assets/main/modal/Modal2.svg";
 import Modal3 from "../../assets/main/modal/Modal3.svg";
 import { useDispatch } from "react-redux";
-import { existgoal } from "../../redux/modules/existgoal";
-import fill from "../../assets/main/modal/fill.png"
-
+import { existgoal } from "../../redux/modules/existgoalSlice";
+import fill from "../../assets/main/modal/fill.png";
 
 const MainModal = (props) => {
   const { number } = props;
   const [modalOpen, setModalOpen] = useState(true);
-  
+
   return (
     <div>
       {/* <button
@@ -27,16 +26,16 @@ const MainModal = (props) => {
   );
 };
 
-
 function Modal(props) {
-  const {page, setModal } =props;
+  const { page, setModal } = props;
   const dispatch = useDispatch();
 
-
   const ReturnCalendar = () => {
-    dispatch(existgoal({
-      exist: false
-    }));
+    dispatch(
+      existgoal({
+        exist: false,
+      })
+    );
   };
 
   return (
@@ -56,7 +55,7 @@ function Modal(props) {
             )}
           </div>
           <h5>작심 {page}일에 성공하셨습니다</h5>
-          {page === 3 ? 
+          {page === 3 ? (
             <StBtnLayout>
               <button
                 className="retry"
@@ -64,20 +63,20 @@ function Modal(props) {
                   setModal(false);
                   ReturnCalendar();
                 }}
-                >
+              >
                 <img src={fill} alt="" />
                 &nbsp;새로운 도전하기
               </button>
             </StBtnLayout>
-            :
+          ) : (
             <button
-            onClick={() => {
-              setModal(false);
-            }}
+              onClick={() => {
+                setModal(false);
+              }}
             >
               확인
             </button>
-          }
+          )}
         </StModalContainer>
       </StModal>
     </div>
@@ -110,7 +109,7 @@ const StModal = styled.div`
   justify-content: center;
   align-items: center;
   flex-flow: column;
-  `;
+`;
 
 const StModalContainer = styled.div`
   display: flex;
@@ -127,7 +126,7 @@ const StModalContainer = styled.div`
   & > button {
     width: 155px;
     height: 32px;
-    background: #70CCA6;
+    background: #70cca6;
     border-radius: 2px;
     border: none;
   }

@@ -2,17 +2,17 @@ import React, { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import serverAxios from "../../components/axios/server.axios";
+import serverAxios from "../../axios/server.axios";
 
 import ReactLoading from "react-loading";
 import { format } from "date-fns";
 
 //아이콘
-import PlayCircle from "../../assets/community/PlayCircle.png";
-import comments from "../../assets/community/comments.svg";
-import noncomment from "../../assets/community/noncomment.svg";
+import PlayCircle from "../../../assets/community/PlayCircle.png";
+import comments from "../../../assets/community/comments.svg";
+import noncomment from "../../../assets/community/noncomment.svg";
 
-import LikeHandler from "./PostLike";
+import LikeHandler from "../posts/PostLike";
 
 function CommunityMain() {
   const [posts, setPosts] = useState([]);
