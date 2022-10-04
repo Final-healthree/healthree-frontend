@@ -14,15 +14,12 @@ const MainGoalSecond = (props) => {
   const [goalmodalOpen, setGoalmodalOpen] = useState(false);
   const dispatch = useDispatch();
   const getMainGoal = useSelector((state) => state.certification.list.result);
-  const status = useSelector((state) => state.certification.status);
   const date = getMainGoal?.day2.date.slice(0, 10);
   const today = new Date();
   const selectedDay = new Date((new Date(date).getTime() + (24-9) * 60 * 60 * 1000));
   const videoUploadCheck = useSelector((state) => state.certification.list.result?.day2);
   const [message, setMessage] = useState(); 
 
-  const a = useSelector((state) => state);
-  console.log(a)
 
   useEffect(() => {
     dispatch(__loadMainGoal());
@@ -119,7 +116,7 @@ const StMainLayout = styled.div`
 `;
 
 const StGuideTextContainer = styled.div`
-  margin-top: 30px;
+  margin-top: 16px;
   text-align: left;
   padding-left: 20px;
 

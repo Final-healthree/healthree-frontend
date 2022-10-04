@@ -14,7 +14,6 @@ const MainGoalThird = (props) => {
   const [goalmodalOpen, setGoalmodalOpen] = useState(false);
   const dispatch = useDispatch();
   const getMainGoal = useSelector((state) => state.goal.list.result);
-  const status = useSelector((state) => state.certification.status);
   const date = getMainGoal?.day3.date.slice(0, 10);
   const today = new Date();
   const selectedDay = new Date((new Date(date).getTime() + (24-9) * 60 * 60 * 1000));
@@ -97,10 +96,6 @@ const MainGoalThird = (props) => {
         :
         ""
       } */}
-            <button onClick={() => {
-          setModalOpen(!modalopen);
-        }}>동영상 등록하기</button>
-
 
       {videoUploadCheck?.uploaded === false ?
         <button onClick={() => {
@@ -121,7 +116,7 @@ const StMainLayout = styled.div`
 `;
 
 const StGuideTextContainer = styled.div`
-  margin-top: 30px;
+  margin-top: 16px;
   text-align: left;
   padding-left: 20px;
 

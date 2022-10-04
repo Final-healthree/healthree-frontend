@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import serverAxios from "../axios/server.axios";
-import { useNavigate } from "react-router-dom";
 import btn from "../../assets/setting/PaginationBtn.png"
 import GuideModal from "./GuideModal";
 
 const SettingDetail = () => {
-  const navigate = useNavigate();
   const token = localStorage.getItem("Token");
 
   const [profileImage, setProfileImage] = useState();
@@ -94,7 +92,8 @@ const StProfileLayout = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 10px;  
+  padding: 10px;
+  padding-top: 0px;  
 `;
 
 const StProfile = styled.div`
@@ -109,7 +108,7 @@ const StNickName = styled.div``;
 
 
 const StSettingContainer = styled.div`
-  margin-top: 30px;
+  margin-top: 10px;
  
   & > div {
     display: flex;
