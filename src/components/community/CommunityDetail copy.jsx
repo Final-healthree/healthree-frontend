@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import serverAxios from "../axios/server.axios";
-import PostDelete from "./PostDelete";
 
 //아이콘
 import backBtn from "../../assets/community/backbtn.svg";
@@ -23,7 +22,6 @@ const CommunityDetailPost = () => {
 
   const token = localStorage.getItem("Token");
   const myDecodedToken = decodeToken(token);
-  const [modalopen, setModalOpen] =useState(false);
 
   const postInfo = async () => {
     await serverAxios.get(`api/posts/${param.postid}`).then((res) => {
@@ -67,13 +65,11 @@ const CommunityDetailPost = () => {
               </CreatAt>
             </InfoBox>
           </UserInfo>
-            <DelBtn onClick={()=>{
-              setModalOpen(true);
-            }}>
+          {myDecodedToken.payload.user_id === getpost.user_id ? (
+            <DelBtn onClick={deletePost}>
               <img src={trash} alt="" />
             </DelBtn>
-            { modalopen === true ? <PostDelete setmodal={setModalOpen} /> : null }
-         
+          ) : null}
         </StTop>
         <VideoArea onClick={showVideo}>
           {change ? (

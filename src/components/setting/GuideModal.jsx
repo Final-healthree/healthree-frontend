@@ -44,7 +44,7 @@ const StGuideModalLayout = styled.div`
     position: relative;
     left: -13px;
     right: 0;
-    top: -200px;
+    top: -160px;
     bottom: 0;
 
     background-color: #fff;
