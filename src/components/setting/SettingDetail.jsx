@@ -3,13 +3,15 @@ import styled from "styled-components";
 import serverAxios from "../axios/server.axios";
 import btn from "../../assets/setting/PaginationBtn.png"
 import GuideModal from "./GuideModal";
+import { userClickedAddToHome, deferredInstallPrompt } from "./deferredInstallPrompt";
+
 
 const SettingDetail = () => {
   const token = localStorage.getItem("Token");
 
   const [profileImage, setProfileImage] = useState();
   const [nickName, setNickName] = useState();
-  const [modalopen, setModalOpen] =useState(false);
+  const [modalopen, setModalOpen] = useState(false);
 
   const getProfile = async () => {
     await serverAxios
@@ -34,51 +36,60 @@ const SettingDetail = () => {
     <StSettingLayout>
       <StProfileLayout>
         <StProfile>
-          <img style={{ width: "34px", height: "34px" }} src={profileImage} alt=""/>
+          <img style={{ width: "34px", height: "34px" }} src={profileImage} alt="" />
         </StProfile>
         <StNickName>{nickName}</StNickName>
       </StProfileLayout>
 
       <StSettingContainer>
-        <div>
-          <p>앱 다운로드(준비 중입니다)</p>
-          <img  
-          src={btn} alt="" />
-        </div>
-          <hr />
+        {/* {deferredInstallPrompt ? ( */}
+          <>
+            <div>
+              <p>앱 다운로드</p>
+              <img
+                onClick={() => {
+                  userClickedAddToHome()
+                }}
+                src={btn}
+                alt=""
+              />
+            </div>
+          </>
+        {/* ) : null} */}
+        <hr />
         <div>
           <p>사용자 가이드</p>
-          <img onClick={()=>{
+          <img onClick={() => {
             setModalOpen(true);
           }}
-          src={btn} alt="" />
+            src={btn} alt="" />
         </div>
-          { modalopen === true ? <GuideModal setmodal={setModalOpen} /> : null }
-          <hr />
+        {modalopen === true ? <GuideModal setmodal={setModalOpen} /> : null}
+        <hr />
         <div>
           <p>버그 신고</p>
-          <img onClick={()=>{
+          <img onClick={() => {
             window.open("https://forms.gle/khRnXR5PzqhHZEe58", "_blank")
-          }} 
-          src={btn} alt="" />
+          }}
+            src={btn} alt="" />
         </div>
-          <hr />
+        <hr />
         <div>
-        <p>설문 조사 하러가기!</p>
-        <img onClick={()=>{
-          window.open("https://forms.gle/hknQyvw9iR4DfuzKA", "_blank")
-        }} 
-        src={btn} alt="" />
-      </div>
+          <p>설문 조사 하러가기!</p>
+          <img onClick={() => {
+            window.open("https://forms.gle/hknQyvw9iR4DfuzKA", "_blank")
+          }}
+            src={btn} alt="" />
+        </div>
         <hr />
         <div>
           <p>로그아웃</p>
-          <img onClick={()=>{
+          <img onClick={() => {
             Logout();
-          }} 
-          src={btn} alt="" />
+          }}
+            src={btn} alt="" />
         </div>
-          <hr />
+        <hr />
       </StSettingContainer>
     </StSettingLayout>
   )
