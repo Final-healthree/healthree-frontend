@@ -2,7 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 import web_phone from "../../assets/layout/phone.png";
-import web_intro from "../../assets/layout/Frame.png";
+import title from "../../assets/layout/title.png";
+import howtouse from "../../assets/layout/howtouse.png";
 
 const Pullpage = (props) => {
   return (
@@ -17,9 +18,9 @@ const Pullpage = (props) => {
 const Web = styled.div`
   width: 90vw;
   height: 90vh;
-  background: url(${web_intro});
-  background-size: 714px 197px;
-  background-position: 20% 30%;
+  background: url(${title}), url(${howtouse});
+  background-size: 900px 400px, 652px 189px;
+  background-position: 10% 20%, 10% 90%;
   background-repeat: no-repeat;
 `;
 
@@ -33,7 +34,7 @@ const Phone = styled.div`
   transform: translate(50%, -50%);
   background: url(${web_phone}) no-repeat;
   background-size: 100% 100%;
-  border: 1px solid pink;
+  border: none;
 
   @media screen and (min-width: 1120px) {
     //1120px이상일 경우

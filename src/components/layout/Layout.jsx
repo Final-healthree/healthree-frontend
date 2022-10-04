@@ -17,8 +17,6 @@ const StLayout = styled.div`
     display: none;
   }
   box-sizing: border-box;
-
-  /* background-color: pink; */
 `;
 
 export default Layout;
