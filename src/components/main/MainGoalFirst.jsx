@@ -115,7 +115,7 @@ const MainGoalFirst = (props) => {
 }
 
 const StMainLayout = styled.div`
-
+  position: relative;
 `;
 
 const StGuideTextContainer = styled.div`
