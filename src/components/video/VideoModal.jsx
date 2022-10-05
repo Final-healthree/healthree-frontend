@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import serverAxios from "../axios/server.axios";
+import shareimg from "../../assets/video/share-2.png";
 
 const VideoModal = (props) => {
   const url = props.url;
@@ -32,7 +33,10 @@ const VideoModal = (props) => {
           <source src={url} type="video/mp4" />
         </ShowVideo>
         {share === "1" ? null : (
-          <ShareBtn onClick={ShareVideo}>공유하기</ShareBtn>
+          <ShareBtn onClick={ShareVideo}>
+            <img src={shareimg} alt=""/>
+            &nbsp;공유하기
+          </ShareBtn>
         )}
       </ModalContainer>
     </ModalBody>
@@ -91,8 +95,13 @@ const ShareBtn = styled.button`
   border-radius: 2px;
   border: none;
 
+  font-family: sans-serif;
   font-weight: 600;
   font-size: 12px;
 
   cursor: pointer;
+
+  & > img {
+    transform: translate(0px, 1px);
+  }
 `;

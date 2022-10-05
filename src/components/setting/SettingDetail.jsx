@@ -86,7 +86,7 @@ const SettingDetail = () => {
           />
         </div>
         <hr />
-        <div>
+        {/* <div>
           <p>설문 조사 하러가기!</p>
           <img
             onClick={() => {
@@ -96,7 +96,7 @@ const SettingDetail = () => {
             alt=""
           />
         </div>
-        <hr />
+        <hr /> */}
         <div>
           <p>로그아웃</p>
           <img
