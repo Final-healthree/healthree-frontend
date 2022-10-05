@@ -122,7 +122,7 @@ const StProfileLayout = styled.div`
   align-items: center;
   gap: 10px;
   padding: 10px;
-  padding-top: 0px;
+  padding-top: 6px;
 `;
 
 const StProfile = styled.div`
