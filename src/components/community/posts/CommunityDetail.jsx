@@ -12,7 +12,7 @@ import { format } from "date-fns";
 import { decodeToken } from "react-jwt";
 
 import PostLike from "./PostLike";
-import PostDelete from "./PostDelete";
+import DeleteModal from "./DeleteModal";
 
 const CommunityDetailPost = () => {
   const param = useParams();
@@ -22,7 +22,7 @@ const CommunityDetailPost = () => {
 
   const token = localStorage.getItem("Token");
   const myDecodedToken = decodeToken(token);
-  const [modalopen, setModalOpen] =useState(false);
+  const [modalopen, setModalOpen] = useState(false);
 
   const postInfo = async () => {
     await serverAxios.get(`api/posts/${param.postid}`).then((res) => {
@@ -34,17 +34,12 @@ const CommunityDetailPost = () => {
     postInfo();
   }, []);
 
-  const deletePost = () => {
-    serverAxios.delete(`api/posts/${param.postid}`).then((res) => {
-      if (res.data.success) {
-        alert("게시글이 삭제되었습니다.");
-        navigate("/community");
-      }
-    });
-  };
-
   const showVideo = () => {
     setChange(!change);
+  };
+
+  const deleteHandler = () => {
+    setModalOpen(true);
   };
 
   return (
@@ -65,11 +60,11 @@ const CommunityDetailPost = () => {
             </InfoBox>
           </UserInfo>
           {myDecodedToken.payload.user_id === getpost.user_id ? (
-            <DelBtn onClick={deletePost}>
+            <DelBtn onClick={deleteHandler}>
               <img src={trash} alt="" />
             </DelBtn>
           ) : null}
-            {/* <DelBtn onClick={()=>{
+          {/* <DelBtn onClick={()=>{
               setModalOpen(true);
             }}>
               <img src={trash} alt="" />
@@ -114,6 +109,9 @@ const CommunityDetailPost = () => {
             />
           )}
         </StBottom>
+        {modalopen ? (
+          <DeleteModal content={"게시글"} setModalOpen={setModalOpen} />
+        ) : null}
       </StContent>
     </>
   );

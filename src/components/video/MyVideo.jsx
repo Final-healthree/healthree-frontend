@@ -58,11 +58,12 @@ const MyVideo = () => {
     setUrl(video);
     setGoalId(goal);
     setIsShare(share);
-  };
-
-  const showModal = (data) => {
     setModalOpen(true);
   };
+
+  // const showModal = (data) => {
+  //   setModalOpen(true);
+  // };
 
   return (
     <Container>
@@ -84,8 +85,8 @@ const MyVideo = () => {
             >
               {items.length - 1 === idx ? (
                 <VideoBox ref={ref}>
-                  <VideoImg src={data.thumbnail} onClick={showModal} />
-                  <PlayImg src={PlayCircle} onClick={showModal} />
+                  <VideoImg src={data.thumbnail} />
+                  <PlayImg src={PlayCircle} />
                   {data.is_share === "1" ? <ShareImg src={share} /> : null}
                   <GoalName style={{ margin: "2px" }}>
                     {data.goal_name}
@@ -97,8 +98,8 @@ const MyVideo = () => {
                 </VideoBox>
               ) : (
                 <VideoBox>
-                  <VideoImg src={data.thumbnail} onClick={showModal} />
-                  <PlayImg src={PlayCircle} onClick={showModal} />
+                  <VideoImg src={data.thumbnail} />
+                  <PlayImg src={PlayCircle} />
                   <MiddleBox>
                     <GoalName style={{ margin: "2px" }}>
                       {data.goal_name}

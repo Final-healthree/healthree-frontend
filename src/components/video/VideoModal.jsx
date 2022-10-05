@@ -55,44 +55,37 @@ const ModalBody = styled.div`
 
 const ModalContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  height: 100%;
+  padding: 10px;
 `;
 const CloseBtn = styled.button`
-  color: #70cca6;
-  border: none;
-  background: none;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-  right: 12px;
-
-  top: 130px;
-
+  align-self: flex-end;
+  margin-bottom: 10px;
   font-size: 19px;
+  background: none;
+  border: none;
+  color: #70cca6;
+  cursor: pointer;
 `;
 
 const ShowVideo = styled.video`
   background-color: #dadada;
   border-radius: 2px;
-  margin: auto;
-  width: 90%;
-  height: 50%;
+  margin: 0;
+  width: 100%;
+  height: 346px;
 `;
 
 const ShareBtn = styled.button`
   width: 80px;
   height: 30px;
-  display: flex;
-  align-items: center;
+  align-self: flex-end;
+  margin-top: 10px;
   justify-content: center;
-  padding: 10px;
-
-  right: 20px;
-  bottom: 170px;
+  align-items: center;
 
   background: #70cca6;
   border-radius: 2px;
