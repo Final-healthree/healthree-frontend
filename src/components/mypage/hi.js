@@ -1,5 +1,4 @@
 function getTargetsByDateList(dataList) {
-  console.log(dataList);
   const circleTarget = [];
   const leftCircleTarget = [];
   const rightCircleTarget = [];

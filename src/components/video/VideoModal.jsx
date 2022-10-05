@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import serverAxios from "../axios/server.axios";
@@ -8,6 +9,7 @@ const VideoModal = (props) => {
   const url = props.url;
   const goalId = props.goal;
   const share = props.share;
+  const navigate = useNavigate();
 
   const setModalOpen = props.setModalOpen;
 
@@ -21,6 +23,7 @@ const VideoModal = (props) => {
       .then((res) => {
         if (res.data.success === true) {
           alert("공유 성공");
+          navigate("/community");
         }
       });
   };

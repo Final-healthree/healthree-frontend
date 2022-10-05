@@ -3,14 +3,11 @@ export let deferredInstallPrompt = null;
 
 // beforeinstallprompt라는 이벤트가 발생하여 설치 조건을 모두 충족됨을 브라우저에게 알림
 window.addEventListener("beforeinstallprompt", (e) => {
-  console.log("test")
   deferredInstallPrompt = e;
 });
 
 export const userClickedAddToHome = () => {
-
   window.addEventListener("beforeinstallprompt", (e) => {
-    console.log("test")
     deferredInstallPrompt = e;
   });
 

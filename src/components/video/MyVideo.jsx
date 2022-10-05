@@ -28,7 +28,7 @@ const MyVideo = () => {
   const getItems = async () => {
     setLoading(true);
     if (page > 1) {
-      await new Promise((resolve) => setTimeout(resolve, 700));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
     }
 
     await serverAxios
@@ -45,7 +45,7 @@ const MyVideo = () => {
   // `getItems` 가 바뀔 때 마다 함수 실행
   useEffect(() => {
     getItems();
-  }, [page, isshare]); //페이지가 바껴서 함수가 실행됐어
+  }, [page]); //페이지가 바껴서 함수가 실행됐어
 
   useEffect(() => {
     if (inView && !loading && items.length >= more) {
@@ -58,12 +58,11 @@ const MyVideo = () => {
     setUrl(video);
     setGoalId(goal);
     setIsShare(share);
-    setModalOpen(true);
   };
 
-  // const showModal = (data) => {
-  //   setModalOpen(true);
-  // };
+  const showModal = (data) => {
+    setModalOpen(true);
+  };
 
   return (
     <Container>
@@ -85,8 +84,8 @@ const MyVideo = () => {
             >
               {items.length - 1 === idx ? (
                 <VideoBox ref={ref}>
-                  <VideoImg src={data.thumbnail} />
-                  <PlayImg src={PlayCircle} />
+                  <VideoImg src={data.thumbnail} onClick={showModal} />
+                  <PlayImg src={PlayCircle} onClick={showModal} />
                   {data.is_share === "1" ? <ShareImg src={share} /> : null}
                   <GoalName style={{ margin: "2px" }}>
                     {data.goal_name}
@@ -98,8 +97,8 @@ const MyVideo = () => {
                 </VideoBox>
               ) : (
                 <VideoBox>
-                  <VideoImg src={data.thumbnail} />
-                  <PlayImg src={PlayCircle} />
+                  <VideoImg src={data.thumbnail} onClick={showModal} />
+                  <PlayImg src={PlayCircle} onClick={showModal} />
                   <MiddleBox>
                     <GoalName style={{ margin: "2px" }}>
                       {data.goal_name}
@@ -125,7 +124,7 @@ const MyVideo = () => {
 
           {inView && items.length >= more ? (
             <LoaderWrap>
-              <ReactLoading type="spin" color="#A593E0" />
+              <ReactLoading type="spin" color="#70cca6" />
             </LoaderWrap>
           ) : (
             ""
@@ -146,6 +145,9 @@ const Container = styled.div`
   ::-webkit-scrollbar {
     display: none;
   }
+
+  padding-bottom: 70px;
+  box-sizing: border-box;
 `;
 
 const EmptyArea = styled.div`

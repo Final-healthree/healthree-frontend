@@ -42,10 +42,10 @@ const RegCalendar = ({ regtoday }) => {
 
   const [range, setRange] = useState(defaultSelected(regtoday));
 
-  const week = [{ dayOfWeek: [0, 6] }];
-  const weekStyle = {
-    color: "red",
-  };
+  // const week = [{ dayOfWeek: [0, 6] }];
+  // const weekStyle = {
+  //   color: "red",
+  // };
 
   const formatCaption = (date, options) => {
     const y = format(date, "yyyy");
@@ -73,8 +73,6 @@ const RegCalendar = ({ regtoday }) => {
           defaultMonth={today}
           selected={range} //이 범위 만큼 선택
           onDayClick={handleDayClick}
-          modifiers={{ week: week }}
-          modifiersStyles={{ week: weekStyle }}
           disabled={day}
           formatters={{ formatCaption }}
         ></DayPicker>

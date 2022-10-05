@@ -7,7 +7,6 @@ import serverAxios from "../../axios/server.axios";
 import Cancle from "../../../assets/community/postDelete/cancle.svg";
 
 function DeleteHandler({ content, setModalOpen }) {
-  console.log(content);
   const param = useParams();
   const navigate = useNavigate();
 
