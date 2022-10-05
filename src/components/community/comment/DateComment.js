@@ -9,7 +9,7 @@ function DateComment(props) {
     // 1분 미만일땐 방금 전 표기
     return "방금 전";
   }
-  if (diff < 60 * 60 * 24 * 3) {
+  if (diff < 60 * 60 * 24 * 7) {
     // 3일 미만일땐 시간차이 출력(몇시간 전, 며칠 전)
     return formatDistanceToNow(d, { addSuffix: true, locale: ko });
   }

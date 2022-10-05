@@ -46,6 +46,8 @@ function getCalenderCss(type) {
       borderRadius: "50% 0 0 50%",
       height: "40px",
       width: "40px",
+      border: "0",
+      transform: "translate(6px,0)",
     };
     const rightCircleCss = {
       color: "#fff",
@@ -53,6 +55,7 @@ function getCalenderCss(type) {
       borderRadius: "0 50% 50% 0",
       height: "40px",
       width: "40px",
+      border: "0",
     };
     return {
       circleCss,

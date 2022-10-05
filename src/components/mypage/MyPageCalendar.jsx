@@ -10,6 +10,7 @@ import ko from "date-fns/locale/ko";
 import getDateOption from "./get-date-option";
 
 import CalendarCss from "../calendar/calendar";
+import { format } from "date-fns";
 
 function MyPageCalendar() {
   const [success, setSuccess] = useState([]);
@@ -33,6 +34,12 @@ function MyPageCalendar() {
     fail: fail,
   });
 
+  const formatCaption = (date, options) => {
+    const y = format(date, "yyyy");
+    const m = format(date, "MM", { locale: options?.locale });
+    return `${y}년 ${m}월 `;
+  };
+
   return (
     <Container>
       <CalendarCss />
@@ -42,6 +49,7 @@ function MyPageCalendar() {
         modifiers={modifiers}
         modifiersStyles={modifiersStyles}
         showOutsideDays
+        formatters={{ formatCaption }}
       />
     </Container>
   );

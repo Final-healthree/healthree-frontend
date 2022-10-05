@@ -18,17 +18,20 @@ function CommunityMain() {
   const [posts, setPosts] = useState([]);
   const [page, setPage] = useState(1);
   const [more, setMore] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const [ref, inView] = useInView();
   const navigate = useNavigate();
 
   const getItems = async () => {
-    if (page > 1) {
+    setLoading(true);
+    if (page > 1 && inView) {
       await new Promise((resolve) => setTimeout(resolve, 1000));
     }
     await serverAxios.get(`api/posts?pagecount=5&&page=${page}`).then((res) => {
       setPosts([...posts, ...res.data.result.post]);
     });
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -37,18 +40,21 @@ function CommunityMain() {
 
   useEffect(() => {
     console.log("inview");
-    if (inView && posts.length >= more) {
+    if (!loading && inView && posts.length >= more) {
       setPage(page + 1);
       setMore(more + 3);
     }
-  }, [inView]);
+  }, [inView, loading]);
 
   return (
     <Container>
       {posts.map((post, idx) => (
         <div key={post.post_id}>
           {posts.length - 1 === idx ? (
-            <StContent>
+            <StContent
+              ref={ref}
+              options={{ threshhold: 0.8, triggerOnce: true }}
+            >
               <InfoBox>
                 <Goal>{post.goal_name}</Goal>
                 <Period>
@@ -101,7 +107,6 @@ function CommunityMain() {
                   />
                 </IconBox>
               </StBottom>
-              <div ref={ref}></div>
             </StContent>
           ) : (
             <StContent>
