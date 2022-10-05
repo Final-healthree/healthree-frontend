@@ -59,6 +59,12 @@ const MainGoalThird = (props) => {
           <FailModal number={3} date={getMainGoal?.day3.date.slice(0,10)} setModal={setFailModalClose}/> 
           : null
       :
+        ""
+      }
+      
+      {videoUploadCheck?.uploaded === false ?
+        ""
+      :
         goalmodalOpen === true ? <MainModal number={3} date={getMainGoal?.day1.date.slice(0,10)}/> : null
       }
 
