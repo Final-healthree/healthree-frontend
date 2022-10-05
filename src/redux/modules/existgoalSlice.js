@@ -13,7 +13,6 @@ export const __existGoal = createAsyncThunk(
     try {
       await new Promise((resolve) => setTimeout(resolve, 300));
       const data = await serverAxios.get(`api/goals/exist`);
-      console.log(data.data.result);
       return thunkAPI.fulfillWithValue(data.data.result);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

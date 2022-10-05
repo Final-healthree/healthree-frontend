@@ -39,7 +39,6 @@ function CommunityMain() {
   }, [page]); //페이지가 바껴서 함수가 실행됐어
 
   useEffect(() => {
-    console.log("inview");
     if (!loading && inView && posts.length >= more) {
       setPage(page + 1);
       setMore(more + 3);
