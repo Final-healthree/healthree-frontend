@@ -90,7 +90,7 @@ const StRegisterModalLayout = styled.div`
 
 const StRegisterModalContainer = styled.div`
   position: absolute;
-  top: 0;
+  top: -25px;
   width: 350px;
   height: 500px;
   margin-top: 50px;

@@ -33,7 +33,6 @@ export default function VideoInput(props) {
       if (res.error.message === "Rejected"){
         setMessage(res.payload)
       }
-      console.log(res.payload)
     })
     modal(false);
     setGoalmodal(true);

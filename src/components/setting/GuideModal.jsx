@@ -119,8 +119,6 @@ const StGuideContent = styled.div`
         }
         } */
   }
-
-    
     
   }
 `;
