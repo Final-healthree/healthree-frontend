@@ -90,6 +90,7 @@ const StModal = styled.div`
   /* left: 0; */
   /* right: 0; */
   top: 0;
+  left: 11px;
   bottom: 0;
 
   background-color: #fff;
