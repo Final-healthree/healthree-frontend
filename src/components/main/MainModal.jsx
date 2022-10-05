@@ -86,11 +86,9 @@ function Modal(props) {
 export default MainModal;
 
 const StModal = styled.div`
-  position: fixed;
-  /* left: 0; */
-  /* right: 0; */
+  position: absolute;
   top: 0;
-  /* left: 11px; */
+  left: 11px;
   bottom: 0;
 
   background-color: #fff;
@@ -152,5 +150,8 @@ const StBtnLayout = styled.div`
     align-items: center;
     padding-right: 15px;
     border: none;
+    font-family: sans-serif;
+    font-weight: 700;
+    font-size: 14px;
   }
 `;

@@ -18,6 +18,7 @@ const MainGoalSecond = (props) => {
   const today = new Date();
   const selectedDay = new Date((new Date(date).getTime() + (24-9) * 60 * 60 * 1000));
   const videoUploadCheck = useSelector((state) => state.certification.list.result?.day2);
+  const videoUploadCheck2 = useSelector((state) => state.certification.list.result?.day1);
   const [message, setMessage] = useState(); 
 
 
@@ -47,7 +48,7 @@ const MainGoalSecond = (props) => {
           </>
         } 
       </StGuideTextContainer>
-      {videoUploadCheck?.uploaded === false ?
+      {videoUploadCheck2?.uploaded === true && videoUploadCheck?.uploaded === false ?
         today < selectedDay ?
           ""
       : 
@@ -112,7 +113,7 @@ const MainGoalSecond = (props) => {
 }
 
 const StMainLayout = styled.div`
-
+  position: relative;
 `;
 
 const StGuideTextContainer = styled.div`
