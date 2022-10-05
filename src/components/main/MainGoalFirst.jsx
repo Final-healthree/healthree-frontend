@@ -97,14 +97,17 @@ const MainGoalFirst = (props) => {
       } */}
 
       {videoUploadCheck?.uploaded === false ? 
-        <button
-          onClick={() => {
-            setModalOpen(!modalopen);
-          }}
-        >
-          동영상 등록하기
-        </button>
-        : 
+        today < selectedDay ?
+          <button
+            onClick={() => {
+              setModalOpen(!modalopen);
+            }}
+          >
+            동영상 등록하기
+          </button>
+        :
+          ""
+      : 
         ""
       }
         { modalopen === true ? 
