@@ -1,7 +1,6 @@
 import React from "react";
 import Tab from "../components/mypage/Tab";
-import Profile from "../components/element/Profile";
-
+import Profile from "../components/mypage/Profile";
 
 const Mypage = () => {
   return (
@@ -13,5 +12,3 @@ const Mypage = () => {
 };
 
 export default Mypage;
-
-

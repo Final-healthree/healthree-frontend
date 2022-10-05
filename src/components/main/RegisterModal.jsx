@@ -7,7 +7,6 @@ import VideoInput from "./VideoInput";
 
 const RegisterModal = (props) => {
   const { modal, setGoalmodal,setMessage } = props;
-  const [state, setState] = useState();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [attachment, setAttachment] = useState(false);
@@ -91,7 +90,7 @@ const StRegisterModalLayout = styled.div`
 
 const StRegisterModalContainer = styled.div`
   position: absolute;
-  top: 0;
+  top: -25px;
   width: 350px;
   height: 500px;
   margin-top: 50px;

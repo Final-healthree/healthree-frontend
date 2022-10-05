@@ -1,11 +1,15 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import serverAxios from "../axios/server.axios";
+import shareimg from "../../assets/video/share-2.png";
 
 const VideoModal = (props) => {
   const url = props.url;
   const goalId = props.goal;
+  const share = props.share;
+  const navigate = useNavigate();
 
   const setModalOpen = props.setModalOpen;
 
@@ -19,17 +23,25 @@ const VideoModal = (props) => {
       .then((res) => {
         if (res.data.success === true) {
           alert("공유 성공");
+          navigate("/community");
         }
       });
   };
 
   return (
     <ModalBody onClick={closeModal}>
-      <CloseBtn onClick={closeModal}>X</CloseBtn>
-      <ShowVideo controls="controls">
-        <source src={url} type="video/mp4" />
-      </ShowVideo>
-      <ShareBtn onClick={ShareVideo}>공유하기</ShareBtn>
+      <ModalContainer>
+        <CloseBtn onClick={closeModal}>X</CloseBtn>
+        <ShowVideo controls="controls">
+          <source src={url} type="video/mp4" />
+        </ShowVideo>
+        {share === "1" ? null : (
+          <ShareBtn onClick={ShareVideo}>
+            <img src={shareimg} alt=""/>
+            &nbsp;공유하기
+          </ShareBtn>
+        )}
+      </ModalContainer>
     </ModalBody>
   );
 };
@@ -39,64 +51,60 @@ export default VideoModal;
 const ModalBody = styled.div`
   position: fixed;
   left: 0;
-  right: 0;
   top: 0;
-  bottom: 0;
   z-index: 100;
   background-color: rgba(29, 27, 27, 0.8);
 
   display: flex;
-  flex-direction: column;
-  gap: 20px;
-  margin: auto;
-
   width: 100%;
   height: 100%;
+`;
+
+const ModalContainer = styled.div`
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+`;
+const CloseBtn = styled.button`
+  align-self: flex-end;
+  margin-bottom: 10px;
+  font-size: 19px;
+  background: none;
+  border: none;
+  color: #70cca6;
+  cursor: pointer;
 `;
 
 const ShowVideo = styled.video`
   background-color: #dadada;
   border-radius: 2px;
-  margin: auto;
-  width: 90%;
-  height: 50%;
-  display: flex;
-  flex-direction: column;
-`;
-
-const CloseBtn = styled.button`
-  color: #70cca6;
-  border: none;
-  background: none;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-  right: 12px;
-
-  position: absolute;
-  top: 130px;
-
-  font-size: 19px;
+  margin: 0;
+  width: 100%;
+  height: 346px;
 `;
 
 const ShareBtn = styled.button`
   width: 80px;
   height: 30px;
-  display: flex;
-  align-items: center;
+  align-self: flex-end;
+  margin-top: 10px;
   justify-content: center;
-  padding: 10px;
-  left: 277px;
-
-  position: absolute;
-  top: 550px;
+  align-items: center;
 
   background: #70cca6;
   border-radius: 2px;
   border: none;
 
+  font-family: sans-serif;
   font-weight: 600;
   font-size: 12px;
 
   cursor: pointer;
+
+  & > img {
+    transform: translate(0px, 1px);
+  }
 `;

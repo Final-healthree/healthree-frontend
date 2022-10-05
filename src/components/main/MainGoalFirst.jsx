@@ -14,14 +14,12 @@ const MainGoalFirst = (props) => {
   const [goalmodalOpen, setGoalmodalOpen] = useState(false);
   const dispatch = useDispatch();
   const getMainGoal = useSelector((state) => state.certification.list.result);
-  const status = useSelector((state) => state.certification.status);
   const date = getMainGoal?.day1.date.slice(0, 10);
   const today = new Date();
   const selectedDay = new Date((new Date(date).getTime() + (24-9) * 60 * 60 * 1000));
   const videoUploadCheck = useSelector((state) => state.certification.list.result?.day1);
   const [message, setMessage] = useState(); 
 
-  console.log(message)
   useEffect(() => {
     dispatch(__loadMainGoal());
   }, []);
@@ -36,8 +34,6 @@ const MainGoalFirst = (props) => {
               오늘 목표 인증을 아직 안하셨군요!<br />
               목표를 인증하고,<br />
               작심 1일을 시작하세요!
-
-
             </p>
           </>
          : 
@@ -123,7 +119,7 @@ const StMainLayout = styled.div`
 `;
 
 const StGuideTextContainer = styled.div`
-  margin-top: 30px;
+  margin-top: 16px;
   text-align: left;
   padding-left: 20px;
 

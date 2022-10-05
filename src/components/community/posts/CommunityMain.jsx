@@ -18,17 +18,20 @@ function CommunityMain() {
   const [posts, setPosts] = useState([]);
   const [page, setPage] = useState(1);
   const [more, setMore] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const [ref, inView] = useInView();
   const navigate = useNavigate();
 
   const getItems = async () => {
-    if (page > 1) {
+    setLoading(true);
+    if (page > 1 && inView) {
       await new Promise((resolve) => setTimeout(resolve, 1000));
     }
     await serverAxios.get(`api/posts?pagecount=5&&page=${page}`).then((res) => {
       setPosts([...posts, ...res.data.result.post]);
     });
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -36,19 +39,21 @@ function CommunityMain() {
   }, [page]); //페이지가 바껴서 함수가 실행됐어
 
   useEffect(() => {
-    console.log("inview");
-    if (inView && posts.length >= more) {
+    if (!loading && inView && posts.length >= more) {
       setPage(page + 1);
       setMore(more + 3);
     }
-  }, [inView]);
+  }, [inView, loading]);
 
   return (
     <Container>
       {posts.map((post, idx) => (
         <div key={post.post_id}>
           {posts.length - 1 === idx ? (
-            <StContent>
+            <StContent
+              ref={ref}
+              options={{ threshhold: 0.8, triggerOnce: true }}
+            >
               <InfoBox>
                 <Goal>{post.goal_name}</Goal>
                 <Period>
@@ -78,10 +83,21 @@ function CommunityMain() {
                 <IconBox>
                   <CommentBox>
                     <img
-                      style={{ width: "25px", height: "25px" }}
+                      style={{
+                        width: "25px",
+                        height: "25px",
+                      }}
                       src={post.comment_cnt > 0 ? comments : noncomment}
                     />
-                    <p>{post.comment_cnt}</p>
+                    <p
+                      style={{
+                        width: "20px",
+                        height: "20px",
+                        fontSize: "17px",
+                      }}
+                    >
+                      {post.comment_cnt}
+                    </p>
                   </CommentBox>
                   <LikeHandler
                     like={post.is_like}
@@ -90,7 +106,6 @@ function CommunityMain() {
                   />
                 </IconBox>
               </StBottom>
-              <div ref={ref}></div>
             </StContent>
           ) : (
             <StContent>
@@ -123,10 +138,21 @@ function CommunityMain() {
                 <IconBox>
                   <CommentBox>
                     <img
-                      style={{ width: "25px", height: "25px" }}
+                      style={{
+                        width: "25px",
+                        height: "25px",
+                      }}
                       src={post.comment_cnt > 0 ? comments : noncomment}
                     />
-                    <p>{post.comment_cnt}</p>
+                    <p
+                      style={{
+                        width: "20px",
+                        height: "20px",
+                        fontSize: "17px",
+                      }}
+                    >
+                      {post.comment_cnt}
+                    </p>
                   </CommentBox>
                   <LikeHandler
                     like={post.is_like}
@@ -155,8 +181,8 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 60px;
-  padding: 20px 0 70px;
+  gap: 50px;
+  padding: 16px 0 70px;
   box-sizing: border-box;
 
   ::-webkit-scrollbar {

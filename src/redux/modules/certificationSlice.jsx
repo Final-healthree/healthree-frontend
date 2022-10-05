@@ -18,7 +18,6 @@ export const __addCertification = createAsyncThunk(
     return 'day'+payload.number;
     }
     catch(err){
-      console.log(err)
       alert(err.response.data.message);
       return thunkAPI.rejectWithValue(err.response.data.message);
     }
@@ -68,12 +67,11 @@ const certificationSlice = createSlice({
       .addCase(__addCertification.rejected, (state, action) => {
         state.status = action.payload;
         state.errmsg = action.payload;
-        state.order = action.payload.number;
-        console.log(action.payload);
+        // state.order = action.payload.number;
         // state.order[action.payload.number] = action.payload.message
       })
       .addCase(__addCertification.pending, (state, action) => {
-        state.status = "영상을 처리 중입니다...";
+        state.status = "동영상을 합치는 중입니다...";
       })
       .addCase(__addFail.fulfilled, (state, action) => {
         state.list = action.payload;

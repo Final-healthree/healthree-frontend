@@ -6,7 +6,6 @@ import Community from "../pages/Community";
 import CommunityDetail from "../pages/CommunityDetail";
 import Register from "../pages/Register";
 import Mypage from "../pages/MyPage";
-import Pullpage from "../components/layout/Pullpage";
 import Layout from "../components/layout/Layout";
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
