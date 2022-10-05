@@ -98,13 +98,20 @@ const MainGoalSecond = (props) => {
         ""
       } */}
 
-      {videoUploadCheck?.uploaded === false ?
-          <button onClick={() => {
-            setModalOpen(!modalopen);
-          }}>동영상 등록하기</button>
-          :
+      {videoUploadCheck?.uploaded === false ? 
+        today < selectedDay ?
+          <button
+            onClick={() => {
+              setModalOpen(!modalopen);
+            }}
+          >
+            동영상 등록하기
+          </button>
+        :
           ""
-        }
+      : 
+        ""
+      }
         { modalopen === true ? 
         <RegisterModal number={2} modal={setModalOpen} setGoalmodal={setGoalmodalOpen} setMessage={setMessage}/> : null }
       </StButtonContainer>
