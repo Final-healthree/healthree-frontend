@@ -4,23 +4,27 @@ import serverAxios from "../../axios/server.axios";
 
 import { decodeToken } from "react-jwt";
 
-function StCommentText(props) {
-  const token = localStorage.getItem("Token");
-  const myDecodedToken = decodeToken(token);
+import DateComment from "./DateComment";
+import DeleteModal from "../posts/DeleteModal";
 
-  const commentID = props.comment_id;
-  const userID = props.userId;
-  const remove = props.remove;
-  const setRemove = props.setRemove;
+function StCommentText({
+  content,
+  commentId,
+  userId,
+  commentTime,
+  remove,
+  setRemove,
+}) {
+  const Token = localStorage.getItem("Token");
+  const myDecodedToken = decodeToken(Token);
+  const NowUser = myDecodedToken.payload.user_id;
+  const Time = DateComment({ date: commentTime });
+  const [modalopen, setModalOpen] = useState(false);
 
   const [edit, setEdit] = useState(true);
   const [editComment, setEditComment] = useState({
-    comment: props.value,
+    comment: content,
   });
-
-  const editHandler = () => {
-    setEdit(false);
-  };
 
   const onChange = (e) => {
     setEditComment({
@@ -29,20 +33,22 @@ function StCommentText(props) {
     });
   };
 
-  const saveHandler = () => {
+  const onEditHandler = () => {
+    setEdit(!edit);
+  };
+
+  const onSaveHandler = async () => {
     setEdit(true);
-    serverAxios.put(`api/comments/${commentID}`, editComment).then((res) => {
-      if (res.data.success === true) {
-      }
-    });
+    await serverAxios
+      .put(`api/comments/${commentId}`, editComment)
+      .then((res) => {
+        if (res.data.success === true) {
+        }
+      });
   };
 
   const onDeleteHandler = async () => {
-    await serverAxios.delete(`api/comments/${props.comment_id}`).then((res) => {
-      if (res.data.success === true) {
-        setRemove(!remove);
-      }
-    });
+    setModalOpen(true);
   };
 
   return (
@@ -53,21 +59,33 @@ function StCommentText(props) {
         onChange={onChange}
         maxLength={40}
       />
-
-      {myDecodedToken.payload.user_id === userID ? (
+      <StBottom>
         <BtnArea>
-          {edit === true ? (
-            <EditBtn onClick={() => editHandler()}>수정하기</EditBtn>
-          ) : (
-            <EditBtn onClick={() => saveHandler()}>완료하기</EditBtn>
-          )}
-          {edit === true ? (
-            <EditBtn onClick={() => onDeleteHandler()}>삭제하기</EditBtn>
-          ) : (
-            <EditBtn onClick={() => setEdit(true)}>취소하기</EditBtn>
-          )}
+          {NowUser === userId ? (
+            edit ? (
+              <>
+                <EditBtn onClick={onEditHandler}>수정하기</EditBtn>
+                <EditBtn onClick={onDeleteHandler}>삭제하기</EditBtn>
+              </>
+            ) : (
+              <>
+                <EditBtn onClick={onSaveHandler}>완료하기</EditBtn>
+                <EditBtn onClick={onEditHandler}>취소하기</EditBtn>
+              </>
+            )
+          ) : null}
         </BtnArea>
-      ) : null}
+        {modalopen ? (
+          <DeleteModal
+            content={"댓글"}
+            setModalOpen={setModalOpen}
+            commentId={commentId}
+            remove={remove}
+            setRemove={setRemove}
+          />
+        ) : null}
+        <CommentTime>{Time}</CommentTime>
+      </StBottom>
     </Stcontent>
   );
 }
@@ -77,31 +95,32 @@ export default StCommentText;
 const Stcontent = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-
+  flex: 1;
   box-sizing: border-box;
-  padding-top: 9px;
 `;
 
 const StComment = styled.textarea`
+  width: 100%;
+  resize: none;
+
   border: ${(props) => (props.disabled ? "none" : "1px solid gray")};
   border-radius: 2px;
   font-size: 13px;
   background-color: #fff;
   font-weight: 600;
   font-family: sans-serif;
-  width: 180px;
-  height: 40px;
-  resize: none;
 `;
 
+const StBottom = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
 const BtnArea = styled.div`
   display: flex;
-  margin: 0;
+  flex: 1;
 `;
 const EditBtn = styled.button`
-  width: 60px;
-  height: 15px;
   color: #a0a0a0;
   background-color: transparent;
   border: none;
@@ -109,4 +128,11 @@ const EditBtn = styled.button`
   font-size: 11px;
 
   cursor: pointer;
+`;
+
+const CommentTime = styled.div`
+  width: 60px;
+  color: #70cca6;
+  font-family: sans-serif;
+  font-size: 10px;
 `;

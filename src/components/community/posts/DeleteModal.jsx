@@ -6,9 +6,16 @@ import serverAxios from "../../axios/server.axios";
 
 import Cancle from "../../../assets/community/postDelete/cancle.svg";
 
-function DeleteHandler({ content, setModalOpen }) {
+function DeleteHandler({
+  content,
+  setModalOpen,
+  commentId,
+  remove,
+  setRemove,
+}) {
   const param = useParams();
   const navigate = useNavigate();
+  console.log(commentId);
 
   const deletePost = () => {
     serverAxios.delete(`api/posts/${param.postid}`).then((res) => {
@@ -19,12 +26,25 @@ function DeleteHandler({ content, setModalOpen }) {
     });
   };
 
+  const deleteComment = () => {
+    serverAxios.delete(`api/comments/${commentId}`).then((res) => {
+      if (res.data.success === true) {
+        setModalOpen(false);
+        setRemove(!remove);
+      }
+    });
+  };
+
   return (
     <StDeleteModalLayout>
       <StDeleteModalContainer>
         <StGuideTitle>{content}삭제하시겠습니까?</StGuideTitle>
         <ButtonBox>
-          <StButton onClick={deletePost}>삭제</StButton>
+          <StButton
+            onClick={commentId === undefined ? deletePost : deleteComment}
+          >
+            삭제
+          </StButton>
           <StButton
             cancle
             onClick={() => {
