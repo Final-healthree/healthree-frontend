@@ -5,7 +5,7 @@ import ReactLoading from "react-loading";
 import VideoModal from "./VideoModal";
 import serverAxios from "../axios/server.axios";
 
-import emptyImg from "../../assets/images/emptyimg.svg";
+import emptyImg from "../../assets/myCalendar/emptyimg.svg";
 import share from "../../assets/video/share.svg";
 import PlayCircle from "../../assets/community/PlayCircle.png";
 
