@@ -155,14 +155,14 @@ const StUploadGuide = styled.div`
 `;
 
 const StButtonContainer = styled.div`
-  margin-top: 15px;
+  margin-top: 23px;
   display: flex;
   justify-content: center;
   align-items: center;
 
   & > button {
-    width: 95%;
-    height: 52px;
+    width: 64%;
+    height: 40px;
     background: #70cca6;
     cursor: pointer;
     border: none;
