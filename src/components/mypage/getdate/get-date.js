@@ -1,5 +1,5 @@
-import getTargetsByDateList from "./hi";
-import getCalenderCss from "./hello";
+import getTargetsByDateList from "../getdate/get-date-option";
+import getCalenderCss from "../getdate/get-date-mark";
 
 function getDateOption(props) {
   const failCssList = getCalenderCss("fail");
