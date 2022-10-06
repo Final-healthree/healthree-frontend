@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -11,7 +11,6 @@ import footerMypageC from "../../assets/headerFooter/footerMypageC.svg";
 import footerSetting from "../../assets/headerFooter/footerSetting.svg";
 import footerSettingC from "../../assets/headerFooter/footerSettingC.svg";
 
-
 const Footer = () => {
   const navigate = useNavigate();
   const pathName = useLocation().pathname;
@@ -19,9 +18,6 @@ const Footer = () => {
   const [isListHoverCommunity, setIsListHoverCommunity] = useState(false);
   const [isListHoverSetting, setIsListHoverSetting] = useState(false);
   const [isListHoverMypage, setIsListHoverMypage] = useState(false);
-
-
-
 
   //로그인 페이지 푸터 숨기기
   if (window.location.pathname === "/") return null;
@@ -33,10 +29,16 @@ const Footer = () => {
         onMouseOut={() => setIsListHoverMain(false)}
         onClick={() => {
           navigate("/main");
-
         }}
       >
-        <img src={isListHoverMain === true || pathName === "/main" ? footerMainC : footerMain} alt="" />
+        <img
+          src={
+            isListHoverMain === true || pathName === "/main"
+              ? footerMainC
+              : footerMain
+          }
+          alt=""
+        />
       </li>
 
       <li
@@ -47,7 +49,11 @@ const Footer = () => {
         }}
       >
         <img
-          src={isListHoverCommunity === true || pathName === "/community" ? footerCommunityC : footerCommunity}
+          src={
+            isListHoverCommunity === true || pathName === "/community"
+              ? footerCommunityC
+              : footerCommunity
+          }
           alt=""
         />
       </li>
@@ -60,8 +66,13 @@ const Footer = () => {
         }}
       >
         <img
-          src={isListHoverMypage === true || pathName === "/mypage" ? footerMypageC : footerMypage}
-          alt="" />
+          src={
+            isListHoverMypage === true || pathName === "/mypage"
+              ? footerMypageC
+              : footerMypage
+          }
+          alt=""
+        />
       </li>
 
       <li
@@ -72,8 +83,13 @@ const Footer = () => {
         }}
       >
         <img
-         src={isListHoverSetting === true || pathName === "/setting" ? footerSettingC : footerSetting} 
-         alt="" />
+          src={
+            isListHoverSetting === true || pathName === "/setting"
+              ? footerSettingC
+              : footerSetting
+          }
+          alt=""
+        />
       </li>
     </StFooterMain>
   );
