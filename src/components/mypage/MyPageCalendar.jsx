@@ -7,7 +7,7 @@ import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import ko from "date-fns/locale/ko";
 
-import getDateOption from "./get-date-option";
+import getDate from "./getdate/get-date";
 
 import CalendarCss from "../calendar/calendar";
 import { format } from "date-fns";
@@ -29,7 +29,7 @@ function MyPageCalendar() {
     getDates();
   }, []);
 
-  const { modifiers, modifiersStyles } = getDateOption({
+  const { modifiers, modifiersStyles } = getDate({
     success: success,
     fail: fail,
   });

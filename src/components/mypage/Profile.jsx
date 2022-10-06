@@ -7,12 +7,10 @@ function Profile() {
   const [nickName, setNickName] = useState();
 
   const getProfile = async () => {
-    await serverAxios
-      .get(process.env.REACT_APP_REST_API_KEY + `api/goals/mine`)
-      .then((result) => {
-        setProfileImage(result.data.result.profile_image);
-        setNickName(result.data.result.nickname);
-      });
+    await serverAxios.get(`api/goals/mine`).then((result) => {
+      setProfileImage(result.data.result.profile_image);
+      setNickName(result.data.result.nickname);
+    });
   };
 
   useEffect(() => {

@@ -37,7 +37,7 @@ const VideoModal = (props) => {
         </ShowVideo>
         {share === "1" ? null : (
           <ShareBtn onClick={ShareVideo}>
-            <img src={shareimg} alt=""/>
+            <img src={shareimg} alt="" />
             &nbsp;공유하기
           </ShareBtn>
         )}

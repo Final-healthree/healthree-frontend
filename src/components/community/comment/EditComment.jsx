@@ -58,6 +58,7 @@ function StCommentText({
         value={editComment.comment}
         onChange={onChange}
         maxLength={40}
+        rows={2}
       />
       <StBottom>
         <BtnArea>
@@ -100,7 +101,7 @@ const Stcontent = styled.div`
 `;
 
 const StComment = styled.textarea`
-  width: 100%;
+  flex: 1;
   resize: none;
 
   border: ${(props) => (props.disabled ? "none" : "1px solid gray")};
@@ -109,6 +110,8 @@ const StComment = styled.textarea`
   background-color: #fff;
   font-weight: 600;
   font-family: sans-serif;
+  padding-top: 8px;
+  margin: 0;
 `;
 
 const StBottom = styled.div`
@@ -118,7 +121,6 @@ const StBottom = styled.div`
 `;
 const BtnArea = styled.div`
   display: flex;
-  flex: 1;
 `;
 const EditBtn = styled.button`
   color: #a0a0a0;
