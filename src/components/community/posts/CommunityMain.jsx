@@ -88,6 +88,7 @@ function CommunityMain() {
                         height: "25px",
                       }}
                       src={post.comment_cnt > 0 ? comments : noncomment}
+                      alt=""
                     />
                     <p
                       style={{
@@ -143,6 +144,7 @@ function CommunityMain() {
                         height: "25px",
                       }}
                       src={post.comment_cnt > 0 ? comments : noncomment}
+                      alt=""
                     />
                     <p
                       style={{

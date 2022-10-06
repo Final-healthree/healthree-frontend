@@ -15,7 +15,6 @@ function DeleteHandler({
 }) {
   const param = useParams();
   const navigate = useNavigate();
-  console.log(commentId);
 
   const deletePost = () => {
     serverAxios.delete(`api/posts/${param.postid}`).then((res) => {

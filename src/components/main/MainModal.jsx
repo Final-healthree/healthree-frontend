@@ -13,14 +13,6 @@ const MainModal = (props) => {
 
   return (
     <div>
-      {/* <button
-        onClick={() => {
-          setModalOpen(true);
-        }}
-      >
-        {" "}
-        모달{" "}
-      </button> */}
       {modalOpen ? <Modal page={number} setModal={setModalOpen} /> : null}
     </div>
   );

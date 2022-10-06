@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const FailModal = (props) => {
-  const { number, page, setModal } = props;
+  const { number, setModal } = props;
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

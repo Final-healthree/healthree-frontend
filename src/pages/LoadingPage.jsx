@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import loading from "../assets/notFound/loading.svg";
+import loading from "../assets/etc/loading.svg";
 
 const LoadingPage = () => {
   return (
     <FullPage>
-      <img src={loading} />
+      <img src={loading} alt="로딩페이지" />
     </FullPage>
   );
 };
