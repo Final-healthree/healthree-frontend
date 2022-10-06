@@ -194,6 +194,7 @@ const StContent = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 
   width: 340px;
   height: 405px;
@@ -205,6 +206,7 @@ const InfoBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  width: 330px;
   padding-left: 5px;
 `;
 
@@ -248,6 +250,7 @@ const PlayImg = styled.img`
 
 const StBottom = styled.div`
   display: flex;
+  width: 330px;
   justify-content: space-between;
 `;
 const StProfile = styled.div`
@@ -262,7 +265,7 @@ const StImg = styled.img`
 `;
 const UserName = styled.p`
   font-family: sans-serif;
-  font-weight: 500;
+  font-weight: 800;
   margin: 0 5px;
 `;
 const IconBox = styled.div`

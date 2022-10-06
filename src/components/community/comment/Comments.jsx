@@ -5,7 +5,6 @@ import serverAxios from "../../axios/server.axios";
 
 import InputComment from "./InputComment";
 import StCommentText from "./EditComment";
-import DateComment from "./DateComment";
 import Pagination from "./Pagination";
 
 function Comments() {
@@ -39,25 +38,19 @@ function Comments() {
           setCreate={setCreate}
         />
         {comments.map((comment) => (
-          <div key={comment.comment_id}>
-            <StContentContainer>
-              <div style={{ display: "flex", flexDirection: "row" }}>
-                <StProfile>
-                  <StImg src={comment.profile_image} />
-                  <StNameText>{comment.nickname}</StNameText>
-                </StProfile>
+          <StContentContainer key={comment.comment_id}>
+            <StImg src={comment.profile_image} />
 
-                <StCommentText
-                  value={comment.comment}
-                  comment_id={comment.comment_id}
-                  userId={comment.user_id}
-                  remove={remove}
-                  setRemove={setRemove}
-                />
-              </div>
-              <ReplyTime>{DateComment({ date: comment.date })}</ReplyTime>
-            </StContentContainer>
-          </div>
+            <StNameText>{comment.nickname}</StNameText>
+            <StCommentText
+              content={comment.comment}
+              commentId={comment.comment_id}
+              userId={comment.user_id}
+              commentTime={comment.date}
+              remove={remove}
+              setRemove={setRemove}
+            />
+          </StContentContainer>
         ))}
         <Pagination total={total} limit={4} page={page} setPage={setPage} />
       </StWrapper>
@@ -73,14 +66,12 @@ const StWrapper = styled.div`
   padding: 10px 10px 55px 10px;
   flex: 1;
 `;
-
-const StProfile = styled.div`
+const StContentContainer = styled.div`
   display: flex;
-  gap: 10px;
-  align-items: center;
-  margin-right: 5px;
+  padding: 5px 3px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #dadada;
 `;
-
 const StImg = styled.img`
   width: 34px;
   height: 34px;
@@ -88,25 +79,13 @@ const StImg = styled.img`
   border: 1px solid #dadada;
 `;
 
-const StNameText = styled.span`
-  font-size: 14px;
-  width: 50px;
+const StNameText = styled.div`
+  width: 63px;
+  height: 34px;
+  font-size: 12px;
   font-family: sans-serif;
-  font-weight: 600;
-`;
-
-const StContentContainer = styled.div`
-  display: flex;
-  position: relative;
-  flex-direction: row;
-  padding: 10px;
-  border-bottom: 1px solid #dadada;
-`;
-
-const ReplyTime = styled.span`
-  display: flex;
-  color: #70cca6;
-  font-family: sans-serif;
-  font-size: 10px;
-  transform: translate(0, 80%);
+  font-weight: 500;
+  //글씨 가운데 정렬
+  line-height: 34px;
+  text-align: center;
 `;

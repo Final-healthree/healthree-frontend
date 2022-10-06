@@ -64,13 +64,6 @@ const CommunityDetailPost = () => {
               <img src={trash} alt="" />
             </DelBtn>
           ) : null}
-          {/* <DelBtn onClick={()=>{
-              setModalOpen(true);
-            }}>
-              <img src={trash} alt="" />
-            </DelBtn>
-            { modalopen === true ? <PostDelete setmodal={setModalOpen} /> : null }
-          */}
         </StTop>
         <VideoArea onClick={showVideo}>
           {change ? (
@@ -189,7 +182,6 @@ const VideoArea = styled.div`
 
   height: 340px;
   width: 370px;
-  margin-bottom: 20px;
   position: relative;
 
   & > .videoThumbnail {
