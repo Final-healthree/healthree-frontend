@@ -1,28 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import serverAxios from "../axios/server.axios";
 import btn from "../../assets/setting/PaginationBtn.png";
 import GuideModal from "./GuideModal";
 import {
   userClickedAddToHome,
   deferredInstallPrompt,
 } from "./deferredInstallPrompt";
+import Profile from "../mypage/Profile";
 
 const SettingDetail = () => {
-  const token = localStorage.getItem("Token");
-
-  const [profileImage, setProfileImage] = useState();
-  const [nickName, setNickName] = useState();
   const [modalopen, setModalOpen] = useState(false);
-
-  const getProfile = async () => {
-    await serverAxios
-      .get(process.env.REACT_APP_REST_API_KEY + `api/goals/mine`)
-      .then((result) => {
-        setProfileImage(result.data.result.profile_image);
-        setNickName(result.data.result.nickname);
-      });
-  };
 
   const Logout = () => {
     alert("로그아웃 성공");
@@ -30,23 +17,9 @@ const SettingDetail = () => {
     window.location.replace("/");
   };
 
-  useEffect(() => {
-    getProfile();
-  }, []);
-
   return (
     <StSettingLayout>
-      <StProfileLayout>
-        <StProfile>
-          <img
-            style={{ width: "34px", height: "34px" }}
-            src={profileImage}
-            alt=""
-          />
-        </StProfile>
-        <StNickName>{nickName}</StNickName>
-      </StProfileLayout>
-
+      <Profile />
       <StSettingContainer>
         {deferredInstallPrompt ? (
           <>
@@ -86,17 +59,6 @@ const SettingDetail = () => {
           />
         </div>
         <hr />
-        {/* <div>
-          <p>설문 조사 하러가기!</p>
-          <img
-            onClick={() => {
-              window.open("https://forms.gle/hknQyvw9iR4DfuzKA", "_blank");
-            }}
-            src={btn}
-            alt=""
-          />
-        </div>
-        <hr /> */}
         <div>
           <p>로그아웃</p>
           <img
@@ -113,27 +75,7 @@ const SettingDetail = () => {
   );
 };
 
-const StSettingLayout = styled.div`
-  margin-top: 10px;
-`;
-
-const StProfileLayout = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px;
-  padding-top: 6px;
-`;
-
-const StProfile = styled.div`
-  display: block;
-  width: 34px;
-  height: 34px;
-  border-radius: 70%;
-  overflow: hidden;
-`;
-
-const StNickName = styled.div``;
+const StSettingLayout = styled.div``;
 
 const StSettingContainer = styled.div`
   margin-top: 10px;

@@ -51,12 +51,14 @@ const css = `
   border-bottom-right-radius: 0;
   height: 40px;
   border:0;
+  margin-right: -1px;
 }
 
 .rdp-day_range_middle {
   border-radius: 0;
   border: 0;
   height: 40px;
+  margin-left: -1px;
 }
 
 .rdp:not([dir='rtl']) .rdp-day_range_end:not(.rdp-day_range_start) {
@@ -64,5 +66,6 @@ const css = `
   border-bottom-left-radius: 0;
   height: 40px;
   border:0;
+  transform: translate(-2px,0);
 }
 `;

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Nav } from "react-bootstrap";
 //컴퍼넌트
 import MyPageCalendar from "./MyPageCalendar";
-import MyVideo from "../video/MyVideo";
+import MyVideo from "../myvideo/MyVideo";
 
 function Tab() {
   const [Tb, setTb] = useState(true);
