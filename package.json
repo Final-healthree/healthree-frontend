@@ -1,4 +1,5 @@
 {
+  "proxy": "https://healthree3.com",
   "name": "healthree",
   "version": "0.1.0",
   "private": true,
