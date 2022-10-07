@@ -131,7 +131,7 @@
 
 ![스크린샷 2022-10-06 오후 5 05 21](https://user-images.githubusercontent.com/108923582/194256129-d76196c2-f105-4fa8-b1ad-28de7ab22479.png)
 
-- 주요 liblary : Redux, Redux-toolkit
+- 주요 library : Redux, Redux-toolkit
 - 캘린더 : DayPicker
 - CSS : Styled component
 
