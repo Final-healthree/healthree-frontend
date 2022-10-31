@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Main from "../pages/Main";
 import Login from "../pages/Login";
+import Main from "../pages/Main";
 import Community from "../pages/Community";
 import CommunityDetail from "../pages/CommunityDetail";
 import Register from "../pages/Register";
@@ -15,11 +15,11 @@ import NotFound from "../pages/NotFound";
 const Router = () => {
   return (
     <BrowserRouter>
-
         <Layout>
           <Header />
           <Routes>
-            <Route path="/" element={<Login />} />
+           <Route path="/" element={<Login />} />
+            {/* <Route path="/" element={<Login />} /> */}
             <Route path="/main" element={<Main />} />
             <Route path="/community" element={<Community />} />
             <Route path="/community/:postid" element={<CommunityDetail />} />

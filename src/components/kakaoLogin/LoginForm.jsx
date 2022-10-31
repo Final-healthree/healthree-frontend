@@ -1,5 +1,6 @@
+import kakaoLogin from "../../assets/login/kakaoLogin.svg"
 import styled from "styled-components";
-import kakaoLogin from "../../assets/kakaoLogin/kakaoLogin.svg";
+
 
 const LoginForm = () => {
   return (
