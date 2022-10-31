@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import footerMain from "../../assets/headerFooter/footerMain.svg";
-import footerMainC from "../../assets/headerFooter/footerMainC.svg";
-import footerCommunity from "../../assets/headerFooter/footerCommunity.svg";
-import footerCommunityC from "../../assets/headerFooter/footerCommunityC.svg";
-import footerMypage from "../../assets/headerFooter/footerMypage.svg";
-import footerMypageC from "../../assets/headerFooter/footerMypageC.svg";
-import footerSetting from "../../assets/headerFooter/footerSetting.svg";
-import footerSettingC from "../../assets/headerFooter/footerSettingC.svg";
+import footerMain from "../../assets/footer/footerMain.svg";
+import footerMainC from "../../assets/footer/footerMainC.svg";
+import footerCommunity from "../../assets/footer/footerCommunity.svg";
+import footerCommunityC from "../../assets/footer/footerCommunityC.svg";
+import footerMypage from "../../assets/footer/footerMypage.svg";
+import footerMypageC from "../../assets/footer/footerMypageC.svg";
+import footerSetting from "../../assets/footer/footerSetting.svg";
+import footerSettingC from "../../assets/footer/footerSettingC.svg";
 
 const Footer = () => {
   const navigate = useNavigate();
