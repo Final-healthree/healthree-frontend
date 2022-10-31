@@ -1,9 +1,9 @@
-import React from "react";
 import styled from "styled-components";
+import React from "react";
 
-import mainLogo from "../assets/kakaoLogin/mainLogo.svg";
-import LoginForm from "../components/login/LoginForm";
-import teamName from "../assets/kakaoLogin/teamName.svg";
+import mainLogo from "../assets/login/mainLogo.svg";
+import teamName from "../assets/login/teamName.svg";
+import LoginForm from "../components/kakaoLogin/LoginForm";
 
 const Login = () => {
   return (
