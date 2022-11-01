@@ -3,11 +3,11 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import serverAxios from "../../axios/server.axios";
 
-import InputComment from "./InputComment";
-import StCommentText from "./EditComment";
+import CommentInput from "./CommentInput";
+import StCommentText from "./CommentEdit";
 import Pagination from "./Pagination";
 
-function Comments() {
+function Comment() {
   const params = useParams();
   const [page, setPage] = useState(1);
 
@@ -32,7 +32,7 @@ function Comments() {
   return (
     <>
       <StWrapper>
-        <InputComment
+        <CommentInput
           data={params.postid}
           create={create}
           setCreate={setCreate}
@@ -58,7 +58,7 @@ function Comments() {
   );
 }
 
-export default Comments;
+export default Comment;
 
 const StWrapper = styled.div`
   display: flex;
@@ -85,7 +85,7 @@ const StNameText = styled.div`
   font-size: 12px;
   font-family: sans-serif;
   font-weight: 500;
-  //글씨 가운데 정렬
+ 
   line-height: 34px;
   text-align: center;
 `;

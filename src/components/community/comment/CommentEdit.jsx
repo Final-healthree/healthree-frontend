@@ -4,7 +4,7 @@ import serverAxios from "../../axios/server.axios";
 
 import { decodeToken } from "react-jwt";
 
-import DateComment from "./DateComment";
+import CommentDate from "./CommentDate";
 import DeleteModal from "../posts/DeleteModal";
 
 function StCommentText({
@@ -18,17 +18,17 @@ function StCommentText({
   const Token = localStorage.getItem("Token");
   const myDecodedToken = decodeToken(Token);
   const NowUser = myDecodedToken.payload.user_id;
-  const Time = DateComment({ date: commentTime });
+  const Time = CommentDate({ date: commentTime });
   const [modalopen, setModalOpen] = useState(false);
 
   const [edit, setEdit] = useState(true);
-  const [editComment, setEditComment] = useState({
+  const [commentEdit, setCommentEdit] = useState({
     comment: content,
   });
 
   const onChange = (e) => {
-    setEditComment({
-      ...editComment,
+    setCommentEdit({
+      ...commentEdit,
       comment: e.target.value,
     });
   };
@@ -40,7 +40,7 @@ function StCommentText({
   const onSaveHandler = async () => {
     setEdit(true);
     await serverAxios
-      .put(`api/comments/${commentId}`, editComment)
+      .put(`api/comments/${commentId}`, commentEdit)
       .then((res) => {
         if (res.data.success === true) {
         }
@@ -55,7 +55,7 @@ function StCommentText({
     <Stcontent>
       <StComment
         disabled={edit}
-        value={editComment.comment}
+        value={commentEdit.comment}
         onChange={onChange}
         maxLength={40}
         rows={2}
