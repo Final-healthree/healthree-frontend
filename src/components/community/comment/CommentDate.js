@@ -1,7 +1,7 @@
 import { format, formatDistanceToNow } from "date-fns";
 import { ko } from "date-fns/locale";
 
-function DateComment(props) {
+function CommentDate(props) {
   const day = new Date(props.date);
   const now = Date.now();
   const diff = (now - day.getTime()) / 1000;
@@ -19,4 +19,4 @@ function DateComment(props) {
   return `${m}월 ${d}일`; // 날짜 포맷
 }
 
-export default DateComment;
+export default CommentDate;

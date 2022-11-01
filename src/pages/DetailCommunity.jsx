@@ -1,13 +1,13 @@
 import React from "react";
-import CommunityDetailPost from "../components/community/posts/CommunityDetail";
-import Comments from "../components/community/comment/Comments";
+import DetailCommunityPost from "../components/community/posts/DetailCommunityPost";
+import Comment from "../components/community/comment/Comment";
 import styled from "styled-components";
 
 const CommunityDetail = () => {
   return (
     <Container>
-      <CommunityDetailPost />
-      <Comments />
+      <DetailCommunityPost />
+      <Comment />
     </Container>
   );
 };
