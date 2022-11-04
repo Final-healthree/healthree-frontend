@@ -5,7 +5,7 @@ const LoginForm = () => {
   return (
     <div>
       <StLoginArea>
-        <a href={"api/auth/kakao"}>
+        <a href={process.env.REACT_APP_REST_API_KEY + "api/auth/kakao"}>
           <img src={kakaoLogin} />
         </a>
       </StLoginArea>
