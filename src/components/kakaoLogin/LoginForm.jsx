@@ -2,10 +2,11 @@ import kakaoLogin from "../../assets/login/kakaoLogin.svg"
 import styled from "styled-components";
 
 const LoginForm = () => {
+
   return (
     <div>
       <StLoginArea>
-        <a href={process.env.REACT_APP_REST_API_KEY + "api/auth/kakao"}>
+      <a href="https://wetube-phenomenonlee.shop/api/auth/kakao">
           <img src={kakaoLogin} />
         </a>
       </StLoginArea>
